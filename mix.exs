@@ -38,6 +38,7 @@ defmodule CodeStats.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.3"},
+     {:number, "~> 0.4.1"},
      {:earmark, "~> 0.2.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}]
   end

@@ -30,3 +30,10 @@ config :phoenix, :generators,
 
 config :comeonin,
   bcrypt_log_rounds: 12
+
+config :number,
+  delimiter: [
+    precision: 0,
+    delimiter: ",",
+    separator: "."
+  ]
