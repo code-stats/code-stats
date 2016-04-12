@@ -18,6 +18,10 @@ defmodule CodeStats.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug CodeStats.APIAuthRequired
+  end
+
   scope "/", CodeStats do
     pipe_through :browser # Use the default browser stack
 
@@ -48,6 +52,10 @@ defmodule CodeStats.Router do
   scope "/api", CodeStats do
     pipe_through :api
 
-    resources "/xps", XPController, except: [:new, :edit]
+    scope "/my" do
+      pipe_through :api_auth
+
+      get "/xps", XPController, :get
+    end
   end
 end

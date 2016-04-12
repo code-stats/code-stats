@@ -17,22 +17,21 @@
 
   <hr />
 
-  <h2>API keys</h2>
+  <h2>API key</h2>
+
+  <p class="alert alert-success" role="alert"><%= get_flash(@conn, :regen_keys_success) %></p>
+  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :regen_keys_error) %></p>
 
   <p>
-    Your API keys are:
-    <ul>
-      <li>User ID: <code>foo</code></li>
-      <li>User key: <code>bar</code></li>
-    </ul>
+    Your API key is: <code><%= CodeStats.AuthUtils.get_api_key(@conn, @user) %></code>
   </p>
 
   <p>
-    If you wish to regenerate new API keys, please use the button below. Your old API keys will stop working immediately.
+    If you wish to regenerate your API key, please use the button below. Your old API key will stop working immediately.
   </p>
 
   <%= form_tag(profile_path(@conn, :regen_keys)) %>
-    <input type="submit" class="btn btn-warning" value="Regenerate API keys" />
+    <input type="submit" class="btn btn-warning" value="Regenerate API key" />
   </form>
 
   <hr />

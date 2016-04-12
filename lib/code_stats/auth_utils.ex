@@ -10,6 +10,7 @@ defmodule CodeStats.AuthUtils do
   alias CodeStats.User
   alias Comeonin.Bcrypt
   alias Plug.Conn
+  alias Plug.Crypto.MessageVerifier
 
   @auth_key     :codestats_user
   @api_auth_key :codestats_api_user
@@ -125,27 +126,34 @@ defmodule CodeStats.AuthUtils do
   @doc """
   Is the current user authenticated to the API?
   """
-  @spec is_api_authed(%Conn{}) :: boolean
-  def is_api_authed(%Conn{} = conn) do
-    match?(%User{}, Conn.get_private(conn, @api_auth_key))
+  @spec is_api_authed?(%Conn{}) :: boolean
+  def is_api_authed?(%Conn{} = conn) do
+    match?(%User{}, conn.private[@api_auth_key])
   end
 
   @doc """
-  Get user with the given API user ID.
-  """
-  @spec get_user_api(String.t) :: %User{}
-  def get_user_api(api_user_id) do
-    
-  end
-
-  @doc """
-  Authenticate the given user in the given connection.
+  Authenticate a user in the given connection using the given API token.
 
   Authentication status is saved in the connection with the key @api_auth_key.
   """
-  @spec auth_user_api(%Conn{}, %User{}, String.t) :: %Conn{}
-  def auth_user_api(%Conn{} = conn, %User{} = user, api_user_token) do
-    
+  @spec auth_user_api(%Conn{}, String.t) :: %Conn{} | :error | nil
+  def auth_user_api(%Conn{} = conn, api_user_token) do
+    with username <- split_username_from_token(api_user_token),
+      %User{} = user <- get_user(username),
+      {:ok, _} <- MessageVerifier.verify(api_user_token, conn.secret_key_base <> user.api_salt)
+      do
+        Conn.put_private(conn, @api_auth_key, user)
+      end
+  end
+
+  @doc """
+  Get user's API key from user data.
+
+  Connection needs to be given to get the secret key base.
+  """
+  @spec get_api_key(%Conn{}, %User{}) :: String.t
+  def get_api_key(%Conn{} = conn, %User{} = user) do
+    MessageVerifier.sign(user.username, conn.secret_key_base <> user.api_salt)
   end
 
   @doc """
@@ -154,5 +162,11 @@ defmodule CodeStats.AuthUtils do
   @spec check_user_password(%User{}, String.t) :: boolean
   def check_user_password(%User{} = user, password) do
     Bcrypt.checkpw(password, user.password)
+  end
+
+  defp split_username_from_token(token) do
+    [username, _] = String.split(token, "##")
+    {:ok, username} = Base.url_decode64(username)
+    username
   end
 end

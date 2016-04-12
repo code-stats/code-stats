@@ -20,4 +20,9 @@ defmodule CodeStats.XPController do
         |> render(CodeStats.ChangesetView, "error.json", changeset: changeset)
     end
   end
+
+  def get(conn, _params) do
+    conn
+    |> send_resp(200, "Peekaboo!")
+  end
 end
