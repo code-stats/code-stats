@@ -43,9 +43,15 @@ defmodule CodeStats.Router do
       get "/preferences", ProfileController, :edit
       put "/preferences", ProfileController, :do_edit
 
-      post "/keys_must_be_regenerated", ProfileController, :regen_keys
       post "/password", ProfileController, :change_password
       post "/sound_of_inevitability", ProfileController, :delete
+
+      get "/machines", MachineController, :list
+      post "/machines", MachineController, :add
+      get "/machines/:id", MachineController, :view_single
+      put "/machines/:id", MachineController, :edit
+      delete "/machines/:id", MachineController, :delete
+      post "/machines/:id/key", MachineController, :regen_machine_key
     end
   end
 

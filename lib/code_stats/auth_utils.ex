@@ -8,6 +8,7 @@ defmodule CodeStats.AuthUtils do
   alias CodeStats.Repo
 
   alias CodeStats.User
+  alias CodeStats.Machine
   alias Comeonin.Bcrypt
   alias Plug.Conn
   alias Plug.Crypto.MessageVerifier
@@ -128,32 +129,35 @@ defmodule CodeStats.AuthUtils do
   """
   @spec is_api_authed?(%Conn{}) :: boolean
   def is_api_authed?(%Conn{} = conn) do
-    match?(%User{}, conn.private[@api_auth_key])
+    match?({%User{}, %Machine{}}, conn.private[@api_auth_key])
   end
 
   @doc """
   Authenticate a user in the given connection using the given API token.
 
-  Authentication status is saved in the connection with the key @api_auth_key.
+  Authentication status is saved in the connection with the key @api_auth_key. The key will
+  contain a tuple of the authenticated user and the machine they are using.
   """
   @spec auth_user_api(%Conn{}, String.t) :: %Conn{} | :error | nil
   def auth_user_api(%Conn{} = conn, api_user_token) do
-    with username <- split_username_from_token(api_user_token),
+    with {username, machine_id} <- split_token(api_user_token),
       %User{} = user <- get_user(username),
+      %Machine{} = machine <- get_machine(machine_id, user),
       {:ok, _} <- MessageVerifier.verify(api_user_token, conn.secret_key_base <> user.api_salt)
       do
-        Conn.put_private(conn, @api_auth_key, user)
+        Conn.put_private(conn, @api_auth_key, {user, machine})
       end
   end
 
   @doc """
-  Get user's API key from user data.
+  Get user's API key from user and machine data.
 
   Connection needs to be given to get the secret key base.
   """
-  @spec get_api_key(%Conn{}, %User{}) :: String.t
-  def get_api_key(%Conn{} = conn, %User{} = user) do
-    MessageVerifier.sign(user.username, conn.secret_key_base <> user.api_salt)
+  @spec get_api_key(%Conn{}, %User{}, %Machine{}) :: String.t
+  def get_api_key(%Conn{} = conn, %User{} = user, %Machine{} = machine) do
+    MessageVerifier.sign(form_payload(user.username, machine.id),
+                         conn.secret_key_base <> machine.api_salt)
   end
 
   @doc """
@@ -164,9 +168,27 @@ defmodule CodeStats.AuthUtils do
     Bcrypt.checkpw(password, user.password)
   end
 
-  defp split_username_from_token(token) do
-    [username, _] = String.split(token, "##")
+  defp form_payload(username, machine_id) do
+    Base.url_encode64(username) <> "##" <> Base.url_encode64(Integer.to_string(machine_id))
+  end
+
+  defp unform_payload(payload) do
+    [username, machine] = String.split(payload, "##")
     {:ok, username} = Base.url_decode64(username)
-    username
+    {:ok, machine} = Base.url_decode64(machine)
+    {username, machine}
+  end
+
+  defp split_token(token) do
+    [content, _] = String.split(token, "##")
+    unform_payload(content)
+  end
+
+  defp get_machine(machine_id, user) do
+    query = from m in Machine,
+      where: m.id == ^machine_id and
+             m.user_id == ^user.id
+
+    Repo.one(query)
   end
 end

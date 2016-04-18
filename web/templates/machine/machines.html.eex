@@ -1,0 +1,62 @@
+<div class="machines-list">
+  <h2>Configured machines</h2>
+
+  <%= for machine <- @machines do %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4><%= machine.name %></h4>
+        <p>
+          API key: <code><%= CodeStats.AuthUtils.get_api_key(@conn, @user, machine) %></code>
+        </p>
+
+        <div class="pull-left machine-action">
+          <%= form_tag(machine_path(@conn, :view_single, machine.id), method: :get) %>
+            <input type="submit" class="btn btn-primary" value="Edit" />
+          </form>
+        </div>
+
+        <div class="pull-left machine-action">
+          <%= form_tag(machine_path(@conn, :regen_machine_key, machine.id)) %>
+            <input type="submit" class="btn btn-warning" value="Regenerate API key" />
+          </form>
+        </div>
+
+        <div class="pull-left machine-action">
+          <%= form_tag(machine_path(@conn, :delete, machine.id), method: :delete) %>
+            <input type="submit" class="btn btn-danger" value="Delete" />
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= if Enum.empty?(@machines) do %>
+    <div class="alert alert-info">
+      <p>
+        You don't have any machines configured. :( You should add one below!
+      </p>
+    </div>
+  <% end %>
+
+  <div class="alert alert-warning">
+    <p>
+      Note that if you regenerate a machine's API key, the old API key will stop working immediately. You should do this if you lose your API key or the machine that was connected to it.
+    </p>
+  </div>
+
+  <hr />
+
+  <h3>Add new machine</h3>
+
+  <%= form_for(@changeset, machine_path(@conn, :list), fn f -> %>
+    <div class="form-group <%= if f.errors[:name], do: "has-error" %>">
+      <label for="machine_name">Name (required)</label>
+      <%= text_input(f, :name, class: "form-control", required: true) %>
+      <%= if message = f.errors[:name] do %>
+        <p class="help-block"><%= message %></p>
+      <% end %>
+    </div>
+
+    <%= submit("Add machine", class: "btn btn-primary") %>
+  <% end) %>
+
+</div>

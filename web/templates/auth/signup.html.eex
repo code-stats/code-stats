@@ -26,6 +26,6 @@
       </p>
     </div>
 
-    <%= submit("Register!", class: "btn btn-default") %>
+    <%= submit("Register!", class: "btn btn-primary") %>
   <% end) %>
 </div>

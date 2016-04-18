@@ -1,0 +1,19 @@
+<div class="single-machine">
+  <p>
+    <a class="btn btn-default" href="<%= machine_path(@conn, :list) %>">&laquo; Back to machine list</a>
+  </p>
+
+  <h2>Machine: <%= @machine.name %></h2>
+
+  <%= form_for(@changeset, machine_path(@conn, :edit, @machine.id), fn f -> %>
+    <div class="form-group <%= if f.errors[:name], do: "has-error" %>">
+      <label for="machine_name">Name (required)</label>
+      <%= text_input(f, :name, class: "form-control", required: true) %>
+      <%= if message = f.errors[:name] do %>
+        <p class="help-block"><%= message %></p>
+      <% end %>
+    </div>
+
+    <%= submit("Edit machine", class: "btn btn-primary") %>
+  <% end) %>
+</div>

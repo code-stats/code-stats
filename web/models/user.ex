@@ -8,8 +8,6 @@ defmodule CodeStats.User do
     field :password, :string
     field :total_xp, :integer
 
-    field :api_salt, :string
-
     timestamps
   end
 
@@ -33,7 +31,6 @@ defmodule CodeStats.User do
     |> cast(params, @required_fields, @optional_fields)
     |> update_change(:password, &hash_password/1)
     |> put_change(:total_xp, 0)
-    |> put_change(:api_salt, generate_api_salt())
     |> validate_length(:username, min: 1)
     |> validate_length(:username, max: 64)
     |> validations()
@@ -56,16 +53,6 @@ defmodule CodeStats.User do
     model
     |> cast(params, @password_required_fields, @password_optional_fields)
     |> update_change(:password, &hash_password/1)
-  end
-
-  def api_salt_changeset(model, params \\ :empty) do
-    model
-    |> cast(params, [], [])
-    |> put_change(:api_salt, generate_api_salt())
-  end
-
-  defp generate_api_salt() do
-    Bcrypt.gen_salt()
   end
 
   defp hash_password(password) do

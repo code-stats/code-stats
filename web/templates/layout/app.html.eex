@@ -19,6 +19,7 @@
             <%= if is_authed?(@conn) do %>
               <li><a href="<%= profile_path(@conn, :my_profile) %>">Profile</a></li>
               <li><a href="<%= profile_path(@conn, :edit) %>">Preferences</a></li>
+              <li><a href="<%= machine_path(@conn, :list) %>">Machines</a></li>
               <li><a href="<%= auth_path(@conn, :logout) %>">Log out</a></li>
             <% else %>
               <li><a href="<%= auth_path(@conn, :render_login) %>">Log in</a></li>

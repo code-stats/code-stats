@@ -4,6 +4,9 @@ defmodule CodeStats.Pulse do
   schema "pulses" do
     field :sent_at, Ecto.DateTime
     belongs_to :user, CodeStats.User
+    belongs_to :machine, CodeStats.Machine
+
+    has_many :xps, CodeStats.XP
 
     timestamps
   end

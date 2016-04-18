@@ -12,27 +12,8 @@
       </p>
     </div>
 
-    <%= submit("Update preferences", class: "btn btn-default") %>
+    <%= submit("Update preferences", class: "btn btn-primary") %>
   <% end) %>
-
-  <hr />
-
-  <h2>API key</h2>
-
-  <p class="alert alert-success" role="alert"><%= get_flash(@conn, :regen_keys_success) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :regen_keys_error) %></p>
-
-  <p>
-    Your API key is: <code><%= CodeStats.AuthUtils.get_api_key(@conn, @user) %></code>
-  </p>
-
-  <p>
-    If you wish to regenerate your API key, please use the button below. Your old API key will stop working immediately.
-  </p>
-
-  <%= form_tag(profile_path(@conn, :regen_keys)) %>
-    <input type="submit" class="btn btn-warning" value="Regenerate API key" />
-  </form>
 
   <hr />
 
@@ -57,7 +38,7 @@
       <% end %>
     </div>
 
-    <input type="submit" class="btn btn-default" value="Change password" />
+    <input type="submit" class="btn btn-primary" value="Change password" />
   </form>
 
   <hr />
@@ -70,11 +51,15 @@
     <p>
       If you wish to delete your account, please input "DELETE" into the field below and press
       the delete button. If you do this, all your data will be removed and cannot be recovered.
+
+      <strong>
+        This cannot be undone!
+      </strong>
     </p>
 
     <%= form_tag(profile_path(@conn, :delete)) %>
       <div class="form-group">
-        <input type="text" name="delete_confirmation" maxlength="6" />
+        <input type="text" class="form-control" name="delete_confirmation" maxlength="6" />
       </div>
 
       <input type="submit" class="btn btn-danger" value="Delete account forever" />

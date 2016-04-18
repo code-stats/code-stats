@@ -4,6 +4,8 @@ defmodule CodeStats.Language do
   schema "languages" do
     field :name, :string
 
+    has_many :pulses, CodeStats.Pulse
+
     timestamps
   end
 

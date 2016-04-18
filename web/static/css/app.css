@@ -30,6 +30,11 @@ form.link, form.button {
   background-size: 519px 71px;
 }
 
+.logo>a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing {
@@ -74,4 +79,8 @@ form.link, form.button {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.machine-action {
+  margin-right: 5px;
 }

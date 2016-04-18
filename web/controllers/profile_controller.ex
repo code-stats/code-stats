@@ -94,24 +94,9 @@ defmodule CodeStats.ProfileController do
     end
   end
 
-  def regen_keys(conn, _params) do
-    user = SetSessionUser.get_user_data(conn)
-    api_salt_changeset = User.api_salt_changeset(user, %{})
-    case AuthUtils.update_user(api_salt_changeset) do
-      %User{} ->
-        conn
-        |> put_flash(:regen_keys_success, "API key regenerated.")
-        |> redirect(to: profile_path(conn, :edit))
-
-      %Ecto.Changeset{} ->
-        conn
-        |> put_flash(:regen_keys_error, "Error regenerating API key.")
-        |> redirect(to: profile_path(conn, :edit))
-    end
-  end
-
   defp common_edit_assigns(conn) do
     user_data = SetSessionUser.get_user_data(conn)
-    assign(conn, :user, user_data)
+    conn
+    |> assign(:user, user_data)
   end
 end
