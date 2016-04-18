@@ -28,7 +28,7 @@
           </ul>
         </nav>
         <h1 class="logo">
-          &lt;Code::Stats&gt;<sup>+ 15 XP!</sup>
+          <a href="<%= page_path(@conn, :index) %>">&lt;Code::Stats&gt;<sup>+ 15 XP!</sup></a>
         </h1>
       </header>
 
@@ -39,6 +39,14 @@
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
+
+      <footer>
+        <hr />
+
+        <p>
+          Request served in <%= CodeStats.RequestTime.calculate_time(@conn) %>.
+        </p>
+      </footer>
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

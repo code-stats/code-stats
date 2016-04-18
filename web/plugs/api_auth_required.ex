@@ -17,7 +17,7 @@ defmodule CodeStats.APIAuthRequired do
   end
 
   def call(conn, _opts) do
-    ret = with [auth_header] <- Conn.get_req_header(conn, @api_auth_header),
+    ret = with [auth_header] <- get_req_header(conn, @api_auth_header),
       %Conn{} = conn <- AuthUtils.auth_user_api(conn, auth_header),
       true <- AuthUtils.is_api_authed?(conn) do
         conn
@@ -28,7 +28,7 @@ defmodule CodeStats.APIAuthRequired do
 
       _ ->
         conn
-        |> Conn.send_resp(403, "You must be authenticated")
+        |> send_resp(403, "You must be authenticated")
         |> halt
     end
   end

@@ -19,6 +19,8 @@ defmodule CodeStats.Endpoint do
     plug Phoenix.CodeReloader
   end
 
+  plug CodeStats.RequestTime
+
   plug Plug.RequestId
   plug Plug.Logger
 

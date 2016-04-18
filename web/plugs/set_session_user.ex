@@ -27,9 +27,9 @@ defmodule CodeStats.SetSessionUser do
       query = from u in User,
         where: u.id == ^id
       
-      Conn.put_private(conn, @private_info_key, Repo.one(query))
+      put_private(conn, @private_info_key, Repo.one(query))
     else
-      Conn.put_private(conn, @private_info_key, nil)
+      put_private(conn, @private_info_key, nil)
     end
   end
 

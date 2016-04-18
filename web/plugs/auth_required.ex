@@ -6,7 +6,6 @@ defmodule CodeStats.AuthRequired do
   """
 
   import Plug.Conn
-  alias Plug.Conn
 
   alias CodeStats.AuthUtils
 
@@ -19,7 +18,7 @@ defmodule CodeStats.AuthRequired do
       conn
     else
       conn
-      |> Conn.put_status(403)
+      |> put_status(403)
       |> Phoenix.Controller.put_view(CodeStats.ErrorView)
       |> Phoenix.Controller.render("403.html")
       |> halt
