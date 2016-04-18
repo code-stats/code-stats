@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <h2>Welcome to Code::Stats!</h2>
-  <p class="lead">Write code, get XP, level up, show off! A free stats tracking service for programmers.</p>
+  <p class="lead">Write code, level up, show off! A free stats tracking service for programmers.</p>
 </div>
 
 <div class="row marketing">
@@ -12,21 +12,14 @@
   </div>
 
   <div class="col-xs-12 col-lg-4">
-    <h4>Get XP</h4>
+    <h4>Level up</h4>
     <p>
-      You will be awarded with experience points for the amount of programming you do. Track your habits and make programming fun!
+    You will be awarded with experience points for the amount of programming you do. Watch as your levels grow for each language you use. Identify your strong skill sets and use the data to see where you still have room for improvement.
     </p>
   </div>
 
   <div class="col-xs-12 col-lg-4">
-    <h4>Level up</h4>
-    <p>
-    Watch as your levels grow for each language you use. Identify your strong skill sets and use the data to see where you still have room for improvement.
-    </p>
-  </div>
-
-  <div class="col-xs-12">
-    <h2>Show off</h2>
+    <h4>Show off</h4>
     <p>
       Show your personal statistics page to your friends and compare your progress with others. Maybe even have a competition! Or, if you wish, you can keep all your information private and enjoy it in secret. Just take a look at the example below.
     </p>
