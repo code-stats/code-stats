@@ -1,6 +1,6 @@
 <div class="preferences-form">
   <h2>User details</h2>
-  <%= form_for(@changeset, profile_path(@conn, :do_edit), fn f -> %>
+  <%= form_for(@changeset, preferences_path(@conn, :do_edit), fn f -> %>
     <div class="form-group <%= if f.errors[:email], do: "has-error" %>">
       <label for="user_email">Email address</label>
       <%= email_input(f, :email, class: "form-control") %>
@@ -22,7 +22,7 @@
   <p class="alert alert-success" role="alert"><%= get_flash(@conn, :password_success) %></p>
   <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :password_error) %></p>
 
-  <%= form_tag(profile_path(@conn, :change_password)) %>
+  <%= form_tag(preferences_path(@conn, :change_password)) %>
     <div class="form-group <%= if assigns[:old_password_error], do: "has-error" %>">
       <label for="old_password">Old password (required)</label>
       <input type="password" id="old_password" name="old_password" class="form-control" required />
@@ -57,7 +57,7 @@
       </strong>
     </p>
 
-    <%= form_tag(profile_path(@conn, :delete)) %>
+    <%= form_tag(preferences_path(@conn, :delete)) %>
       <div class="form-group">
         <input type="text" class="form-control" name="delete_confirmation" maxlength="6" />
       </div>

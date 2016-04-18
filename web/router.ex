@@ -40,11 +40,11 @@ defmodule CodeStats.Router do
 
       get "/profile", ProfileController, :my_profile
 
-      get "/preferences", ProfileController, :edit
-      put "/preferences", ProfileController, :do_edit
+      get "/preferences", PreferencesController, :edit
+      put "/preferences", PreferencesController, :do_edit
 
-      post "/password", ProfileController, :change_password
-      post "/sound_of_inevitability", ProfileController, :delete
+      post "/password", PreferencesController, :change_password
+      post "/sound_of_inevitability", PreferencesController, :delete
 
       get "/machines", MachineController, :list
       post "/machines", MachineController, :add
