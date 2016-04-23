@@ -1,4 +1,7 @@
-%{"comeonin": {:hex, :comeonin, "2.3.1"},
+%{"calecto": {:hex, :calecto, "0.5.2"},
+  "calendar": {:hex, :calendar, "0.13.2"},
+  "certifi": {:hex, :certifi, "0.4.0"},
+  "comeonin": {:hex, :comeonin, "2.3.1"},
   "connection": {:hex, :connection, "1.0.2"},
   "cowboy": {:hex, :cowboy, "1.0.4"},
   "cowlib": {:hex, :cowlib, "1.0.2"},
@@ -9,6 +12,10 @@
   "ex_doc": {:hex, :ex_doc, "0.11.4"},
   "fs": {:hex, :fs, "0.9.2"},
   "gettext": {:hex, :gettext, "0.10.0"},
+  "hackney": {:hex, :hackney, "1.6.0"},
+  "idna": {:hex, :idna, "1.2.0"},
+  "metrics": {:hex, :metrics, "1.0.1"},
+  "mimerl": {:hex, :mimerl, "1.0.2"},
   "number": {:hex, :number, "0.4.1"},
   "phoenix": {:hex, :phoenix, "1.1.4"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "2.0.1"},
@@ -18,4 +25,6 @@
   "poison": {:hex, :poison, "1.5.2"},
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.11.1"},
-  "ranch": {:hex, :ranch, "1.2.1"}}
+  "ranch": {:hex, :ranch, "1.2.1"},
+  "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0"},
+  "tzdata": {:hex, :tzdata, "0.5.7"}}

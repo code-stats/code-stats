@@ -19,7 +19,7 @@ defmodule CodeStats.Mixfile do
   def application do
     [mod: {CodeStats, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :postgrex, :comeonin, :calendar]]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,17 +30,21 @@ defmodule CodeStats.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:phoenix_html, "~> 2.4"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"},
-     {:comeonin, "~> 2.3"},
-     {:number, "~> 0.4.1"},
-     {:earmark, "~> 0.2.1", only: :dev},
-     {:ex_doc, "~> 0.11", only: :dev}]
+    [
+      {:phoenix, "~> 1.1.4"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_ecto, "~> 2.0"},
+      {:phoenix_html, "~> 2.4"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.9"},
+      {:cowboy, "~> 1.0"},
+      {:comeonin, "~> 2.3"},
+      {:number, "~> 0.4.1"},
+      {:earmark, "~> 0.2.1", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev},
+      {:calecto, "~> 0.5.2"},
+      {:calendar, "~> 0.13.2"}
+   ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

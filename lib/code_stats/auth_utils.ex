@@ -143,10 +143,20 @@ defmodule CodeStats.AuthUtils do
     with {username, machine_id} <- split_token(api_user_token),
       %User{} = user <- get_user(username),
       %Machine{} = machine <- get_machine(machine_id, user),
-      {:ok, _} <- MessageVerifier.verify(api_user_token, conn.secret_key_base <> user.api_salt)
+      {:ok, _} <- MessageVerifier.verify(api_user_token, conn.secret_key_base <> machine.api_salt)
       do
         Conn.put_private(conn, @api_auth_key, {user, machine})
       end
+  end
+
+  @doc """
+  Get the user and machine associated with the given connection.
+
+  Returns nil if user is not API authenticated.
+  """
+  @spec get_api_details(%Conn{}) :: {%User{}, %Machine{}} | nil
+  def get_api_details(%Conn{} = conn) do
+    conn.private[@api_auth_key]
   end
 
   @doc """
@@ -181,6 +191,7 @@ defmodule CodeStats.AuthUtils do
 
   defp split_token(token) do
     [content, _] = String.split(token, "##")
+    {:ok, content} = Base.url_decode64(content)
     unform_payload(content)
   end
 

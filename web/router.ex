@@ -61,7 +61,7 @@ defmodule CodeStats.Router do
     scope "/my" do
       pipe_through :api_auth
 
-      get "/xps", XPController, :get
+      post "/pulse", PulseController, :add
     end
   end
 end

@@ -2,7 +2,7 @@ defmodule CodeStats.Pulse do
   use CodeStats.Web, :model
 
   schema "pulses" do
-    field :sent_at, Ecto.DateTime
+    field :sent_at, Calecto.DateTimeUTC
     belongs_to :user, CodeStats.User
     belongs_to :machine, CodeStats.Machine
 
