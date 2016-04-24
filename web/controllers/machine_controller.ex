@@ -39,7 +39,7 @@ defmodule CodeStats.MachineController do
     user = SetSessionUser.get_user_data(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
-      changeset = Machine.changeset(machine) do
+      changeset                = Machine.changeset(machine) do
         conn
         |> assign(:machine, machine)
         |> render("single_machine.html", changeset: changeset)
@@ -50,8 +50,8 @@ defmodule CodeStats.MachineController do
     user = SetSessionUser.get_user_data(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
-      changeset = Machine.changeset(machine, params),
-      %Machine{} = machine <- edit_machine_or_flash(conn, changeset) do
+      changeset                = Machine.changeset(machine, params),
+      %Machine{} = machine    <- edit_machine_or_flash(conn, changeset) do
         conn
         |> assign(:machine, machine)
         |> put_flash(:success, "Machine edited successfully.")
@@ -63,8 +63,8 @@ defmodule CodeStats.MachineController do
     user = SetSessionUser.get_user_data(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
-      changeset = Machine.api_changeset(machine),
-      %Machine{} = machine <- edit_api_key_or_flash(conn, changeset) do
+      changeset                = Machine.api_changeset(machine),
+      %Machine{} = machine    <- edit_api_key_or_flash(conn, changeset) do
         conn
         |> put_flash(:success, "API key regenerated for machine #{machine.name}.")
         |> redirect(to: machine_path(conn, :list))

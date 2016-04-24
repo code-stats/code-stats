@@ -40,10 +40,10 @@ defmodule CodeStats.PulseController do
   defp do_add(conn, timestamp, xps) do
     {user, machine} = AuthUtils.get_api_details(conn)
 
-    with {:ok, %DateTime{} = datetime} <- parse_timestamp(timestamp),
-      :ok <- check_datetime_diff(datetime),
-      {:ok, %Pulse{} = pulse} <- create_pulse(user, machine, datetime),
-      :ok <- create_xps(pulse, xps) do
+    with {:ok, %DateTime{} = datetime}  <- parse_timestamp(timestamp),
+      :ok                               <- check_datetime_diff(datetime),
+      {:ok, %Pulse{} = pulse}           <- create_pulse(user, machine, datetime),
+      :ok                               <- create_xps(pulse, xps) do
         :ok
       end
   end

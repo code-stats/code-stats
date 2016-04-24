@@ -14,7 +14,7 @@ defmodule CodeStats.AuthController do
   end
 
   def login(conn, %{"username" => username, "password" => password}) do
-    with %User{} = user <- AuthUtils.get_user(username),
+    with %User{} = user   <- AuthUtils.get_user(username),
       %Plug.Conn{} = conn <- AuthUtils.auth_user(conn, user, password) do
         conn
       end
