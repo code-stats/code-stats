@@ -27,6 +27,9 @@ defmodule CodeStats.Router do
 
     get "/", PageController, :index
 
+    get "/api-docs", PageController, :api_docs
+    get "/tos", PageController, :terms
+
     get "/login", AuthController, :render_login
     post "/login", AuthController, :login
     get "/logout", AuthController, :logout
@@ -61,7 +64,7 @@ defmodule CodeStats.Router do
     scope "/my" do
       pipe_through :api_auth
 
-      post "/pulse", PulseController, :add
+      post "/pulses", PulseController, :add
     end
   end
 end

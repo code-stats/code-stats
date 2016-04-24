@@ -21,7 +21,10 @@ defmodule CodeStats.PulseController do
     end
 
     case do_add(conn, timestamp, xps) do
-      :ok -> json(conn, %{"ok" => "Great success!"})
+      :ok ->
+        conn
+        |> put_status(201)
+        |> json(%{"ok" => "Great success!"})
 
       {:error, :not_found, reason} ->
         resp(conn, 404, reason)

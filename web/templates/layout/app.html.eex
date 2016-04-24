@@ -28,7 +28,7 @@
           </ul>
         </nav>
         <h1 class="logo">
-          <a href="<%= page_path(@conn, :index) %>">&lt;Code::Stats&gt;<sup>+ 15 XP!</sup></a>
+          <a href="<%= page_path(@conn, :index) %>">&lt;Code::Stats&gt;</a>
         </h1>
       </header>
 
@@ -45,6 +45,10 @@
 
         <p>
           Request served in <%= CodeStats.RequestTime.calculate_time(@conn) %>.
+          —
+          <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
+          —
+          <a href="<%= page_path(@conn, :terms) %>">Terms of Service &amp; Privacy Policy</a>
         </p>
       </footer>
 
