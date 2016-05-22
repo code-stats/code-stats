@@ -32,9 +32,9 @@ defmodule CodeStats.XPCalculator do
     current_level_xp = get_next_level_xp(level - 1)
     next_level_xp = get_next_level_xp(level)
 
-    missing_xp = next_level_xp - xp
+    have_xp = xp - current_level_xp
     needed_xp = next_level_xp - current_level_xp
-    Float.round((missing_xp / needed_xp) * 100)
+    Float.round((have_xp / needed_xp) * 100)
     |> trunc
   end
 end
