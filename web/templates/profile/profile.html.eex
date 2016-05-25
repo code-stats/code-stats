@@ -1,9 +1,21 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6">
-    <h3>Level <%= get_level(@total_xp) %> (<%= format_xp(@total_xp) %> XP)</h3>
+    <h3>
+      Level
+      <%= get_level(@total_xp) %>
+      (<%= format_xp(@total_xp) %>&nbsp;XP)
+
+      <%= if @total_new_xp > 0 do %>
+        <sup>
+          (+<%= format_xp(@total_new_xp) %>&nbsp;XP!)
+        </sup>
+      <% end %>
+    </h3>
+
     <div class="progress">
-      <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= get_level_progress(@total_xp) %>%"></div>
-      <!--<div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: 10%"></div>-->
+      <% {old_width, new_width} = get_xp_bar_widths(@total_xp, @total_new_xp) %>
+      <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%"></div>
+      <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%"></div>
     </div>
   </div>
 
@@ -23,16 +35,25 @@
 
 <div class="row">
   <%= for xp <- @xps do %>
+    <% new_xp = Map.get(@new_xps, xp.language.name, 0) %>
+
     <div class="col-xs-12 col-md-6 language-progress">
       <h4>
         <%= xp.language.name %>
         level
         <%= get_level(xp.amount) %>
         (<%= format_xp(xp.amount) %>&nbsp;XP)
+
+        <%= if new_xp > 0 do %>
+          <sup>
+            (+<%= format_xp(new_xp) %>&nbsp;XP!)
+          </sup>
+        <% end %>
       </h4>
       <div class="progress">
-        <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= get_level_progress(xp.amount) %>%"></div>
-        <!--<div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: 5%"></div>-->
+        <% {old_width, new_width} = get_xp_bar_widths(xp.amount, new_xp) %>
+        <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%"></div>
+        <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%"></div>
       </div>
     </div>
   <% end %>
@@ -51,11 +72,18 @@
 
       <ol start="11">
         <%= for xp <- @more_xps do %>
+          <% new_xp = Map.get(@new_xps, xp.language.name, 0) %>
           <li>
             <%= xp.language.name %>
             level
             <%= get_level(xp.amount) %>
             (<%= format_xp(xp.amount) %>&nbsp;XP)
+
+            <%= if new_xp > 0 do %>
+              <sup>
+                (+<%= format_xp(new_xp) %>&nbsp;XP!)
+              </sup>
+            <% end %>
           </li>
         <% end %>
       </ol>
