@@ -12,7 +12,7 @@ defmodule CodeStats.ProfileView do
     if have_xp > new_xp do
       {
         get_level_progress(total_xp - new_xp),
-        get_level_progress(total_xp)
+        get_level_progress(total_xp) - get_level_progress(total_xp - new_xp)
       }
     else
       {
