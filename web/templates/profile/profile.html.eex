@@ -46,35 +46,21 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <h4>Other languages</h4>
+<%= if not Enum.empty?(@more_xps) do %>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Other languages</h4>
 
-    <ol start="8">
-      <li>
-        Markdown level 1 (670 XP)
-      </li>
-      <li>
-        EL level 1 (500 XP)
-      </li>
-      <li>
-        Verilog level 0 (475 XP)
-      </li>
-      <li>
-        SASS level 0 (443 XP)
-      </li>
-      <li>
-        Lua level 0 (400 XP)
-      </li>
-      <li>
-        TypeScript level 0 (386 XP)
-      </li>
-      <li>
-        JSON level 0 (233 XP)
-      </li>
-      <li>
-        COBOL level 0 (10 XP)
-      </li>
-    </ol>
+      <ol start="11">
+        <%= for xp <- @more_xps do %>
+          <li>
+            <%= xp.language.name %>
+            level
+            <%= get_level(xp.amount) %>
+            (<%= format_xp(xp.amount) %>&nbsp;XP)
+          </li>
+        <% end %>
+      </ol>
+    </div>
   </div>
-</div>
+<% end %>

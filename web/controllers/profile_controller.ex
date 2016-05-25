@@ -28,19 +28,14 @@ defmodule CodeStats.ProfileController do
 
         total_xp = Enum.reduce(xps, 0, fn xp, acc -> acc + xp.amount end)
 
+        {highlighted_xps, more_xps} = Enum.split(xps, 10)
+
         conn
         |> assign(:user, user)
         |> assign(:total_xp, total_xp)
-        |> assign(:xps, xps)
+        |> assign(:xps, highlighted_xps)
+        |> assign(:more_xps, more_xps)
         |> render("profile.html")
     end
-  end
-
-  defp get_xps(user) do
-    (from cx in CachedXP,
-      where: cx.user_id == ^user.id,
-      preload: [:language],
-      order_by: [desc: cx.amount])
-    |> Repo.all()
   end
 end
