@@ -10,6 +10,8 @@ defmodule CodeStats.User do
 
   alias CodeStats.Repo
   alias CodeStats.Pulse
+  alias CodeStats.Language
+  alias CodeStats.XP
   alias CodeStats.CachedXP
 
   schema "users" do
@@ -82,7 +84,8 @@ defmodule CodeStats.User do
     end
 
     cached_xps_q = from cx in CachedXP,
-      where: cx.user_id == ^user.id
+      where: cx.user_id == ^user.id,
+      preload: [:language]
 
     cached_xps = case Repo.all(cached_xps_q) do
       nil -> []
@@ -94,36 +97,41 @@ defmodule CodeStats.User do
       Map.put(acc, cached_xp.language_id, {cached_xp, false, cached_xp.amount})
     end)
 
-    pulses_q = from p in Pulse,
+    # Load all of user's XPs plus the Language for each XP
+    xps_q = from x in XP,
+      join: p in Pulse, on: p.id == x.pulse_id,
+      join: l in Language, on: l.id == x.language_id,
       where: p.user_id == ^user.id and p.sent_at >= ^last_cached,
-      preload: [:xps]
+      select: {x, l}
 
-    pulses = case Repo.all(pulses_q) do
+    xps = case Repo.all(xps_q) do
       nil -> []
       ret -> ret
     end
 
-    # Double reduce over all new xps
-    Enum.reduce(pulses, cached_xps, fn pulse, cached_xps ->
-      Enum.reduce(pulse.xps, cached_xps, fn xp, cached_xps ->
-        {cached_xp, _, amount} = Map.get(
-          cached_xps,
-          xp.language_id,
-          {
-            %CachedXP{
-              language_id: xp.language_id,
-              user_id: user.id,
-              amount: 0
-            },
-            true,
-            0
-          }
-        )
+    # Reduce over all new xps
+    updated_cached_xps = Enum.reduce(xps, cached_xps, fn {xp, language}, cached_xps ->
+      {cached_xp, _, amount} = Map.get(
+        cached_xps,
+        xp.language_id,
+        {
+          %CachedXP{
+            language: language,
+            language_id: language.id,
+            user_id: user.id,
+            amount: 0
+          },
+          true,
+          0
+        }
+      )
 
-        Map.put(cached_xps, xp.language_id, {cached_xp, true, amount + xp.amount})
-      end)
+      Map.put(cached_xps, xp.language_id, {cached_xp, true, amount + xp.amount})
     end)
     |> Map.values()
+
+    # Persist changed (dirty) cached XPs
+    updated_cached_xps
     |> Enum.filter(fn {_, dirty, _} -> dirty end)
     |> Enum.each(fn {cached_xp, _, amount} ->
       CachedXP.changeset(cached_xp, %{"amount" => amount})
@@ -136,6 +144,13 @@ defmodule CodeStats.User do
     updating_changeset(user, %{})
     |> Changeset.put_change(:last_cached, Calendar.DateTime.now_utc())
     |> Repo.update()
+
+    # Return all of the user's cached XPs
+    updated_cached_xps
+    |> Enum.map(fn
+      {cached_xp, false, _} -> cached_xp
+      {cached_xp, true, amount} -> %{cached_xp | amount: amount}
+    end)
   end
 
   defp hash_password(password) do

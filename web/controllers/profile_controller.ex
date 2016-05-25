@@ -23,7 +23,8 @@ defmodule CodeStats.ProfileController do
         |> render(CodeStats.ErrorView, "404.html")
 
       %User{} = user ->
-        xps = get_xps(user)
+        xps = User.update_cached_xps(user)
+        |> Enum.sort(fn a, b -> a.amount >= b.amount end)
 
         total_xp = Enum.reduce(xps, 0, fn xp, acc -> acc + xp.amount end)
 
