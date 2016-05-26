@@ -37,7 +37,7 @@
   <%= for xp <- @xps do %>
     <% new_xp = Map.get(@new_xps, xp.language.name, 0) %>
 
-    <div class="col-xs-12 col-md-6 language-progress">
+    <div class="col-xs-12 language-progress">
       <h4>
         <%= xp.language.name %>
         level
