@@ -59,13 +59,13 @@
   <% end %>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <hr />
-  </div>
-</div>
-
 <%= if not Enum.empty?(@more_xps) do %>
+  <div class="row">
+    <div class="col-xs-12">
+      <hr />
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xs-12">
       <h4>Other languages</h4>
