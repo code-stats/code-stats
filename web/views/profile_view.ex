@@ -7,7 +7,6 @@ defmodule CodeStats.ProfileView do
     next_level_xp = get_next_level_xp(level)
 
     have_xp = total_xp - current_level_xp
-    needed_xp = next_level_xp - current_level_xp
 
     if have_xp > new_xp do
       {
