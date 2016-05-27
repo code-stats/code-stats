@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CodeStats</title>
+    <title>Code::Stats</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -28,7 +28,7 @@
           </ul>
         </nav>
         <h1 class="logo">
-          <a href="<%= page_path(@conn, :index) %>">&lt;Code::Stats&gt;</a>
+          <a href="<%= page_path(@conn, :index) %>">Code::Stats</a>
         </h1>
       </header>
 
