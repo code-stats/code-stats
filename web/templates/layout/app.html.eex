@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Code::Stats</title>
+    <title><%= get_conf(:site_name) %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -28,7 +28,7 @@
           </ul>
         </nav>
         <h1 class="logo">
-          <a href="<%= page_path(@conn, :index) %>">Code::Stats</a>
+          <a href="<%= page_path(@conn, :index) %>"><%= get_conf(:site_name) %></a>
         </h1>
       </header>
 
@@ -54,5 +54,6 @@
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <%= raw get_conf(:analytics_code) %>
   </body>
 </html>

@@ -117,6 +117,7 @@ defmodule CodeStats.AuthUtils do
 
   Returns true if succeeded, false if failed.
   """
+  @spec delete_user(%User{}) :: boolean
   def delete_user(user) do
     case Repo.delete(user) do
       {:ok, _} -> true
