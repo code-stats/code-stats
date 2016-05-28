@@ -12,6 +12,17 @@
       </p>
     </div>
 
+    <div class="checkbox">
+      <label>
+        <%= checkbox(f, :private_profile) %>
+        Private profile
+      </label>
+
+      <p class="help-block">
+        Private profile can only be seen by yourself.
+      </p>
+    </div>
+
     <%= submit("Update preferences", class: "btn btn-primary") %>
   <% end) %>
 

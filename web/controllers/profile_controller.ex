@@ -19,30 +19,41 @@ defmodule CodeStats.ProfileController do
 
   def profile(conn, %{"username" => username}) do
     case AuthUtils.get_user(username) do
-      nil ->
-        conn
-        |> put_status(404)
-        |> render(CodeStats.ErrorView, "404.html")
+      nil -> render_404(conn)
 
       %User{} = user ->
-        xps = User.update_cached_xps(user)
-        |> Enum.sort(fn a, b -> a.amount >= b.amount end)
-        new_xps = get_latest_xps(user)
-
-        total_xp = Enum.reduce(xps, 0, fn xp, acc -> acc + xp.amount end)
-        total_new_xp = Enum.reduce(Map.values(new_xps), 0, fn amount, acc -> acc + amount end)
-
-        {highlighted_xps, more_xps} = Enum.split(xps, 10)
-
-        conn
-        |> assign(:user, user)
-        |> assign(:total_xp, total_xp)
-        |> assign(:xps, highlighted_xps)
-        |> assign(:more_xps, more_xps)
-        |> assign(:new_xps, new_xps)
-        |> assign(:total_new_xp, total_new_xp)
-        |> render("profile.html")
+        case {user.private_profile, AuthUtils.get_current_user(conn) == user.id} do
+          {true, true} -> render_profile(conn, user)
+          {true, false} -> render_404(conn)
+          {false, _} -> render_profile(conn, user)
+        end
     end
+  end
+
+  def render_404(conn) do
+    conn
+    |> put_status(404)
+    |> render(CodeStats.ErrorView, "404.html")
+  end
+
+  def render_profile(conn, user) do
+    xps = User.update_cached_xps(user)
+    |> Enum.sort(fn a, b -> a.amount >= b.amount end)
+    new_xps = get_latest_xps(user)
+
+    total_xp = Enum.reduce(xps, 0, fn xp, acc -> acc + xp.amount end)
+    total_new_xp = Enum.reduce(Map.values(new_xps), 0, fn amount, acc -> acc + amount end)
+
+    {highlighted_xps, more_xps} = Enum.split(xps, 10)
+
+    conn
+    |> assign(:user, user)
+    |> assign(:total_xp, total_xp)
+    |> assign(:xps, highlighted_xps)
+    |> assign(:more_xps, more_xps)
+    |> assign(:new_xps, new_xps)
+    |> assign(:total_new_xp, total_new_xp)
+    |> render("profile.html")
   end
 
   defp get_latest_xps(user) do

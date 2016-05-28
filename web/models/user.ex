@@ -19,6 +19,7 @@ defmodule CodeStats.User do
     field :email, :string
     field :password, :string
     field :last_cached, Calecto.DateTimeUTC
+    field :private_profile, :boolean
 
     has_many :pulses, Pulse
     has_many :cached_xps, CachedXP
@@ -27,10 +28,10 @@ defmodule CodeStats.User do
   end
 
   @required_fields ~w(username password)
-  @optional_fields ~w(email)
+  @optional_fields ~w(email private_profile)
 
   @put_required_fields ~w()
-  @put_optional_fields ~w(email)
+  @put_optional_fields ~w(email private_profile)
 
   @password_required_fields ~w(password)
   @password_optional_fields ~w()
