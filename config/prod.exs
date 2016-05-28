@@ -17,7 +17,7 @@ config :code_stats, CodeStats.Endpoint,
   cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
-config :logger, level: :info
+config :logger, level: :error
 
 # ## SSL Support
 #
