@@ -62,7 +62,7 @@
 <h4>XP</h4>
 
 <p>
-  Programming gives users <em>experience points</em>, i.e. XP. A certain amount of XP corresponds to a certain level. In Code::Stats, each keystroke that creates or deletes a character gives 1 XP, so a client should keep an XP counter and add to it on each such keystroke. Operating on many characters at once, such as when pasting or deleting highlighted text is counted as 1 XP. An XP value is a positive integer.
+  Programming gives users <em>experience points</em>, i.e. XP. A certain amount of XP corresponds to a certain level. In Code::Stats, each keystroke that creates or deletes a character gives 1 XP, so a client should keep an XP counter and add to it on each such keystroke. Operating on many characters at once, such as when deleting highlighted text, is counted as 1 XP for each character. An XP value is a positive integer.
 </p>
 
 <h4>Language</h4>
@@ -94,7 +94,7 @@
 </p>
 
 <pre><code>&gt; POST /api/my/pulse HTTP/1.1
-&gt; Host: codestats.click:443
+&gt; Host: codestats.net:443
 &gt; User-Agent: curl/7.43.0
 &gt; Accept: */*
 &gt; X-API-Token: VG1salpBPT0jI01UTT0=##9MrwcAx9bBjpHnpgn0rN8KndpoU=
