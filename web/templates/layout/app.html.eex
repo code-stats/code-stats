@@ -14,22 +14,27 @@
   <body>
     <div class="container">
       <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <%= if is_authed?(@conn) do %>
-              <li><a href="<%= profile_path(@conn, :my_profile) %>">Profile</a></li>
-              <li><a href="<%= preferences_path(@conn, :edit) %>">Preferences</a></li>
-              <li><a href="<%= machine_path(@conn, :list) %>">Machines</a></li>
-              <li><a href="<%= auth_path(@conn, :logout) %>">Log out</a></li>
-            <% else %>
-              <li><a href="<%= auth_path(@conn, :render_login) %>">Log in</a></li>
-              <li><a href="<%= auth_path(@conn, :render_signup) %>">Sign up</a></li>
-            <% end %>
-          </ul>
-        </nav>
-        <h1 class="logo">
-          <a href="<%= page_path(@conn, :index) %>"><%= get_conf(:site_name) %></a>
-        </h1>
+        <div class="row">
+          <div class="col-xs-2">
+            <a class="logo" href="<%= page_path(@conn, :index) %>"><img src="/images/Logo_crushed.png" alt="<%= get_conf(:site_name) %>" title="<%= get_conf(:site_name) %>" height="100%" /></a>
+          </div>
+
+          <div class="col-xs-10">
+            <nav role="navigation">
+              <ul class="nav nav-pills pull-right">
+                <%= if is_authed?(@conn) do %>
+                  <li><a href="<%= profile_path(@conn, :my_profile) %>">Profile</a></li>
+                  <li><a href="<%= preferences_path(@conn, :edit) %>">Preferences</a></li>
+                  <li><a href="<%= machine_path(@conn, :list) %>">Machines</a></li>
+                  <li><a href="<%= auth_path(@conn, :logout) %>">Log out</a></li>
+                <% else %>
+                  <li><a href="<%= auth_path(@conn, :render_login) %>">Log in</a></li>
+                  <li><a href="<%= auth_path(@conn, :render_signup) %>">Sign up</a></li>
+                <% end %>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -49,6 +54,8 @@
           <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
           —
           <a href="<%= page_path(@conn, :terms) %>">Legal</a>
+          —
+          <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
         </p>
       </footer>
 

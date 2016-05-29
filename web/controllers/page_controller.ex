@@ -71,4 +71,8 @@ defmodule CodeStats.PageController do
   def terms(conn, _params) do
     render(conn, "terms.html")
   end
+
+  def plugins(conn, _params) do
+    render(conn, "plugins.html")
+  end
 end

@@ -1,0 +1,21 @@
+<h1>
+  <%= get_conf(:site_name) %> plugins
+</h1>
+
+<h2>Atom</h2>
+
+<p>
+  To install, use Atom's builtin package search to search for <code>code-stats-atom</code> and install the package. Then go to the package's settings page and insert the API key of the machine you want.
+</p>
+
+<h2>IntelliJ IDEA / JetBrains IDEs</h2>
+
+<p>
+  The plugin for IntelliJ IDEA and the JetBrains range of IDEs is under development.
+</p>
+
+<h2>Other editors</h2>
+
+<p>
+  If there is no plugin for your favourite editor, you can check out the <a href="<%= page_path(@conn, :api_docs) %>">API docs</a> and implement one yourself.
+</p>

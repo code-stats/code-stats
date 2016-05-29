@@ -29,6 +29,7 @@ defmodule CodeStats.Router do
 
     get "/api-docs", PageController, :api_docs
     get "/tos", PageController, :terms
+    get "/plugins", PageController, :plugins
 
     get "/login", AuthController, :render_login
     post "/login", AuthController, :login
