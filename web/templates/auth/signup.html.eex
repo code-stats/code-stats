@@ -26,6 +26,12 @@
       </p>
     </div>
 
+    <div class="form-group">
+      <p>
+        When registering, you accept that you have read, understood and accepted the <a href="<%= page_path(@conn, :terms) %>">Terms of Service and Privacy policy</a>.
+      </p>
+    </div>
+
     <%= submit("Register!", class: "btn btn-primary") %>
   <% end) %>
 </div>

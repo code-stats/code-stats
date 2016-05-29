@@ -1,0 +1,135 @@
+<h1>Legal matters</h1>
+
+<h2>Table of contents</h2>
+
+<p>
+  <ol>
+    <li><a href="#privacy">Privacy policy</a></li>
+    <li><a href="#terms">Terms of service</a></li>
+  </ol>
+</p>
+
+<h2>Privacy policy <a id="privacy" href="#privacy">#</a></h2>
+
+<p>
+  <%= get_conf(:site_name) %> stores user data to provide its services. This document describes the data storage and usage policies.
+</p>
+
+<h4>Name and contact details of the personal data register holder</h4>
+
+<dl>
+  <dt>Name</dt>
+  <dd>Mikko Ahlroth</dd>
+
+  <dt>Email address</dt>
+  <dd>mikko.ahlroth ⓐⓣ gmail.com</dd>
+</dl>
+
+<p>
+  Inquiries about the register and the data contained should be directed to the above addresses.
+</p>
+
+<h4>Name of the register</h4>
+
+<p><%= get_conf(:site_name) %> (later "the service") user database.</p>
+
+<h4>Location of the register</h4>
+
+<p>
+  The user database is stored on a server hosted by <a href="https://www.online.net/en">Online SAS</a> in France.
+</p>
+
+<h4>The purpose of data collection</h4>
+
+<p>
+  Data is collected about the users of the service to enable and improve the service's functionality. User data is not used for any other purpose.
+</p>
+
+<h4>Data contained in the register</h4>
+
+<p>
+  The service collects the following data from the users:
+
+  <ul>
+    <li>
+      Username and password for authentication purposes.
+    </li>
+    <li>
+      Email address (optional) for notifying the user about important announcements related to the service and for account recovery in the case of a lost password.
+    </li>
+    <li>
+      IP addresses and browser user agent strings from both authenticated and unauthenticated users are stored in the server request logs for 4 weeks. They are used for statistical purposes and abuse prevention.
+    </li>
+  </ul>
+</p>
+
+<h4>Data sources</h4>
+
+<p>
+  All data is provided by the user. No data is collected from other sources.
+</p>
+
+<h4>Sharing of data with 3rd parties</h4>
+
+<p>
+  Data is never shared with 3rd parties, except to comply with an official, legal, written request from the Finnish authorities.
+</p>
+
+<h4>Transfer of data to outside the EU or ETA</h4>
+
+<p>
+  Data will not be moved outside the EU or ETA.
+</p>
+
+<h4>Security of the register</h4>
+
+<p>
+  Logins and communication with the server are secured with <em>SSH</em>. On the server, the database is protected by a further login known to only the register holder. Passwords in the database are hashed using <em>Bcrypt</em> with a randomized salt to prevent their decryption in case of a data breach. If a strong password is used, it cannot be feasibly decrypted.
+</p>
+
+<p>
+  Physical security of the server in the datacenter is managed by Online SAS.
+</p>
+
+<h4>Register data requests</h4>
+
+<p>
+  All users of the register have a right to request a copy of the data stored about them. To make such a request, send a free-form written request to the contact details provided above.
+</p>
+
+<h4>Note about analytics</h4>
+
+<p>
+  The service uses Google Analytics to gather statistics about its use. The data is not used to track any single user. If you wish to prevent such data collection, you can use an extension such as <a href="https://support.google.com/analytics/answer/181881">Google Analytics opt-out browser add-on</a> or <a href="https://github.com/gorhill/uBlock">uBlock Origin</a> in your browser to block Google Analytics. Please refer to the <a href="https://support.google.com/analytics/answer/6004245?hl=en">Google Analytics data safeguarding page</a> for more information.
+</p>
+
+<p>
+  Google does not have access to the data register itself.
+</p>
+
+<h4>Changes to the privacy policy</h4>
+
+<p>
+  This page holds the most up to date version of the privacy policy. We ask that you check this page for changes regularly. In the case of major changes to the policy, all users that have given their email address will be notified by email beforehand.
+</p>
+
+<p>
+  This privacy policy was last changed on the 29th of May 2016.
+</p>
+
+<h2>Terms of service <a id="terms" href="#terms">#</a></h2>
+
+<p>
+  <%= get_conf(:site_name) %> (later "the service") is a free service. Using it is a privilege, not a right. There is no <abbr title="Service level agreement">SLA</abbr> promised or implied.
+</p>
+
+<p>
+  The rules of using the service:
+
+  <ol>
+    <li>Don't hammer or attempt to DoS the API or the server or you will be banned.</li>
+    <li>Don't be mean to other people.</li>
+    <li>Do check the source code of the service and the plugins and suggest improvements.</li>
+    <li>Have fun.</li>
+  </ol>
+</p>

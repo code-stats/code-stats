@@ -48,7 +48,7 @@
           —
           <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
           —
-          <a href="<%= page_path(@conn, :terms) %>">Terms of Service &amp; Privacy Policy</a>
+          <a href="<%= page_path(@conn, :terms) %>">Legal</a>
         </p>
       </footer>
 
