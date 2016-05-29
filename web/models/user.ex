@@ -28,7 +28,7 @@ defmodule CodeStats.User do
   end
 
   @required_fields ~w(username password)
-  @optional_fields ~w(email private_profile)
+  @optional_fields ~w(email)
 
   @put_required_fields ~w()
   @put_optional_fields ~w(email private_profile)
@@ -46,6 +46,7 @@ defmodule CodeStats.User do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> update_change(:password, &hash_password/1)
+    |> put_change(:private_profile, false)
     |> validate_length(:username, min: 1)
     |> validate_length(:username, max: 64)
     |> validations()
