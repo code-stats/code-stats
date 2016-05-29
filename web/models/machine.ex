@@ -24,6 +24,8 @@ defmodule CodeStats.Machine do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_length(:name, min: 1)
+    |> validate_length(:name, max: 64)
     |> unique_constraint(:name, name: :machines_name_user_id_index)
     |> put_change(:api_salt, generate_api_salt())
   end

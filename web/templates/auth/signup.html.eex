@@ -5,21 +5,23 @@
       <label for="user_username">Username (required)</label>
       <%= text_input(f, :username, class: "form-control", required: true) %>
       <%= if message = f.errors[:username] do %>
-        <p class="help-block"><%= message %></p>
+        <p class="help-block"><%= translate_error(message) %></p>
       <% end %>
+
+      <p class="help-block">Must not contain the following characters: <code>/#%?&amp;=</code>. You're free to use Unicode characters but complex character sequences may make the profile unreachable.</p>
     </div>
     <div class="form-group <%= if f.errors[:password], do: "has-error" %>">
       <label for="user_password">Password (required)</label>
       <%= password_input(f, :password, class: "form-control", required: true) %>
       <%= if message = f.errors[:password] do %>
-        <p class="help-block"><%= message %></p>
+        <p class="help-block"><%= translate_error(message) %></p>
       <% end %>
     </div>
     <div class="form-group <%= if f.errors[:email], do: "has-error" %>">
       <label for="user_email">Email address (optional)</label>
       <%= email_input(f, :email, class: "form-control") %>
       <%= if message = f.errors[:email] do %>
-        <p class="help-block"><%= message %></p>
+        <p class="help-block"><%= translate_error(message) %></p>
       <% end %>
       <p class="help-block">
         Email is only used for important notifications about the service, not for promotions or spam.

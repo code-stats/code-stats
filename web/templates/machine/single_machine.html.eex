@@ -10,7 +10,7 @@
       <label for="machine_name">Name (required)</label>
       <%= text_input(f, :name, class: "form-control", required: true) %>
       <%= if message = f.errors[:name] do %>
-        <p class="help-block"><%= message %></p>
+        <p class="help-block"><%= translate_error(message) %></p>
       <% end %>
     </div>
 
