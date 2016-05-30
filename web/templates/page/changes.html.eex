@@ -1,5 +1,11 @@
 <h2>Changelog</h2>
 
+<h3>1.1.1 – Clock drift</h3>
+
+<ul>
+  <li>Fixed a case where clock drift either on the client or the server caused pulses to not be accepted.</li>
+</ul>
+
 <h3>1.1.0 – First public release</h3>
 
 <p>

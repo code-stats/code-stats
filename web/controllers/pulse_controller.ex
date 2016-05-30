@@ -41,7 +41,7 @@ defmodule CodeStats.PulseController do
     {user, machine} = AuthUtils.get_api_details(conn)
 
     with {:ok, %DateTime{} = datetime}  <- parse_timestamp(timestamp),
-      :ok                               <- check_datetime_diff(datetime),
+      {:ok, datetime}                   <- check_datetime_diff(datetime),
       {:ok, %Pulse{} = pulse}           <- create_pulse(user, machine, datetime),
       :ok                               <- create_xps(pulse, xps) do
         :ok
@@ -60,15 +60,19 @@ defmodule CodeStats.PulseController do
     {:ok, diff, _, type} = DateTime.diff(DateTime.now_utc(), datetime)
 
     if type == :after and diff <= @datetime_max_diff do
-      :ok
+      {:ok, datetime}
     else
-      {:error, :generic, "Invalid date."}
+      if type == :before or type == :same_time do
+        {:ok, DateTime.now_utc()}
+      else
+        {:error, :generic, "Invalid date."}
+      end
     end
   end
 
   defp create_pulse(user, machine, datetime) do
     params = %{"sent_at" => datetime}
-    
+
     Pulse.changeset(%Pulse{}, params)
     |> Changeset.put_change(:user_id, user.id)
     |> Changeset.put_change(:machine_id, machine.id)
