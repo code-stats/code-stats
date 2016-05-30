@@ -75,4 +75,12 @@ defmodule CodeStats.PageController do
   def plugins(conn, _params) do
     render(conn, "plugins.html")
   end
+
+  def source(conn, _params) do
+    render(conn, "source.html")
+  end
+
+  def changes(conn, _params) do
+    render(conn, "changes.html")
+  end
 end

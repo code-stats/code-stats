@@ -21,7 +21,7 @@ defmodule CodeStats.AuthController do
     |> case do
       %Plug.Conn{} = conn ->
         conn
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: profile_path(conn, :my_profile))
 
       ret ->
         # If ret is nil, user was not found -> run dummy auth to prevent user enumeration

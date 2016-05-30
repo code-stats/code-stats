@@ -1,6 +1,6 @@
-<h1>Legal matters</h1>
+<h2>Legal matters</h2>
 
-<h2>Table of contents</h2>
+<h3>Table of contents</h3>
 
 <p>
   <ol>
@@ -9,7 +9,7 @@
   </ol>
 </p>
 
-<h2>Privacy policy <a id="privacy" href="#privacy">#</a></h2>
+<h3>Privacy policy <a id="privacy" href="#privacy">#</a></h3>
 
 <p>
   <%= get_conf(:site_name) %> stores user data to provide its services. This document describes the data storage and usage policies.
@@ -117,7 +117,7 @@
   This privacy policy was last changed on the 29th of May 2016.
 </p>
 
-<h2>Terms of service <a id="terms" href="#terms">#</a></h2>
+<h3>Terms of service <a id="terms" href="#terms">#</a></h3>
 
 <p>
   <%= get_conf(:site_name) %> (later "the service") is a free service. Using it is a privilege, not a right. There is no <abbr title="Service level agreement">SLA</abbr> promised or implied.
