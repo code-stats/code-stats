@@ -93,7 +93,7 @@
   In all API requests that require authentication, the token must be added using the HTTP header <code>X-API-Token</code>. Here is an example request sent with the token (as printed by curl):
 </p>
 
-<pre><code>&gt; POST /api/my/pulse HTTP/1.1
+<pre><code>&gt; POST /api/my/pulses HTTP/1.1
 &gt; Host: codestats.net:443
 &gt; User-Agent: curl/7.43.0
 &gt; Accept: */*
@@ -117,6 +117,10 @@
 
 <p>
   Adds a new <em>Pulse</em> to the system. The client should send a pulse periodically when the user is programming. The payload should be a list of languages and their accumulated XP since the last successful pulse. The pulse should also contain a <code>coded_at</code> timestamp that signifies when the pulse was generated. This allows sending the pulse later, if the Internet connection is momentarily cut.
+</p>
+
+<p>
+  Note: The <code>coded_at</code> timestamp must be no more than 2 weeks old. Any older timestamps will result in an error. Timestamps in the future will be ignored, their <code>coded_at</code> will be set to the current moment.
 </p>
 
 <p>

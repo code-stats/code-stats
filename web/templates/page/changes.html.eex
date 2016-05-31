@@ -24,7 +24,18 @@
 
 <h2>Changelog</h2>
 
-<h3>1.2.0 – Scaling back levels</h3>
+<h3>1.2.1 – 2016-05-31 – Small fixes</h3>
+
+<p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</p>
+
+<h3>1.2.0 – 2016-05-31 – Scaling back levels</h3>
 
 <p>
   <ul>
@@ -33,7 +44,7 @@
   </ul>
 </p>
 
-<h3>1.1.1 – Clock drift</h3>
+<h3>1.1.1 – 2016-05-30 – Clock drift</h3>
 
 <p>
   <ul>
@@ -41,7 +52,7 @@
   </ul>
 </p>
 
-<h3>1.1.0 – First public release</h3>
+<h3>1.1.0 – 2016-05-30 – First public release</h3>
 
 <p>
   Implemented <em>everything</em>. 🎉

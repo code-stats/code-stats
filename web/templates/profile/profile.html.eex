@@ -72,6 +72,20 @@
       </div>
     <% end %>
   </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <hr />
+
+      <p>
+        <center>
+          <small>
+            XP gained in the last 12 hours is highlighted.
+          </small>
+        </center>
+      </p>
+    </div>
+  </div>
 <% end %>
 
 <%= if not Enum.empty?(@more_xps) do %>
