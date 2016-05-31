@@ -76,10 +76,6 @@ defmodule CodeStats.PageController do
     render(conn, "plugins.html")
   end
 
-  def source(conn, _params) do
-    render(conn, "source.html")
-  end
-
   def changes(conn, _params) do
     render(conn, "changes.html")
   end

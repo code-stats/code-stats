@@ -3,7 +3,7 @@ defmodule CodeStats.XPCalculator do
   Calculations for levels based on XP.
   """
 
-  @level_factor 0.05
+  @level_factor 0.025
 
   @doc """
   Get the level based on given XP.

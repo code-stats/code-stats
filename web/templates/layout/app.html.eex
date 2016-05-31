@@ -50,7 +50,7 @@
 
         <p>
           <center>
-            <a href="<%= page_path(@conn, :source)%>"><%= unquote(Mix.Project.config[:version]) %></a>
+            <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
             —
             <%= CodeStats.RequestTime.calculate_time(@conn) %>
             —
@@ -59,8 +59,6 @@
             <a href="<%= page_path(@conn, :terms) %>">Legal</a>
             —
             <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
-            —
-            <a href="<%= page_path(@conn, :changes) %>">Changes</a>
           </center>
         </p>
       </footer>
