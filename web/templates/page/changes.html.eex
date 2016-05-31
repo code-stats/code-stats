@@ -28,10 +28,11 @@
 
 <p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/1">#1</a>: coded_at time range not documented in API docs</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/2">#2</a>: Endpoint path typo in API docs</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/4">#4</a>: Refactor README</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/5">#5</a>: Add link to example stats to front page</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/6">#6</a>: Add clarification about recent XP</li>
   </ul>
 </p>
 
