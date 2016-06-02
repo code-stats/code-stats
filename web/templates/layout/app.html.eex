@@ -61,6 +61,14 @@
             <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
           </center>
         </p>
+
+        <p>
+          <center>
+            <small>
+              <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
+            </small>
+          </center>
+        </p>
       </footer>
 
     </div> <!-- /container -->

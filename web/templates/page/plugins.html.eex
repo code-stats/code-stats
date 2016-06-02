@@ -2,6 +2,18 @@
   <%= get_conf(:site_name) %> plugins
 </h2>
 
+<h3>A note about the functionality of the plugins</h3>
+
+<p>
+  The plugins work by listening to your editor's text changes and detecting the syntax used. If you are having problems with XP registering to the wrong language, you may need to install an appropriate language support package for your editor. <%= get_conf(:site_name) %> relies on the editor to detect the proper language.
+</p>
+
+<p>
+  Note that <em>at no point is any of your code sent to <%= get_conf(:site_name) %></em>. Only the amounts of XP (roughly the amount of keystrokes) are sent. For further information, check the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a> and the source code of the plugins.
+</p>
+
+<hr />
+
 <h3>Atom</h3>
 
 <p>
