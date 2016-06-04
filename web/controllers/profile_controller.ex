@@ -117,7 +117,7 @@ defmodule CodeStats.ProfileController do
       nil -> %{}
       ret ->
         Enum.reduce(ret, %{}, fn {machine, amount}, acc ->
-          Map.put(acc, machine.id, {machine, amount})
+          Map.put(acc, machine.id, amount)
         end)
     end
 
