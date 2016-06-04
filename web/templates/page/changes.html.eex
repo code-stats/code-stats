@@ -24,6 +24,17 @@
 
 <h2>Changelog</h2>
 
+<h3>1.3.0 – 2016-06-04 – Machine stats</h3>
+
+<p>
+  <ul>
+    <li>Added machine statistics to profile page.</li>
+    <li>Added recalculation of XP once a day to fix XP errors in profile view.</li>
+    <li>Added favicons.</li>
+    <li>Added more user info to profile view.</li>
+  </ul>
+</p>
+
 <h3>1.2.2 – 2016-06-02 – Vincit Oy</h3>
 
 <p>

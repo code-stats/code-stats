@@ -13,6 +13,9 @@ defmodule CodeStats do
       supervisor(CodeStats.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(CodeStats.Worker, [arg1, arg2, arg3]),
+
+      # Start XPCacheRefresher
+      worker(CodeStats.XPCacheRefresher, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

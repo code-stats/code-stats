@@ -83,3 +83,17 @@ form.link, form.button {
 .machine-action {
   margin-right: 5px;
 }
+
+.profile-detail-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.profile-detail-list li {
+  /*display: inline;*/
+}
+
+.profile-detail-list li:before {
+  content: "☞ ";
+}

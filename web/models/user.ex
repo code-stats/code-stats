@@ -77,9 +77,12 @@ defmodule CodeStats.User do
 
   Will first load all existing CachedXP, then sum any new XPs per Language and add those to
   the CachedXPs, creating new ones if required.
+
+  If `update_all` is set, all XP is gathered and CachedXP is replaced, not just added to. This
+  results in a total recalculation of all the user's XP.
   """
-  def update_cached_xps(user) do
-    last_cached = if user.last_cached != nil do
+  def update_cached_xps(user, update_all \\ false) do
+    last_cached = if not update_all and user.last_cached != nil do
       user.last_cached
     else
       {:ok, datetime} = Calendar.DateTime.Parse.rfc3339_utc(@null_datetime)
@@ -97,14 +100,21 @@ defmodule CodeStats.User do
     |> Enum.reduce(%{}, fn cached_xp, acc ->
       # Each cached XP is inserted into a 3-tuple of {CachedXP, dirty bit, amount}
       # The dirty bit is used to persist only changed CachedXPs
-      Map.put(acc, cached_xp.language_id, {cached_xp, false, cached_xp.amount})
+
+      # If we are updating all XP, every CachedXP will be marked as dirty and will have
+      # amount set to 0 to start with
+      if update_all do
+        Map.put(acc, cached_xp.language_id, {cached_xp, true, 0})
+      else
+        Map.put(acc, cached_xp.language_id, {cached_xp, false, cached_xp.amount})
+      end
     end)
 
-    # Load all of user's XPs plus the Language for each XP
+    # Load all of user's new XP plus the Language for each XP
     xps_q = from x in XP,
       join: p in Pulse, on: p.id == x.pulse_id,
       join: l in Language, on: l.id == x.language_id,
-      where: p.user_id == ^user.id and p.sent_at >= ^last_cached,
+      where: p.user_id == ^user.id and p.inserted_at >= ^last_cached,
       select: {x, l}
 
     xps = case Repo.all(xps_q) do
