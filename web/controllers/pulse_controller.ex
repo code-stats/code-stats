@@ -116,7 +116,7 @@ defmodule CodeStats.PulseController do
   defp get_or_create_language(language_name) do
     # Get-create-get to handle race conditions
     get_query = from l in Language,
-      where: l.name == ^language_name
+      where: fragment("LOWER(?)", l.name) == fragment("LOWER(?)", ^language_name)
 
     case Repo.one(get_query) do
       %Language{} = language -> {:ok, language}
