@@ -17,7 +17,7 @@ defmodule CodeStats.PulseController do
 
   def add(conn, %{"coded_at" => timestamp, "xps" => xps}) do
     if not is_list(xps) do
-      resp(conn, 400, "Invalid xps format.")
+      resp(conn, 400, %{error: "Invalid xps format."})
     end
 
     case do_add(conn, timestamp, xps) do
@@ -27,13 +27,13 @@ defmodule CodeStats.PulseController do
         |> json(%{"ok" => "Great success!"})
 
       {:error, :not_found, reason} ->
-        resp(conn, 404, reason)
+        resp(conn, 404, %{error: reason})
 
       {:error, :generic, reason} ->
-        resp(conn, 400, reason)
+        resp(conn, 400, %{error: reason})
 
       {:error, :internal, reason} ->
-        resp(conn, 500, reason)
+        resp(conn, 500, %{error: reason})
     end
   end
 

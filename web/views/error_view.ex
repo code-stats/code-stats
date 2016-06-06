@@ -12,6 +12,10 @@ defmodule CodeStats.ErrorView do
     """
   end
 
+  def render("404.json", _assigns) do
+    %{error: "Route not found."}
+  end
+
   def render("500.html", _assigns) do
     raw """
     <div class="jumbotron">
@@ -23,6 +27,10 @@ defmodule CodeStats.ErrorView do
     """
   end
 
+  def render("500.json", _assigns) do
+    %{error: "The server some kind of exploded."}
+  end
+
   def render("403.html", _assigns) do
     raw """
     <div class="jumbotron">
@@ -32,6 +40,10 @@ defmodule CodeStats.ErrorView do
       </p>
     </div>
     """
+  end
+
+  def render("403.json", _assigns) do
+    %{error: "You are not allowed to do that."}
   end
 
   # In case no render clause matches or no

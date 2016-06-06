@@ -32,7 +32,7 @@
 <h4>Protocol</h4>
 
 <p>
-  All requests are made using the HTTP protocol and use JSON to serialize the data. Requests with payloads should send the payload as JSON in the request body. Error responses from the server will only return the error string, so if the response code is not in the 2xx series, don't attempt to parse the content as JSON.
+  All requests are made using the HTTP protocol and use JSON to serialize the data. Requests with payloads should send the payload as JSON in the request body. The responses are JSON, error responses will contain the key <code>error</code> which has the error message as value.
 </p>
 
 <h4>Path</h4>
