@@ -49,7 +49,7 @@ defmodule CodeStats.User do
     |> put_change(:private_profile, false)
     |> validate_length(:username, min: 1)
     |> validate_length(:username, max: 64)
-    |> validate_format(:username, ~r/^[^\/#%?&=]+$/)
+    |> validate_format(:username, ~r/^[^\/#%?&=+]+$/)
     |> validations()
     |> unique_constraint(:username)
   end
