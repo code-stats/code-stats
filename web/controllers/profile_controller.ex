@@ -19,7 +19,9 @@ defmodule CodeStats.ProfileController do
   end
 
   def profile(conn, %{"username" => username}) do
-    case AuthUtils.get_user(username) do
+    fix_url_username(username)
+    |> AuthUtils.get_user()
+    |> case do
       nil -> render_404(conn)
 
       %User{} = user ->
@@ -136,5 +138,11 @@ defmodule CodeStats.ProfileController do
       nil -> []
       ret -> ret
     end
+  end
+
+  # Fix the username specified in the URL by converting plus characters to spaces.
+  # This is not done by Phoenix for some reason.
+  defp fix_url_username(username) do
+    String.replace(username, "+", " ")
   end
 end
