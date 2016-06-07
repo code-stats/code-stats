@@ -27,8 +27,22 @@
 <h3>IntelliJ IDEA / JetBrains IDEs</h3>
 
 <p>
-  The plugin for IntelliJ IDEA and the JetBrains range of IDEs is under development.
+  To install, use the IDEs builtin package manager, click on "Browse repositories…" and search for <code>Code::Stats</code>. After installation, go to Settings -> Other Settings -> Code::Stats and insert your API key.
 </p>
+
+<p>
+  <a href="https://plugins.jetbrains.com/plugin/8393?pr=">Link to the plugin on JetBrain's site.</a>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  If the plugin fails to send XP, reporting <code>C::S ERR!</code>, hover over the status bar text to see the actual exception. If it complains of a PKIX error, you may need to install the <a href="https://www.identrust.com/certificates/trustid/root-download-x3.html">DST Root CA X3</a> to the IDE's JRE's trust store manually. The command to do that goes roughly like this on OS X:
+</p>
+
+<pre>
+<code>$ cd /Applications/&lt;IDE&gt;.app/Contents/jre/jdk/Contents/Home/jre
+$ bin/keytool -import -alias 'DST Root CA X3' -keystore lib/security/cacerts -trustcacerts -file /path/to/dst_root_ca_x3.pem</code>
+</pre>
 
 <h3>Other editors</h3>
 

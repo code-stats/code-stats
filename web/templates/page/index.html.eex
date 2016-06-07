@@ -7,7 +7,7 @@
   <div class="col-xs-12 col-lg-4">
     <h4>Write code</h4>
     <p>
-      Code::Stats currently has a <a href="<%= page_path(@conn, :plugins) %>">plugin for the Atom editor</a>. If you wish to make one for your own favourite editor, you are free to check out the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a>!
+      Code::Stats currently has <a href="<%= page_path(@conn, :plugins) %>">plugins for the Atom editor and the IntelliJ/JetBrains range of IDEs</a>. If you wish to make one for your own favourite editor, you are free to check out the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a>!
     </p>
   </div>
 
