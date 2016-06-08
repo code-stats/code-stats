@@ -29,6 +29,17 @@
 
 <h2>Changelog</h2>
 
+<h3>1.3.7 – 2016-06-08 – Fix username uniqueness</h3>
+
+<p>
+  <ul>
+    <li>Fix username uniqueness, due to a problem with SQL migrations a unique index was not created and multiple users could be registered with the same username. 😱</li>
+    <li>Change some IDs to bigint because if it's worth doing, it's worth overdoing.</li>
+    <li>Remove old unused total XP property from users.</li>
+    <li>Clarified git repo licences a bit.</li>
+  </ul>
+</p>
+
 <h3>1.3.3–1.3.6 – 2016-06-07 – JetBrains and username path fixes</h3>
 
 <p>
