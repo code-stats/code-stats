@@ -1,15 +1,9 @@
 defmodule CodeStats.ErrorView do
   use CodeStats.Web, :view
 
-  def render("404.html", _assigns) do
-    raw """
-    <div class="jumbotron">
-      <h1>Not found</h1>
-      <p class="lead">
-        The page you were looking for does not exist.
-      </p>
-    </div>
-    """
+  def render("404.html", assigns) do
+    assigns = non_crash_error_assigns(assigns)
+    render(CodeStats.ErrorView, "error_404.html", assigns)
   end
 
   def render("404.json", _assigns) do
@@ -17,29 +11,16 @@ defmodule CodeStats.ErrorView do
   end
 
   def render("500.html", _assigns) do
-    raw """
-    <div class="jumbotron">
-      <h1>Internal server error</h1>
-      <p class="lead">
-        The server some kind of exploded.
-      </p>
-    </div>
-    """
+    render(CodeStats.ErrorView, "error_500.html")
   end
 
   def render("500.json", _assigns) do
     %{error: "The server some kind of exploded."}
   end
 
-  def render("403.html", _assigns) do
-    raw """
-    <div class="jumbotron">
-      <h1>Forbidden</h1>
-      <p class="lead">
-        Either you are not logged in or you tried doing something you're not allowed to do.
-      </p>
-    </div>
-    """
+  def render("403.html", assigns) do
+    assigns = non_crash_error_assigns(assigns)
+    render("error_403.html", assigns)
   end
 
   def render("403.json", _assigns) do
@@ -50,5 +31,12 @@ defmodule CodeStats.ErrorView do
   # template is found, let's render it as 500
   def template_not_found(_template, assigns) do
     render "500.html", assigns
+  end
+
+  # Assigns for error pages that are not crashes
+  defp non_crash_error_assigns(assigns) do
+    Map.merge(assigns, %{
+      layout: {CodeStats.ErrorView, "error_layout.html"}
+    })
   end
 end

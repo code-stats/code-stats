@@ -47,7 +47,7 @@ defmodule CodeStats.Web do
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
       import CodeStats.Utils, only: [get_conf: 1]
-      import CodeStats.AuthUtils, only: [is_authed?: 1, get_current_user: 1]
+      import CodeStats.AuthUtils, only: [is_authed?: 1, get_current_user_id: 1]
       import CodeStats.XPCalculator, only: [get_level: 1, get_next_level_xp: 1, get_level_progress: 1]
       import CodeStats.ViewUtils
 

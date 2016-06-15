@@ -29,9 +29,29 @@ defmodule CodeStats.AuthUtils do
 
   Returns nil if user is not authenticated.
   """
-  @spec get_current_user(%Conn{}) :: number | nil
-  def get_current_user(conn) do
+  @spec get_current_user_id(%Conn{}) :: number | nil
+  def get_current_user_id(conn) do
     Conn.get_session(conn, @auth_key)
+  end
+
+  @doc """
+  Get current user model from the session.
+
+  Returns nil if the user is not authenticated.
+  """
+  @spec get_current_user(%Conn{}) :: %User{} | nil
+  def get_current_user(conn) do
+    user_id = get_current_user_id(conn)
+
+    case user_id do
+      nil -> nil
+
+      id ->
+        query = from u in User,
+          where: u.id == ^id
+
+        Repo.one(query)
+    end
   end
 
   @doc """

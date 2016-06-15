@@ -47,7 +47,7 @@
 <%= if Enum.empty?(@xps) do %>
   <div class="jumbotron">
     <p class="lead">
-      <%= if get_current_user(@conn) == @user.id do %>
+      <%= if get_current_user_id(@conn) == @user.id do %>
         <strong>Quick start:</strong><br />
         ⑴ Create your first <a href="<%= machine_path(@conn, :list) %>">machine</a>.<br />
         ⑵ Install the <a href="<%= page_path(@conn, :plugins) %>">Code::Stats plugin for your editor</a> and copy the machine's API token to its settings.</a><br />

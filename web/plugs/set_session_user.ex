@@ -23,7 +23,7 @@ defmodule CodeStats.SetSessionUser do
 
   def call(conn, _opts) do
     if AuthUtils.is_authed?(conn) do
-      id = AuthUtils.get_current_user(conn)
+      id = AuthUtils.get_current_user_id(conn)
       query = from u in User,
         where: u.id == ^id
       

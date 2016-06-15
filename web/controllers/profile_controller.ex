@@ -5,7 +5,7 @@ defmodule CodeStats.ProfileController do
 
   alias CodeStats.Repo
 
-  alias CodeStats.AuthUtils
+  alias CodeStats.{AuthUtils, PermissionUtils}
   alias CodeStats.User
   alias CodeStats.SetSessionUser
   alias CodeStats.Pulse
@@ -25,10 +25,9 @@ defmodule CodeStats.ProfileController do
       nil -> render_404(conn)
 
       %User{} = user ->
-        case {user.private_profile, AuthUtils.get_current_user(conn) == user.id} do
-          {true, true} -> render_profile(conn, user)
-          {true, false} -> render_404(conn)
-          {false, _} -> render_profile(conn, user)
+        case PermissionUtils.can_access_profile?(AuthUtils.get_current_user(conn), user) do
+          true -> render_profile(conn, user)
+          false -> render_404(conn)
         end
     end
   end
@@ -36,7 +35,7 @@ defmodule CodeStats.ProfileController do
   def render_404(conn) do
     conn
     |> put_status(404)
-    |> render(CodeStats.ErrorView, "404.html")
+    |> render(CodeStats.ErrorView, "error_404.html")
   end
 
   def render_profile(conn, user) do
