@@ -5,12 +5,17 @@ defmodule CodeStats.AuthController do
   alias CodeStats.User
 
   def render_login(conn, _params) do
-    render(conn, "login.html")
+    conn
+    |> assign(:title, "Login")
+    |> render("login.html")
   end
 
   def render_signup(conn, _params) do
     changeset = User.changeset(%User{})
-    render(conn, "signup.html", changeset: changeset)
+
+    conn
+    |> assign(:title, "Signup")
+    |> render("signup.html", changeset: changeset)
   end
 
   def login(conn, %{"username" => username, "password" => password}) do
@@ -30,6 +35,7 @@ defmodule CodeStats.AuthController do
         if ret == nil, do: AuthUtils.dummy_auth_user()
 
         conn
+        |> assign(:title, "Login")
         |> assign(:username_input, username)
         |> put_status(404)
         |> put_flash(:error, "Wrong username and/or password!")
@@ -42,6 +48,7 @@ defmodule CodeStats.AuthController do
     case AuthUtils.create_user(changeset) do
       %Ecto.Changeset{} = changeset ->
         conn
+        |> assign(:title, "Signup")
         |> put_status(400)
         |> render("signup.html", changeset: changeset)
 

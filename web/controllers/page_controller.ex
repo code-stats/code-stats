@@ -65,18 +65,26 @@ defmodule CodeStats.PageController do
   end
 
   def api_docs(conn, _params) do
-    render(conn, "api_docs.html")
+    conn
+    |> assign(:title, "API docs")
+    |> render("api_docs.html")
   end
 
   def terms(conn, _params) do
-    render(conn, "terms.html")
+    conn
+    |> assign(:title, "Legal")
+    |> render("terms.html")
   end
 
   def plugins(conn, _params) do
-    render(conn, "plugins.html")
+    conn
+    |> assign(:title, "Plugins")
+    |> render("plugins.html")
   end
 
   def changes(conn, _params) do
-    render(conn, "changes.html")
+    conn
+    |> assign(:title, "Changes")
+    |> render("changes.html")
   end
 end

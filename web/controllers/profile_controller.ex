@@ -60,6 +60,7 @@ defmodule CodeStats.ProfileController do
     end
 
     conn
+    |> assign(:title, user.username)
     |> assign(:user, user)
     |> assign(:total_xp, total_xp)
     |> assign(:last_day_coded, last_day_coded)

@@ -5,6 +5,8 @@ defmodule CodeStats.PreferencesController do
   alias CodeStats.User
   alias CodeStats.SetSessionUser
 
+  plug :set_title
+
   def edit(conn, _params) do
     changeset = User.changeset(SetSessionUser.get_user_data(conn))
     conn
@@ -77,5 +79,9 @@ defmodule CodeStats.PreferencesController do
     user_data = SetSessionUser.get_user_data(conn)
     conn
     |> assign(:user, user_data)
+  end
+
+  defp set_title(conn, _opts) do
+    assign(conn, :title, "Preferences")
   end
 end

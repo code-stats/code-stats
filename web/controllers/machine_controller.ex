@@ -9,6 +9,8 @@ defmodule CodeStats.MachineController do
   alias CodeStats.SetSessionUser
   alias CodeStats.ControllerUtils
 
+  plug :set_title
+
   def list(conn, _params) do
     {conn, _} = common_assigns(conn)
     changeset = Machine.changeset(%Machine{})
@@ -151,5 +153,9 @@ defmodule CodeStats.MachineController do
       {:ok, _} -> true
       {:error, _} -> false
     end
+  end
+
+  defp set_title(conn, _opts) do
+    assign(conn, :title, "Machines")
   end
 end

@@ -7,7 +7,7 @@
     <meta name="description" content="Code::Stats is a free stats tracking service for programmers">
     <meta name="author" content="Mikko Ahlroth">
 
-    <title><%= get_conf(:site_name) %></title>
+    <title><%= get_title(@conn) %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
