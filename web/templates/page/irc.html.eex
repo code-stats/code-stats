@@ -1,0 +1,9 @@
+<h2>IRC</h2>
+
+<p>
+  <%= get_conf(:site_name) %> has its own IRC channel on <a href="https://freenode.net/">Freenode</a>: <code>#codestats</code>. Feel free to join to give feedback, ask questions or just hang around.
+</p>
+
+<p>
+  In case you do not have an IRC client yet, you can join <a href="http://webchat.freenode.net?channels=%23codestats">using the webchat</a>.
+</p>

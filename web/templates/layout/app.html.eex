@@ -78,6 +78,8 @@
             <a href="<%= page_path(@conn, :terms) %>">Legal</a>
             —
             <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
+            —
+            <a href="<%= page_path(@conn, :irc) %>">IRC</a>
           </center>
         </p>
 

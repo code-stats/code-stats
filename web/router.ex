@@ -31,6 +31,7 @@ defmodule CodeStats.Router do
     get "/tos", PageController, :terms
     get "/plugins", PageController, :plugins
     get "/changes", PageController, :changes
+    get "/irc", PageController, :irc
 
     get "/login", AuthController, :render_login
     post "/login", AuthController, :login
