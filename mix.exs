@@ -18,7 +18,7 @@ defmodule CodeStats.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {CodeStats, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :calendar]]
   end
 
@@ -31,9 +31,10 @@ defmodule CodeStats.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.1.4"},
+      {:phoenix, "~> 1.2.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_ecto, "~> 2.0"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_ecto, "~> 3.0-rc"},
       {:phoenix_html, "~> 2.4"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.9"},
@@ -42,8 +43,8 @@ defmodule CodeStats.Mixfile do
       {:number, "~> 0.4.1"},
       {:earmark, "~> 0.2.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev},
-      {:calecto, "~> 0.5.2"},
-      {:calendar, "~> 0.13.2"}
+      {:calecto, "~> 0.16.0"},
+      {:calendar, "~> 0.16.0"}
    ]
   end
 
@@ -54,7 +55,10 @@ defmodule CodeStats.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+   ]
   end
 end

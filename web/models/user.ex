@@ -42,7 +42,7 @@ defmodule CodeStats.User do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> update_change(:password, &hash_password/1)
@@ -57,7 +57,7 @@ defmodule CodeStats.User do
   @doc """
   Create changeset for updating a user's data.
   """
-  def updating_changeset(model, params \\ :empty) do
+  def updating_changeset(model, params \\ %{}) do
     model
     |> cast(params, @put_required_fields, @put_optional_fields)
     |> validations()
@@ -66,7 +66,7 @@ defmodule CodeStats.User do
   @doc """
   Create a changeset for changing a user's password.
   """
-  def password_changeset(model, params \\ :empty) do
+  def password_changeset(model, params \\ %{}) do
     model
     |> cast(params, @password_required_fields, @password_optional_fields)
     |> update_change(:password, &hash_password/1)

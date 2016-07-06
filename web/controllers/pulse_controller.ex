@@ -6,7 +6,7 @@ defmodule CodeStats.PulseController do
   import Ecto.Query, only: [from: 2]
   alias Ecto.Changeset
 
-  alias Calendar.DateTime
+  alias Calendar.DateTime, as: CDateTime
 
   alias CodeStats.AuthUtils
   alias CodeStats.Repo
@@ -49,7 +49,7 @@ defmodule CodeStats.PulseController do
   end
 
   defp parse_timestamp(timestamp) do
-    case DateTime.Parse.rfc3339_utc(timestamp) do
+    case CDateTime.Parse.rfc3339_utc(timestamp) do
       {:ok, datetime} -> {:ok, datetime}
 
       {:bad_format, _} -> {:error, :generic, "Invalid coded_at format."}
@@ -57,13 +57,13 @@ defmodule CodeStats.PulseController do
   end
 
   defp check_datetime_diff(datetime) do
-    {:ok, diff, _, type} = DateTime.diff(DateTime.now_utc(), datetime)
+    {:ok, diff, _, type} = CDateTime.diff(CDateTime.now_utc(), datetime)
 
     if type == :after and diff <= @datetime_max_diff do
       {:ok, datetime}
     else
       if type == :before or type == :same_time do
-        {:ok, DateTime.now_utc()}
+        {:ok, CDateTime.now_utc()}
       else
         {:error, :generic, "Invalid date."}
       end

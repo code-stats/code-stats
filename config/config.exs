@@ -8,13 +8,18 @@ use Mix.Config
 # Configures the endpoint
 config :code_stats, CodeStats.Endpoint,
   url: [host: "localhost"],
-  root: Path.dirname(__DIR__),
   secret_key_base: "gWdaZrx0+CB8iuwoC1LMNUD2Lp37PCqvv73Dgid6k+jESaQFWguzrf2hDAoIYE4U",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: CodeStats.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 config :code_stats,
+
+  ecto_repos: [CodeStats.Repo],
+
+
+# User configurable settings below
+##################################
 
   site_name: "Code::Stats",
 
