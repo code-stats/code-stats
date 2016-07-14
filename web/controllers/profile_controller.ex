@@ -56,7 +56,7 @@ defmodule CodeStats.ProfileController do
     last_day_coded = Enum.at(days_coded, 0)
     xp_per_day = case last_day_coded do
       nil -> 0
-      _ -> Float.round(total_xp / Enum.count(days_coded))
+      _ -> trunc(Float.round(total_xp / Enum.count(days_coded)))
     end
 
     conn

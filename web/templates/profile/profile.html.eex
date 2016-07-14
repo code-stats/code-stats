@@ -24,7 +24,7 @@
     <p>
       <ul class="profile-detail-list">
         <li>Programming since <%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>.</li>
-        <li>Average <%= @xp_per_day %>&nbsp;XP per day.</li>
+        <li>Average <%= format_xp(@xp_per_day) %>&nbsp;XP per day.</li>
         <li>
           Last coded
           <%= if @last_day_coded != nil do %>
