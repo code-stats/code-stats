@@ -14,8 +14,12 @@
 
     <div class="progress">
       <% {old_width, new_width} = get_xp_bar_widths(@total_xp, @total_new_xp) %>
-      <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%"></div>
-      <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%"></div>
+      <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%" aria-valuenow="<%= old_width %>" aria-valuemin="0" aria-valuemax="100">
+        <span class="sr-only">Level progress <%= old_width %> %.</span>
+      </div>
+      <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%" aria-valuenow="<%= new_width %>" aria-valuemin="0" aria-valuemax="100">
+        <span class="sr-only">Recent level progress <%= new_width %> %.</span>
+      </div>
     </div>
   </div>
 
@@ -23,12 +27,20 @@
     <h2><%= @user.username %></h2>
     <p>
       <ul class="profile-detail-list">
-        <li>Programming since <%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>.</li>
+        <li>
+          Programming since
+          <time datetime="<%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>">
+            <%= Calendar.Strftime.strftime!(@user.inserted_at, "%b %e %Y") %>
+          </time>.
+        </li>
         <li>Average <%= format_xp(@xp_per_day) %>&nbsp;XP per day.</li>
         <li>
           Last coded
           <%= if @last_day_coded != nil do %>
-            at <%= Calendar.Strftime.strftime!(@last_day_coded, "%F") %>.
+            at
+            <time datetime="<%= Calendar.Strftime.strftime!(@last_day_coded, "%F") %>">
+              <%= Calendar.Strftime.strftime!(@last_day_coded, "") %>
+            </time>.
           <% else %>
             <em>never</em>.
           <% end %>
@@ -77,8 +89,12 @@
         </h4>
         <div class="progress">
           <% {old_width, new_width} = get_xp_bar_widths(xp.amount, new_xp) %>
-          <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%"></div>
-          <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%"></div>
+          <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%" aria-valuenow="<%= old_width %>" aria-valuemin="0" aria-valuemax="100">
+            <span class="sr-only">Level progress <%= old_width %> %.</span>
+          </div>
+          <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%" aria-valuenow="<%= new_width %>" aria-valuemin="0" aria-valuemax="100">
+            <span class="sr-only">Recent level progress <%= new_width %> %.</span>
+          </div>
         </div>
       </div>
     <% end %>
@@ -141,10 +157,11 @@
           <li>
             <strong>
               <%= machine.name %>
-              level
-              <%= get_level(amount) %>
-              (<%= format_xp(amount) %>&nbsp;XP)
             </strong>
+
+            level
+            <%= get_level(amount) %>
+            (<%= format_xp(amount) %>&nbsp;XP)
 
             <%= if new_xp > 0 do %>
               <sup>
@@ -154,8 +171,12 @@
 
             <div class="progress">
               <% {old_width, new_width} = get_xp_bar_widths(amount, new_xp) %>
-              <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%"></div>
-              <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%"></div>
+              <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%" aria-valuenow="<%= old_width %>" aria-valuemin="0" aria-valuemax="100">
+                <span class="sr-only">Level progress <%= old_width %> %.</span>
+              </div>
+              <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%" aria-valuenow="<%= new_width %>" aria-valuemin="0" aria-valuemax="100">
+                <span class="sr-only">Recent level progress <%= new_width %> %.</span>
+              </div>
             </div>
           </li>
         <% end %>
