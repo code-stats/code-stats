@@ -16,6 +16,9 @@ defmodule CodeStats do
 
       # Start XPCacheRefresher
       worker(CodeStats.XPCacheRefresher, []),
+
+      # Start cache service
+      worker(CodeStats.CacheService, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

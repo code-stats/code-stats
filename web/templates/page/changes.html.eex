@@ -29,91 +29,85 @@
 
 <h2>Changelog</h2>
 
+<h3>1.4.0 – 2016-07-16 – First performance update</h3>
+
+<ul>
+  <li>Total XP and most popular languages counters on the front page are now in-memory, stored inside ETS. They are updated on every incoming pulse (for now) and totally refreshed every 15 minutes. This should make the front page much faster.</li>
+  <li>Added an index to make "XP in last 12 hours" queries faster both on front page and profile pages.</li>
+  <li>Accessibility was improved with regards to dates and progress bars.</li>
+  <li>Fixed average XP per day display, which showed XP in scientific format in some cases.</li>
+  <li>Added real page titles for better SEO and bookmarking.</li>
+  <li>Updated the codebase for Elixir 1.3, Phoenix 1.2 and Ecto 2.0.</li>
+  <li>Fixed some JSON errors not being sent correctly in the API.</li>
+</ul>
+
 <h3>1.3.7 – 2016-06-08 – Fix username uniqueness</h3>
 
-<p>
-  <ul>
-    <li>Fix username uniqueness, due to a problem with SQL migrations a unique index was not created and multiple users could be registered with the same username. 😱</li>
-    <li>Change some IDs to bigint because if it's worth doing, it's worth overdoing.</li>
-    <li>Remove old unused total XP property from users.</li>
-    <li>Clarified git repo licences a bit.</li>
-  </ul>
-</p>
+<ul>
+  <li>Fix username uniqueness, due to a problem with SQL migrations a unique index was not created and multiple users could be registered with the same username. 😱</li>
+  <li>Change some IDs to bigint because if it's worth doing, it's worth overdoing.</li>
+  <li>Remove old unused total XP property from users.</li>
+  <li>Clarified git repo licences a bit.</li>
+</ul>
 
 <h3>1.3.3–1.3.6 – 2016-06-07 – JetBrains and username path fixes</h3>
 
-<p>
-  <ul>
-    <li>Added details of the published IntelliJ/JetBrains plugin.</li>
-    <li>Fixed spaces in usernames resulting in unreachable profile pages.</li>
-    <li>Disallowed the plus sign in usernames to avoid conflicts with spaces.</li>
-  </ul>
-</p>
+<ul>
+  <li>Added details of the published IntelliJ/JetBrains plugin.</li>
+  <li>Fixed spaces in usernames resulting in unreachable profile pages.</li>
+  <li>Disallowed the plus sign in usernames to avoid conflicts with spaces.</li>
+</ul>
 
 <h3>1.3.2 – 2016-06-06 – JSON errors</h3>
 
-<p>
-  <ul>
-    <li>Enabled JSON errors for easier debugging of 500 Internal server errors.</li>
-  </ul>
-</p>
+<ul>
+  <li>Enabled JSON errors for easier debugging of 500 Internal server errors.</li>
+</ul>
 
 <h3>1.3.1 – 2016-06-05 – Language name fix</h3>
 
-<p>
-  <ul>
-    <li>Fixed languages being created with different capitalisations. Now language names are case insensitive.</li>
-  </ul>
-</p>
+<ul>
+  <li>Fixed languages being created with different capitalisations. Now language names are case insensitive.</li>
+</ul>
 
 <h3>1.3.0 – 2016-06-04 – Machine stats</h3>
 
-<p>
-  <ul>
-    <li>Added machine statistics to profile page.</li>
-    <li>Added recalculation of XP once a day to fix XP errors in profile view.</li>
-    <li>Added favicons.</li>
-    <li>Added more user info to profile view.</li>
-  </ul>
-</p>
+<ul>
+  <li>Added machine statistics to profile page.</li>
+  <li>Added recalculation of XP once a day to fix XP errors in profile view.</li>
+  <li>Added favicons.</li>
+  <li>Added more user info to profile view.</li>
+</ul>
 
 <h3>1.2.2 – 2016-06-02 – Vincit Oy</h3>
 
-<p>
-  <ul>
-    <li>Added note about my company who have sponsored the development of the service.</li>
-    <li>Added more information to the plugins page.</li>
-  </ul>
-</p>
+<ul>
+  <li>Added note about my company who have sponsored the development of the service.</li>
+  <li>Added more information to the plugins page.</li>
+</ul>
 
 <h3>1.2.1 – 2016-05-31 – Small fixes</h3>
 
-<p>
-  <ul>
-    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/1">#1</a>: coded_at time range not documented in API docs</li>
-    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/2">#2</a>: Endpoint path typo in API docs</li>
-    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/4">#4</a>: Refactor README</li>
-    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/5">#5</a>: Add link to example stats to front page</li>
-    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/6">#6</a>: Add clarification about recent XP</li>
-  </ul>
-</p>
+<ul>
+  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/1">#1</a>: coded_at time range not documented in API docs</li>
+  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/2">#2</a>: Endpoint path typo in API docs</li>
+  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/4">#4</a>: Refactor README</li>
+  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/5">#5</a>: Add link to example stats to front page</li>
+  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/6">#6</a>: Add clarification about recent XP</li>
+</ul>
 
 <h3>1.2.0 – 2016-05-31 – Scaling back levels</h3>
 
-<p>
-  <ul>
-    <li>Scaled back the level algorithm to grant less levels. XP is not affected. The aim is to prevent an inflation of levels. The level algorithm may be modified further later on.</li>
-    <li>Combined the source and changes page.</li>
-  </ul>
-</p>
+<ul>
+  <li>Scaled back the level algorithm to grant less levels. XP is not affected. The aim is to prevent an inflation of levels. The level algorithm may be modified further later on.</li>
+  <li>Combined the source and changes page.</li>
+</ul>
 
 <h3>1.1.1 – 2016-05-30 – Clock drift</h3>
 
-<p>
-  <ul>
-    <li>Fixed a case where clock drift either on the client or the server caused pulses to not be accepted.</li>
-  </ul>
-</p>
+<ul>
+  <li>Fixed a case where clock drift either on the client or the server caused pulses to not be accepted.</li>
+</ul>
 
 <h3>1.1.0 – 2016-05-30 – First public release</h3>
 

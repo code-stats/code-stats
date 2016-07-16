@@ -30,17 +30,15 @@
         <li>
           Programming since
           <time datetime="<%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>">
-            <%= Calendar.Strftime.strftime!(@user.inserted_at, "%b %e %Y") %>
-          </time>.
+            <%= Calendar.Strftime.strftime!(@user.inserted_at, "%b %e, %Y") %></time>.
         </li>
         <li>Average <%= format_xp(@xp_per_day) %>&nbsp;XP per day.</li>
         <li>
           Last coded
           <%= if @last_day_coded != nil do %>
-            at
+            on
             <time datetime="<%= Calendar.Strftime.strftime!(@last_day_coded, "%F") %>">
-              <%= Calendar.Strftime.strftime!(@last_day_coded, "") %>
-            </time>.
+              <%= Calendar.Strftime.strftime!(@last_day_coded, "%b %e, %Y") %></time>.
           <% else %>
             <em>never</em>.
           <% end %>

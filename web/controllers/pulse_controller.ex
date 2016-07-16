@@ -8,44 +8,40 @@ defmodule CodeStats.PulseController do
 
   alias Calendar.DateTime, as: CDateTime
 
-  alias CodeStats.AuthUtils
-  alias CodeStats.Repo
-
-  alias CodeStats.Pulse
-  alias CodeStats.Language
-  alias CodeStats.XP
+  alias CodeStats.{
+    AuthUtils,
+    Repo,
+    Pulse,
+    Language,
+    XP,
+    CacheService
+  }
 
   def add(conn, %{"coded_at" => timestamp, "xps" => xps}) do
     if not is_list(xps) do
       resp(conn, 400, %{error: "Invalid xps format."})
-    end
+    else
 
-    case do_add(conn, timestamp, xps) do
-      :ok ->
-        conn
-        |> put_status(201)
-        |> json(%{"ok" => "Great success!"})
+      {user, machine} = AuthUtils.get_api_details(conn)
 
-      {:error, :not_found, reason} ->
-        resp(conn, 404, %{error: reason})
+      with {:ok, %DateTime{} = datetime}  <- parse_timestamp(timestamp),
+        {:ok, datetime}                   <- check_datetime_diff(datetime),
+        {:ok, %Pulse{} = pulse}           <- create_pulse(user, machine, datetime),
+        {:ok, inserted_xps}               <- create_xps(pulse, xps),
+        :ok                               <- update_caches(inserted_xps)
+      do
+        conn |> put_status(201) |> json(%{"ok" => "Great success!"})
+      else
+        {:error, :not_found, reason} ->
+          conn |> put_status(404) |> json(%{"error" => reason})
 
-      {:error, :generic, reason} ->
-        resp(conn, 400, %{error: reason})
+        {:error, :generic, reason} ->
+          conn |> put_status(400) |> json(%{"error" => reason})
 
-      {:error, :internal, reason} ->
-        resp(conn, 500, %{error: reason})
-    end
-  end
-
-  defp do_add(conn, timestamp, xps) do
-    {user, machine} = AuthUtils.get_api_details(conn)
-
-    with {:ok, %DateTime{} = datetime}  <- parse_timestamp(timestamp),
-      {:ok, datetime}                   <- check_datetime_diff(datetime),
-      {:ok, %Pulse{} = pulse}           <- create_pulse(user, machine, datetime),
-      :ok                               <- create_xps(pulse, xps) do
-        :ok
+        {:error, :internal, reason} ->
+          conn |> put_status(500) |> json(%{"error" => reason})
       end
+    end
   end
 
   defp parse_timestamp(timestamp) do
@@ -79,20 +75,21 @@ defmodule CodeStats.PulseController do
     |> Repo.insert()
     |> case do
       {:ok, %Pulse{} = pulse} -> {:ok, pulse}
-      {:error, changeset} -> {:error, :generic, "Could not create pulse: #{inspect changeset.errors}"}
+      {:error, _} -> {:error, :generic, "Could not create pulse because of an unknown issue."}
     end
   end
 
   defp create_xps(pulse, xps) do
     try do
-      Enum.each(xps, fn
+      inserted_xps = Enum.map(xps, fn
         %{"language" => language, "xp" => xp} when is_integer(xp) ->
           case create_xp(pulse, language, xp) do
-            :ok -> :ok
+            {:ok, inserted_xp} -> inserted_xp
             {:error, _, reason} -> raise reason
           end
         _ -> raise "Invalid XP format."
       end)
+      {:ok, inserted_xps}
     rescue
       e in RuntimeError -> {:error, :generic, e.message}
     end
@@ -107,8 +104,12 @@ defmodule CodeStats.PulseController do
       |> Changeset.put_change(:language_id, language.id)
       |> Repo.insert()
       |> case do
-        {:ok, _} -> :ok
-        {:error, changeset} -> {:error, :generic, "Could not create XP: #{inspect changeset.errors}"}
+        {:ok, inserted_xp} ->
+          # Set the language so that it can be used in update_caches
+          inserted_xp = %{inserted_xp | language: language}
+          {:ok, inserted_xp}
+
+        {:error, _} -> {:error, :generic, "Could not create XP because of an unknown issue."}
       end
     end
   end
@@ -130,9 +131,19 @@ defmodule CodeStats.PulseController do
           {:error, _} ->
             case Repo.one(get_query) do
               %Language{} = language -> {:ok, language}
-              nil -> {:error, :internal, "Could not get-create-get language: #{language_name}"}
+              nil -> {:error, :internal, "Could not get-create-get language because of an unknown issue."}
             end
         end
+    end
+  end
+
+  defp update_caches(xps) do
+    try do
+      Enum.each(xps, fn xp ->
+        CacheService.add_total_language_xp(xp.language, xp.amount)
+      end)
+    rescue
+      e in RuntimeError -> {:error, :generic, e.message}
     end
   end
 end

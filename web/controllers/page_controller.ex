@@ -3,22 +3,28 @@ defmodule CodeStats.PageController do
 
   import Ecto.Query, only: [from: 2]
 
-  alias CodeStats.Repo
-  alias CodeStats.XP
-  alias CodeStats.Pulse
-  alias CodeStats.Language
+  alias CodeStats.{
+    Repo,
+    XP,
+    Pulse,
+    Language,
+    CacheService
+  }
+
+  @popular_languages_limit 10
 
   def index(conn, _params) do
     now = Calendar.DateTime.now_utc()
     then = Calendar.DateTime.subtract!(now, 3600 * 12)
 
-    total_xp_q = from x in XP,
-      select: sum(x.amount)
+    # Load total language XPs from cache and use them to populate total XP and
+    # list of most popular languages
+    total_lang_xps = CacheService.get_total_language_xps()
+    |> Enum.sort(fn {_, a}, {_, b} -> a > b end)
 
-    total_xp = case Repo.one(total_xp_q) do
-      nil -> 0
-      ret -> ret
-    end
+    total_xp = Enum.reduce(total_lang_xps, 0, fn {_, amount}, acc -> amount + acc end)
+
+    most_popular = Enum.slice(total_lang_xps, 0..@popular_languages_limit)
 
     last_12h_xp_q = from x in XP,
       join: p in Pulse, on: p.id == x.pulse_id,
@@ -30,18 +36,6 @@ defmodule CodeStats.PageController do
       ret -> ret
     end
 
-    most_popular_q = from x in XP,
-      join: l in Language, on: l.id == x.language_id,
-      group_by: l.id,
-      order_by: [desc: sum(x.amount)],
-      select: {l.name, sum(x.amount)},
-      limit: 10
-
-    most_popular = case Repo.all(most_popular_q) do
-      nil -> []
-      ret -> ret
-    end
-
     most_popular_12h_q = from x in XP,
       join: l in Language, on: l.id == x.language_id,
       join: p in Pulse, on: p.id == x.pulse_id,
@@ -49,7 +43,7 @@ defmodule CodeStats.PageController do
       group_by: l.id,
       order_by: [desc: sum(x.amount)],
       select: {l.name, sum(x.amount)},
-      limit: 10
+      limit: @popular_languages_limit
 
     most_popular_12h = case Repo.all(most_popular_12h_q) do
       nil -> []
