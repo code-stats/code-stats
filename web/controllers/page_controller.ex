@@ -24,7 +24,7 @@ defmodule CodeStats.PageController do
 
     total_xp = Enum.reduce(total_lang_xps, 0, fn {_, amount}, acc -> amount + acc end)
 
-    most_popular = Enum.slice(total_lang_xps, 0..@popular_languages_limit)
+    most_popular = Enum.slice(total_lang_xps, 0..(@popular_languages_limit - 1))
 
     last_12h_xp_q = from x in XP,
       join: p in Pulse, on: p.id == x.pulse_id,

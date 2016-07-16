@@ -81,8 +81,7 @@ defmodule CodeStats.CacheService do
       join: l in Language, on: l.id == x.language_id,
       group_by: l.id,
       order_by: [desc: sum(x.amount)],
-      select: {l, sum(x.amount)},
-      limit: 10
+      select: {l, sum(x.amount)}
 
     most_popular = case Repo.all(most_popular_q) do
       nil -> []
