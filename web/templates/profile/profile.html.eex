@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<%= if Enum.empty?(@xps) do %>
+<%= if not has_language_xps?(@language_xps) do %>
   <div class="jumbotron">
     <p class="lead">
       <%= if get_current_user_id(@conn) == @user.id do %>
@@ -69,15 +69,15 @@
   </div>
 <% else %>
   <div class="row">
-    <%= for xp <- @xps do %>
-      <% new_xp = Map.get(@new_xps, xp.language.name, 0) %>
+    <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(0)) do %>
+      <% new_xp = Map.get(@new_xps, language.name, 0) %>
 
       <div class="col-xs-12 language-progress">
         <h4>
-          <%= xp.language.name %>
+          <%= language.name %>
           level
-          <%= get_level(xp.amount) %>
-          (<%= format_xp(xp.amount) %>&nbsp;XP)
+          <%= get_level(xp) %>
+          (<%= format_xp(xp) %>&nbsp;XP)
 
           <%= if new_xp > 0 do %>
             <sup>
@@ -86,7 +86,7 @@
           <% end %>
         </h4>
         <div class="progress">
-          <% {old_width, new_width} = get_xp_bar_widths(xp.amount, new_xp) %>
+          <% {old_width, new_width} = get_xp_bar_widths(xp, new_xp) %>
           <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%" aria-valuenow="<%= old_width %>" aria-valuemin="0" aria-valuemax="100">
             <span class="sr-only">Level progress <%= old_width %> %.</span>
           </div>
@@ -120,18 +120,18 @@
 </div>
 
 <div class="row">
-  <%= if not Enum.empty?(@more_xps) do %>
+  <%= if has_more_language_xps?(@language_xps) do %>
     <div class="col-xs-12 col-sm-6">
       <h4>Other languages</h4>
 
       <ol start="11">
-        <%= for xp <- @more_xps do %>
-          <% new_xp = Map.get(@new_xps, xp.language.name, 0) %>
+        <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(1)) do %>
+          <% new_xp = Map.get(@new_xps, language.name, 0) %>
           <li>
-            <strong><%= xp.language.name %></strong>
+            <strong><%= language.name %></strong>
             level
-            <%= get_level(xp.amount) %>
-            (<%= format_xp(xp.amount) %>&nbsp;XP)
+            <%= get_level(xp) %>
+            (<%= format_xp(xp) %>&nbsp;XP)
 
             <%= if new_xp > 0 do %>
               <sup>
@@ -144,7 +144,7 @@
     </div>
   <% end %>
 
-  <%= if not Enum.empty?(@machine_xps) do %>
+  <%= if has_machine_xps?(@machine_xps) do %>
     <div class="col-xs-12 col-sm-6">
       <h4>Machines</h4>
 

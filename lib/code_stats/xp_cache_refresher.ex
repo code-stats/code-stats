@@ -16,20 +16,26 @@ defmodule CodeStats.XPCacheRefresher do
   end
 
   def init(state) do
+    do_refresh()
+
     Process.send_after(self(), :work, @how_often)
     {:ok, state}
   end
 
   def handle_info(:work, state) do
-    (from u in User, select: u)
-    |> Repo.all()
-    |> Enum.each(
-      fn user -> User.update_cached_xps(user, true) end
-    )
+    do_refresh()
 
     # Start the timer again
     Process.send_after(self(), :work, @how_often)
 
     {:noreply, state}
+  end
+
+  defp do_refresh() do
+    (from u in User, select: u)
+    |> Repo.all()
+    |> Enum.each(
+      fn user -> User.update_cached_xps(user, true) end
+    )
   end
 end

@@ -29,6 +29,13 @@
 
 <h2>Changelog</h2>
 
+<h3>1.5.0 – 2016-07-17 – Second performance update</h3>
+
+<ul>
+  <li>Earlier, profile view XPs per language were cached to the database as CachedXP elements. This worked fine for that purpose but caching for other dimensions such as per machine and per date were needed. In this update, CachedXP is removed in favor of a JSON field on the user model, which can be used to add all kinds of different caches. Caching is implemented in this field for languages, machines and dates. This removes the need to hit the database for other uses than to update the cache and to load the last 12 hours' XP data. As a result the profile view's display should be much faster.</li>
+  <li>An issue with 1.4.0 and database limits in queries was hotfixed.</li>
+</ul>
+
 <h3>1.4.0 – 2016-07-16 – First performance update</h3>
 
 <ul>
