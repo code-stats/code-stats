@@ -86,14 +86,17 @@ defmodule CodeStats.User do
       datetime
     end
 
-    # If update_all is given, don't use any previous cache data
-    cached_data = case update_all do
-      false -> unformat_cache_from_db(user.cache)
-      true -> %{
-        languages: %{},
-        machines: %{},
-        dates: %{}
-      }
+    # If update_all is given or user cache is empty, don't use any previous cache data
+    cached_data = %{
+      languages: %{},
+      machines: %{},
+      dates: %{}
+    }
+
+    cached_data = case {update_all, user.cache} do
+      {true, _} -> cached_data
+      {_, nil} -> cached_data
+      _ -> unformat_cache_from_db(user.cache)
     end
 
     # Load all of user's new XP plus required associations
