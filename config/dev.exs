@@ -41,3 +41,7 @@ config :code_stats, CodeStats.Repo,
   database: "code_stats_dev",
   hostname: "localhost",
   pool_size: 10
+
+# To avoid conflicts with workspaces
+# dev.secret.exs is not versioned, like prod.secret.exs
+import_config "dev.secret.exs"
