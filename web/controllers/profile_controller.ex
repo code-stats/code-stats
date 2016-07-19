@@ -160,7 +160,7 @@ defmodule CodeStats.ProfileController do
   defp process_date_xps(date_xps) do
     date_xps
     |> Map.to_list()
-    |> Enum.sort(fn {_, a}, {_, b} -> a > b end)
+    |> Enum.sort(fn {a, _}, {b, _} -> Date.to_erl(a) > Date.to_erl(b) end)
   end
 
   # Fix the username specified in the URL by converting plus characters to spaces.
