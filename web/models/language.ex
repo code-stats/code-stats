@@ -5,7 +5,6 @@ defmodule CodeStats.Language do
     field :name, :string
 
     has_many :pulses, CodeStats.Pulse
-    has_many :cached_xps, CodeStats.CachedXP
 
     timestamps
   end

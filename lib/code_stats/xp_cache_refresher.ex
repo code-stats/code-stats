@@ -1,7 +1,7 @@
 defmodule CodeStats.XPCacheRefresher do
   @moduledoc """
   This module handles refreshing the caches of all users periodically. This is done to avoid
-  accumulating problems that might happen with miscalculations of CachedXPs.
+  accumulating problems that might happen with miscalculations of cached user data.
   """
   use GenServer
 
