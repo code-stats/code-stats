@@ -120,7 +120,7 @@
 </p>
 
 <p>
-  Note: The <code>coded_at</code> timestamp must be no more than 2 weeks old. Any older timestamps will result in an error. Timestamps in the future will be ignored, their <code>coded_at</code> will be set to the current moment.
+  Note: The <code>coded_at</code> timestamp must be no older than a week. Any older timestamps will result in an error. Timestamps in the future will be ignored, their <code>coded_at</code> will be set to the current moment.
 </p>
 
 <p>
