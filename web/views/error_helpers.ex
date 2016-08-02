@@ -32,9 +32,9 @@ defmodule CodeStats.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(MyApp.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(CodeStats.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(MyApp.Gettext, "errors", msg, opts)
+      Gettext.dgettext(CodeStats.Gettext, "errors", msg, opts)
     end
   end
 
