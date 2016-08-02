@@ -158,16 +158,22 @@ defmodule CodeStats.AuthUtils do
 
   Authentication status is saved in the connection with the key @api_auth_key. The key will
   contain a tuple of the authenticated user and the machine they are using.
+
+  If the given token is not valid, nothing is done to the connection.
   """
-  @spec auth_user_api(%Conn{}, String.t) :: %Conn{} | :error | nil
+  @spec auth_user_api(%Conn{}, String.t) :: %Conn{}
   def auth_user_api(%Conn{} = conn, api_user_token) do
-    with {username, machine_id} <- split_token(api_user_token),
-      %User{} = user <- get_user(username),
-      %Machine{} = machine <- get_machine(machine_id, user),
-      {:ok, _} <- MessageVerifier.verify(api_user_token, conn.secret_key_base <> machine.api_salt)
-      do
-        Conn.put_private(conn, @api_auth_key, {user, machine})
-      end
+    with \
+      {username, machine_id}  <- split_token(api_user_token),
+      %User{} = user          <- get_user(username),
+      %Machine{} = machine    <- get_machine(machine_id, user),
+      {:ok, _}                <- MessageVerifier.verify(api_user_token,
+                                                        conn.secret_key_base <> machine.api_salt)
+    do
+      Conn.put_private(conn, @api_auth_key, {user, machine})
+    else
+      _ -> conn
+    end
   end
 
   @doc """
@@ -204,16 +210,28 @@ defmodule CodeStats.AuthUtils do
   end
 
   defp unform_payload(payload) do
-    [username, machine] = String.split(payload, "##")
-    {:ok, username} = Base.url_decode64(username)
-    {:ok, machine} = Base.url_decode64(machine)
-    {username, machine}
+    with \
+      [username, machine] <- String.split(payload, "##"),
+      {:ok, username}     <- Base.url_decode64(username),
+      {:ok, machine}      <- Base.url_decode64(machine)
+    do
+      {username, machine}
+    else
+      _ -> :error
+    end
   end
 
   defp split_token(token) do
-    [content, _] = String.split(token, "##")
-    {:ok, content} = Base.url_decode64(content)
-    unform_payload(content)
+    with \
+      [content, _]        <- String.split(token, "##"),
+      {:ok, content}      <- Base.url_decode64(content),
+      {username, machine} <- unform_payload(content)
+    do
+      {username, machine}
+    else
+      # Given token was malformed in some way
+      _ -> :error
+    end
   end
 
   defp get_machine(machine_id, user) do
