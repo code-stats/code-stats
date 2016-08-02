@@ -2,15 +2,11 @@ defmodule CodeStats.RequestTime do
   @moduledoc """
   Plug that adds request time to the conn. It can be used to render the total time taken to
   serve the request.
-
-  To use, add `<codestats-request-time></codestats-request-time>` to the output HTML. No
-  whitespace allowed.
   """
 
   import Plug.Conn
 
   @data_key :codestats_request_start_time
-  @interpolate_key "<codestats-request-time></codestats-request-time>"
 
   @time_units [
     "µs", "ms", "s"
@@ -27,7 +23,7 @@ defmodule CodeStats.RequestTime do
 
   def calculate_time(conn) do
     old_time = conn.private[@data_key]
-    
+
     ((get_current_time() - old_time) * 1_000_000)
     |> Float.round()
     |> trunc()
