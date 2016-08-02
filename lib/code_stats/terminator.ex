@@ -17,7 +17,7 @@ defmodule CodeStats.Terminator do
   # is the function to call and the second is how often to call it, in milliseconds.
   # Functions to call must have 0 arity.
   @targets [
-    {:clear_old_password_reset_tokens, 10 * 1000}
+    {:clear_old_password_reset_tokens, 24 * 60 * 60 * 1000}
   ]
 
   def start_link() do
