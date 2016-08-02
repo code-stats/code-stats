@@ -4,7 +4,7 @@ defmodule CodeStats.Mixfile do
   def project do
     [app: :code_stats,
      version: "1.5.0",
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule CodeStats.Mixfile do
   def application do
     [mod: {CodeStats, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin, :calendar]]
+                    :phoenix_ecto, :postgrex, :comeonin, :calendar, :bamboo]]
   end
 
   # Specifies which paths to compile per environment.
@@ -44,7 +44,8 @@ defmodule CodeStats.Mixfile do
       {:earmark, "~> 0.2.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev},
       {:calecto, "~> 0.16.0"},
-      {:calendar, "~> 0.16.0"}
+      {:calendar, "~> 0.16.0"},
+      {:bamboo, "~> 0.6"}
    ]
   end
 

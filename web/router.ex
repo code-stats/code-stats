@@ -38,6 +38,10 @@ defmodule CodeStats.Router do
     get "/logout", AuthController, :logout
     get "/signup", AuthController, :render_signup
     post "/signup", AuthController, :signup
+    get "/forgot-password", AuthController, :render_forgot
+    post "/forgot-password", AuthController, :forgot
+    get "/reset-password/:token", AuthController, :render_reset
+    put "/reset-password/:token", AuthController, :reset
 
     get "/users/:username", ProfileController, :profile
 

@@ -27,24 +27,16 @@ defmodule CodeStats.User do
     timestamps
   end
 
-  @required_fields ~w(username password)
-  @optional_fields ~w(email)
-
-  @put_required_fields ~w()
-  @put_optional_fields ~w(email private_profile)
-
-  @password_required_fields ~w(password)
-  @password_optional_fields ~w()
-
   @doc """
-  Creates a changeset based on the `model` and `params`.
+  Creates a changeset based on the `data` and `params`.
 
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
+  def changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:username, :password, :email])
+    |> validate_required([:username, :password])
     |> update_change(:password, &hash_password/1)
     |> put_change(:private_profile, false)
     |> validate_length(:username, min: 1)
@@ -57,18 +49,19 @@ defmodule CodeStats.User do
   @doc """
   Create changeset for updating a user's data.
   """
-  def updating_changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @put_required_fields, @put_optional_fields)
+  def updating_changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:email, :private_profile])
     |> validations()
   end
 
   @doc """
   Create a changeset for changing a user's password.
   """
-  def password_changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @password_required_fields, @password_optional_fields)
+  def password_changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:password])
+    |> validate_required([:password])
     |> update_change(:password, &hash_password/1)
   end
 

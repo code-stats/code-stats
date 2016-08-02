@@ -12,18 +12,16 @@ defmodule CodeStats.Machine do
     timestamps
   end
 
-  @required_fields ~w(name)
-  @optional_fields ~w()
-
   @doc """
-  Creates a changeset based on the `model` and `params`.
+  Creates a changeset based on the `data` and `params`.
 
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
+  def changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:name])
+    |> validate_required([:name])
     |> validate_length(:name, min: 1)
     |> validate_length(:name, max: 64)
     |> unique_constraint(:name, name: :machines_name_user_id_index)
@@ -35,8 +33,8 @@ defmodule CodeStats.Machine do
 
   Takes no input.
   """
-  def api_changeset(model) do
-    model
+  def api_changeset(data) do
+    data
     |> change(%{api_salt: generate_api_salt()})
   end
 

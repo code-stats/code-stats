@@ -9,17 +9,15 @@ defmodule CodeStats.XP do
     timestamps
   end
 
-  @required_fields ~w(amount)
-  @optional_fields ~w()
-
   @doc """
-  Creates a changeset based on the `model` and `params`.
+  Creates a changeset based on the `data` and `params`.
 
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
+  def changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:amount])
+    |> validate_required([:amount])
   end
 end

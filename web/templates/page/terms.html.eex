@@ -2,12 +2,10 @@
 
 <h3>Table of contents</h3>
 
-<p>
-  <ol>
-    <li><a href="#privacy">Privacy policy</a></li>
-    <li><a href="#terms">Terms of service</a></li>
-  </ol>
-</p>
+<ol>
+  <li><a href="#privacy">Privacy policy</a></li>
+  <li><a href="#terms">Terms of service</a></li>
+</ol>
 
 <h3>Privacy policy <a id="privacy" href="#privacy">#</a></h3>
 
@@ -49,19 +47,19 @@
 
 <p>
   The service collects the following data from the users:
-
-  <ul>
-    <li>
-      Username and password for authentication purposes.
-    </li>
-    <li>
-      Email address (optional) for notifying the user about important announcements related to the service and for account recovery in the case of a lost password.
-    </li>
-    <li>
-      IP addresses and browser user agent strings from both authenticated and unauthenticated users are stored in the server request logs for 4 weeks. They are used for statistical purposes and abuse prevention.
-    </li>
-  </ul>
 </p>
+
+<ul>
+  <li>
+    Username and password for authentication purposes.
+  </li>
+  <li>
+    Email address (optional) for notifying the user about important announcements related to the service and for account recovery in the case of a lost password.
+  </li>
+  <li>
+    IP addresses and browser user agent strings from both authenticated and unauthenticated users are stored in the server request logs for 4 weeks. They are used for statistical purposes and abuse prevention.
+  </li>
+</ul>
 
 <h4>Data sources</h4>
 
@@ -69,22 +67,31 @@
   All data is provided by the user. No data is collected from other sources.
 </p>
 
-<h4>Sharing of data with 3rd parties</h4>
+<h4>Sharing of data with 3<sup>rd</sup> parties</h4>
 
 <p>
-  Data is never shared with 3rd parties, except to comply with an official, legal, written request from the Finnish authorities.
+  Data is never shared with 3<sup>rd</sup> parties, except in the following cases:
 </p>
+
+<ul>
+  <li>to send an email to a user from the service (the email address and the contents of the email must be transferred to the email delivery service), or</li>
+  <li>to comply with an official, legal, written order from the Finnish authorities to release customer data.</li>
+</ul>
 
 <h4>Transfer of data to outside the EU or ETA</h4>
 
 <p>
-  Data will not be moved outside the EU or ETA.
+  Data will not be moved outside the EU or ETA, except in the following cases:
 </p>
+
+<ul>
+  <li>to send an email to a user from the service (the email address and the contents of the email must be transferred to the email delivery service).</li>
+</ul>
 
 <h4>Security of the register</h4>
 
 <p>
-  Logins and communication with the server are secured with <em>SSH</em>. On the server, the database is protected by a further login known to only the register holder. Passwords in the database are hashed using <em>Bcrypt</em> with a randomized salt to prevent their decryption in case of a data breach. If a strong password is used, it cannot be feasibly decrypted.
+  Logins and communication with the server are secured with <abbr title="Secure Shell">SSH</abbr>. On the server, the database is protected by a further login known to only the register holder. Passwords in the database are hashed using <em>Bcrypt</em> with a randomized salt to prevent their decryption in case of a data breach. If a strong password is used, it cannot be feasibly decrypted.
 </p>
 
 <p>
@@ -107,6 +114,22 @@
   Google does not have access to the data register itself.
 </p>
 
+<h4>Note about advertisements</h4>
+
+<p>
+  The service may contain advertisements. These advertisements are handled by 3<sup>rd</sup> party advertisement providers. The advertisement providers may use the advertisements to collect certain information about the user. This collection of data and the behaviour of the advertisement providers are not under direct control of the service. If you suspect abuse from an advertisement provider, please contact the service administrators for assistance.
+</p>
+
+<p>
+  Advertisement providers are never given access to the data register itself.
+</p>
+
+<h4>Note about email</h4>
+
+<p>
+  Emails from the service are sent using either <a href="http://www.mailgun.com/">Mailgun</a> by Rackspace Inc, a US based company, or <a href="https://gmail.com/">Gmail</a> by Alphabet Inc, a US based company. This means user details contained in the emails (such as the user's email address) are sent to the email service as a necessary part of the email delivery process. If you do not wish to have your email address sent to either of these services, you can remove your email address in the preferences.
+</p>
+
 <h4>Changes to the privacy policy</h4>
 
 <p>
@@ -114,7 +137,7 @@
 </p>
 
 <p>
-  This privacy policy was last changed on the 29th of May 2016.
+  This privacy policy was last changed on the 2<sup>nd</sup> of August 2016.
 </p>
 
 <h3>Terms of service <a id="terms" href="#terms">#</a></h3>
@@ -125,11 +148,12 @@
 
 <p>
   The rules of using the service:
-
-  <ol>
-    <li>Don't hammer or attempt to DoS the API or the server or you will be banned.</li>
-    <li>Don't be mean to other people.</li>
-    <li>Do check the source code of the service and the plugins and suggest improvements.</li>
-    <li>Have fun.</li>
-  </ol>
 </p>
+
+<ol>
+  <li>Don't hammer or attempt to DoS the API or the server or you will be banned.</li>
+  <li>Don't try to insert fake XP for yourself through the API.</li>
+  <li>Don't be mean to other people.</li>
+  <li>Do check the source code of the service and the plugins and suggest improvements.</li>
+  <li>Have fun.</li>
+</ol>

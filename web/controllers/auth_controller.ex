@@ -1,8 +1,15 @@
 defmodule CodeStats.AuthController do
   use CodeStats.Web, :controller
 
-  alias CodeStats.AuthUtils
-  alias CodeStats.User
+  alias Calendar.DateTime, as: CDateTime
+
+  alias CodeStats.{
+    AuthUtils,
+    User,
+    PasswordReset,
+    Repo,
+    EmailUtils
+  }
 
   def render_login(conn, _params) do
     conn
@@ -63,5 +70,83 @@ defmodule CodeStats.AuthController do
     conn
     |> AuthUtils.unauth_user()
     |> redirect(to: page_path(conn, :index))
+  end
+
+  def render_forgot(conn, _params) do
+    {changeset, _} = PasswordReset.changeset(%PasswordReset{})
+
+    conn
+    |> assign(:title, "Forgot password")
+    |> render("forgot.html", changeset: changeset)
+  end
+
+  def forgot(conn, %{"password_reset" => params}) do
+    {changeset, user} = PasswordReset.changeset(%PasswordReset{}, params)
+
+    # If the changeset is valid, attempt to create password reset token
+    # and send email
+    with \
+      true <- changeset.valid?,
+      %PasswordReset{token: token} <- Repo.insert!(changeset) do
+        EmailUtils.send_password_reset_email(user, token)
+    else
+      _ -> nil
+    end
+
+    conn
+    |> put_flash(:info, "A password reset email will be sent shortly to the email address linked to the account, if the account had one. If you do not receive an email, please check that you typed the account name correctly.")
+    |> redirect(to: auth_path(conn, :render_forgot))
+  end
+
+  def render_reset(conn, %{"token" => token}) do
+    case check_reset_token(token) do
+      %PasswordReset{} = persisted_token ->
+        changeset = User.password_changeset(persisted_token.user, %{})
+
+        conn
+        |> assign(:title, "Password reset")
+        |> assign(:token, persisted_token.token)
+        |> render("reset.html", changeset: changeset)
+
+      nil ->
+        conn
+        |> put_status(404)
+        |> render(CodeStats.ErrorView, "error_404.html")
+    end
+  end
+
+  def reset(conn, %{"user" => params, "token" => token}) do
+    with \
+      %PasswordReset{} = token  <- check_reset_token(token),
+      changeset                  = User.password_changeset(token.user, params),
+      %User{}                   <- Repo.update!(changeset)
+    do
+      Repo.delete(token)
+
+      conn
+      |> put_flash(:success, "Password reset successfully. You can now log in with the new password.")
+      |> redirect(to: auth_path(conn, :render_login))
+    else
+      _ ->
+        conn
+        |> put_flash(:error, "Unable to reset password. The password reset token may have expired. Please try requesting a new token.")
+        |> redirect(to: auth_path(conn, :render_login))
+    end
+  end
+
+  # Check that reset token exists and is valid, and return the reset token with the user
+  # preloaded or nil if not found
+  defp check_reset_token(token) do
+    now = DateTime.utc_now()
+    earliest_valid = CDateTime.subtract!(now, PasswordReset.token_max_life() * 3600)
+
+    query = from p in PasswordReset,
+      where: p.token == ^token and p.inserted_at >= ^earliest_valid,
+      preload: [:user]
+
+    case Repo.one(query) do
+      %PasswordReset{} = token -> token
+      nil -> nil
+    end
   end
 end

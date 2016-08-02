@@ -1,0 +1,9 @@
+<%= get_conf(:site_name) %>
+===========
+
+<%= render @view_module, @view_template, assigns %>
+
+-----------
+This email was sent from <%= get_conf(:site_name) %> <<%= page_url(CodeStats.Endpoint, :index) %>>. If you do not wish to receive more emails, you can remove your email address in the preferences page of your account.
+
+Please note that you cannot reply to this email.

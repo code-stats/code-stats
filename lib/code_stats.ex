@@ -7,18 +7,25 @@ defmodule CodeStats do
     import Supervisor.Spec, warn: false
 
     children = [
+      # Start the Ecto repository first for database access
+      supervisor(CodeStats.Repo, []),
+
+      # Start cache service
+      # We want this to be before the endpoint so that the caches are ready for new
+      # requests
+      worker(CodeStats.CacheService, []),
+
       # Start the endpoint when the application starts
       supervisor(CodeStats.Endpoint, []),
-      # Start the Ecto repository
-      supervisor(CodeStats.Repo, []),
+
       # Here you could define other workers and supervisors as children
       # worker(CodeStats.Worker, [arg1, arg2, arg3]),
 
       # Start XPCacheRefresher
       worker(CodeStats.XPCacheRefresher, []),
 
-      # Start cache service
-      worker(CodeStats.CacheService, []),
+      # Start The Terminator
+      worker(CodeStats.Terminator, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

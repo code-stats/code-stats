@@ -13,6 +13,12 @@ config :code_stats, CodeStats.Endpoint,
   pubsub: [name: CodeStats.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# Email config, override in your env.secret.exs
+config :code_stats, CodeStats.Mailer,
+  adapter: Bamboo.MailgunAdapter,
+  api_key: "",
+  domain: "domain.example"
+
 config :code_stats,
 
   ecto_repos: [CodeStats.Repo],
@@ -23,7 +29,10 @@ config :code_stats,
 
   site_name: "Code::Stats",
 
-# Extra HTML that is injected to every page, right before </body>. Useful for analytics scripts.
+  # Address to send email from in the form of {"Name", "address@domain.example"}
+  email_from: {"Code::Stats", "address@domain.example"},
+
+  # Extra HTML that is injected to every page, right before </body>. Useful for analytics scripts.
   analytics_code: """
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
