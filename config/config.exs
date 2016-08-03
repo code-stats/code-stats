@@ -32,6 +32,9 @@ config :code_stats,
   # Address to send email from in the form of {"Name", "address@domain.example"}
   email_from: {"Code::Stats", "address@domain.example"},
 
+  # Twitter account username to insert link in footer, nil to disable
+  twitter_account: nil,
+
   # Extra HTML that is injected to every page, right before </body>. Useful for analytics scripts.
   analytics_code: """
 <script>

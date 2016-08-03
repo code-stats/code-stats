@@ -67,28 +67,33 @@
       <footer>
         <hr />
 
-        <p>
-          <center>
-            <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
-            —
-            <%= CodeStats.RequestTime.calculate_time(@conn) %>
-            —
-            <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
-            —
-            <a href="<%= page_path(@conn, :terms) %>">Legal</a>
-            —
-            <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
-            —
-            <a href="<%= page_path(@conn, :irc) %>">IRC</a>
-          </center>
+        <p class="text-center">
+          <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
+          —
+          <%= CodeStats.RequestTime.calculate_time(@conn) %>
+          —
+          <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
+          —
+          <a href="<%= page_path(@conn, :terms) %>">Legal</a>
+          —
+          <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
+          —
+          <a href="<%= page_path(@conn, :irc) %>">IRC</a>
+
+          <%= if get_conf(:twitter_account) do %>
+            –
+            <a href="https://twitter.com/<%= get_conf(:twitter_account) %>">Twitter</a>
+          <% end %>
         </p>
 
-        <p>
-          <center>
-            <small>
-              <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
-            </small>
-          </center>
+        <p class="text-center">
+          Made with <a href="http://elixir-lang.org/">Elixir</a> and <a href="http://www.phoenixframework.org/">Phoenix</a>.
+        </p>
+
+        <p class="text-center">
+          <small>
+            <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
+          </small>
         </p>
       </footer>
 
