@@ -9,7 +9,7 @@ defmodule CodeStats.PasswordReset do
   }
 
   # How long a password reset token is active (hours)
-  @token_max_life 24
+  @token_max_life 4
 
   schema "password_resets" do
     field :token, Ecto.UUID
