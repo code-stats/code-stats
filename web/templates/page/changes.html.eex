@@ -29,6 +29,20 @@
 
 <h2>Changelog</h2>
 
+<h3>1.6.0 – 2016-08-04 – Password resets and fixes</h3>
+
+<ul>
+  <li>Added password reset feature. Password can only be reset if the account has an email address set up.</li>
+  <li>Updated privacy policy and terms of service due to email sending feature.</li>
+  <li>Fixed 💥 when forms like the signup form were filled with invalid data.</li>
+  <li>Fixed crash when pulses were sent before caches were generated.</li>
+  <li>Fixed crash when pulses were sent with the API token in an invalid format.</li>
+  <li>Added Twitter link.</li>
+  <li>Added Elixir and Phoenix link to footer.</li>
+  <li>Fixed discrepancies in the API docs regarding pulse dates.</li>
+  <li>An issue with the "last coded at" date in 1.5.0 was hotfixed.</li>
+</ul>
+
 <h3>1.5.0 – 2016-07-17 – Second performance update</h3>
 
 <ul>
