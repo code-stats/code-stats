@@ -21,7 +21,7 @@
       <hr />
 
       <p>
-        This email was sent from <a href="<%= page_url(CodeStats.Endpoint, :index) %>"><%= get_conf(:site_name) %></a>. If you do not wish to receive more emails, you can remove your email address in the preferences page of your account.
+        This email was sent from <a href="<%= get_conf(:absolute_url) <> page_path(CodeStats.Endpoint, :index) %>"><%= get_conf(:site_name) %></a>. If you do not wish to receive more emails, you can remove your email address in the preferences page of your account.
       </p>
 
       <p>

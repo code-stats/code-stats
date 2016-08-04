@@ -27,6 +27,10 @@ config :code_stats,
 # User configurable settings below
 ##################################
 
+  # If the site is proxied, the URL helpers may end up with the wrong URL.
+  # This value is used as absolute URL instead. No trailing slash!
+  absolute_url: "https://domain.example",
+
   site_name: "Code::Stats",
 
   # Address to send email from in the form of {"Name", "address@domain.example"}
