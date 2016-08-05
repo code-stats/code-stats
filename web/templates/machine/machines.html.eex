@@ -23,7 +23,7 @@
 
         <div class="pull-left machine-action">
           <%= form_tag(machine_path(@conn, :delete, machine.id), method: :delete) %>
-            <input type="submit" class="btn btn-danger" value="Delete" />
+            <input type="submit" class="btn btn-danger machine-delete-button" value="Delete" />
           </form>
         </div>
       </div>
@@ -60,3 +60,5 @@
   <% end) %>
 
 </div>
+
+<script type="text/javascript" src="<%= static_path(@conn, "/js/machine_delete_confirm.js") %>"></script>

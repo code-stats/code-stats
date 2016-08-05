@@ -2,7 +2,10 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js"
+      joinTo: {
+        'js/app.js': /^(web\/static\/vendor)|(node_modules)|(web\/static\/js\/app\.js)/,
+        'js/machine_delete_confirm.js': /^web\/static\/js\/machine_delete_confirm\.js/
+      }
 
       // To use a separate vendor.js bundle, specify two files path
       // https://github.com/brunch/brunch/blob/stable/docs/config.md#files
@@ -57,7 +60,8 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      'js/app.js': ['web/static/js/app'],
+      'js/machine_delete_confirm.js': ['web/static/js/machine_delete_confirm']
     }
   },
 
