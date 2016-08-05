@@ -155,6 +155,12 @@ defmodule CodeStats.ProfileController do
     Enum.map(machine_xps, fn {id, amount} ->
       {Map.get(machines, id), amount}
     end)
+    # Filter out machines that exist in cache but not in DB (if machine was just deleted)
+    # and cache was not regenerated yet
+    |> Enum.filter(fn
+      {nil, _} -> false
+      _ -> true
+    end)
   end
 
   defp process_date_xps(date_xps) do

@@ -4,10 +4,13 @@ defmodule CodeStats.MachineController do
   import Ecto.Query, only: [from: 2]
   alias Ecto.Changeset
 
-  alias CodeStats.Repo
-  alias CodeStats.Machine
-  alias CodeStats.SetSessionUser
-  alias CodeStats.ControllerUtils
+  alias CodeStats.{
+    Repo,
+    Machine,
+    SetSessionUser,
+    ControllerUtils,
+    User
+  }
 
   plug :set_title
 
@@ -79,6 +82,9 @@ defmodule CodeStats.MachineController do
     with %Machine{} = machine <- get_machine_or_404(conn, user, id) do
       case delete_machine(machine) do
         true ->
+          # Regenerate user's cache in a background process
+          Task.start(User, :update_cached_xps, [user, true])
+
           conn
           |> put_flash(:success, "Machine deleted.")
           |> redirect(to: machine_path(conn, :list))
