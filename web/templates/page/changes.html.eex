@@ -29,6 +29,14 @@
 
 <h2>Changelog</h2>
 
+<h3>1.6.1 – 2016-08-06 – Fixes to machines and page permissions</h3>
+
+<ul>
+  <li>Forbid authenticated users from accessing the login, signup and password reset pages. They will be redirected to their profile instead.</li>
+  <li>Fix crash when machine was deleted, caused by the cache not being regenerated. Now the cache is regenerated automatically after delete and crash is avoided even if regeneration is still in progress.</li>
+  <li>Add a JavaScript confirmation prompt when deleting a machine.</li>
+</ul>
+
 <h3>1.6.0 – 2016-08-04 – Password resets and fixes</h3>
 
 <ul>
