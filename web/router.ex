@@ -14,6 +14,10 @@ defmodule CodeStats.Router do
     plug CodeStats.AuthRequired
   end
 
+  pipeline :browser_unauth do
+    plug CodeStats.AuthNotAllowed
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -33,15 +37,20 @@ defmodule CodeStats.Router do
     get "/changes", PageController, :changes
     get "/irc", PageController, :irc
 
-    get "/login", AuthController, :render_login
-    post "/login", AuthController, :login
+    scope "/" do
+      pipe_through :browser_unauth
+
+      get "/login", AuthController, :render_login
+      post "/login", AuthController, :login
+      get "/signup", AuthController, :render_signup
+      post "/signup", AuthController, :signup
+      get "/forgot-password", AuthController, :render_forgot
+      post "/forgot-password", AuthController, :forgot
+      get "/reset-password/:token", AuthController, :render_reset
+      put "/reset-password/:token", AuthController, :reset
+    end
+
     get "/logout", AuthController, :logout
-    get "/signup", AuthController, :render_signup
-    post "/signup", AuthController, :signup
-    get "/forgot-password", AuthController, :render_forgot
-    post "/forgot-password", AuthController, :forgot
-    get "/reset-password/:token", AuthController, :render_reset
-    put "/reset-password/:token", AuthController, :reset
 
     get "/users/:username", ProfileController, :profile
 
