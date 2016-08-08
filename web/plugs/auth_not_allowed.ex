@@ -19,6 +19,7 @@ defmodule CodeStats.AuthNotAllowed do
     else
       conn
       |> Phoenix.Controller.redirect(to: CodeStats.Router.Helpers.profile_path(conn, :my_profile))
+      |> halt
     end
   end
 end
