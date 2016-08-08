@@ -29,6 +29,13 @@
 
 <h2>Changelog</h2>
 
+<h3>1.6.2 – 2016-08-08 – Small fixes</h3>
+
+<ul>
+  <li>Remove redundant ARIA tags from progress bars to show more descriptive textual info for screen readers.</li>
+  <li>Fix error message printed in console when trying to access a page that does not allow authentication, while being logged in.</li>
+</ul>
+
 <h3>1.6.1 – 2016-08-06 – Fixes to machines and page permissions</h3>
 
 <ul>
