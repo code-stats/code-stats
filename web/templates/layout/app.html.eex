@@ -28,6 +28,10 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
+
+    <%= if is_authed?(@conn) do %>
+      <%= tag(:meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", get_current_user(@conn).username)) %>
+    <% end %>
   </head>
 
   <body>

@@ -14,7 +14,8 @@ defmodule CodeStats.PulseController do
     Pulse,
     Language,
     XP,
-    CacheService
+    CacheService,
+    ProfileChannel
   }
 
   def add(conn, %{"coded_at" => timestamp, "xps" => xps}) do
@@ -30,6 +31,9 @@ defmodule CodeStats.PulseController do
         {:ok, inserted_xps}               <- create_xps(pulse, xps),
         :ok                               <- update_caches(inserted_xps)
       do
+        # Broadcast XP data to possible viewers
+        ProfileChannel.send_pulse(user, %{pulse | xps: inserted_xps})
+
         conn |> put_status(201) |> json(%{"ok" => "Great success!"})
       else
         {:error, :not_found, reason} ->
@@ -74,7 +78,10 @@ defmodule CodeStats.PulseController do
     |> Changeset.put_change(:machine_id, machine.id)
     |> Repo.insert()
     |> case do
-      {:ok, %Pulse{} = pulse} -> {:ok, pulse}
+      {:ok, %Pulse{} = pulse} ->
+        # Set the machine so it can be used later
+        pulse = %{pulse | machine: machine}
+        {:ok, pulse}
       {:error, _} -> {:error, :generic, "Could not create pulse because of an unknown issue."}
     end
   end
@@ -105,7 +112,7 @@ defmodule CodeStats.PulseController do
       |> Repo.insert()
       |> case do
         {:ok, inserted_xp} ->
-          # Set the language so that it can be used in update_caches
+          # Set the language so that it can be used later
           inserted_xp = %{inserted_xp | language: language}
           {:ok, inserted_xp}
 

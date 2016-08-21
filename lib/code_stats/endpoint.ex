@@ -1,7 +1,7 @@
 defmodule CodeStats.Endpoint do
   use Phoenix.Endpoint, otp_app: :code_stats
 
-  socket "/socket", CodeStats.UserSocket
+  socket "/live_update_socket", CodeStats.LiveUpdateSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #

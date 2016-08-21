@@ -60,5 +60,3 @@
   <% end) %>
 
 </div>
-
-<script type="text/javascript" src="<%= static_path(@conn, "/js/machine_delete_confirm.js") %>"></script>

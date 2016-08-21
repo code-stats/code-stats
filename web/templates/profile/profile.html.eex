@@ -1,5 +1,10 @@
 <div class="row">
-  <div class="col-xs-12 col-sm-7">
+  <div
+    id="profile-elm-total-container"
+    class="col-xs-12 col-sm-7"
+    data-xp="<%= @total_xp %>"
+    data-recent-xp="<%= @total_new_xp %>"
+  >
     <h3>
       Level
       <%= get_level(@total_xp) %>
@@ -24,27 +29,30 @@
   </div>
 
   <div class="col-xs-12 col-sm-5">
-    <h2><%= @user.username %></h2>
-    <p>
-      <ul class="profile-detail-list">
-        <li>
-          Programming since
-          <time datetime="<%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>">
-            <%= Calendar.Strftime.strftime!(@user.inserted_at, "%b %e, %Y") %></time>.
-        </li>
-        <li>Average <%= format_xp(@xp_per_day) %>&nbsp;XP per day.</li>
-        <li>
-          Last coded
-          <%= if @last_day_coded != nil do %>
-            on
-            <time datetime="<%= Calendar.Strftime.strftime!(@last_day_coded, "%F") %>">
-              <%= Calendar.Strftime.strftime!(@last_day_coded, "%b %e, %Y") %></time>.
-          <% else %>
-            <em>never</em>.
-          <% end %>
-        </li>
-      </ul>
-    </p>
+    <h2
+      id="profile-username"
+      data-name="<%= @user.username %>"
+    >
+      <%= @user.username %>
+    </h2>
+    <ul class="profile-detail-list">
+      <li>
+        Programming since
+        <time datetime="<%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>">
+          <%= Calendar.Strftime.strftime!(@user.inserted_at, "%b %e, %Y") %></time>.
+      </li>
+      <li>Average <%= format_xp(@xp_per_day) %>&nbsp;XP per day.</li>
+      <li>
+        Last coded
+        <%= if @last_day_coded != nil do %>
+          on
+          <time datetime="<%= Calendar.Strftime.strftime!(@last_day_coded, "%F") %>">
+            <%= Calendar.Strftime.strftime!(@last_day_coded, "%b %e, %Y") %></time>.
+        <% else %>
+          <em>never</em>.
+        <% end %>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -68,67 +76,19 @@
     </p>
   </div>
 <% else %>
-  <div class="row">
-    <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(0)) do %>
-      <% new_xp = Map.get(@new_xps, language.name, 0) %>
+  <div id="profile-elm-main-container">
+    <div class="row">
+      <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(0)) do %>
+        <% new_xp = Map.get(@new_xps, language.name, 0) %>
 
-      <div class="col-xs-12 language-progress">
-        <h4>
-          <%= language.name %>
-          level
-          <%= get_level(xp) %>
-          (<%= format_xp(xp) %>&nbsp;XP)
-
-          <%= if new_xp > 0 do %>
-            <sup>
-              (+<%= format_xp(new_xp) %>)
-            </sup>
-          <% end %>
-        </h4>
-        <div class="progress">
-          <% {old_width, new_width} = get_xp_bar_widths(xp, new_xp) %>
-          <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%">
-            <span class="sr-only">Level progress <%= old_width %> %.</span>
-          </div>
-          <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%">
-            <span class="sr-only">Recent level progress <%= new_width %> %.</span>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <hr />
-
-      <p>
-        <center>
-          <small>
-            XP gained in the last 12 hours is highlighted.
-          </small>
-        </center>
-      </p>
-    </div>
-  </div>
-<% end %>
-
-<div class="row">
-  <div class="col-xs-12">
-    <hr />
-  </div>
-</div>
-
-<div class="row">
-  <%= if has_more_language_xps?(@language_xps) do %>
-    <div class="col-xs-12 col-sm-6">
-      <h4>Other languages</h4>
-
-      <ol start="11">
-        <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(1)) do %>
-          <% new_xp = Map.get(@new_xps, language.name, 0) %>
-          <li>
-            <strong><%= language.name %></strong>
+        <div
+          class="col-xs-12 profile-language-progress"
+          data-xp="<%= xp %>"
+          data-recent-xp="<%= new_xp %>"
+          data-name="<%= language.name %>"
+        >
+          <h4>
+            <%= language.name %>
             level
             <%= get_level(xp) %>
             (<%= format_xp(xp) %>&nbsp;XP)
@@ -138,47 +98,110 @@
                 (+<%= format_xp(new_xp) %>)
               </sup>
             <% end %>
-          </li>
-        <% end %>
-      </ol>
-    </div>
-  <% end %>
-
-  <%= if has_machine_xps?(@machine_xps) do %>
-    <div class="col-xs-12 col-sm-6">
-      <h4>Machines</h4>
-
-      <ol>
-        <%= for {machine, amount} <- @machine_xps do %>
-          <% new_xp = Map.get(@new_machine_xps, machine.id, 0) %>
-
-          <li>
-            <strong>
-              <%= machine.name %>
-            </strong>
-
-            level
-            <%= get_level(amount) %>
-            (<%= format_xp(amount) %>&nbsp;XP)
-
-            <%= if new_xp > 0 do %>
-              <sup>
-                (+<%= format_xp(new_xp) %>)
-              </sup>
-            <% end %>
-
-            <div class="progress">
-              <% {old_width, new_width} = get_xp_bar_widths(amount, new_xp) %>
-              <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%">
-                <span class="sr-only">Level progress <%= old_width %> %.</span>
-              </div>
-              <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%">
-                <span class="sr-only">Recent level progress <%= new_width %> %.</span>
-              </div>
+          </h4>
+          <div class="progress">
+            <% {old_width, new_width} = get_xp_bar_widths(xp, new_xp) %>
+            <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%">
+              <span class="sr-only">Level progress <%= old_width %> %.</span>
             </div>
-          </li>
-        <% end %>
-      </ol>
+            <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%">
+              <span class="sr-only">Recent level progress <%= new_width %> %.</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <hr />
+
+        <p class="text-center">
+          <small>
+            XP gained in the last 12 hours is highlighted. <noscript>Also, if you turned on JavaScript for this site, you would see these numbers update live.</noscript>
+          </small>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <hr />
+      </div>
+    </div>
+
+    <div class="row">
+      <%= if has_more_language_xps?(@language_xps) do %>
+        <div class="col-xs-12 col-sm-6">
+          <h4>Other languages</h4>
+
+          <ol start="11">
+            <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(1)) do %>
+              <% new_xp = Map.get(@new_xps, language.name, 0) %>
+              <li
+                class="profile-more-language-progress"
+                data-xp="<%= xp %>"
+                data-recent-xp="<%= new_xp %>"
+                data-name="<%= language.name %>"
+              >
+                <strong><%= language.name %></strong>
+                level
+                <%= get_level(xp) %>
+                (<%= format_xp(xp) %>&nbsp;XP)
+
+                <%= if new_xp > 0 do %>
+                  <sup>
+                    (+<%= format_xp(new_xp) %>)
+                  </sup>
+                <% end %>
+              </li>
+            <% end %>
+          </ol>
+        </div>
+      <% end %>
+
+      <%= if has_machine_xps?(@machine_xps) do %>
+        <div class="col-xs-12 col-sm-6">
+          <h4>Machines</h4>
+
+          <ol>
+            <%= for {machine, xp} <- @machine_xps do %>
+              <% new_xp = Map.get(@new_machine_xps, machine.id, 0) %>
+
+              <li
+                class="profile-machine-progress"
+                data-xp="<%= xp %>"
+                data-recent-xp="<%= new_xp %>"
+                data-name="<%= machine.name %>"
+              >
+                <strong>
+                  <%= machine.name %>
+                </strong>
+
+                level
+                <%= get_level(xp) %>
+                (<%= format_xp(xp) %>&nbsp;XP)
+
+                <%= if new_xp > 0 do %>
+                  <sup>
+                    (+<%= format_xp(new_xp) %>)
+                  </sup>
+                <% end %>
+
+                <div class="progress">
+                  <% {old_width, new_width} = get_xp_bar_widths(xp, new_xp) %>
+                  <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%">
+                    <span class="sr-only">Level progress <%= old_width %> %.</span>
+                  </div>
+                  <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%">
+                    <span class="sr-only">Recent level progress <%= new_width %> %.</span>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ol>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

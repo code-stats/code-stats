@@ -1,8 +1,14 @@
-defmodule CodeStats.UserSocket do
+defmodule CodeStats.LiveUpdateSocket do
   use Phoenix.Socket
 
+  alias CodeStats.{
+    AuthUtils,
+    User
+  }
+
   ## Channels
-  # channel "rooms:*", CodeStats.RoomChannel
+  channel "users:*", CodeStats.ProfileChannel
+  channel "frontpage", CodeStats.FrontpageChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -19,8 +25,19 @@ defmodule CodeStats.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
+  def connect(%{"token" => token}, socket) do
+
+    with %User{} = user <- check_token(socket, token) do
+      {:ok, assign(socket, :user_id, user.id)}
+    else
+      # Invalid token was given, forbid user instead of allowing as unauthed
+      _ -> :error
+    end
+  end
+
+  # If user doesn't have token or has invalid params, they are unauthed
   def connect(_params, socket) do
-    {:ok, socket}
+    {:ok, assign(socket, :user_id, nil)}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
@@ -34,4 +51,16 @@ defmodule CodeStats.UserSocket do
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil
+
+  # Check that given token is valid, return user or nil if invalid
+  defp check_token(socket, token) do
+    with \
+      {:ok, data}     <- Phoenix.Token.verify(socket, "user", token),
+      %User{} = user  <- AuthUtils.get_user(data)
+    do
+      user.id
+    else
+      _ -> nil
+    end
+  end
 end
