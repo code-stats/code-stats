@@ -8,14 +8,15 @@ defmodule CodeStats.PageController do
     XP,
     Pulse,
     Language,
-    CacheService
+    CacheService,
+    ProfileUtils
   }
 
   @popular_languages_limit 10
 
   def index(conn, _params) do
     now = Calendar.DateTime.now_utc()
-    then = Calendar.DateTime.subtract!(now, 3600 * 12)
+    then = Calendar.DateTime.subtract!(now, 3600 * ProfileUtils.recent_xp_hours)
 
     # Load total language XPs from cache and use them to populate total XP and
     # list of most popular languages

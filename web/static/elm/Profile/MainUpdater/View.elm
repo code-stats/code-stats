@@ -11,7 +11,7 @@ language_limit = 10
 
 language_row : NamedProgress -> Html Msg
 language_row progress =
-  div [ class "row" ] [language_progress_bar_view progress]
+  div [] [language_progress_bar_view progress]
 
 maybe_more_language_progress : List NamedProgress -> Html Msg
 maybe_more_language_progress languages =
@@ -31,6 +31,7 @@ view : Model -> Html Msg
 view {languages, machines} =
   let
     sorted_langs = List.reverse (List.sortBy .xp languages)
+    sorted_machines = List.reverse (List.sortBy .xp machines)
     langs = List.take language_limit sorted_langs
     more_langs = List.drop language_limit sorted_langs
   in

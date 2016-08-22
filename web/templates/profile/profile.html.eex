@@ -1,10 +1,5 @@
 <div class="row">
-  <div
-    id="profile-elm-total-container"
-    class="col-xs-12 col-sm-7"
-    data-xp="<%= @total_xp %>"
-    data-recent-xp="<%= @total_new_xp %>"
-  >
+  <div id="profile-elm-total-container" class="col-xs-12 col-sm-7">
     <h3>
       Level
       <%= get_level(@total_xp) %>
@@ -79,14 +74,9 @@
   <div id="profile-elm-main-container">
     <div class="row">
       <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(0)) do %>
-        <% new_xp = Map.get(@new_xps, language.name, 0) %>
+        <% new_xp = Map.get(@new_xps, language.id, 0) %>
 
-        <div
-          class="col-xs-12 profile-language-progress"
-          data-xp="<%= xp %>"
-          data-recent-xp="<%= new_xp %>"
-          data-name="<%= language.name %>"
-        >
+        <div class="col-xs-12 profile-language-progress">
           <h4>
             <%= language.name %>
             level
@@ -137,13 +127,8 @@
 
           <ol start="11">
             <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(1)) do %>
-              <% new_xp = Map.get(@new_xps, language.name, 0) %>
-              <li
-                class="profile-more-language-progress"
-                data-xp="<%= xp %>"
-                data-recent-xp="<%= new_xp %>"
-                data-name="<%= language.name %>"
-              >
+              <% new_xp = Map.get(@new_xps, language.id, 0) %>
+              <li class="profile-more-language-progress" >
                 <strong><%= language.name %></strong>
                 level
                 <%= get_level(xp) %>
@@ -168,12 +153,7 @@
             <%= for {machine, xp} <- @machine_xps do %>
               <% new_xp = Map.get(@new_machine_xps, machine.id, 0) %>
 
-              <li
-                class="profile-machine-progress"
-                data-xp="<%= xp %>"
-                data-recent-xp="<%= new_xp %>"
-                data-name="<%= machine.name %>"
-              >
+              <li class="profile-machine-progress">
                 <strong>
                   <%= machine.name %>
                 </strong>
