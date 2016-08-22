@@ -222,9 +222,14 @@ defmodule CodeStats.AuthUtils do
   end
 
   defp split_token(token) do
+    # Try new style token split first, then old style
+    content = case String.split(token, ".") do
+      [_, content, _] -> content
+      _ -> String.split(token, "##") |> Enum.at(0)
+    end
+
     with \
-      [content, _]        <- String.split(token, "##"),
-      {:ok, content}      <- Base.url_decode64(content),
+      {:ok, content}      <- Base.decode64(content, padding: false),
       {username, machine} <- unform_payload(content)
     do
       {username, machine}
