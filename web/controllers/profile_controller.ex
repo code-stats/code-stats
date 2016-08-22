@@ -1,18 +1,11 @@
 defmodule CodeStats.ProfileController do
   use CodeStats.Web, :controller
 
-  import Ecto.Query, only: [from: 2]
-
   alias CodeStats.{
-    Repo,
     AuthUtils,
     PermissionUtils,
     User,
     SetSessionUser,
-    Pulse,
-    XP,
-    Language,
-    Machine,
     ProfileUtils
   }
 
