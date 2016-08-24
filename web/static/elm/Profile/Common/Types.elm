@@ -25,9 +25,9 @@ type alias XPData =
   }
 
 type alias InitData =
-  { total : { xp : Int, new_xp : Int }
-  , languages: List LanguageProgress
-  , machines: List MachineProgress
+  { total : Progress
+  , languages : List LanguageProgress
+  , machines : List MachineProgress
   }
 
 -- Input messages from JS

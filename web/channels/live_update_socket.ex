@@ -58,7 +58,7 @@ defmodule CodeStats.LiveUpdateSocket do
       {:ok, data}     <- Phoenix.Token.verify(socket, "user", token),
       %User{} = user  <- AuthUtils.get_user(data)
     do
-      user.id
+      user
     else
       _ -> nil
     end

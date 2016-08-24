@@ -15,7 +15,8 @@ defmodule CodeStats.PulseController do
     Language,
     XP,
     CacheService,
-    ProfileChannel
+    ProfileChannel,
+    FrontpageChannel
   }
 
   def add(conn, %{"coded_at" => timestamp, "xps" => xps}) do
@@ -31,8 +32,9 @@ defmodule CodeStats.PulseController do
         {:ok, inserted_xps}               <- create_xps(pulse, xps),
         :ok                               <- update_caches(inserted_xps)
       do
-        # Broadcast XP data to possible viewers
+        # Broadcast XP data to possible viewers on profile page and frontpage
         ProfileChannel.send_pulse(user, %{pulse | xps: inserted_xps})
+        FrontpageChannel.send_pulse(user, %{pulse | xps: inserted_xps})
 
         conn |> put_status(201) |> json(%{"ok" => "Great success!"})
       else

@@ -1,5 +1,6 @@
 import profile_page from './profile_page';
 import machine_page from './machine_page';
+import index_page from './index_page';
 
 /**
  * List of routes. Key should be regex to match against path, value
@@ -9,7 +10,8 @@ import machine_page from './machine_page';
  */
 const ROUTES = [
   [/^\/users\/[^/]+\/?/, profile_page],
-  [/^\/my\/machines\/?/, machine_page]
+  [/^\/my\/machines\/?/, machine_page],
+  [/^\/?$/, index_page]
 ];
 
 /**

@@ -1,19 +1,15 @@
+import { clear_children } from './utils';
+import Elm from '../elm-bin/elm-app';
+
 /**
  * Handles connecting to the profile page socket and sending updates to Elm.
  */
-
-import Elm from '../elm-bin/elm-app';
-
 class ProfilePageUpdater {
   constructor(socket) {
     this.socket = socket;
     this.channel = null;
 
     this.username = null;
-
-    this.total_progress = null;
-    this.language_progresses = [];
-    this.machine_progresses = [];
 
     // Elm app containers
     this.tu_div = document.getElementById('profile-elm-total-container');
@@ -46,8 +42,8 @@ class ProfilePageUpdater {
   }
 
   clearDOM() {
-    ProfilePageUpdater.clearChildren(document.getElementById('profile-elm-total-container'));
-    ProfilePageUpdater.clearChildren(document.getElementById('profile-elm-main-container'));
+    clear_children(this.tu_div);
+    clear_children(this.mu_div);
   }
 
   installElm() {
@@ -64,12 +60,6 @@ class ProfilePageUpdater {
   newPulse(msg) {
     this.tu_app.ports.tu_new_xp.send(msg);
     this.mu_app.ports.mu_new_xp.send(msg);
-  }
-
-  static clearChildren(elem) {
-    while (elem.lastChild) {
-      elem.removeChild(elem.lastChild);
-    }
   }
 }
 

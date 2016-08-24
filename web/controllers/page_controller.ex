@@ -27,35 +27,9 @@ defmodule CodeStats.PageController do
 
     most_popular = Enum.slice(total_lang_xps, 0..(@popular_languages_limit - 1))
 
-    last_12h_xp_q = from x in XP,
-      join: p in Pulse, on: p.id == x.pulse_id,
-      where: p.sent_at >= ^then,
-      select: sum(x.amount)
-
-    last_12h_xp = case Repo.one(last_12h_xp_q) do
-      nil -> 0
-      ret -> ret
-    end
-
-    most_popular_12h_q = from x in XP,
-      join: l in Language, on: l.id == x.language_id,
-      join: p in Pulse, on: p.id == x.pulse_id,
-      where: p.sent_at >= ^then,
-      group_by: l.id,
-      order_by: [desc: sum(x.amount)],
-      select: {l.name, sum(x.amount)},
-      limit: @popular_languages_limit
-
-    most_popular_12h = case Repo.all(most_popular_12h_q) do
-      nil -> []
-      ret -> ret
-    end
-
     conn
     |> assign(:total_xp, total_xp)
-    |> assign(:last_12h_xp, last_12h_xp)
     |> assign(:most_popular, most_popular)
-    |> assign(:most_popular_12h, most_popular_12h)
     |> render("index.html")
   end
 

@@ -36,39 +36,7 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <h3>
-          Most popular languages
-        </h3>
-
-        <ol>
-          <%= for {language, xp} <- @most_popular do %>
-            <li>
-              <%= language %>: <%= format_xp(xp) %>&nbsp;XP
-            </li>
-          <% end %>
-        </ol>
-      </div>
-
-      <div class="col-xs-12 col-md-6">
-        <h3>
-          Recently popular languages
-        </h3>
-
-        <ol>
-          <%= for {language, xp} <- @most_popular_12h do %>
-            <li>
-              <%= language %>: <%= format_xp(xp) %>&nbsp;XP
-            </li>
-          <% end %>
-        </ol>
-      </div>
-    </div>
-  </div>
-
+<div class="row" id="index-elm-container">
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12 col-md-6">
@@ -83,12 +51,29 @@
 
       <div class="col-xs-12 col-md-6">
         <h3>
-          XP in last 12 hours
+          Most popular languages
         </h3>
 
-        <h2>
-          <%= format_xp(@last_12h_xp) %>
-        </h2>
+        <ol>
+          <%= for {language, xp} <- @most_popular do %>
+            <li>
+              <%= language %>: <%= format_xp(xp) %>&nbsp;XP
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h3>Loading live statistics…</h3>
+
+        <noscript>
+          <p class="alert alert-info">
+            If you had JavaScript enabled, you would see fancy live updating statistics.
+          </p>
+        </noscript>
       </div>
     </div>
   </div>

@@ -91,7 +91,9 @@
         </p>
 
         <p class="text-center">
-          Made with <a href="http://elixir-lang.org/">Elixir</a> and <a href="http://www.phoenixframework.org/">Phoenix</a>.
+          Made with <a href="http://elixir-lang.org/">Elixir</a>,
+          <a href="http://www.phoenixframework.org/">Phoenix</a>, and
+          <a href="http://elm-lang.org/">Elm</a>.
         </p>
 
         <p class="text-center">

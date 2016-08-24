@@ -77,7 +77,7 @@ exports.config = {
       executablePath: '../../../node_modules/elm/binwrappers',
 
       elmFolder: 'web/static/elm',
-      mainModules: ['Profile/MainUpdater.elm', 'Profile/TotalUpdater.elm'],
+      mainModules: ['IndexPage/Updater.elm', 'Profile/MainUpdater.elm', 'Profile/TotalUpdater.elm'],
 
       // Compile elm files into elm-bin where they can be picked up from by the
       // javascript compiler
