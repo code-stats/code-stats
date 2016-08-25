@@ -1,23 +1,13 @@
 defmodule CodeStats.PageController do
   use CodeStats.Web, :controller
 
-  import Ecto.Query, only: [from: 2]
-
   alias CodeStats.{
-    Repo,
-    XP,
-    Pulse,
-    Language,
-    CacheService,
-    ProfileUtils
+    CacheService
   }
 
   @popular_languages_limit 10
 
   def index(conn, _params) do
-    now = Calendar.DateTime.now_utc()
-    then = Calendar.DateTime.subtract!(now, 3600 * ProfileUtils.recent_xp_hours)
-
     # Load total language XPs from cache and use them to populate total XP and
     # list of most popular languages
     total_lang_xps = CacheService.get_total_language_xps()

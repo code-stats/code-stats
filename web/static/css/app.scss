@@ -97,3 +97,19 @@ form {
     }
   }
 }
+
+// Ticker in the live update for index page
+ul.ticker {
+  list-style: none;
+  font-family: monospace;
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 30%);
+    pointer-events: none;
+  }
+}

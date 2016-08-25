@@ -29,6 +29,13 @@
 
 <h2>Changelog</h2>
 
+<h3>1.7.0 – 2016-08-25 – Live updates ✨</h3>
+
+<ul>
+  <li>Added live update functionality to profile page and index page. XP numbers and progress bars update live using Elm. 📊 Index page includes a ticker that shows users gaining XP live (private profiles are shown as "Private user").</li>
+  <li>Bumped dependencies. Update of Plug results in a different format for API tokens, but the old ones will still work.</li>
+</ul>
+
 <h3>1.6.2 – 2016-08-08 – Small fixes</h3>
 
 <ul>

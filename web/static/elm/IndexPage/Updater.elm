@@ -7,7 +7,7 @@ import IndexPage.View exposing (view)
 import IndexPage.Ports exposing (..)
 
 -- Maximum number of rows to show in ticker
-ticker_max_rows = 5
+ticker_max_rows = 15
 
 main =
   Html.program

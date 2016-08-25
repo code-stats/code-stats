@@ -15,28 +15,14 @@ format_number number =
 
 ticker_row : TickerDataRow -> Html Msg
 ticker_row data =
-  div [ class "row" ] [
-    div [ class "col-xs-4" ] [
-      p [] [
-        strong [] [
-          text data.username
-        ]
-      ]
+  li [] [
+    strong [] [
+      text data.username
     ],
-
-    div [ class "col-xs-4" ] [
-      p [] [
-        text "+",
-        text (format_number data.xp),
-        text " XP"
-      ]
-    ],
-
-    div [ class "col-xs-4" ] [
-      p [] [
-        text data.language
-      ]
-    ]
+    text " +",
+    text (format_number data.xp),
+    text " ",
+    text data.language
   ]
 
 view : Model -> Html Msg
@@ -102,6 +88,12 @@ view model =
       ],
 
       div [ class "row" ] [
-        div [ class "col-xs-12" ] (List.map ticker_row model.tickerdata)
+        div [ class "col-xs-12" ] [
+          ul [ class "ticker" ]
+            (case model.tickerdata of
+              [] -> [li [] [ text "Waiting for incoming XP…" ]]
+
+              data -> (List.map ticker_row data))
+        ]
       ]
     ]
