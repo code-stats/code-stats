@@ -30,7 +30,7 @@ update msg model =
     Init data ->
       ({ total = { xp = data.total_xp, new_xp = 0 }
        , languages = List.map (\l -> { xp = l.xp, name = l.name, new_xp = 0 }) data.languages
-       , tickerdata = []
+       , tickerdata = model.tickerdata
        }, Cmd.none)
 
     NewXP data ->
