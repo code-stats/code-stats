@@ -64,7 +64,7 @@ view {languages, machines} =
           div [ class "row" ] [
             div [ class "col-xs-12" ] [
               h4 [] [ text "Machines" ],
-              ol [] (List.map machine_progress_bar_view machines)
+              ol [] (List.map machine_progress_bar_view sorted_machines)
             ]
           ]
         ]
