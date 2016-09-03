@@ -29,6 +29,13 @@
 
 <h2>Changelog</h2>
 
+<h3>1.7.1 – 2016-09-03 – Small fixes to live updates</h3>
+
+<ul>
+  <li>Fixed machine ordering on profile page being wrong when live updating.</li>
+  <li>Fixed live updates not working on IE and other silly browsers by adding Babel polyfill.</li>
+</ul>
+
 <h3>1.7.0 – 2016-08-25 – Live updates ✨</h3>
 
 <ul>
