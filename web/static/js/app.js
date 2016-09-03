@@ -12,6 +12,9 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 
+// Import Babel polyfill to fix functionality for silly browsers
+import 'babel-polyfill';
+
 import 'phoenix_html';
 
 // Import local files
