@@ -112,13 +112,9 @@ defmodule CodeStats.User do
       dates: date_data
     }
 
-    # Persist cache changes
+    # Persist cache changes and update user's last cached timestamp
     user
     |> cast(%{cache: format_cache_for_db(final_cache)}, [:cache])
-    |> Repo.update!()
-
-    # Finally update the user's last_cached timestamp
-    updating_changeset(user, %{})
     |> Changeset.put_change(:last_cached, Calendar.DateTime.now_utc())
     |> Repo.update!()
 
