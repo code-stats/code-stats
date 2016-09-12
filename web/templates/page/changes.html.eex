@@ -29,6 +29,14 @@
 
 <h2>Changelog</h2>
 
+<h3>1.7.2 – 2016-09-12 – Machine API key and caching duration stuff</h3>
+
+<ul>
+  <li>Fixed machine API key changing when machine name was changed.</li>
+  <li>Added caching duration to user's cache to monitor how long generating caches takes. ⏱</li>
+  <li>Fixed duplicate update query when updating user's cache.</li>
+</ul>
+
 <h3>1.7.1 – 2016-09-03 – Small fixes to live updates</h3>
 
 <ul>
