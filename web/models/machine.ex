@@ -21,11 +21,14 @@ defmodule CodeStats.Machine do
   def changeset(data, params \\ %{}) do
     data
     |> cast(params, [:name])
-    |> validate_required([:name])
-    |> validate_length(:name, min: 1)
-    |> validate_length(:name, max: 64)
-    |> unique_constraint(:name, name: :machines_name_user_id_index)
+    |> name_validations()
     |> put_change(:api_salt, generate_api_salt())
+  end
+
+  def update_changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:name])
+    |> name_validations()
   end
 
   @doc """
@@ -36,6 +39,14 @@ defmodule CodeStats.Machine do
   def api_changeset(data) do
     data
     |> change(%{api_salt: generate_api_salt()})
+  end
+
+  defp name_validations(changeset) do
+    changeset
+    |> validate_required([:name])
+    |> validate_length(:name, min: 1)
+    |> validate_length(:name, max: 64)
+    |> unique_constraint(:name, name: :machines_name_user_id_index)
   end
 
   defp generate_api_salt() do

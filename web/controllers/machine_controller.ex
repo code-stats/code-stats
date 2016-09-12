@@ -55,7 +55,7 @@ defmodule CodeStats.MachineController do
     user = SetSessionUser.get_user_data(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
-      changeset                = Machine.changeset(machine, params),
+      changeset                = Machine.update_changeset(machine, params),
       %Machine{} = machine    <- edit_machine_or_flash(conn, changeset) do
         conn
         |> assign(:machine, machine)
