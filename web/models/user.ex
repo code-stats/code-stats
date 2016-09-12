@@ -72,6 +72,8 @@ defmodule CodeStats.User do
   just added to. This results in a total recalculation of all the user's XP.
   """
   def update_cached_xps(user, update_all \\ false) do
+    update_start_time = DateTime.utc_now()
+
     last_cached = if not update_all and user.last_cached != nil do
       user.last_cached
     else
@@ -83,7 +85,9 @@ defmodule CodeStats.User do
     cached_data = %{
       languages: %{},
       machines: %{},
-      dates: %{}
+      dates: %{},
+      caching_duration: 0,      # Time taken for the last partial cache update
+      total_caching_duration: 0 # Time taken for the last full cache update
     }
 
     cached_data = case {update_all, user.cache} do
@@ -106,20 +110,33 @@ defmodule CodeStats.User do
     language_data = generate_language_cache(cached_data.languages, xps)
     machine_data = generate_machine_cache(cached_data.machines, xps)
     date_data = generate_date_cache(cached_data.dates, xps)
-    final_cache = %{
-      languages: language_data,
-      machines: machine_data,
-      dates: date_data
-    }
+
+    cache_contents =
+      %{
+        languages: language_data,
+        machines: machine_data,
+        dates: date_data
+      }
+
+    # Correct key for storing caching duration
+    duration_key = if update_all, do: :total_caching_duration, else: :caching_duration
+
+    # Store cache that is formatted for DB and add caching duration
+    stored_cache =
+      cache_contents
+      |> format_cache_for_db()
+      |> Map.put(:caching_duration, cached_data.caching_duration)
+      |> Map.put(:total_caching_duration, cached_data.total_caching_duration)
+      |> Map.put(duration_key, get_caching_duration(update_start_time))
 
     # Persist cache changes and update user's last cached timestamp
     user
-    |> cast(%{cache: format_cache_for_db(final_cache)}, [:cache])
+    |> cast(%{cache: stored_cache}, [:cache])
     |> Changeset.put_change(:last_cached, Calendar.DateTime.now_utc())
     |> Repo.update!()
 
     # Return the cache data for the caller
-    final_cache
+    cache_contents
   end
 
   defp generate_language_cache(language_data, xps) do
@@ -187,7 +204,9 @@ defmodule CodeStats.User do
     %{
       languages: languages,
       machines: machines,
-      dates: dates
+      dates: dates,
+      caching_duration: Map.get(cache, "caching_duration", 0),
+      total_caching_duration: Map.get(cache, "total_caching_duration", 0)
     }
   end
 
@@ -215,5 +234,10 @@ defmodule CodeStats.User do
     |> Map.to_list()
     |> Enum.map(fn {key, value} -> {Integer.parse(key) |> elem(0), value} end)
     |> Map.new()
+  end
+
+  defp get_caching_duration(start_time) do
+    Calendar.DateTime.diff(DateTime.utc_now(), start_time)
+    |> (fn {:ok, s, us, _} -> s + (us / 1_000_000) end).()
   end
 end
