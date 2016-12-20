@@ -1,5 +1,7 @@
 # Code::Stats
 
+[![Join the chat at https://gitter.im/code-stats/Lobby](https://badges.gitter.im/code-stats/Lobby.svg)](https://gitter.im/code-stats/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Code::Stats is a free stats tracking service for programmers: [https://codestats.net/](https://codestats.net/).
 
 This repository contains the Phoenix application that implements the service backend.
