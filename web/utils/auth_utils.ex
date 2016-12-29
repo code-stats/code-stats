@@ -5,10 +5,14 @@ defmodule CodeStats.AuthUtils do
 
   import Ecto.Query, only: [from: 2]
   alias Ecto.Changeset
-  alias CodeStats.Repo
 
-  alias CodeStats.User
-  alias CodeStats.Machine
+  alias CodeStats.{
+    Repo,
+    User,
+    Machine,
+    SetSessionUser
+  }
+
   alias Comeonin.Bcrypt
   alias Plug.Conn
   alias Plug.Crypto.MessageVerifier
@@ -35,23 +39,13 @@ defmodule CodeStats.AuthUtils do
   end
 
   @doc """
-  Get current user model from the session.
+  Get current user model of the authenticated user.
 
   Returns nil if the user is not authenticated.
   """
   @spec get_current_user(%Conn{}) :: %User{} | nil
   def get_current_user(conn) do
-    user_id = get_current_user_id(conn)
-
-    case user_id do
-      nil -> nil
-
-      id ->
-        query = from u in User,
-          where: u.id == ^id
-
-        Repo.one(query)
-    end
+    SetSessionUser.get_user_data(conn)
   end
 
   @doc """
