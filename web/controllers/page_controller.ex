@@ -47,9 +47,9 @@ defmodule CodeStats.PageController do
     |> render("changes.html")
   end
 
-  def irc(conn, _params) do
+  def contact(conn, _params) do
     conn
-    |> assign(:title, "IRC")
-    |> render("irc.html")
+    |> assign(:title, "Contact")
+    |> render("contact.html")
   end
 end

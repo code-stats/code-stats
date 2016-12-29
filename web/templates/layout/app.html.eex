@@ -82,7 +82,7 @@
           —
           <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
           —
-          <a href="<%= page_path(@conn, :irc) %>">IRC</a>
+          <a href="<%= page_path(@conn, :contact) %>">Contact</a>
 
           <%= if get_conf(:twitter_account) do %>
             –

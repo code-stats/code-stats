@@ -35,7 +35,7 @@ defmodule CodeStats.Router do
     get "/tos", PageController, :terms
     get "/plugins", PageController, :plugins
     get "/changes", PageController, :changes
-    get "/irc", PageController, :irc
+    get "/contact", PageController, :contact
 
     get "/aliases", AliasController, :list
 
