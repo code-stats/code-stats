@@ -32,7 +32,8 @@
 <h3>1.8.0 – ????-??-?? – Language aliases</h3>
 
 <ul>
-  <li>Added a language alias feature. Now some languages are just aliases for others. This is done to fix typos and problems in language detection in editors. For example, "JavaScript 1.5" (which was released in 2000 and is erroneously detected by JetBrains in some situations) will now be corrected to "JavaScript" and all existing XP has been combined between the languages. If you have feedback or suggestions on languages to merge, give us feedback on our <a href="<%= page_path(@conn, :irc) %>">Gitter or IRC channel</a>.</li>
+  <li>Added a language alias feature. Now some languages are just aliases for others. This is done to fix typos and problems in language detection in editors. For example, "JavaScript 1.5" (which was released in 2000 and is erroneously detected by JetBrains in some situations) will now be corrected to "JavaScript" and all existing XP has been combined between the languages. If you have feedback or suggestions on languages to merge, give us feedback on our <a href="<%= page_path(@conn, :contact) %>">Gitter or IRC channel</a>.</li>
+  <li>Added information about Gitter channel.</li>
 </ul>
 
 <h3>1.7.2 – 2016-09-12 – Machine API key and caching duration stuff</h3>
