@@ -1,8 +1,6 @@
 defmodule CodeStats.PasswordReset do
   use CodeStats.Web, :model
 
-  import Ecto.Query, only: [from: 2]
-
   alias CodeStats.{
     User,
     Repo

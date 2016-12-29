@@ -4,9 +4,6 @@ defmodule CodeStats.User do
   @null_datetime "1970-01-01T00:00:00Z"
 
   alias Comeonin.Bcrypt
-  alias Ecto.Changeset
-
-  import Ecto.Query, only: [from: 2]
 
   alias CodeStats.{
     Repo,
@@ -132,7 +129,7 @@ defmodule CodeStats.User do
     # Persist cache changes and update user's last cached timestamp
     user
     |> cast(%{cache: stored_cache}, [:cache])
-    |> Changeset.put_change(:last_cached, Calendar.DateTime.now_utc())
+    |> put_change(:last_cached, Calendar.DateTime.now_utc())
     |> Repo.update!()
 
     # Return the cache data for the caller

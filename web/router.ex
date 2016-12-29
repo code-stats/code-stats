@@ -37,6 +37,8 @@ defmodule CodeStats.Router do
     get "/changes", PageController, :changes
     get "/irc", PageController, :irc
 
+    get "/aliases", AliasController, :list
+
     scope "/" do
       pipe_through :browser_unauth
 

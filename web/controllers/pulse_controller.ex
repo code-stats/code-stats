@@ -3,7 +3,6 @@ defmodule CodeStats.PulseController do
 
   @datetime_max_diff 604800
 
-  import Ecto.Query, only: [from: 2]
   alias Ecto.Changeset
 
   alias Calendar.DateTime, as: CDateTime
@@ -106,16 +105,24 @@ defmodule CodeStats.PulseController do
 
   defp create_xp(pulse, language_name, xp) do
     with {:ok, %Language{} = language} <- get_or_create_language(language_name) do
+
+      # If language was an alias of another, use that instead
+      final_language = case language.alias_of do
+        %Language{} = aliased -> aliased
+        nil -> language
+      end
+
       params = %{"amount" => xp}
 
       XP.changeset(%XP{}, params)
       |> Changeset.put_change(:pulse_id, pulse.id)
-      |> Changeset.put_change(:language_id, language.id)
+      |> Changeset.put_change(:language_id, final_language.id)
+      |> Changeset.put_change(:original_language_id, language.id)
       |> Repo.insert()
       |> case do
         {:ok, inserted_xp} ->
           # Set the language so that it can be used later
-          inserted_xp = %{inserted_xp | language: language}
+          inserted_xp = %{inserted_xp | language: final_language}
           {:ok, inserted_xp}
 
         {:error, _} -> {:error, :generic, "Could not create XP because of an unknown issue."}
@@ -124,25 +131,9 @@ defmodule CodeStats.PulseController do
   end
 
   defp get_or_create_language(language_name) do
-    # Get-create-get to handle race conditions
-    get_query = from l in Language,
-      where: fragment("LOWER(?)", l.name) == fragment("LOWER(?)", ^language_name)
-
-    case Repo.one(get_query) do
-      %Language{} = language -> {:ok, language}
-
-      nil ->
-        Language.changeset(%Language{}, %{"name" => language_name})
-        |> Repo.insert()
-        |> case do
-          {:ok, language} -> {:ok, language}
-
-          {:error, _} ->
-            case Repo.one(get_query) do
-              %Language{} = language -> {:ok, language}
-              nil -> {:error, :internal, "Could not get-create-get language because of an unknown issue."}
-            end
-        end
+    case Language.get_or_create(language_name) do
+      {:ok, language} -> {:ok, language}
+      {:error, :unknown} -> {:error, :internal, "Could not get-create-get language because of an unknown issue."}
     end
   end
 

@@ -3,7 +3,7 @@ defmodule CodeStats.Mixfile do
 
   def project do
     [app: :code_stats,
-     version: "1.7.2",
+     version: "1.8.0",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,

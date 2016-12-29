@@ -6,6 +6,10 @@ defmodule CodeStats.XP do
     belongs_to :pulse, CodeStats.Pulse
     belongs_to :language, CodeStats.Language
 
+    # Original language can be used to fix alias errors later, it should always use
+    # the language that was sent. :language field on the other hand follows aliases
+    belongs_to :original_language, CodeStats.Language
+
     timestamps
   end
 
