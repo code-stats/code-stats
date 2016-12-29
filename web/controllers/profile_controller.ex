@@ -16,14 +16,21 @@ defmodule CodeStats.ProfileController do
 
   def profile(conn, %{"username" => username}) do
     fix_url_username(username)
-    |> AuthUtils.get_user()
+    |> AuthUtils.get_user(true)
     |> case do
       nil -> render_404(conn)
 
       %User{} = user ->
-        case PermissionUtils.can_access_profile?(AuthUtils.get_current_user(conn), user) do
-          true -> render_profile(conn, user)
-          false -> render_404(conn)
+        # If username has different capitalisation than actual, redirect to actual
+        case username == user.username do
+          true ->
+            case PermissionUtils.can_access_profile?(AuthUtils.get_current_user(conn), user) do
+              true -> render_profile(conn, user)
+              false -> render_404(conn)
+            end
+
+          false ->
+            redirect(conn, to: profile_path(conn, :profile, user.username))
         end
     end
   end

@@ -51,12 +51,21 @@ defmodule CodeStats.AuthUtils do
   @doc """
   Get user with the given username.
 
+  If second argument is true, case insensitive search is used instead.
+
   Returns nil if user was not found.
   """
-  @spec get_user(String.t) :: %User{} | nil
-  def get_user(username) do
-    query = from u in User,
-      where: u.username == ^username
+  @spec get_user(String.t, boolean) :: %User{} | nil
+  def get_user(username, case_insensitive \\ false) do
+    query = case case_insensitive do
+      false ->
+        from u in User,
+          where: u.username == ^username
+
+      true ->
+        from u in User,
+          where: fragment("lower(?)", ^username) == fragment("lower(?)", u.username)
+    end
 
     Repo.one(query)
   end

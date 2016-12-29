@@ -7,6 +7,9 @@
       <%= if message = f.errors[:username] do %>
         <p class="help-block"><%= translate_error(message) %></p>
       <% end %>
+      <%= if message = f.errors[:lower_username] do %>
+        <p class="help-block"><%= translate_error(message) %></p>
+      <% end %>
 
       <p class="help-block">Must not contain the following characters: <code>/#%?&amp;=+</code>. You're free to use Unicode characters but complex character sequences may make the profile unreachable.</p>
     </div>

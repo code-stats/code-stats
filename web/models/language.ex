@@ -31,6 +31,7 @@ defmodule CodeStats.Language do
     |> cast(params, [:name])
     |> validate_required([:name])
     |> unique_constraint(:name)
+    |> unique_constraint(:lower_name)
   end
 
   @doc """

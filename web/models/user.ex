@@ -41,6 +41,7 @@ defmodule CodeStats.User do
     |> validate_format(:username, ~r/^[^\/#%?&=+]+$/)
     |> validations()
     |> unique_constraint(:username)
+    |> unique_constraint(:lower_username)
   end
 
   @doc """
