@@ -36,8 +36,12 @@ config :code_stats,
   # Address to send email from in the form of {"Name", "address@domain.example"}
   email_from: {"Code::Stats", "address@domain.example"},
 
-  # Twitter account username to insert link in footer, nil to disable
-  twitter_account: nil,
+  # Social links to insert in the website's footer, list of 2-tuples in the form of
+  # {"Link name", "Full link URL"}
+  social_links: [
+    {"Twitter", "https://twitter.com/example"},
+    {"IRC", "irc://irc.freenode.net/codestats"}
+  ],
 
   # Extra HTML that is injected to every page, right before </body>. Useful for analytics scripts.
   analytics_code: """

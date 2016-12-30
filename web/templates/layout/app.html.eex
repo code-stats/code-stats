@@ -71,32 +71,29 @@
       <footer>
         <hr />
 
-        <p class="text-center">
-          <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
-          —
-          <%= CodeStats.RequestTime.calculate_time(@conn) %>
-          —
-          <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
-          —
-          <a href="<%= page_path(@conn, :terms) %>">Legal</a>
-          —
-          <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
-          —
-          <a href="<%= page_path(@conn, :contact) %>">Contact</a>
+        <ul class="footer-info">
+          <li><%= CodeStats.RequestTime.calculate_time(@conn) %></li>
+          <li><a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a></li>
+          <li><a href="<%= page_path(@conn, :api_docs) %>">API docs</a></li>
+          <li><a href="<%= page_path(@conn, :terms) %>">Legal</a></li>
+          <li><a href="<%= page_path(@conn, :plugins) %>">Plugins</a></li>
+        </ul>
 
-          <%= if get_conf(:twitter_account) do %>
-            –
-            <a href="https://twitter.com/<%= get_conf(:twitter_account) %>">Twitter</a>
-          <% end %>
-        </p>
+        <%= if not Enum.empty?(get_conf(:social_links)) do %>
+          <ul class="footer-info">
+            <%= for {name, url} <- get_conf(:social_links) do %>
+              <li><a href="<%= url %>"><%= name %></a></li>
+            <% end %>
+          </ul>
+        <% end %>
 
-        <p class="text-center">
+        <p class="footer-info">
           Made with <a href="http://elixir-lang.org/">Elixir</a>,
           <a href="http://www.phoenixframework.org/">Phoenix</a>, and
           <a href="http://elm-lang.org/">Elm</a>.
         </p>
 
-        <p class="text-center">
+        <p class="footer-info">
           <small>
             <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
           </small>

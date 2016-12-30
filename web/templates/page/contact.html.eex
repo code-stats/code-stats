@@ -1,9 +1,0 @@
-<h2>Contact</h2>
-
-<p>
-  <%= get_conf(:site_name) %> has a <a href="https://gitter.im/code-stats/Lobby">Gitter channel</a> which you can use for feedback, asking questions or just general chat related to the project.
-</p>
-
-<p>
-  <%= get_conf(:site_name) %> also has its own IRC channel on <a href="https://freenode.net/">Freenode</a>: <code>#codestats</code>. In case you do not have an IRC client yet, you can join <a href="http://webchat.freenode.net?channels=%23codestats">using the webchat</a>.
-</p>

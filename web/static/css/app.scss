@@ -56,6 +56,34 @@ form {
   margin: 35px 0;
 }
 
+footer {
+  .footer-info {
+    text-align: center;
+  }
+
+  ul.footer-info {
+    list-style-type: none;
+    display: block;
+    margin: 0.7em;
+
+    li {
+      display: inline;
+    }
+
+    li:after {
+      content: " – ";
+    }
+
+    li:first-of-type:before {
+      content: ""
+    }
+
+    li:last-of-type:after {
+      content: "";
+    }
+  }
+}
+
 // Responsive: Portrait tablets and up
 @media screen and (min-width: 768px) {
   // Remove the padding we set earlier
