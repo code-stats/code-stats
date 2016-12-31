@@ -34,6 +34,7 @@
 <ul>
   <li>Added a language alias feature. Now some languages are just aliases for others. This is done to fix typos and problems in language detection in editors. For example, "JavaScript 1.5" (which was released in 2000 and is erroneously detected by JetBrains in some situations) will now be corrected to "JavaScript" and all existing XP has been combined between the languages. If you have feedback or suggestions on languages to merge, give us feedback on our Gitter or IRC channel.</li>
   <li>Added information about Gitter channel into footer, removed useless contact page.</li>
+  <li>Added user profile API for fetching data of public users. Integrate Code::Stats with your website! Check the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a> for more information.</li>
 </ul>
 
 <h3>1.7.2 – 2016-09-12 – Machine API key and caching duration stuff</h3>

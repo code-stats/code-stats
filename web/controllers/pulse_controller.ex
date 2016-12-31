@@ -18,35 +18,35 @@ defmodule CodeStats.PulseController do
     FrontpageChannel
   }
 
-  def add(conn, %{"coded_at" => timestamp, "xps" => xps}) do
-    if not is_list(xps) do
-      resp(conn, 400, %{error: "Invalid xps format."})
+  def add(conn, %{"coded_at" => timestamp, "xps" => xps}) when is_list(xps) do
+    {user, machine} = AuthUtils.get_api_details(conn)
+
+    with \
+      {:ok, %DateTime{} = datetime} <- parse_timestamp(timestamp),
+      {:ok, datetime}               <- check_datetime_diff(datetime),
+      {:ok, %Pulse{} = pulse}       <- create_pulse(user, machine, datetime),
+      {:ok, inserted_xps}           <- create_xps(pulse, xps),
+      :ok                           <- update_caches(inserted_xps)
+    do
+      # Broadcast XP data to possible viewers on profile page and frontpage
+      ProfileChannel.send_pulse(user, %{pulse | xps: inserted_xps})
+      FrontpageChannel.send_pulse(user, %{pulse | xps: inserted_xps})
+
+      conn |> put_status(201) |> json(%{"ok" => "Great success!"})
     else
+      {:error, :not_found, reason} ->
+        conn |> put_status(404) |> json(%{"error" => reason})
 
-      {user, machine} = AuthUtils.get_api_details(conn)
+      {:error, :generic, reason} ->
+        conn |> put_status(400) |> json(%{"error" => reason})
 
-      with {:ok, %DateTime{} = datetime}  <- parse_timestamp(timestamp),
-        {:ok, datetime}                   <- check_datetime_diff(datetime),
-        {:ok, %Pulse{} = pulse}           <- create_pulse(user, machine, datetime),
-        {:ok, inserted_xps}               <- create_xps(pulse, xps),
-        :ok                               <- update_caches(inserted_xps)
-      do
-        # Broadcast XP data to possible viewers on profile page and frontpage
-        ProfileChannel.send_pulse(user, %{pulse | xps: inserted_xps})
-        FrontpageChannel.send_pulse(user, %{pulse | xps: inserted_xps})
-
-        conn |> put_status(201) |> json(%{"ok" => "Great success!"})
-      else
-        {:error, :not_found, reason} ->
-          conn |> put_status(404) |> json(%{"error" => reason})
-
-        {:error, :generic, reason} ->
-          conn |> put_status(400) |> json(%{"error" => reason})
-
-        {:error, :internal, reason} ->
-          conn |> put_status(500) |> json(%{"error" => reason})
-      end
+      {:error, :internal, reason} ->
+        conn |> put_status(500) |> json(%{"error" => reason})
     end
+  end
+
+  def add(conn, _params) do
+    resp(conn, 400, %{"error" => "Invalid xps format."})
   end
 
   defp parse_timestamp(timestamp) do

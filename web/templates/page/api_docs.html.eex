@@ -18,6 +18,9 @@
       <a href="#auth">Authentication</a>
     </li>
     <li>
+      <a href="#profile">Endpoint: Profile</a>
+    </li>
+    <li>
       <a href="#pulse">Endpoint: Pulse</a>
     </li>
   </ol>
@@ -32,7 +35,7 @@
 <h4>Protocol</h4>
 
 <p>
-  All requests are made using the HTTP protocol and use JSON to serialize the data. Requests with payloads should send the payload as JSON in the request body. The responses are JSON, error responses will contain the key <code>error</code> which has the error message as value.
+  All requests are made using HTTP and use JSON to serialize the data. Requests with payloads should send the payload as JSON in the request body. The responses are JSON, error responses will contain the key <code>error</code> which has the error message as value. The error message is a human readable message, not intended for automated parsing.
 </p>
 
 <h4>Path</h4>
@@ -65,6 +68,27 @@
   Programming gives users <em>experience points</em>, i.e. XP. A certain amount of XP corresponds to a certain level. In Code::Stats, each keystroke that creates or deletes a character gives 1 XP, so a client should keep an XP counter and add to it on each such keystroke. Operating on many characters at once, such as when deleting highlighted text, is counted as 1 XP, if made possible by the editor's API. An XP value is a positive integer.
 </p>
 
+<h4>Level</h4>
+
+<p>
+  A <em>level</em> is a human readable indicator of progress. It is calculated from XP and its only purpose is to make an amount of XP more meaningful for a user. The read API does not provide levels, so it is the client's job to calculate the levels of a user.
+</p>
+
+<p>
+  Levels are calculated with the following pseudocode formula:
+</p>
+
+<pre><code>LEVEL_FACTOR = 0.025
+
+// Get level for given XP
+int get_level(float xp) {
+  return to_int(floor(LEVEL_FACTOR * sqrt(xp)))
+}</code></pre>
+
+<p>
+  For more examples of level calculations, see <a href="https://github.com/Nicd/code-stats/blob/master/lib/code_stats/xp_calculator.ex">CodeStats.XPCalculator</a>.
+</p>
+
 <h4>Language</h4>
 
 <p>
@@ -87,7 +111,7 @@
   Code::Stats uses simple token authentication. A single token authenticates both a user and the machine they are using. It is signed to prevent tampering and unauthorized creation of tokens matching other users' information. To generate a token, you need to create a new machine from the <a href="<%= machine_path(@conn, :list) %>">Machine control panel</a>. A token looks like this:
 </p>
 
-<pre><code>VG1salpBPT0jI01UTT0=##9MrwcAx9bBjpHnpgn0rN8KndpoU=</code></pre>
+<pre><code>SFMyNTY.OEotWWdnPT0jI01qaz0.X0wVEZquh8Ogau1iTtBihYqqL71FD8N6p5ChQiIpaxQ</code></pre>
 
 <p>
   In all API requests that require authentication, the token must be added using the HTTP header <code>X-API-Token</code>. Here is an example request sent with the token (as printed by curl):
@@ -97,18 +121,74 @@
 &gt; Host: codestats.net:443
 &gt; User-Agent: curl/7.43.0
 &gt; Accept: */*
-&gt; X-API-Token: VG1salpBPT0jI01UTT0=##9MrwcAx9bBjpHnpgn0rN8KndpoU=
+&gt; X-API-Token: SFMyNTY.OEotWWdnPT0jI01qaz0.X0wVEZquh8Ogau1iTtBihYqqL71FD8N6p5ChQiIpaxQ
 &gt; Content-Type: application/json
 &gt; Content-Length: 113</code></pre>
 
 <hr />
 
-<h3 id="pulse">
-  Endpoint: Pulse <sup>(authn required)</sup>
+<h3 id="profile">
+  Endpoint: Profile
 </h3>
 
 <h4>
-  Add pulse
+  Read public user's information
+</h4>
+
+<p>
+  <code>GET <%= profile_path(@conn, :profile_api, "username") %></code>
+</p>
+
+<p>
+  Retrieves the information of the specified user. If the user does not exist or their profile is private, <code>HTTP 404</code> will be returned. An example request that also shows the returned data format:
+</p>
+
+<pre><code>GET /api/users/Nicd HTTP/1.1
+
+{
+  "user": "Nicd",
+  "total_xp": 3073421,
+  "new_xp": 3289,
+  "machines": {
+    "Työkone": {
+      "xps": 246116,
+      "new_xps": 3289
+    },
+    "Best Machine": {
+      "xps": 2827305,
+      "new_xps": 0
+    }
+  },
+  "languages": {
+    "💩": {
+      "xps": 1767278,
+      "new_xps": 0
+    },
+    "XML": {
+      "xps": 15,
+      "new_xps": 0
+    },
+    "Plaintext": {
+      "xps": 3429,
+      "new_xps": 3289
+    }
+  },
+  "dates": {
+    "2016-12-31": 3289,
+    "2016-08-24": 26700
+  }
+}</code></pre>
+
+<p>
+  <strong>Returns</strong> user profile data as JSON. In the data, <code>new_xps</code> is XP gained in the last 12 hours.
+</p>
+
+<h3 id="pulse">
+  Endpoint: Pulse
+</h3>
+
+<h4>
+  Add pulse <sup>(authn required)</sup>
 </h4>
 
 <p>
@@ -136,4 +216,4 @@
   ]
 }</code></pre>
 
-<p><strong>Returns</strong> HTTP 201 Created and <code>{"ok": "Great success!"}</code> on success.
+<p><strong>Returns</strong> <code>HTTP 201</code> and <code>{"ok": "Great success!"}</code> on success.

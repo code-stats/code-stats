@@ -79,6 +79,8 @@ defmodule CodeStats.Router do
   scope "/api", CodeStats do
     pipe_through :api
 
+    get "/users/:username", ProfileController, :profile_api
+
     scope "/my" do
       pipe_through :api_auth
 
