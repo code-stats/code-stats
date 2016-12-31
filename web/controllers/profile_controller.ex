@@ -53,8 +53,6 @@ defmodule CodeStats.ProfileController do
     total_xp = Enum.reduce(language_xps, 0, fn {_, amount}, acc -> acc + amount end)
 
     # Sort XP data
-    language_xps = Enum.sort(language_xps, fn {_, a}, {_, b} -> a > b end)
-    machine_xps = Enum.sort(machine_xps, fn {_, a}, {_, b} -> a > b end)
     date_xps = process_date_xps(date_xps)
 
     # Get new XP data from last 12 hours

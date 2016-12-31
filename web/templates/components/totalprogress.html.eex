@@ -1,0 +1,14 @@
+<%#
+  Total progress for an entity (e.g. user) across all languages.
+
+  Requires:
+    @total_xp
+    @new_xp
+    @heading_type (element used for heading)
+%>
+<<%= @heading_type %>>
+  Level
+  <%= render("leveltext.html", assigns) %>
+</<%= @heading_type %>>
+
+<%= render("progressbar.html", assigns) %>

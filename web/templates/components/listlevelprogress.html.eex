@@ -1,0 +1,25 @@
+<%#
+  Level progress in a single target (language, machine…), list item version.
+
+  Requires:
+    @target
+    @total_xp
+    @new_xp
+    @show_bar (true to show progress bar, false to not)
+
+  Optional:
+    @class (classes for li as string)
+    @strong_name (set to false to not wrap target name in <strong>)
+%>
+<% strong_name = Map.get(assigns, :strong_name, true) %>
+
+<li class="<%= assigns[:class] %>">
+  <%= if strong_name do %><strong><% end %>
+  <%= @target %>
+  <%= if strong_name do %></strong><% end %>
+
+  level
+  <%= render("leveltext.html", assigns) %>
+
+  <%= if @show_bar, do: render("progressbar.html", assigns) %>
+</li>

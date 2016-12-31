@@ -1,26 +1,14 @@
 <div class="row">
   <div id="profile-elm-total-container" class="col-xs-12 col-sm-7">
-    <h3>
-      Level
-      <%= get_level(@total_xp) %>
-      (<%= format_xp(@total_xp) %>&nbsp;XP)
-
-      <%= if @total_new_xp > 0 do %>
-        <sup>
-          (+<%= format_xp(@total_new_xp) %>)
-        </sup>
-      <% end %>
-    </h3>
-
-    <div class="progress">
-      <% {old_width, new_width} = get_xp_bar_widths(@total_xp, @total_new_xp) %>
-      <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%">
-        <span class="sr-only">Level progress <%= old_width %> %.</span>
-      </div>
-      <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%">
-        <span class="sr-only">Recent level progress <%= new_width %> %.</span>
-      </div>
-    </div>
+    <%=
+      render(
+        CodeStats.ComponentsView,
+        "totalprogress.html",
+        total_xp: @total_xp,
+        new_xp: @total_new_xp,
+        heading_type: "h3"
+      )
+    %>
   </div>
 
   <div class="col-xs-12 col-sm-5">
@@ -73,31 +61,20 @@
 <% else %>
   <div id="profile-elm-main-container">
     <div class="row">
-      <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(0)) do %>
+      <%= for {language, xp} <- (@language_xps |> sort_xps() |> split_language_xps() |> elem(0)) do %>
         <% new_xp = Map.get(@new_xps, language.id, 0) %>
 
         <div class="col-xs-12 profile-language-progress">
-          <h4>
-            <%= language.name %>
-            level
-            <%= get_level(xp) %>
-            (<%= format_xp(xp) %>&nbsp;XP)
-
-            <%= if new_xp > 0 do %>
-              <sup>
-                (+<%= format_xp(new_xp) %>)
-              </sup>
-            <% end %>
-          </h4>
-          <div class="progress">
-            <% {old_width, new_width} = get_xp_bar_widths(xp, new_xp) %>
-            <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%">
-              <span class="sr-only">Level progress <%= old_width %> %.</span>
-            </div>
-            <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%">
-              <span class="sr-only">Recent level progress <%= new_width %> %.</span>
-            </div>
-          </div>
+          <%=
+            render(
+              CodeStats.ComponentsView,
+              "levelprogress.html",
+              target: language.name,
+              total_xp: xp,
+              new_xp: new_xp,
+              heading_type: "h4"
+            )
+          %>
         </div>
       <% end %>
     </div>
@@ -126,20 +103,20 @@
           <h4>Other languages</h4>
 
           <ol start="11">
-            <%= for {language, xp} <- (split_language_xps(@language_xps) |> elem(1)) do %>
+            <%= for {language, xp} <- (@language_xps |> sort_xps() |> split_language_xps() |> elem(1)) do %>
               <% new_xp = Map.get(@new_xps, language.id, 0) %>
-              <li class="profile-more-language-progress" >
-                <strong><%= language.name %></strong>
-                level
-                <%= get_level(xp) %>
-                (<%= format_xp(xp) %>&nbsp;XP)
 
-                <%= if new_xp > 0 do %>
-                  <sup>
-                    (+<%= format_xp(new_xp) %>)
-                  </sup>
-                <% end %>
-              </li>
+              <%=
+                render(
+                  CodeStats.ComponentsView,
+                  "listlevelprogress.html",
+                  target: language.name,
+                  total_xp: xp,
+                  new_xp: new_xp,
+                  show_bar: false,
+                  class: "profile-more-language-progress"
+                )
+              %>
             <% end %>
           </ol>
         </div>
@@ -150,34 +127,20 @@
           <h4>Machines</h4>
 
           <ol>
-            <%= for {machine, xp} <- @machine_xps do %>
+            <%= for {machine, xp} <- (@machine_xps |> sort_xps()) do %>
               <% new_xp = Map.get(@new_machine_xps, machine.id, 0) %>
 
-              <li class="profile-machine-progress">
-                <strong>
-                  <%= machine.name %>
-                </strong>
-
-                level
-                <%= get_level(xp) %>
-                (<%= format_xp(xp) %>&nbsp;XP)
-
-                <%= if new_xp > 0 do %>
-                  <sup>
-                    (+<%= format_xp(new_xp) %>)
-                  </sup>
-                <% end %>
-
-                <div class="progress">
-                  <% {old_width, new_width} = get_xp_bar_widths(xp, new_xp) %>
-                  <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= old_width %>%">
-                    <span class="sr-only">Level progress <%= old_width %> %.</span>
-                  </div>
-                  <div class="progress-bar progress-bar-striped progress-bar-warning" role="progressbar" style="width: <%= new_width %>%">
-                    <span class="sr-only">Recent level progress <%= new_width %> %.</span>
-                  </div>
-                </div>
-              </li>
+              <%=
+                render(
+                  CodeStats.ComponentsView,
+                  "listlevelprogress.html",
+                  target: machine.name,
+                  total_xp: xp,
+                  new_xp: new_xp,
+                  show_bar: true,
+                  class: "profile-machine-progress"
+                )
+              %>
             <% end %>
           </ol>
         </div>

@@ -1,0 +1,16 @@
+<%#
+  Level progress in a single target (language, machine…).
+
+  Requires:
+    @target
+    @total_xp
+    @new_xp
+    @heading_type (element used for heading)
+%>
+<<%= @heading_type %>>
+  <%= @target %>
+  level
+  <%= render("leveltext.html", assigns) %>
+</<%= @heading_type %>>
+
+<%= render("progressbar.html", assigns) %>
