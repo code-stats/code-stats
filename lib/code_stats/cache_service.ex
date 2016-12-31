@@ -74,8 +74,13 @@ defmodule CodeStats.CacheService do
     Process.send_after(self(), :refresh_total_language_xp, @total_language_xp_refresh_timer)
   end
 
-  defp refresh_total_language_xp() do
-    # Refresh all data in total language XP cache
+  @doc """
+  Refresh all data in total language XP cache.
+  """
+  @spec refresh_total_language_xp() :: true
+  def refresh_total_language_xp() do
+    # Remove old languages as aliases can otherwise result in duplicate items
+    :ets.delete_all_objects(@language_xp_cache_table)
 
     most_popular_q = from x in XP,
       join: l in Language, on: l.id == x.language_id,

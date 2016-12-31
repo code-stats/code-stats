@@ -39,7 +39,7 @@ defmodule CodeStats.AdminCommands do
     from(x in XP, where: x.original_language_id == ^language.id)
     |> Repo.update_all(set: [language_id: target.id])
 
-    id2str = fn id -> Integer.to_string(id) end
+    id2str = &Integer.to_string/1
 
     # Update caches for all users with that language
     from(
@@ -75,5 +75,8 @@ defmodule CodeStats.AdminCommands do
         ]
     )
     |> Repo.update_all([])
+
+    # Update frontpage language caches
+    CodeStats.CacheService.refresh_total_language_xp()
   end
 end
