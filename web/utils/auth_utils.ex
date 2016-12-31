@@ -78,20 +78,27 @@ defmodule CodeStats.AuthUtils do
   @spec auth_user(%Conn{}, %User{}, String.t) :: %Conn{} | :error
   def auth_user(%Conn{} = conn, %User{} = user, password) do
     if check_user_password(user, password) do
-      Conn.put_session(conn, @auth_key, user.id)
+      force_auth_user_id(conn, user.id)
     else
       :error
     end
   end
 
   @doc """
+  Put authentication status into session for given user ID.
+  """
+  def force_auth_user_id(%Conn{} = conn, id) do
+    Conn.put_session(conn, @auth_key, id)
+  end
+
+  @doc """
   Unauthenticate (log out) the user from the connection.
 
-  The session's authentication status is cleared.
+  The whole session is destroyed.
   """
   @spec unauth_user(%Conn{}) :: %Conn{}
   def unauth_user(%Conn{} = conn) do
-    Conn.put_session(conn, @auth_key, nil)
+    Conn.configure_session(conn, drop: true)
   end
 
   @doc """

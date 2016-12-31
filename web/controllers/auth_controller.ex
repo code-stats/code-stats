@@ -8,7 +8,8 @@ defmodule CodeStats.AuthController do
     User,
     PasswordReset,
     Repo,
-    EmailUtils
+    EmailUtils,
+    RememberMe
   }
 
   def render_login(conn, _params) do
@@ -25,16 +26,14 @@ defmodule CodeStats.AuthController do
     |> render("signup.html", changeset: changeset)
   end
 
-  def login(conn, %{"username" => username, "password" => password}) do
-    with %User{} = user   <- AuthUtils.get_user(username, true),
-      %Plug.Conn{} = conn <- AuthUtils.auth_user(conn, user, password) do
-        conn
-      end
-    |> case do
-      %Plug.Conn{} = conn ->
-        conn
-        |> redirect(to: profile_path(conn, :my_profile))
-
+  def login(conn, %{"username" => username, "password" => password} = params) do
+    with \
+      %User{} = user      <- AuthUtils.get_user(username, true),
+      %Plug.Conn{} = conn <- AuthUtils.auth_user(conn, user, password),
+      %Plug.Conn{} = conn <- maybe_remember_me(conn, user, params)
+    do
+      redirect(conn, to: profile_path(conn, :my_profile))
+    else
       ret ->
         # If ret is nil, user was not found -> run dummy auth to prevent user enumeration
         # But they can enumerate with the signin form anyway lol
@@ -69,6 +68,7 @@ defmodule CodeStats.AuthController do
   def logout(conn, _params) do
     conn
     |> AuthUtils.unauth_user()
+    |> RememberMe.kill_cookie()
     |> redirect(to: page_path(conn, :index))
   end
 
@@ -149,4 +149,10 @@ defmodule CodeStats.AuthController do
       nil -> nil
     end
   end
+
+  defp maybe_remember_me(conn, user, %{"remember-me" => _}) do
+    RememberMe.write_cookie(conn, user)
+  end
+
+  defp maybe_remember_me(conn, _, _), do: conn
 end
