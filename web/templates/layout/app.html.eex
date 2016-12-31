@@ -65,6 +65,15 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
+        <%= if get_conf(:beta_mode) do %>
+          <p class="alert alert-info">
+            <strong>⚠️ Note!</strong>
+            This instance is in beta mode. You can register as normal and use this instance for testing
+            purposes, such as for developing a new editor plugin. The database may be reset at any time
+            and email sending is disabled.
+          </p>
+        <% end %>
+
         <%= render @view_module, @view_template, assigns %>
       </main>
 

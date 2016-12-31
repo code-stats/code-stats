@@ -27,6 +27,10 @@ config :code_stats,
 # User configurable settings below
 ##################################
 
+  # Set to true if site is in beta mode. This shows a big banner to users
+  # that announces the fact.
+  beta_mode: false,
+
   # If the site is proxied, the URL helpers may end up with the wrong URL.
   # This value is used as absolute URL instead. No trailing slash!
   absolute_url: "https://domain.example",
