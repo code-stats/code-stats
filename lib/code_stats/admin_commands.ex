@@ -104,8 +104,6 @@ defmodule CodeStats.AdminCommands do
     from(x in XP, where: x.original_language_id == ^language.id)
     |> Repo.update_all(set: [language_id: language.id])
 
-    id2str = &Integer.to_string/1
-
     # Update caches for all users (since there's no easy way to separate language points)
     (from u in User, select: u)
     |> Repo.all()

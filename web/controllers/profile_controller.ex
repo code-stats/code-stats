@@ -42,7 +42,7 @@ defmodule CodeStats.ProfileController do
     end
   end
 
-  def get_profile_data(conn, user) do
+  def get_profile_data(user) do
     # Update and get user's cache data
     %{
       languages: language_xps,
@@ -80,7 +80,7 @@ defmodule CodeStats.ProfileController do
       machine_xps,
       new_machine_xps,
       date_xps
-    } = get_profile_data(conn, user)
+    } = get_profile_data(user)
 
     dates_list = Map.to_list(date_xps)
 
@@ -120,7 +120,7 @@ defmodule CodeStats.ProfileController do
       machine_xps,
       new_machine_xps,
       date_xps
-    } = get_profile_data(conn, user)
+    } = get_profile_data(user)
 
     # Transform data into JSON serializable formats and combine XPs with
     # recent XPs
