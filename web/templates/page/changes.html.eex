@@ -29,7 +29,7 @@
 
 <h2>Changelog</h2>
 
-<h3>1.8.0 – ????-??-?? – Language aliases</h3>
+<h3>1.8.0 – 2017-01-02 – Language aliases</h3>
 
 <ul>
   <li>Added a language alias feature. Now some languages are just aliases for others. This is done to fix typos and problems in language detection in editors. For example, "JavaScript 1.5" (which was released in 2000 and is erroneously detected by JetBrains in some situations) will now be corrected to "JavaScript" and all existing XP has been combined between the languages. If you have feedback or suggestions on languages to merge, give us feedback on our Gitter or IRC channel.</li>
