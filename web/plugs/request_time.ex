@@ -18,7 +18,7 @@ defmodule CodeStats.RequestTime do
 
   def call(conn, _opts) do
     conn
-    |> put_private(@data_key, get_current_time)
+    |> put_private(@data_key, get_current_time())
   end
 
   def calculate_time(conn) do
@@ -32,7 +32,7 @@ defmodule CodeStats.RequestTime do
   end
 
   defp get_current_time() do
-    {millions, seconds, microseconds} = :os.timestamp
+    {millions, seconds, microseconds} = :os.timestamp()
     (millions * 1_000_000) + seconds + (microseconds / 1_000_000)
   end
 

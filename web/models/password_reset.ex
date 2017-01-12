@@ -17,7 +17,7 @@ defmodule CodeStats.PasswordReset do
 
     belongs_to :user, User
 
-    timestamps
+    timestamps()
   end
 
   @doc """

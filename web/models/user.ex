@@ -21,7 +21,7 @@ defmodule CodeStats.User do
 
     has_many :pulses, Pulse
 
-    timestamps
+    timestamps()
   end
 
   @doc """

@@ -8,7 +8,7 @@ defmodule CodeStats.Pulse do
 
     has_many :xps, CodeStats.XP
 
-    timestamps
+    timestamps()
   end
 
   @doc """

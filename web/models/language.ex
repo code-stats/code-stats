@@ -17,7 +17,7 @@ defmodule CodeStats.Language do
     belongs_to :alias_of, __MODULE__
     has_many :aliases, __MODULE__, foreign_key: :alias_of_id
 
-    timestamps
+    timestamps()
   end
 
   @doc """

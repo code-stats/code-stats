@@ -4,13 +4,13 @@ defmodule CodeStats.Mixfile do
   def project do
     [app: :code_stats,
      version: "1.8.0",
-     elixir: "~> 1.3",
+     elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -33,19 +33,19 @@ defmodule CodeStats.Mixfile do
     [
       {:phoenix, "~> 1.2.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.0-rc"},
-      {:phoenix_html, "~> 2.4"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_pubsub, "~> 1.0.1"},
+      {:phoenix_ecto, "~> 3.2.1"},
+      {:phoenix_html, "~> 2.9.2"},
+      {:phoenix_live_reload, "~> 1.0.6", only: :dev},
       {:gettext, "~> 0.9"},
       {:cowboy, "~> 1.0"},
-      {:comeonin, "~> 2.3"},
-      {:number, "~> 0.4.1"},
-      {:earmark, "~> 0.2.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev},
+      {:comeonin, "~> 3.0.1"},
+      {:number, "~> 0.5.0"},
+      {:earmark, "~> 1.0.3", only: :dev},
+      {:ex_doc, "~> 0.14", only: :dev},
       {:calecto, "~> 0.16.0"},
       {:calendar, "~> 0.16.0"},
-      {:bamboo, "~> 0.6"}
+      {:bamboo, "~> 0.7.0"}
    ]
   end
 

@@ -10,7 +10,7 @@ defmodule CodeStats.XP do
     # the language that was sent. :language field on the other hand follows aliases
     belongs_to :original_language, CodeStats.Language
 
-    timestamps
+    timestamps()
   end
 
   @doc """

@@ -9,7 +9,7 @@ defmodule CodeStats.Machine do
     belongs_to :user, CodeStats.User
     has_many :pulses, CodeStats.Pulse
 
-    timestamps
+    timestamps()
   end
 
   @doc """
