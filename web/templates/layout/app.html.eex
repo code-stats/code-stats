@@ -69,8 +69,7 @@
           <p class="alert alert-info">
             <strong>⚠️ Note!</strong>
             This instance is in beta mode. You can register as normal and use this instance for testing
-            purposes, such as for developing a new editor plugin. The database may be reset at any time
-            and email sending is disabled.
+            purposes, such as for developing a new editor plugin. The database may be reset at any time.
           </p>
         <% end %>
 
