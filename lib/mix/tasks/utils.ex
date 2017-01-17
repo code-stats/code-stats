@@ -131,20 +131,22 @@ defmodule CodeStats.TaskUtils do
 
   Also listens to input from user and returns if input is given.
   """
-  def listen(programs, task \\ nil)
+  def listen(programs, task \\ nil, opts \\ [])
 
-  def listen([], _), do: nil
+  def listen([], _, _), do: nil
 
-  def listen(%Program{} = program, task), do: listen([program], task)
+  def listen(%Program{} = program, task, opts) do
+    listen([program], task, opts)
+  end
 
-  def listen(programs, task) do
-    # Start another task to ask for user input
-    task = case task do
-      nil ->
-        elem(Task.start_link(__MODULE__, :wait_for_input, [self()]), 1)
-
-      task ->
-        task
+  def listen(programs, task, opts) do
+    # Start another task to ask for user input if we are in watch mode
+    task = with \
+      true        <- Keyword.get(opts, :watch, false),
+      nil         <- task,
+      {:ok, task} <- Task.start_link(__MODULE__, :wait_for_input, [self()])
+    do
+      task
     end
 
     programs = receive do
@@ -155,7 +157,7 @@ defmodule CodeStats.TaskUtils do
         program = Enum.find(programs, get_port_checker(port))
         msg = :unicode.characters_to_binary(msg, :unicode)
 
-        prefix = "[#{program.name}] #{program.pending_output}#{prefix}"
+        prefix = "[#{program.name}] #{program.pending_output}"
 
         Logger.debug(prefix <> msg)
 
@@ -195,7 +197,7 @@ defmodule CodeStats.TaskUtils do
     end
 
     if not Enum.empty?(programs) do
-      listen(programs, task)
+      listen(programs, task, opts)
     end
   end
 
@@ -220,7 +222,7 @@ defmodule CodeStats.TaskUtils do
   def watch(programs) when is_list(programs) do
     Logger.info("Programs started, press ENTER to exit.")
 
-    listen(programs)
+    listen(programs, nil, watch: true)
 
     Logger.info("ENTER received, killing tasks.")
 

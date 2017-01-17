@@ -1,6 +1,7 @@
 defmodule Mix.Tasks.Frontend.Watch do
   use Mix.Task
   import CodeStats.TaskUtils
+  alias Mix.Tasks.Frontend.Build.{Riot, Scss}
 
   @shortdoc "Watch frontend and rebuild when necessary"
 
@@ -8,25 +9,13 @@ defmodule Mix.Tasks.Frontend.Watch do
     [
       exec(
         node_path("/.bin/riot"),
-        [
-          "-w",
-          "web/static/riot",
-          "priv/static/riot"
-        ]
+        ["-w"] ++ Riot.riot_paths()
       ),
       exec(
         node_path("/.bin/node-sass"),
-        [
-          "-o",
-          "priv/static/css",
-          "--source-map",
-          "true",
-          "--include-path",
-          "node_modules/bootstrap-sass/assets/stylesheets",
-          "--precision",
-          "8",
+        Scss.sass_args() ++ [
           "-w",
-          "web/static/css/app.scss"
+          Scss.scss_file()
         ]
       )
     ] |> watch()

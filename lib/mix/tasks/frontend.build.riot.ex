@@ -4,13 +4,12 @@ defmodule Mix.Tasks.Frontend.Build.Riot do
 
   @shortdoc "Build the RiotJS sources"
 
+  def riot_paths(), do: [
+    "web/static/riot",
+    "priv/static/riot"
+  ]
+
   def run(_) do
-    exec(
-      node_path("/.bin/riot"),
-      [
-        "web/static/riot",
-        "priv/static/riot"
-      ]
-    ) |> listen()
+    exec(node_path("/.bin/riot"), riot_paths()) |> listen()
   end
 end
