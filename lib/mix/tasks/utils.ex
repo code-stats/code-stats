@@ -7,6 +7,8 @@ defmodule CodeStats.TaskUtils do
 
   @elixir System.find_executable("elixir")
 
+  @default_task_timeout 60000
+
   defmodule Program do
     @moduledoc """
     Program to execute with arguments. Name is used for prefixing logs.
@@ -49,18 +51,33 @@ defmodule CodeStats.TaskUtils do
   end
 
   @doc """
+  Run the given Mix task and wait for it to stop before returning.
+
+  See run_tasks/2 for the argument description.
+  """
+  def run_task(task, timeout \\ @default_task_timeout) do
+    run_tasks([task], timeout)
+  end
+
+  @doc """
   Run the given Mix tasks in parallel and wait for them all to stop
   before returning.
 
   Tasks should be tuples {task_name, args} or binaries (no args).
   """
   def run_tasks(tasks, timeout \\ 60000) do
+    run_and_log = fn task, args ->
+      Logger.info("[Started] #{task}")
+      Mix.Task.run(task, args)
+      Logger.info("[Finished] #{task}")
+    end
+
     tasks
     |> Enum.map(fn
       task when is_binary(task) ->
-        fn -> Mix.Task.run(task) end
+        fn -> run_and_log.(task, []) end
       {task, args} ->
-        fn -> Mix.Task.run(task, args) end
+        fn -> run_and_log.(task, args) end
     end)
     |> run_funs(timeout)
   end
@@ -114,7 +131,7 @@ defmodule CodeStats.TaskUtils do
       cd -> Keyword.put(options, :cd, cd)
     end
 
-    Logger.debug("[Started] #{name}")
+    Logger.debug("[Spawned] #{name}")
 
     %Program{
       name: name,
