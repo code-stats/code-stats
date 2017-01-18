@@ -39,7 +39,7 @@
       <header class="header">
         <div class="row">
           <div class="col-xs-2">
-            <a class="logo" href="<%= page_path(@conn, :index) %>"><img src="/images/Logo_crushed.png" alt="<%= get_conf(:site_name) %>" title="<%= get_conf(:site_name) %>" height="100%" /></a>
+            <a class="logo" href="<%= page_path(@conn, :index) %>"><img src="<%= static_path(@conn, "/images/Logo_crushed.png") %>" alt="<%= get_conf(:site_name) %> logo" title="<%= get_conf(:site_name) %>" height="100%" /></a>
           </div>
 
           <div class="col-xs-10">

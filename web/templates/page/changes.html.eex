@@ -19,8 +19,13 @@
     </li>
 
     <li>
-      <strong>IntelliJ/JetBrains plugin:</strong>
+      <strong>JetBrains plugin:</strong>
       <a href="https://github.com/Nicd/code-stats-intellij">https://github.com/Nicd/code-stats-intellij</a>
+    </li>
+
+    <li>
+      <strong>Sublime Text 3 plugin:</strong>
+      <a href="https://github.com/Nicd/code-stats-sublime">https://github.com/Nicd/code-stats-sublime</a>
     </li>
   </ul>
 </p>
@@ -28,6 +33,15 @@
 <hr />
 
 <h2>Changelog</h2>
+
+<h3>1.8.1 – 2017-01-18 – Fixes + Sublime Text 3 support</h3>
+
+<ul>
+  <li>Bumped Elixir version to 1.4 and fixed compilation warnings.</li>
+  <li>Fix decimals being printed wrong with Elixir 1.4.</li>
+  <li>Added information about new Sublime Text 3 plugin.</li>
+  <li>Added editor logos to plugin page.</li>
+</ul>
 
 <h3>1.8.0 – 2017-01-02 – Language aliases</h3>
 
