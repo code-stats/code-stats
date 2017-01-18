@@ -43,7 +43,7 @@ defmodule CodeStats.RequestTime do
   defp get_unit(value, [unit | _]), do: {value, unit}
 
   defp format_output({value, unit}) when is_float(value) do
-    "#{Float.to_string(value, decimals: 2)} #{unit}"
+    "#{:erlang.float_to_binary(value, decimals: 2)} #{unit}"
   end
 
   defp format_output({value, unit}) when is_integer(value) do
