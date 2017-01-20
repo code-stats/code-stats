@@ -1,15 +1,15 @@
 defmodule Mix.Tasks.Frontend.Build.Riot do
   use Mix.Task
-  import CodeStats.TaskUtils
+  import CodeStats.{TaskUtils, FrontendConfs}
 
   @shortdoc "Build the RiotJS sources"
 
   def riot_paths(), do: [
-    "web/static/riot",
-    "priv/static/riot"
+    "#{src_path()}/riot",
+    "#{tmp_path()}/compiled/js/riot"
   ]
 
   def run(_) do
-    exec(node_path("/.bin/riot"), riot_paths()) |> listen()
+    exec(node_bin("riot"), riot_paths()) |> listen()
   end
 end

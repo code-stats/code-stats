@@ -42,15 +42,6 @@ defmodule CodeStats.TaskUtils do
   end
 
   @doc """
-  Get absolute path to node_modules, with optional postfix.
-
-  Postfix should have leading slash.
-  """
-  def node_path(postfix \\ "") do
-    "#{proj_path()}/node_modules#{postfix}"
-  end
-
-  @doc """
   Run the given Mix task and wait for it to stop before returning.
 
   See run_tasks/2 for the argument description.

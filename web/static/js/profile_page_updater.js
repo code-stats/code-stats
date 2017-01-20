@@ -1,5 +1,4 @@
 import { clear_children } from './utils';
-import Elm from '../elm-bin/elm-app';
 
 /**
  * Handles connecting to the profile page socket and sending updates to Elm.
@@ -48,18 +47,12 @@ class ProfilePageUpdater {
 
   installElm() {
     this.clearDOM();
-    this.tu_app = Elm.Profile.TotalUpdater.embed(this.tu_div);
-    this.mu_app = Elm.Profile.MainUpdater.embed(this.mu_div);
   }
 
   initializeElm(init_data) {
-    this.tu_app.ports.tu_initialize.send(init_data);
-    this.mu_app.ports.mu_initialize.send(init_data);
   }
 
   newPulse(msg) {
-    this.tu_app.ports.tu_new_xp.send(msg);
-    this.mu_app.ports.mu_new_xp.send(msg);
   }
 }
 

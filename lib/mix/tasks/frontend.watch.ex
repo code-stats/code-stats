@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Frontend.Watch do
   use Mix.Task
-  import CodeStats.TaskUtils
+  import CodeStats.{TaskUtils, FrontendConfs}
   alias Mix.Tasks.Frontend.Build.{Riot, Scss}
 
   @shortdoc "Watch frontend and rebuild when necessary"
@@ -8,11 +8,11 @@ defmodule Mix.Tasks.Frontend.Watch do
   def run(_) do
     [
       exec(
-        node_path("/.bin/riot"),
+        node_bin("riot"),
         ["-w"] ++ Riot.riot_paths()
       ),
       exec(
-        node_path("/.bin/node-sass"),
+        node_bin("node-sass"),
         Scss.sass_args() ++ [
           "-w",
           Scss.scss_file()

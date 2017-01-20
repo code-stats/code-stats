@@ -1,14 +1,14 @@
 defmodule Mix.Tasks.Frontend.Build.Minify do
   use Mix.Task
-  import CodeStats.TaskUtils
+  import CodeStats.{TaskUtils, FrontendConfs}
 
   @shortdoc "Minify built JS files"
 
   def run(_) do
-    outdir = "priv/static/js"
+    outdir = "#{dist_path()}/js"
 
     exec(
-      node_path("/.bin/uglifyjs"),
+      node_bin("uglifyjs"),
       [
         "--source-map",
         "#{outdir}/app.min.js.map",
@@ -20,7 +20,7 @@ defmodule Mix.Tasks.Frontend.Build.Minify do
         "#{outdir}/app.min.js",
         "--"
       ] ++ Path.wildcard(
-        "priv/static/riot/*.js"
+        "#{dist_path()}/riot/*.js"
       )
     ) |> listen()
   end
