@@ -1,5 +1,5 @@
 <h2>
-  API documentation <sup>(v1)</sup>
+  API documentation <sup>(v. 1.0.1)</sup>
 </h2>
 
 <h3>
@@ -31,6 +31,12 @@
 <h3 id="basics">
   Basics
 </h3>
+
+<h4>API version</h4>
+
+<p>
+  The API follows <a href="http://semver.org/">Semantic Versioning</a>. That means bugfixes bump the patch version, backwards compatible features bump the minor version and backwards incompatible changes bump the major version.
+</p>
 
 <h4>Protocol</h4>
 
@@ -197,6 +203,10 @@ int get_level(float xp) {
 
 <p>
   Adds a new <em>Pulse</em> to the system. The client should send a pulse periodically when the user is programming. The payload should be a list of languages and their accumulated XP since the last successful pulse. The pulse should also contain a <code>coded_at</code> timestamp that signifies when the pulse was generated. This allows sending the pulse later, if the Internet connection is momentarily cut.
+</p>
+
+<p>
+  <strong>Note:</strong> The <code>coded_at</code> timestamp <strong>MUST</strong> be in the user's local time with their local UTC offset. Do not convert the time to UTC before sending it to the API.
 </p>
 
 <p>

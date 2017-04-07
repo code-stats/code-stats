@@ -41,11 +41,10 @@ defmodule CodeStats.Mixfile do
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 3.0.1"},
       {:number, "~> 0.5.0"},
-      {:earmark, "~> 1.0.3", only: :dev},
-      {:ex_doc, "~> 0.14", only: :dev},
-      {:calecto, "~> 0.16.0"},
-      {:calendar, "~> 0.16.0"},
-      {:bamboo, "~> 0.7.0"}
+      {:earmark, "~> 1.2.0", only: :dev},
+      {:ex_doc, "~> 0.15", only: :dev},
+      {:calendar, "~> 0.17.2"},
+      {:bamboo, "~> 0.8.0"},
    ]
   end
 

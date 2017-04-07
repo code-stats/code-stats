@@ -2,6 +2,7 @@ defmodule CodeStats.PulseController do
   use CodeStats.Web, :controller
 
   @datetime_max_diff 604800
+  @rfc3339_offset_regex ~R/(\+|-)(\d{2}):?(\d{2})$/
 
   alias Ecto.Changeset
 
@@ -24,7 +25,8 @@ defmodule CodeStats.PulseController do
     with \
       {:ok, %DateTime{} = datetime} <- parse_timestamp(timestamp),
       {:ok, datetime}               <- check_datetime_diff(datetime),
-      {:ok, %Pulse{} = pulse}       <- create_pulse(user, machine, datetime),
+      {:ok, offset}                 <- get_offset(timestamp),
+      {:ok, %Pulse{} = pulse}       <- create_pulse(user, machine, datetime, offset),
       {:ok, inserted_xps}           <- create_xps(pulse, xps),
       :ok                           <- update_caches(inserted_xps)
     do
@@ -71,8 +73,16 @@ defmodule CodeStats.PulseController do
     end
   end
 
-  defp create_pulse(user, machine, datetime) do
-    params = %{"sent_at" => datetime}
+  defp create_pulse(user, machine, datetime, offset) do
+    # Create shifted naive datetime from UTC datetime and offset, recreating the user's
+    # local time
+    local_datetime = CDateTime.add!(datetime, offset * 60) |> CDateTime.to_naive()
+
+    params = %{
+      "sent_at" => datetime,
+      "tz_offset" => offset,
+      "sent_at_local" => local_datetime
+    }
 
     Pulse.changeset(%Pulse{}, params)
     |> Changeset.put_change(:user_id, user.id)
@@ -145,5 +155,30 @@ defmodule CodeStats.PulseController do
     rescue
       e in RuntimeError -> {:error, :generic, e.message}
     end
+  end
+
+  defp get_offset(timestamp) do
+    # Get offset from an RFC3339 or ISO8601 string.
+    timestamp = timestamp |> String.trim() |> String.downcase()
+
+    if String.ends_with?(timestamp, "z") do
+      {:ok, 0}
+    else
+      case Regex.run(@rfc3339_offset_regex, timestamp) do
+        [_, sign, hours, minutes] -> {:ok, calculate_offset(sign, hours, minutes)}
+        _ -> {:error, :generic, "Invalid TZ offset!"}
+      end
+    end
+  end
+
+  defp calculate_offset("+", hours, minutes), do: calculate_offset(hours, minutes)
+
+  defp calculate_offset("-", hours, minutes), do: -calculate_offset(hours, minutes)
+
+  defp calculate_offset(hours, minutes) do
+    {hours, _} = Integer.parse(hours)
+    {minutes, _} = Integer.parse(minutes)
+
+    hours * 60 + minutes
   end
 end

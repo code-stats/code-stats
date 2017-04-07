@@ -2,7 +2,16 @@ defmodule CodeStats.Pulse do
   use CodeStats.Web, :model
 
   schema "pulses" do
-    field :sent_at, Calecto.DateTimeUTC
+    # When the Pulse was generated on the client. This is somewhat confusingly named
+    # "sent_at" for legacy reasons, better name would be "coded_at".
+    field :sent_at, :utc_datetime
+
+    # Same value as before, but stored in the client's local timezone offset. This should
+    # be used for certain aggregations to make the results more useful for the user.
+    field :sent_at_local, :naive_datetime
+
+    # Original offset from UTC for the sent_at_local timestamp. In minutes.
+    field :tz_offset, :integer
     belongs_to :user, CodeStats.User
     belongs_to :machine, CodeStats.Machine
 
@@ -19,7 +28,7 @@ defmodule CodeStats.Pulse do
   """
   def changeset(data, params \\ %{}) do
     data
-    |> cast(params, [:sent_at])
-    |> validate_required([:sent_at])
+    |> cast(params, [:sent_at, :sent_at_local, :tz_offset])
+    |> validate_required([:sent_at, :sent_at_local, :tz_offset])
   end
 end

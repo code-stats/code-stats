@@ -19,7 +19,6 @@ defmodule CodeStats.Web do
   def model do
     quote do
       use Ecto.Schema
-      use Calecto.Schema, usec: false
 
       import Ecto
       import Ecto.Changeset

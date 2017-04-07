@@ -15,7 +15,7 @@ defmodule CodeStats.User do
     field :username, :string
     field :email, :string
     field :password, :string
-    field :last_cached, Calecto.DateTimeUTC
+    field :last_cached, :utc_datetime
     field :private_profile, :boolean
     field :cache, :map
 
