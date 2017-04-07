@@ -1,5 +1,4 @@
 import { clear_children } from './utils';
-import Elm from '../elm-bin/elm-app';
 
 /**
  * Handles connecting to the index page socket and sending updates to Elm.
@@ -14,7 +13,6 @@ class IndexPageUpdater {
     this.iu_app = null;
 
     this.initSocket();
-    this.installElm();
   }
 
   initSocket() {
@@ -35,11 +33,6 @@ class IndexPageUpdater {
 
   clearDOM() {
     clear_children(this.iu_div);
-  }
-
-  installElm() {
-    this.clearDOM();
-    this.iu_app = Elm.IndexPage.Updater.embed(this.iu_div);
   }
 
   initializeElm(init_data) {

@@ -47,7 +47,9 @@ defmodule CodeStats.Mixfile do
       {:calendar, "~> 0.17.4"},
       {:bamboo, "1.0.0-rc.1"},
       {:corsica, "~> 1.0.0"},
-      {:appsignal, "~> 1.3"}
+      {:appsignal, "~> 1.3"},
+      {:mbu, "~> 0.2.4"},
+      {:fs, "~> 2.12.0", override: true}
    ]
   end
 

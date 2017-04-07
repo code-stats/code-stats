@@ -13,14 +13,13 @@ erl_crash.dump
 # Ignore backup files
 *.bak
 
-# Ignore elm packages and build artifacts
-/web/static/elm/elm-stuff
-/web/static/elm-bin
-
 # Since we are building assets from web/static,
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
 /priv/static/
+
+# Ignore build artifacts
+/.tmp/
 
 # The config/prod.secret.exs file by default contains sensitive
 # data and you should not commit it into version control.
