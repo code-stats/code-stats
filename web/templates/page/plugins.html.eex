@@ -92,6 +92,32 @@ $ bin/keytool -import -alias 'DST Root CA X3' -keystore lib/security/cacerts -tr
 
 <div class="media">
   <div class="media-body">
+    <h3 class="media-heading">Visual Studio Code</h3>
+
+    <p>
+      To install, use the editor's extension manager and search for <code>Code::Stats</code>. After installation, set the <code>codestats.apikey</code> setting to your API key.
+    </p>
+
+    <p>
+      <a href="https://marketplace.visualstudio.com/items?itemName=juha-ristolainen.code-stats-vscode">Link to the plugin on the Visual Studio Marketplace.</a>
+    </p>
+
+    <p>
+      <em>Thanks to <a href="http://www.juharistolainen.com/">Juha Ristolainen</a> for the VSCode extension.</em>
+    </p>
+  </div>
+  <div class="media-right">
+    <img
+     class="media-object"
+     src="<%= static_path(@conn, "/images/vscode-logo.png") %>"
+     title="Visual Studio Code"
+     alt="Visual Studio Code logo"
+    />
+  </div>
+</div>
+
+<div class="media">
+  <div class="media-body">
     <h3 class="media-heading">Other editors</h3>
 
     <p>

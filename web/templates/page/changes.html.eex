@@ -34,6 +34,13 @@
 
 <h2>Changelog</h2>
 
+<h3>1.8.2 – 2017-04-09 – Groundwork for future refactoring</h3>
+
+<ul>
+  <li>Added the storing of the user's local timestamp and timezone offset when creating pulses. This will be used for better graphs in the future.</li>
+  <li>Added note about the VSCode plugin to the plugins page.</li>
+</ul>
+
 <h3>1.8.1 – 2017-01-18 – Fixes + Sublime Text 3 support</h3>
 
 <ul>
