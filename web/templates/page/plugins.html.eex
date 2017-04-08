@@ -129,7 +129,7 @@ $ bin/keytool -import -alias 'DST Root CA X3' -keystore lib/security/cacerts -tr
 
   <p>
     <em>
-      All logos are the intellectual property and possible trademarks of their respective owners. The Atom editor logo is licensed under the MIT licence. The JetBrains logo is used with permission from JetBrains s.r.o. It is believed that the Sublime Text logo is used according to the fair use rules of the Finnish law.
+      All logos are the intellectual property and possible trademarks of their respective owners. The Atom editor logo is licensed under the MIT licence. The JetBrains logo is used with permission from JetBrains s.r.o. It is believed that the Sublime Text and Visual Studio Code logos are used according to the fair use rules of the Finnish law.
     </em>
   </p>
 </div>
