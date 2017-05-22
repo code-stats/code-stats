@@ -31,8 +31,8 @@ defmodule CodeStats.APIAuthRequired do
 
       _ ->
         conn
-        |> send_resp(403, "You must be authenticated")
-        |> halt
+        |> send_resp(403, ~S({"error": "You must be authenticated"}))
+        |> halt()
     end
   end
 end
