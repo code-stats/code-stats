@@ -12,25 +12,26 @@ defmodule Mix.Tasks.Frontend.Build.Js.Bundle do
   def bin(), do: node_bin("rollup")
 
   def out_path(), do: Path.join([tmp_path(), "bundled", "js"])
+  def out_file(), do: Path.join([out_path(), "app.js"])
 
   def args() do
-    op = out_path()
-
     [
       "--config",
       "rollup.config.js",
       "--input",
       Path.join([Mix.Tasks.Frontend.Build.Js.Transpile.out_path(), "app.js"]),
       "--output",
-      Path.join([op, "app.js"]),
+      out_file(),
       "--format",
-      "cjs",
+      "iife",
       "--sourcemap",
-      Path.join([op, "app.js.map"])
+      Path.join([out_path(), "app.js.map"])
     ]
   end
 
   task _ do
     bin() |> exec(args()) |> listen()
+
+    print_size(out_file())
   end
 end

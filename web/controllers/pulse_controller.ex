@@ -16,8 +16,11 @@ defmodule CodeStats.PulseController do
     XP,
     CacheService,
     ProfileChannel,
-    FrontpageChannel
+    FrontpageChannel,
+    GeoIP
   }
+
+  plug GeoIP
 
   def add(conn, %{"coded_at" => timestamp, "xps" => xps}) when is_list(xps) do
     {user, machine} = AuthUtils.get_api_details(conn)
@@ -31,24 +34,27 @@ defmodule CodeStats.PulseController do
       :ok                           <- update_caches(inserted_xps)
     do
       # Broadcast XP data to possible viewers on profile page and frontpage
+      coords = GeoIP.get_coords(conn)
       ProfileChannel.send_pulse(user, %{pulse | xps: inserted_xps})
-      FrontpageChannel.send_pulse(user, %{pulse | xps: inserted_xps})
+      FrontpageChannel.send_pulse(user, coords, %{pulse | xps: inserted_xps})
 
-      conn |> put_status(201) |> json(%{"ok" => "Great success!"})
+      conn |> put_status(201) |> json(%{ok: "Great success!"})
     else
       {:error, :not_found, reason} ->
-        conn |> put_status(404) |> json(%{"error" => reason})
+        conn |> put_status(404) |> json(%{error: reason})
 
       {:error, :generic, reason} ->
-        conn |> put_status(400) |> json(%{"error" => reason})
+        conn |> put_status(400) |> json(%{error: reason})
 
       {:error, :internal, reason} ->
-        conn |> put_status(500) |> json(%{"error" => reason})
+        conn |> put_status(500) |> json(%{error: reason})
     end
   end
 
   def add(conn, _params) do
-    resp(conn, 400, %{"error" => "Invalid xps format."})
+    conn
+    |> put_status(400)
+    |> json(%{error: "Invalid xps format."})
   end
 
   defp parse_timestamp(timestamp) do

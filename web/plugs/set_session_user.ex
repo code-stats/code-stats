@@ -6,7 +6,7 @@ defmodule CodeStats.SetSessionUser do
   this plug.
   """
 
-  @private_info_key :codestats_session_user
+  @private_info_key :_codestats_session_user
 
   import Plug.Conn
   import Ecto.Query, only: [from: 2]
@@ -26,7 +26,7 @@ defmodule CodeStats.SetSessionUser do
       id = AuthUtils.get_current_user_id(conn)
       query = from u in User,
         where: u.id == ^id
-      
+
       put_private(conn, @private_info_key, Repo.one(query))
     else
       put_private(conn, @private_info_key, nil)

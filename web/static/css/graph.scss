@@ -1,0 +1,21 @@
+.hidden-fadeout {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.world-map {
+  position: relative;
+
+  >img {
+    max-width: 100%;
+  }
+
+  >.pulses {
+    >.pulse-indicator {
+      position: absolute;
+
+      border-radius: 50%;
+      background-color: #fff;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+a.button {
+  display: inline-block;
+  background-color: getColor(base, primary);
+  color: getColor(text, inverted);
+
+  padding: 10px;
+  //box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    background-color: lighten(getColor(base, primary), 10%);
+  }
+
+  &:active {
+    background-color: darken(getColor(base, primary), 10%);
+  }
+}

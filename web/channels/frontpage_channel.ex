@@ -32,23 +32,26 @@ defmodule CodeStats.FrontpageChannel do
 
   The given pulse must have xps preloaded, xps must have language preloaded.
   """
-  def send_pulse(%User{} = user, %Pulse{xps: xps})
+  def send_pulse(%User{private_profile: false} = user, coords, %Pulse{xps: xps})
       when not is_nil(xps) do
-
-    # Don't show username for private profiles
-    username = case user.private_profile do
-      true -> "Private user"
-      false -> user.username
-    end
 
     formatted_xps = for xp <- xps do
       %{
         xp: xp.amount,
-        language: xp.language.name,
-        username: username
+        language: xp.language.name
       }
     end
 
-    CodeStats.Endpoint.broadcast("frontpage", "new_pulse", %{xps: formatted_xps})
+    CodeStats.Endpoint.broadcast(
+      "frontpage",
+      "new_pulse",
+      %{
+        xps: formatted_xps,
+        username: user.username,
+        coords: coords
+      }
+    )
   end
+
+  def send_pulse(_, _, _), do: nil
 end

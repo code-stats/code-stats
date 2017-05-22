@@ -1,80 +1,47 @@
-<div class="jumbotron">
-  <h2>Welcome to Code::Stats!</h2>
-  <p class="lead">Write code, level up, show off! A free stats tracking service for programmers.</p>
-</div>
+<section class="stripe stripe-dark">
+  <div class="stripe-inner" id="global-user-map-graph">
+    <div id="world-map-graph"></div>
+    <div id="history-bar-graph"></div>
 
-<div class="row marketing">
-  <div class="col-xs-12 col-lg-4">
-    <h4>Write code</h4>
-    <p>
-      Code::Stats has <a href="<%= page_path(@conn, :plugins) %>">plugins for various editors</a>. If you wish to make one for your own favourite editor, you are free to check out the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a>!
-    </p>
+    <noscript>
+      <h2>JavaScript required</h2>
+      <p>
+        This website uses JavaScript for displaying graphs. You can use the site with
+        JavaScript turned off, but you will be missing out on some of the content.
+      </p>
+    </noscript>
   </div>
+</section>
 
-  <div class="col-xs-12 col-lg-4">
-    <h4>Level up</h4>
-    <p>
-    You will be awarded with experience points for the amount of programming you do. Watch as your levels grow for each language you use. Identify your strong skill sets and use the data to see where you still have room for improvement.
-    </p>
+<section class="stripe">
+  <div class="stripe-inner" grid>
+    <section column>
+      <h3>Write code</h3>
+      <p>
+        Code::Stats has plugins for various editors. If you wish to make one for your own favourite editor, you are free to check out the API documentation!
+      </p>
+    </section>
+    <section column>
+      <h3>
+        Level up
+      </h3>
+      <p>
+        You will be awarded with experience points for the amount of programming you do. Watch as your levels grow for each language you use. Identify your strong skill sets and use the data to see where you still have room for improvement.
+      </p>
+    </section>
+    <section column>
+      <h3>
+        Show off
+      </h3>
+      <p>
+        Show your personal statistics page to your friends and compare your progress with others. Maybe even have a competition! Or, if you wish, you can keep all your information private and enjoy it in secret.
+      </p>
+
+      <p>
+        <a class="button" href="">
+          See example profile
+        </a>
+      </p>
+    </section>
   </div>
-
-  <div class="col-xs-12 col-lg-4">
-    <h4>Show off</h4>
-    <p>
-      Show your personal statistics page to your friends and compare your progress with others. Maybe even have a competition! Or, if you wish, you can keep all your information private and enjoy it in secret.
-    </p>
-
-    <p>
-      <a href="<%= profile_path(@conn, :profile, "Nicd") %>">See an example profile →</a>
-    </p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <hr />
-  </div>
-</div>
-
-<div class="row" id="index-elm-container">
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <h3>
-          Total XP
-        </h3>
-
-        <h2>
-          <%= format_xp(@total_xp) %>
-        </h2>
-      </div>
-
-      <div class="col-xs-12 col-md-6">
-        <h3>
-          Most popular languages
-        </h3>
-
-        <ol>
-          <%= for {language, xp} <- @most_popular do %>
-            <li>
-              <%= language %>: <%= format_xp(xp) %>&nbsp;XP
-            </li>
-          <% end %>
-        </ol>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="col-xs-12 text-center">
-        <h3>Loading live statistics…</h3>
-
-        <noscript>
-          <p class="alert alert-info">
-            If you had JavaScript enabled, you would see fancy live updating statistics.
-          </p>
-        </noscript>
-      </div>
-    </div>
-  </div>
-</div>
+</section>

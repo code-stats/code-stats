@@ -1,0 +1,60 @@
+main {
+  margin: 0;
+}
+
+#nav-stripe {
+  // Eat flash-stripe's additional space from the bottom
+  margin-bottom: -1lh;
+
+  img#header-logo {
+    display: block;
+    max-height: 4lh;
+    width: auto;
+    height: auto;
+  }
+
+  nav[role='navigation'] {
+    >div {
+      text-align: right;
+    }
+  }
+}
+
+#footer-stripe {
+  text-align: center;
+}
+
+// Stripe that is the width of the page but has padding for the content
+.stripe {
+  width: 100%;
+  margin: 0;
+  padding: 0.5lh 0;
+
+  background-color: getColor(background, body);
+
+  // Stripe contents that take the size of a container and are centered
+  >.stripe-inner {
+    margin: 0 auto;
+    max-width: $container-width;
+    padding-left: $gutter / 2;
+    padding-right: $gutter / 2;
+    overflow: visible;
+  }
+
+  &.stripe-dark {
+    background-color: getColor(background, dark);
+    color: getColor(text, inverted);
+
+    h1, h2, h3, h4, h5, h6 {
+      color: getColor(text, inverted);
+    }
+
+    a {
+      color: getColor(text, inverted_link);
+
+      &:hover {
+        color: getColor(text, inverted_link_hover);
+      }
+    }
+  }
+}
