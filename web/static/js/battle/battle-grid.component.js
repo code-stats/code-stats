@@ -23,7 +23,8 @@ class BattleGridComponent {
         username: user,
         channel: channel,
         total_xp: init_data.total.xp,
-        languages: init_data.languages.map(({name, xp}) => {return {name, xp};})
+        languages: init_data.languages.map(({name, xp}) => {return {name, xp};}),
+        amount_getter: () => this.users.length
       });
       this.log.addText(`User ${user} added.`);
       this.update();
