@@ -8,7 +8,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 VM_NAME = "codestats_vm"
-MEMORY_SIZE_MB = 1024
+MEMORY_SIZE_MB = 2048
 NUMBER_OF_CPUS = 3
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
