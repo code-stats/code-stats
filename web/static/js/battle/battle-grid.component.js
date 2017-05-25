@@ -19,6 +19,11 @@ class BattleGridComponent {
 
     const channel = this.socket.channel(`users:${user}`);
     channel.join().receive('ok', init_data => {
+      // If this was a reconnect, skip the data
+      if (this.users.findIndex(u => u.username === user) !== -1) {
+        return;
+      }
+
       this.users.push({
         username: user,
         channel: channel,
