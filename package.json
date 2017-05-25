@@ -18,10 +18,11 @@
     "babel-preset-es2017": "~6.24.1",
     "concise-cli": "~0.4.1",
     "cssnano": "~3.10.0",
+    "cssnano-cli": "~1.0.5",
     "rollup": "~0.41.6",
     "rollup-plugin-commonjs": "~8.0.2",
     "rollup-plugin-node-resolve": "~3.0.0",
     "rollup-plugin-sourcemaps": "~0.4.2",
-    "uglifyjs": "~2.4.10"
+    "uglify-js": "~2.8.27"
   }
 }
