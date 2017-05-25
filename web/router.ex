@@ -39,6 +39,8 @@ defmodule CodeStats.Router do
 
     get "/aliases", AliasController, :list
 
+    get "/battle", BattleController, :battle
+
     scope "/" do
       pipe_through :browser_unauth
 

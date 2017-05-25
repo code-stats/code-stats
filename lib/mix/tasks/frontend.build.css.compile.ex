@@ -8,21 +8,27 @@ defmodule Mix.Tasks.Frontend.Build.Css.Compile do
   def bin(), do: node_bin("concisecss")
 
   def out_path(), do: Path.join([tmp_path(), "compiled", "css"])
-  def out_file(), do: Path.join([out_path(), "app.css"])
+  def out_file(bundle), do: Path.join([out_path(), bundle <> ".css"])
 
   def in_path(), do: Path.join([src_path(), "css"])
-  def in_file(), do: Path.join([in_path(), "app.scss"])
+  def in_file(bundle), do: Path.join([in_path(), bundle <> ".scss"])
 
-  def args(), do: [
+  def args(bundle), do: [
     "compile",
-    in_file(),
-    out_file()
+    in_file(bundle),
+    out_file(bundle)
   ]
 
   task _ do
     # Ensure output path exists
     File.mkdir_p!(out_path())
 
-    bin() |> exec(args()) |> listen()
+    [
+      exec(bin(), args("app")),
+      exec(bin(), args("battle"))
+    ] |> listen()
+
+    print_size(out_file("app"))
+    print_size(out_file("battle"))
   end
 end
