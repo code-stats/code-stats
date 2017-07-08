@@ -1,8 +1,5 @@
 // Import dependencies
 
-// Import Babel polyfill to fix functionality for silly browsers
-//import 'babel-polyfill';
-
 import 'phoenix_html';
 
 // Import local files

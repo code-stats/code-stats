@@ -1,11 +1,8 @@
-// Import Babel polyfill to fix functionality for silly browsers
-//import 'babel-polyfill';
-
-import {get_live_update_socket} from './utils';
+import {get_live_update_socket} from '../../common/js/utils';
 
 import {mount} from 'redom';
-import LogComponent from './battle/log.component';
-import BattleGridComponent from './battle/battle-grid.component';
+import LogComponent from './log.component';
+import BattleGridComponent from './battle-grid.component';
 
 document.addEventListener('DOMContentLoaded', () => {
   const socket = get_live_update_socket();

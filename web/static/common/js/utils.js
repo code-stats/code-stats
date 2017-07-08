@@ -1,5 +1,5 @@
 /**
- * Miscellaneous utilities.
+ * Miscellaneous utilities
  */
 
 import { Socket } from "phoenix";

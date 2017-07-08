@@ -10,7 +10,9 @@ defmodule Mix.Tasks.Frontend.Build do
 
   task _ do
     run_tasks([
+      "battle.build.js",
       "frontend.build.js",
+      "battle.build.css",
       "frontend.build.css",
       "frontend.build.assets"
     ])

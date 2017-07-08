@@ -1,14 +1,20 @@
 defmodule Mix.Tasks.Frontend.Watch do
   use MBU.BuildTask
   import MBU.TaskUtils
-  alias Mix.Tasks.Frontend.Build.Js.Transpile, as: TranspileJS
-  alias Mix.Tasks.Frontend.Build.Js.Bundle, as: BundleJS
-  alias Mix.Tasks.Frontend.Build.Js.Copy, as: CopyJS
-  alias Mix.Tasks.Frontend.Build.Css.Compile, as: CompileCSS
-  alias Mix.Tasks.Frontend.Build.Css.Copy, as: CopyCSS
-  alias Mix.Tasks.Frontend.Build.Assets, as: Assets
+  import CodeStats.FrontendConfs
+  alias Mix.Tasks.Frontend.Build.Js.Transpile, as: FrontendTranspileJS
+  alias Mix.Tasks.Frontend.Build.Js.Bundle, as: FrontendBundleJS
+  alias Mix.Tasks.Frontend.Build.Js.Copy, as: FrontendCopyJS
+  alias Mix.Tasks.Frontend.Build.Css.Compile, as: FrontendCompileCSS
+  alias Mix.Tasks.Frontend.Build.Css.Copy, as: FrontendCopyCSS
+  alias Mix.Tasks.Frontend.Build.Assets, as: FrontendAssets
+  alias Mix.Tasks.Battle.Build.Js.Transpile, as: BattleTranspileJS
+  alias Mix.Tasks.Battle.Build.Js.Bundle, as: BattleBundleJS
+  alias Mix.Tasks.Battle.Build.Js.Copy, as: BattleCopyJS
+  alias Mix.Tasks.Battle.Build.Css.Compile, as: BattleCompileCSS
+  alias Mix.Tasks.Battle.Build.Css.Copy, as: BattleCopyCSS
 
-  @shortdoc "Watch frontend and rebuild when necessary"
+  @shortdoc "Watch frontend assets and rebuild when necessary"
 
   @deps [
     "frontend.build"
@@ -16,39 +22,81 @@ defmodule Mix.Tasks.Frontend.Watch do
 
   task _ do
     [
-      exec(
-        TranspileJS.bin(),
-        TranspileJS.args() ++ ["-w"]
+      watch(
+        "BundleCommonJS",
+        src_path(common_prefix(), ["js"]),
+        fn _ ->
+          run_tasks([
+            FrontendBundleJS,
+            BattleBundleJS
+          ])
+        end
       ),
 
       watch(
-        "JSBundle",
-        TranspileJS.out_path(),
-        BundleJS
+        "TranspileFrontendJS",
+        FrontendTranspileJS.in_path(),
+        FrontendTranspileJS
       ),
 
       watch(
-        "JSCopy",
-        BundleJS.out_path(),
-        CopyJS
+        "BundleFrontendJS",
+        FrontendBundleJS.in_path(),
+        FrontendBundleJS
       ),
 
       watch(
-        "CSSCompile",
-        CompileCSS.in_path(),
-        CompileCSS
+        "CopyFrontendJS",
+        FrontendCopyJS.in_path(),
+        FrontendCopyJS
       ),
 
       watch(
-        "CSSCopy",
-        CompileCSS.out_path(),
-        CopyCSS
+        "CompileFrontendCSS",
+        FrontendCompileCSS.in_path(),
+        FrontendCompileCSS
       ),
 
       watch(
-        "AssetCopy",
-        Assets.in_path(),
-        Assets
+        "CopyFrontendCSS",
+        FrontendCopyCSS.in_path(),
+        FrontendCopyCSS
+      ),
+
+      watch(
+        "CopyFrontendAssets",
+        FrontendAssets.in_path(),
+        FrontendAssets
+      ),
+
+      watch(
+        "TranspileBattleJS",
+        BattleTranspileJS.in_path(),
+        BattleTranspileJS
+      ),
+
+      watch(
+        "BundleBattleJS",
+        BattleBundleJS.in_path(),
+        BattleBundleJS
+      ),
+
+      watch(
+        "CopyBattleJS",
+        BattleCopyJS.in_path(),
+        BattleCopyJS
+      ),
+
+      watch(
+        "CompileBattleCSS",
+        BattleCompileCSS.in_path(),
+        BattleCompileCSS
+      ),
+
+      watch(
+        "CopyBattleCSS",
+        BattleCopyCSS.in_path(),
+        BattleCopyCSS
       )
     ]
     |> listen(watch: true)

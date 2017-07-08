@@ -1,7 +1,7 @@
 import {el} from 'redom';
 
 import ProgressCounterComponent from './progress-counter.component';
-import {get_level, get_level_progress} from '../xp_utils';
+import {get_level, get_level_progress} from '../../common/js/xp_utils';
 
 class LanguageProgressComponent {
   constructor() {

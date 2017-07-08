@@ -2,7 +2,7 @@
  * Code to execute on profile pages.
  */
 
-import { get_live_update_socket } from './utils';
+import { get_live_update_socket } from '../../common/js/utils';
 import ProfilePageUpdater from './profile_page_updater';
 
 let updater = null;

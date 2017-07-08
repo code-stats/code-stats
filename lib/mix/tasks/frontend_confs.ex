@@ -23,17 +23,25 @@ defmodule CodeStats.FrontendConfs do
   def node_bin(executable), do: Path.join([node_path(), ".bin", executable])
 
   @doc """
-  Get absolute path to source directory for frontend build.
+  Get absolute path to source directory for frontend builds.
   """
-  def src_path(), do: Path.join([proj_path(), "web", "static"])
+  def base_src_path(), do: Path.join([proj_path(), "web", "static"])
 
   @doc """
   Get absolute path to temp directory for build artifacts.
   """
-  def tmp_path(), do: Path.join([proj_path(), ".tmp"])
+  def base_tmp_path(), do: Path.join([proj_path(), ".tmp"])
 
   @doc """
   Get absolute path to target directory for frontend build.
   """
-  def dist_path(), do: Path.join([proj_path(), "priv", "static"])
+  def base_dist_path(), do: Path.join([proj_path(), "priv", "static"])
+
+  def common_prefix(), do: "common"
+  def frontend_prefix(), do: "frontend"
+  def battle_prefix(), do: "battle"
+
+  def src_path(prefix, parts \\ []), do: Path.join([base_src_path(), prefix | parts])
+  def tmp_path(prefix, parts \\ []), do: Path.join([base_tmp_path(), prefix | parts])
+  def dist_path(prefix, parts \\ []), do: Path.join([base_dist_path(), prefix | parts])
 end

@@ -1,18 +1,18 @@
 defmodule Mix.Tasks.Frontend.Build.Js.Copy do
   use MBU.BuildTask
   import CodeStats.FrontendConfs
+  alias CodeStats.BuildTasks.Copy
 
-  @shortdoc "Copy bundled JS to target dir"
+  @shortdoc "Copy bundled frontend JS to target dir"
 
   @deps [
-    "frontend.build.js.bundle"
+    "frontend.build.js.transpile"
   ]
 
-  task _ do
-    # Ensure target path exists
-    out_path = Path.join([dist_path(), "js"])
-    File.mkdir_p!(out_path)
+  def in_path(), do: Mix.Tasks.Frontend.Build.Js.Transpile.out_path()
+  def out_path(), do: dist_path(frontend_prefix(), ["js"])
 
-    File.cp_r!(Mix.Tasks.Frontend.Build.Js.Bundle.out_path(), out_path)
+  task _ do
+    Copy.task(in_path(), out_path())
   end
 end

@@ -1,17 +1,16 @@
 defmodule Mix.Tasks.Frontend.Build.Assets do
   use MBU.BuildTask
   import CodeStats.FrontendConfs
+  alias CodeStats.BuildTasks.Copy
 
-  @shortdoc "Copy assets to target dir"
+  @shortdoc "Copy frontend assets to target dir"
 
   @deps []
 
-  def in_path(), do: Path.join([src_path(), "assets"])
+  def in_path(), do: src_path(frontend_prefix(), ["assets"])
+  def out_path(), do: dist_path(frontend_prefix(), ["assets"])
 
   task _ do
-    # Ensure target path exists
-    File.mkdir_p!(dist_path())
-
-    File.cp_r!(in_path(), dist_path())
+    Copy.task(in_path(), out_path())
   end
 end

@@ -30,7 +30,7 @@ class WorldMapGraphComponent {
     this.el = el(
       'div.world-map',
       el('img.graph', {
-        src: '/images/worldmap-colored_crushed.png',
+        src: '/frontend/assets/images/worldmap-colored_crushed.png',
         alt: 'World map with light pulses showing where users are coding'
       }),
       this.pulseList

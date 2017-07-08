@@ -5,7 +5,7 @@ defmodule Mix.Tasks.Frontend.Clean do
   @shortdoc "Clean build artifacts"
 
   task _ do
-    File.rm_rf!(tmp_path())
-    File.rm_rf!(dist_path())
+    File.rm_rf!(base_tmp_path())
+    File.rm_rf!(base_dist_path())
   end
 end

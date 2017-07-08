@@ -1,23 +1,18 @@
 defmodule Mix.Tasks.Frontend.Build.Js.Transpile do
   use MBU.BuildTask
   import CodeStats.FrontendConfs
-  import MBU.TaskUtils
+  alias CodeStats.BuildTasks.TranspileJS
 
-  @shortdoc "Transpile JS sources to ES5"
+  @shortdoc "Transpile frontend JS sources to ES5"
 
-  def bin(), do: node_bin("babel")
-
-  def out_path(), do: Path.join([tmp_path(), "transpiled", "js"])
-
-  def args(), do: [
-    Path.join([src_path(), "js"]),
-    "--out-dir",
-    out_path(),
-    "--source-maps",
-    "inline"
+  @deps [
+    "frontend.build.js.bundle"
   ]
 
+  def in_path(), do: Mix.Tasks.Frontend.Build.Js.Bundle.out_path()
+  def out_path(), do: tmp_path(frontend_prefix(), ["transpiled", "js"])
+
   task _ do
-    bin() |> exec(args()) |> listen()
+    TranspileJS.task(in_path(), out_path())
   end
 end

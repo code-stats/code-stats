@@ -1,4 +1,4 @@
-import { clear_children } from './utils';
+import { clear_children } from '../../common/js/utils';
 
 /**
  * Handles connecting to the profile page socket and sending updates to Elm.
