@@ -8,7 +8,8 @@ export default {
     resolve(),
     commonjs({
       namedExports: {
-        'deps/phoenix/priv/static/phoenix.js': ['Socket']
+        'deps/phoenix/priv/static/phoenix.js': ['Socket'],
+        'node_modules/phoenix/priv/static/phoenix.js': ['Socket']
       }
     })
   ]
