@@ -8,7 +8,7 @@ defmodule CodeStats.PreferencesController do
   plug :set_title
 
   def edit(conn, _params) do
-    changeset = User.changeset(SetSessionUser.get_user_data(conn))
+    changeset = User.updating_changeset(SetSessionUser.get_user_data(conn))
     conn
     |> common_edit_assigns()
     |> render("preferences.html", changeset: changeset)
