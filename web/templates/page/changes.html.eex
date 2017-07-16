@@ -34,6 +34,13 @@
 
 <h2>Changelog</h2>
 
+<h3>1.8.3 – 2017-07-16 – Small fixes</h3>
+
+<ul>
+  <li>Fixed the "private profile" checkbox not working properly in the preferences page.</li>
+  <li>Added support for CORS into the user profile read API.</li>
+</ul>
+
 <h3>1.8.2 – 2017-04-09 – Groundwork for future refactoring</h3>
 
 <ul>
