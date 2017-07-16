@@ -45,6 +45,7 @@ defmodule CodeStats.Mixfile do
       {:ex_doc, "~> 0.15", only: :dev},
       {:calendar, "~> 0.17.2"},
       {:bamboo, "~> 0.8.0"},
+      {:corsica, "~> 1.0.0"}
    ]
   end
 

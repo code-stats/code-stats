@@ -3,6 +3,8 @@ defmodule CodeStats.Endpoint do
 
   socket "/live_update_socket", CodeStats.LiveUpdateSocket
 
+  plug CodeStats.RequestTime
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
@@ -19,8 +21,6 @@ defmodule CodeStats.Endpoint do
     plug Phoenix.CodeReloader
   end
 
-  plug CodeStats.RequestTime
-
   plug Plug.RequestId
   plug Plug.Logger
 
@@ -30,6 +30,9 @@ defmodule CodeStats.Endpoint do
     json_decoder: Poison
 
   plug Plug.MethodOverride
+
+  plug CodeStats.CORS
+
   plug Plug.Head
 
   plug Plug.Session,

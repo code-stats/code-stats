@@ -58,7 +58,13 @@ config :code_stats,
   ga('create', 'my-googleanalytics-id', 'auto');
   ga('send', 'pageview');
 </script>
-"""
+""",
+
+  # CORS
+
+  # Allowed origins in a format that Corsica understands, see:
+  # https://hexdocs.pm/corsica/Corsica.html#module-origins
+  cors_allowed_origins: []
 
 # Configures Elixir's Logger
 config :logger, :console,
