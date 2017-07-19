@@ -14,14 +14,14 @@
 </section>
 
 <section class="stripe">
-  <div class="stripe-inner" grid>
-    <section column>
+  <div class="stripe-inner" grid="wrap">
+    <section column="s-12 m-4">
       <h3>Write code</h3>
       <p>
         Code::Stats has plugins for various editors. If you wish to make one for your own favourite editor, you are free to check out the API documentation!
       </p>
     </section>
-    <section column>
+    <section column="s-12 m-4">
       <h3>
         Level up
       </h3>
@@ -29,7 +29,7 @@
         You will be awarded with experience points for the amount of programming you do. Watch as your levels grow for each language you use. Identify your strong skill sets and use the data to see where you still have room for improvement.
       </p>
     </section>
-    <section column>
+    <section column="s-12 m-4">
       <h3>
         Show off
       </h3>

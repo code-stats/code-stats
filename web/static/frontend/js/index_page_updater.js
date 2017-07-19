@@ -23,7 +23,7 @@ class IndexPageUpdater {
 
     console.debug('Joining channel frontpage…');
     this.channel.join()
-      .receive('ok', (init_data) => {
+      .receive('ok', init_data => {
         console.debug('Connection successful.');
         this.initialize(init_data);
       })

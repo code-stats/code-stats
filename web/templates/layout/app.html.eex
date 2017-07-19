@@ -36,7 +36,7 @@
 
   <body>
     <header id="nav-stripe" class="stripe">
-      <div class="stripe-inner" grid>
+      <div class="stripe-inner" grid="center">
         <div column="2">
           <a class="logo" href="<%= page_path(@conn, :index) %>">
             <img
@@ -48,15 +48,15 @@
           </a>
         </div>
 
-        <nav column="8 +2" grid="justify-end center" role="navigation">
+        <nav column="8 +2" grid="justify-end center wrap" role="navigation">
           <%= if is_authed?(@conn) do %>
-            <div column><a href="<%= profile_path(@conn, :my_profile) %>">Profile</a></div>
-            <div column><a href="<%= preferences_path(@conn, :edit) %>">Preferences</a></div>
-            <div column><a href="<%= machine_path(@conn, :list) %>">Machines</a></div>
-            <div column><a href="<%= auth_path(@conn, :logout) %>">Log out</a></div>
+            <div column="s-12 m-3"><a href="<%= profile_path(@conn, :my_profile) %>">Profile</a></div>
+            <div column="s-12 m-3"><a href="<%= preferences_path(@conn, :edit) %>">Preferences</a></div>
+            <div column="s-12 m-3"><a href="<%= machine_path(@conn, :list) %>">Machines</a></div>
+            <div column="s-12 m-3"><a href="<%= auth_path(@conn, :logout) %>">Log out</a></div>
           <% else %>
-            <div column><a href="<%= auth_path(@conn, :render_login) %>">Log in</a></div>
-            <div column><a href="<%= auth_path(@conn, :render_signup) %>">Sign up</a></div>
+            <div column="s-12 m-3"><a href="<%= auth_path(@conn, :render_login) %>">Log in</a></div>
+            <div column="s-12 m-3"><a href="<%= auth_path(@conn, :render_signup) %>">Sign up</a></div>
           <% end %>
         </nav>
       </div>

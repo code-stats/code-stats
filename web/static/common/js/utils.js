@@ -2,7 +2,7 @@
  * Miscellaneous utilities
  */
 
-import { Socket } from "phoenix";
+import {Socket} from "phoenix";
 
 /**
  * Get live update socket for the correct backend socket path.

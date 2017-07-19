@@ -14,3 +14,23 @@ a.button {
     background-color: darken(getColor(base, primary), 10%);
   }
 }
+
+// Jumbotron that emulate's bootstrap's one, intended to grab the user's attention
+.jumbotron {
+  padding: 5lh;
+}
+
+// Progress bar coloring
+.progress-bar {
+  height: 0.65lh;
+
+  >span {
+    &.progress-old {
+      background-color: #5cb85c;
+    }
+
+    &.progress-recent {
+      background-color: #f0ad4e;
+    }
+  }
+}
