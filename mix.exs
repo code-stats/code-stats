@@ -47,8 +47,7 @@ defmodule CodeStats.Mixfile do
       {:calendar, "~> 0.17.4"},
       {:bamboo, "1.0.0-rc.1"},
       {:corsica, "~> 1.0.0"},
-      {:mbu, "~> 1.0.1"},
-      {:fs, "~> 2.12.0", override: true},
+      {:mbu, "~> 2.0.0"},
       {:geolix, "~> 0.13.0"},
       {:geolite2data, "~> 0.0.3"},
       {:remote_ip, "~> 0.1.3"}
