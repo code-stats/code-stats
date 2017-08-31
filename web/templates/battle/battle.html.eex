@@ -1,13 +1,14 @@
 <div id="main-column" grid="column">
   <header column>
     <div grid="row center">
-      <div column="6">
+      <div column="4">
         <h1><%= get_conf(:site_name) %> Battle Mode</h1>
       </div>
 
-      <div column="3">
-        <button id="add-user-button">Add User</button>
-        <button id="start-battle-button">Start Battle</button>
+      <div column="5" grid>
+        <div column><button id="add-user-button">Add User</button></div>
+        <div column><button id="clear-users-button">Clear Users</button></div>
+        <div column><button id="start-battle-button">Start Battle</button></div>
       </div>
 
       <div column="3">

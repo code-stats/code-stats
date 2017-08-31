@@ -41,6 +41,18 @@ class BattleGridComponent {
     channel.on('new_pulse', msg => this.newPulse(user, msg));
   }
 
+  clearUsers() {
+    for (const {username, channel} of this.users) {
+      channel.leave().receive('ok', () => this.log.addText(`Closed ${username}.`));
+    }
+
+    this.users = [];
+    this.battleMode = false;
+
+    this.log.addText('Users cleared.');
+    this.update();
+  }
+
   startBattle() {
     this.battleMode = true;
     this.users = this.users.map(u => {

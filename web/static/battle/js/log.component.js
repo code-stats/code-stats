@@ -7,7 +7,7 @@ class LogComponent {
     this.el = el(
       'textarea',
       {
-        rows: 4,
+        rows: 7,
         readonly: 'readonly',
         style: {
           border: 0,

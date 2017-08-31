@@ -2,28 +2,28 @@
 
 $colors: (
   base: (
-    'primary':   #cd2,
-    'selection': #090,
-    'lines':     #cd2
+    'primary':   #7cb518,
+    'selection': #f3de2c,
+    'lines':     #5c8001
   ),
 
   text: (
-    'primary':   #2f2,
+    'primary':   #454955,
     'secondary': #fff,
-    'heading':   #4f4,
+    'heading':   #f3eff5,
     'inverted':  #1c1c1c,
     'inverted_link': #becacd,
     'inverted_link_hover': #aebdc1
   ),
 
   background: (
-    'dark':  #000,
-    'light': #555,
-    'body':  #000
+    'dark':  #343434,
+    'light': #585858,
+    'body':  #080f0f
   ),
 
   state: (
-    'muted':   #eee,
+    'muted':   #666,
     'success': #10a887,
     'warning': #F17F42,
     'error':   #da3c3c
@@ -62,6 +62,8 @@ $colors: (
   )
 );
 
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 @import '../../../../node_modules/concise.css/concise';
 @import '../../../../node_modules/concise-ui/concise-ui';
 
@@ -84,12 +86,16 @@ header {
   }
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto', sans-serif;
+}
+
 .user-info {
   h2.user-name {
     display: inline;
     margin-right: 10px;
     padding-right: 10px;
-    border-right: 1px solid getColor(base, lines);
+    //border-right: 1px solid getColor(base, lines);
   }
 
   h3.xp-counter {
@@ -104,7 +110,7 @@ header {
     display: inline;
     margin-right: 10px;
     padding-right: 10px;
-    border-right: 1px solid getColor(base, lines);
+    //border-right: 1px solid getColor(base, lines);
   }
 
   h5.xp-counter {
@@ -113,5 +119,6 @@ header {
 }
 
 .user-view {
-  border: 1px solid getColor(base, lines);
+  //border: 1px solid getColor(base, lines);
+  margin-bottom: 40px;
 }
