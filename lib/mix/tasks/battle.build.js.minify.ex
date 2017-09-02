@@ -7,10 +7,10 @@ defmodule Mix.Tasks.Battle.Build.Js.Minify do
   @preferred_cli_env :prod
 
   @deps [
-    "battle.build.js.bundle"
+    "battle.build.js.transpile"
   ]
 
-  def in_path(), do: Mix.Tasks.Battle.Build.Js.Bundle.out_path()
+  def in_path(), do: Mix.Tasks.Battle.Build.Js.Transpile.out_path()
   def in_file(), do: Path.join([in_path(), "#{battle_prefix()}.js"])
 
   def out_path(), do: dist_path(battle_prefix(), ["js"])

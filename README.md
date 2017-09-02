@@ -44,6 +44,7 @@ nano config/dev.secret.exs  # Set up dev config with at least the line "use Mix.
 * `mix frontend.build`: Build the JS/CSS frontend
 * `mix frontend.watch`: Build the frontend and watch for changes (also run when using `phoenix.server`)
 * `mix frontend.clean`: Clean frontend output and build artifacts
+* `MINIFY=true mix frontend.build`: Build frontend with minification.
 
 Ready to run in production? Please [check the Phoenix deployment guides](http://www.phoenixframework.org/docs/deployment).
 

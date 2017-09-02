@@ -10,7 +10,7 @@ defmodule Mix.Tasks.Frontend.Build.Js.Minify do
     "frontend.build.js.transpile"
   ]
 
-  def in_path(), do: Mix.Tasks.Frontend.Build.Js.Bundle.out_path()
+  def in_path(), do: Mix.Tasks.Frontend.Build.Js.Transpile.out_path()
   def in_file(), do: Path.join([in_path(), "#{frontend_prefix()}.js"])
 
   def out_path(), do: dist_path(frontend_prefix(), ["js"])
