@@ -42,6 +42,9 @@ config :code_stats, CodeStats.Repo,
   hostname: "localhost",
   pool_size: 10
 
+
+config :appsignal, :config, active: true
+
 # To avoid conflicts with workspaces
 # dev.secret.exs is not versioned, like prod.secret.exs
 import_config "dev.secret.exs"

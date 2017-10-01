@@ -89,3 +89,17 @@ config :number,
     delimiter: ",",
     separator: "."
   ]
+
+# Appsignal configuration
+
+config :code_stats, CodeStats.Endpoint,
+  instrumenters: [Appsignal.Phoenix.Instrumenter]
+
+config :phoenix, :template_engines,
+  eex: Appsignal.Phoenix.Template.EExEngine,
+  exs: Appsignal.Phoenix.Template.ExsEngine
+
+config :code_stats, CodeStats.Repo,
+  loggers: [Appsignal.Ecto, Ecto.LogEntry]
+
+import_config "appsignal.exs"

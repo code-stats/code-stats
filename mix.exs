@@ -19,7 +19,7 @@ defmodule CodeStats.Mixfile do
   def application do
     [mod: {CodeStats, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin, :calendar, :bamboo]]
+                    :phoenix_ecto, :postgrex, :comeonin, :calendar, :bamboo, :appsignal]]
   end
 
   # Specifies which paths to compile per environment.
@@ -46,7 +46,8 @@ defmodule CodeStats.Mixfile do
       {:ex_doc, "~> 0.17", only: :dev},
       {:calendar, "~> 0.17.4"},
       {:bamboo, "1.0.0-rc.1"},
-      {:corsica, "~> 1.0.0"}
+      {:corsica, "~> 1.0.0"},
+      {:appsignal, "~> 1.3"}
    ]
   end
 

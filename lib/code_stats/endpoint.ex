@@ -40,5 +40,6 @@ defmodule CodeStats.Endpoint do
     key: "_code_stats_key",
     signing_salt: "UuJXllxk"
 
+  use Appsignal.Phoenix
   plug CodeStats.Router
 end
