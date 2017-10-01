@@ -3,8 +3,8 @@ defmodule CodeStats.Mixfile do
 
   def project do
     [app: :code_stats,
-     version: "1.8.3",
-     elixir: "~> 1.4.5",
+     version: "1.8.4",
+     elixir: "~> 1.5",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -31,20 +31,21 @@ defmodule CodeStats.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.2.0"},
+      {:phoenix, "~> 1.3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_pubsub, "~> 1.0.1"},
-      {:phoenix_ecto, "~> 3.2.1"},
-      {:phoenix_html, "~> 2.9.2"},
-      {:phoenix_live_reload, "~> 1.0.6", only: :dev},
-      {:gettext, "~> 0.9"},
+      {:phoenix_pubsub, "~> 1.0.2"},
+      {:phoenix_ecto, "~> 3.3.0"},
+      {:phoenix_html, "~> 2.10.4"},
+      {:phoenix_live_reload, "~> 1.1.2", only: :dev},
+      {:gettext, "~> 0.13"},
       {:cowboy, "~> 1.0"},
-      {:comeonin, "~> 3.0.1"},
-      {:number, "~> 0.5.0"},
-      {:earmark, "~> 1.2.0", only: :dev},
-      {:ex_doc, "~> 0.15", only: :dev},
-      {:calendar, "~> 0.17.2"},
-      {:bamboo, "~> 0.8.0"},
+      {:comeonin, "~> 4.0.3"},
+      {:bcrypt_elixir, "~> 1.0.4"},
+      {:number, "~> 0.5.4"},
+      {:earmark, "~> 1.2.3", only: :dev},
+      {:ex_doc, "~> 0.17", only: :dev},
+      {:calendar, "~> 0.17.4"},
+      {:bamboo, "1.0.0-rc.1"},
       {:corsica, "~> 1.0.0"}
    ]
   end

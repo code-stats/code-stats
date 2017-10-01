@@ -1,6 +1,5 @@
 defmodule CodeStats.Machine do
   use CodeStats.Web, :model
-  alias Comeonin.Bcrypt
 
   schema "machines" do
     field :name, :string
@@ -50,6 +49,6 @@ defmodule CodeStats.Machine do
   end
 
   defp generate_api_salt() do
-    Bcrypt.gen_salt()
+    Bcrypt.gen_salt(Application.get_env(:comeonin, :bcrypt_log_rounds))
   end
 end
