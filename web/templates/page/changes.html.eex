@@ -34,10 +34,16 @@
 
 <h2>Changelog</h2>
 
-<h3>1.8.5 – 2017-10-01 – Appsignal &amp; token expiration</h3>
+<h3>1.8.6 – 2017-10-02 – AppSignal filtering</h3>
 
 <ul>
-  <li>Added Appsignal integration for metrics and error reports to aid in development.</li>
+  <li>Filtered out some data that doesn't need to go to AppSignal.</li>
+</ul>
+
+<h3>1.8.5 – 2017-10-01 – AppSignal &amp; token expiration</h3>
+
+<ul>
+  <li>Added AppSignal integration for metrics and error reports to aid in development.</li>
   <li>Added token expiration to channels so that you need to refresh the page at least once every 3 months.</li>
 </ul>
 

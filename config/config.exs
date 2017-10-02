@@ -102,4 +102,7 @@ config :phoenix, :template_engines,
 config :code_stats, CodeStats.Repo,
   loggers: [Appsignal.Ecto, Ecto.LogEntry]
 
+config :appsignal, :config,
+  filter_parameters: ["password", "username", "user_email", "email", "new_password", "old_password", "machine_name"]
+
 import_config "appsignal.exs"
