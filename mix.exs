@@ -17,9 +17,10 @@ defmodule CodeStats.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {CodeStats, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin, :calendar, :bamboo, :appsignal, :geolix, :geolite2data]]
+    [
+      mod: {CodeStats, []},
+      extra_applications: [:logger]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -47,10 +48,12 @@ defmodule CodeStats.Mixfile do
       {:calendar, "~> 0.17.4"},
       {:bamboo, "1.0.0-rc.1"},
       {:corsica, "~> 1.0.0"},
+      {:appsignal, "~> 1.3"},
       {:mbu, "~> 2.0.0"},
-      {:geolix, "~> 0.13.0"},
+      {:geolix, "~> 0.14.0"},
       {:geolite2data, "~> 0.0.3"},
-      {:remote_ip, "~> 0.1.3"}
+      {:remote_ip, "~> 0.1.3"},
+      {:distillery, git: "https://github.com/bitwalker/distillery.git", ref: "67905e230ce0e861a739756c1f79ba9124c5fd3e", runtime: false}
    ]
   end
 
