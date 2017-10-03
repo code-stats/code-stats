@@ -9,9 +9,9 @@ defmodule CodeStats.BuildTasks.BundleJS do
       "rollup.config.js",
       "--input",
       in_file,
-      "--output",
+      "--output.file",
       out_file,
-      "--format",
+      "--output.format",
       "iife",
       "--sourcemap",
       "#{out_file}.map"

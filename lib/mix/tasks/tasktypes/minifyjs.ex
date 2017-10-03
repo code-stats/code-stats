@@ -5,14 +5,10 @@ defmodule CodeStats.BuildTasks.MinifyJS do
   def bin(), do: node_bin("uglifyjs")
   def args(in_file, out_file) do
     [
-      "--in-source-map",
-      "#{in_file}.map",
       "--source-map",
-      "#{out_file}.map",
-      "--source-map-url",
-      "#{Path.basename(out_file)}.map",
-      "--screw-ie8",
-      "-m",
+      "filename='#{out_file}.map',content='#{in_file}.map',url='#{Path.basename(out_file)}.map'",
+      "--compress",
+      "--mangle",
       "-o",
       out_file,
       "--",
