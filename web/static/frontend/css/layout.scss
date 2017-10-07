@@ -16,7 +16,13 @@ body {
   grid-area: nav;
 
   display: grid;
-  grid: 'logo header-nav' / auto 1fr;
+  grid: 'logo' 1fr
+        'header-nav' 0.5fr
+        / auto;
+
+  @media #{$sm} {
+    grid: 'logo header-nav' / auto 1fr;
+  }
 
   >#header-logo {
     grid-area: logo;
@@ -32,10 +38,15 @@ body {
   >#header-nav {
     grid-area: header-nav;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     padding-left: 20px;
+
+    @media #{$sm} {
+      justify-content: flex-end;
+    }
 
     >a {
       padding: 0 10px;
@@ -57,12 +68,12 @@ main {
   padding-bottom: 20px;
 
   display: grid;
-  grid: 1fr 1fr 1fr / auto;
+  grid: auto auto auto / auto;
   grid-row-gap: 20px;
 
   @media #{$sm} {
     grid: auto / 1fr 1fr 1fr;
-    grid-row-gap: 0;
+    grid-column-gap: 20px;
   }
 
   >section {

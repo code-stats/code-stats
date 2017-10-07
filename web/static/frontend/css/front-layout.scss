@@ -3,5 +3,16 @@
  */
 
 #global-user-map-graph {
-  
+
+}
+
+#frontpage-ads {
+  display: grid;
+  grid: auto auto auto / auto;
+  grid-row-gap: 20px;
+
+  @media #{$sm} {
+    grid: auto / 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+  }
 }
