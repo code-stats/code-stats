@@ -111,10 +111,25 @@ a {
   color: $error-text-color;
 }
 
+$code-background: lighten($accent-background, 60%);
+
 code {
   color: $base-text;
-  background-color: lighten($accent-background, 60%);
+  background-color: $code-background;
   padding: 2px;
   border: 1px solid $accent-background;
   border-radius: 3px;
+  white-space: nowrap;
+}
+
+pre {
+  background-color: $code-background;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+
+  >code {
+    white-space: pre-wrap;
+    border: none;
+  }
 }
