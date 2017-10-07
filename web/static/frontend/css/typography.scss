@@ -105,3 +105,16 @@ a {
     color: $base-link-visited;
   }
 }
+
+// When something has an error status but does not require a full alert
+.has-error {
+  color: $error-text-color;
+}
+
+code {
+  color: $base-text;
+  background-color: lighten($accent-background, 60%);
+  padding: 2px;
+  border: 1px solid $accent-background;
+  border-radius: 3px;
+}

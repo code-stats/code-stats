@@ -1,30 +1,32 @@
-<div class="signup-form">
-  <h2>Sign up</h2>
+<div class="stripe">
+  <h1>Sign up</h1>
   <%= form_for(@changeset, auth_path(@conn, :signup), fn f -> %>
-    <div class="form-group <%= if f.errors[:username], do: "has-error" %>">
-      <label for="user_username">Username (required)</label>
+    <label for="user_username" class="<%= if f.errors[:username], do: "has-error" %>">Username (required)</label>
+    <div class="input">
       <%= text_input(f, :username, class: "form-control", required: true) %>
       <%= if message = f.errors[:username] do %>
-        <p class="help-block"><%= translate_error(message) %></p>
+        <p class="help-block has-error"><%= translate_error(message) %></p>
       <% end %>
       <%= if message = f.errors[:lower_username] do %>
-        <p class="help-block"><%= translate_error(message) %></p>
+        <p class="help-block has-error"><%= translate_error(message) %></p>
       <% end %>
 
       <p class="help-block">Must not contain the following characters: <code>/#%?&amp;=+</code>. You're free to use Unicode characters but complex character sequences may make the profile unreachable.</p>
     </div>
-    <div class="form-group <%= if f.errors[:password], do: "has-error" %>">
-      <label for="user_password">Password (required)</label>
+
+    <label for="user_password" class="<%= if f.errors[:password], do: "has-error" %>">Password (required)</label>
+    <div class="input">
       <%= password_input(f, :password, class: "form-control", required: true) %>
       <%= if message = f.errors[:password] do %>
-        <p class="help-block"><%= translate_error(message) %></p>
+        <p class="help-block has-error"><%= translate_error(message) %></p>
       <% end %>
     </div>
-    <div class="form-group <%= if f.errors[:email], do: "has-error" %>">
-      <label for="user_email">Email address (optional)</label>
+
+    <label for="user_email" class="<%= if f.errors[:email], do: "has-error" %>">Email address (optional)</label>
+    <div class="input">
       <%= email_input(f, :email, class: "form-control") %>
       <%= if message = f.errors[:email] do %>
-        <p class="help-block"><%= translate_error(message) %></p>
+        <p class="help-block has-error"><%= translate_error(message) %></p>
       <% end %>
       <p class="help-block">
         Email is only used for important notifications about the service, not for promotions or spam.
@@ -35,12 +37,12 @@
       </p>
     </div>
 
-    <div class="form-group">
-      <p>
-        When registering, you accept that you have read, understood and accepted the <a href="<%= page_path(@conn, :terms) %>">Terms of Service and Privacy policy</a>.
-      </p>
-    </div>
+    <p class="description">
+      When registering, you accept that you have read, understood and accepted the <a href="<%= page_path(@conn, :terms) %>">Terms of Service and Privacy policy</a>.
+    </p>
 
-    <%= submit("Register!", class: "btn btn-primary") %>
+    <div class="submit">
+      <%= submit("Register!", class: "btn btn-primary") %>
+    </div>
   <% end) %>
 </div>

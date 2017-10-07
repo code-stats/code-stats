@@ -20,28 +20,43 @@
 
 // Basic form should be a 2-grid of label-element pairs
 form {
-  display: grid;
-  grid: auto / auto 1fr;
-
-  grid-gap: 20px 20px;
-
   >input,
-  >textarea {
-    align-self: center;
+  >textarea,
+  >.input {
+    margin-bottom: 20px;
+  }
+
+  @media #{$sm} {
+    display: grid;
+    grid: auto / auto 1fr;
+
+    grid-gap: 20px 20px;
+
+    >input,
+    >textarea,
+    >.input {
+      align-self: center;
+    }
+
+    >label {
+      text-align: right;
+      align-self: start;
+    }
+
+    >.description {
+      grid-column-start: span 2;
+      text-align: left;
+    }
+
+    >.submit {
+      grid-column-start: 2;
+      text-align: left;
+    }
   }
 
   @include text-inputs {
+    width: 100%;
     max-width: 300px;
-  }
-
-  >label {
-    text-align: right;
-    align-self: center;
-  }
-
-  >.submit {
-    grid-column-start: 2;
-    text-align: left;
   }
 }
 
@@ -50,11 +65,13 @@ form {
 }
 
 $button-padding: 10px;
+$button-y-padding: $button-padding;
+$button-x-padding: $button-padding * 2;
 $button-press-move: 1px;
 $button-shadow: 1px 1px 1px #000;
 
 button {
-  padding: $button-padding;
+  padding: $button-padding ($button-padding * 2);
   color: $accent-text;
   background-color: $accent-background;
   border: 1px solid $accent-background;
@@ -63,9 +80,7 @@ button {
 
   // Create "3D" effect of pressing button by moving text when it is active and moving box shadow inside
   &:active {
-    $big-margin: $button-padding + $button-press-move;
-    $small-margin: $button-padding - $button-press-move;
-    padding: $big-margin $small-margin $small-margin $big-margin;
+    padding: ($button-y-padding + $button-press-move) ($button-x-padding - $button-press-move) ($button-y-padding - $button-press-move) ($button-x-padding + $button-press-move);
     box-shadow: inset $button-shadow;
   }
 }

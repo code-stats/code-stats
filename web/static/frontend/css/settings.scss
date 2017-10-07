@@ -2,6 +2,13 @@
 // Base
 // --------------------------------------------------
 
+*,
+*::before,
+*::after {
+  // UGH
+  box-sizing: border-box;
+}
+
 // Reasonable estimate for the size of the scrollbar
 $scrollbar-width: 30px;
 
