@@ -1,0 +1,19 @@
+.stripe.flash-stripe {
+  grid-area: flash;
+
+  background-color: $info-color;
+  color: $info-text-color;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  &.flash-success {
+    background-color: $success-color;
+    color: $success-text-color;
+  }
+
+  &.flash-error {
+    background-color: $error-color;
+    color: $error-text-color;
+  }
+}

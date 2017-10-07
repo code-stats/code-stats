@@ -38,19 +38,35 @@ $xl: '(min-width: #{$extra-large})';
 
 $background-color: #fff;
 
-// Basic colors, the usual colors where others aren't appropriate
-$base-text: #000;
-$base-headings: $base-text;
-$base-background: $background-color;
-$base-link: #282621;
-$base-link-visited: $base-link;
-
 // Accent color for differentiating special elements or layout "pop"
 $accent-text: #fcfcfe;
 $accent-headings: $accent-text;
 $accent-background: #3e4053;
 $accent-link: #becacd;
 $accent-link-visited: $accent-link;
+
+// Basic colors, the usual colors where others aren't appropriate
+$base-text: #000;
+$base-headings: $base-text;
+$base-background: $background-color;
+$base-link: lighten($accent-background, 20%);
+$base-link-visited: $base-link;
+
+// Other colors
+
+// How much to darken text colors from background colors
+$text-color-darken-factor: 60%;
+
+$success-color: #dff2bf;
+$success-text-color: darken($success-color, $text-color-darken-factor);
+$error-color: #ffcbcb;
+$error-text-color: darken($error-color, $text-color-darken-factor);
+$warning-color: #feefb3;
+$warning-text-color: darken($warning-color, $text-color-darken-factor);
+$danger-color: $error-color;
+$danger-text-color: darken($danger-color, $text-color-darken-factor);
+$info-color: #bde5f8;
+$info-text-color: darken($info-color, $text-color-darken-factor);
 
 @mixin use-accent {
   background-color: $accent-background;

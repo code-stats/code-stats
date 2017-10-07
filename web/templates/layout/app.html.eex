@@ -57,33 +57,29 @@
       </nav>
     </header>
 
-    <section id="flash-stripe" class="stripe">
-      <%= if get_flash(@conn, :info) do %>
-        <section class="alert-box" role="alert">
-          <p><%= get_flash(@conn, :info) %></p>
-        </section>
-      <% end %>
-      <%= if get_flash(@conn, :success) do %>
-        <section class="alert alert-success" role="alert">
-          <p><%= get_flash(@conn, :success) %></p>
-        </section>
-      <% end %>
-      <%= if get_flash(@conn, :error) do %>
-        <section class="alert alert-warning" role="alert">
-          <p><%= get_flash(@conn, :error) %></p>
-        </section>
-      <% end %>
+    <%= if get_flash(@conn, :info) do %>
+      <section class="stripe flash-stripe" role="alert">
+        ℹ️ <%= get_flash(@conn, :info) %>
+      </section>
+    <% end %>
+    <%= if get_flash(@conn, :success) do %>
+      <section class="stripe flash-stripe flash-success" role="alert">
+        ✅ <%= get_flash(@conn, :success) %>
+      </section>
+    <% end %>
+    <%= if get_flash(@conn, :error) do %>
+      <section class="stripe flash-stripe flash-error" role="alert">
+        ⚠️ <%= get_flash(@conn, :error) %>
+      </section>
+    <% end %>
 
-      <%= if false and get_conf(:beta_mode) do %>
-        <section class="alert">
-          <p>
-            <strong>⚠️ Note!</strong>
-            This instance is in beta mode. You can register as normal and use this instance for testing
-            purposes, such as for developing a new editor plugin. The database may be reset at any time.
-          </p>
-        </section>
-      <% end %>
-    </section>
+    <%= if false and get_conf(:beta_mode) do %>
+      <section class="stripe flash-stripe" role="alert">
+        <strong>⚠️ Note!</strong>
+        This instance is in beta mode. You can register as normal and use this instance for testing
+        purposes, such as for developing a new editor plugin. The database may be reset at any time.
+      </section>
+    <% end %>
 
     <main>
       <%= render @view_module, @view_template, assigns %>
