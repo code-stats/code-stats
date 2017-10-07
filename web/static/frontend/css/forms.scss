@@ -1,0 +1,71 @@
+// All input types that use some sort of text box
+@mixin text-inputs {
+  input[type='text'],
+  input[type='password'],
+  input[type='tel'],
+  input[type='email'],
+  input[type='number'],
+  input[type='number'],
+  input[type='datetime-local'],
+  input[type='month'],
+  input[type='search'],
+  input[type='time'],
+  input[type='url'],
+  input[type='week'],
+  input[type='date'],
+  textarea {
+    @content;
+  }
+}
+
+// Basic form should be a 2-grid of label-element pairs
+form {
+  display: grid;
+  grid: auto / auto 1fr;
+
+  grid-gap: 20px 20px;
+
+  >input,
+  >textarea {
+    align-self: center;
+  }
+
+  @include text-inputs {
+    max-width: 300px;
+  }
+
+  >label {
+    text-align: right;
+    align-self: center;
+  }
+
+  >.submit {
+    grid-column-start: 2;
+    text-align: left;
+  }
+}
+
+@include text-inputs {
+  padding: 5px;
+}
+
+$button-padding: 10px;
+$button-press-move: 1px;
+$button-shadow: 1px 1px 1px #000;
+
+button {
+  padding: $button-padding;
+  color: $accent-text;
+  background-color: $accent-background;
+  border: 1px solid $accent-background;
+  box-shadow: $button-shadow;
+  border-radius: 5px;
+
+  // Create "3D" effect of pressing button by moving text when it is active and moving box shadow inside
+  &:active {
+    $big-margin: $button-padding + $button-press-move;
+    $small-margin: $button-padding - $button-press-move;
+    padding: $big-margin $small-margin $small-margin $big-margin;
+    box-shadow: inset $button-shadow;
+  }
+}

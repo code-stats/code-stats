@@ -1,27 +1,19 @@
-<div class="login-form">
-  <h2>Log in</h2>
-  <%= form_tag("", method: :post) %>
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" name="username" value="<%= assigns[:username_input] %>" required />
-    </div>
+<div class="stripe">
+  <h1>Log in</h1>
+  <%= form_tag("", method: :post, class: "login-form") %>
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" name="username" value="<%= assigns[:username_input] %>" required />
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required />
-    </div>
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password" required />
 
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" class="" id="remember-me" name="remember-me" />
-        Remember me
-      </label>
-    </div>
+    <label for="remember-me">Remember me</label>
+    <input type="checkbox" class="" id="remember-me" name="remember-me" />
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="submit"><button type="submit">Submit</button></div>
   </form>
 
-  <h3>Forgot your password?</h3>
+  <h2>Forgot your password?</h2>
 
   <p>
     If you forgot your password, <a href="<%= auth_path(@conn, :render_forgot) %>">proceed to the password reset form</a>. If you have not added an email address to your account, it cannot be recovered.
