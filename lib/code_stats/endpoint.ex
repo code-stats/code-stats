@@ -4,7 +4,6 @@ defmodule CodeStats.Endpoint do
   socket "/live_update_socket", CodeStats.LiveUpdateSocket
 
   plug CodeStats.RequestTime
-  plug RemoteIp
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -21,6 +20,8 @@ defmodule CodeStats.Endpoint do
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
+
+  plug RemoteIp
 
   plug Plug.RequestId
   plug Plug.Logger
