@@ -1,0 +1,283 @@
+// The following definitions were created by Transfonter
+
+$font-path: '/frontend/assets/fonts/';
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato Regular'), local('Lato-Regular'),
+    url('#{$font-path}Lato-Regular.woff2') format('woff2'),
+    url('#{$font-path}Lato-Regular.woff') format('woff'),
+    url('#{$font-path}Lato-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'),
+    url('#{$font-path}Lato-BoldItalic.woff2') format('woff2'),
+    url('#{$font-path}Lato-BoldItalic.woff') format('woff'),
+    url('#{$font-path}Lato-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato Bold'), local('Lato-Bold'),
+    url('#{$font-path}Lato-Bold.woff2') format('woff2'),
+    url('#{$font-path}Lato-Bold.woff') format('woff'),
+    url('#{$font-path}Lato-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato Black Italic'), local('Lato-BlackItalic'),
+    url('#{$font-path}Lato-BlackItalic.woff2') format('woff2'),
+    url('#{$font-path}Lato-BlackItalic.woff') format('woff'),
+    url('#{$font-path}Lato-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato Hairline';
+  src: local('Lato-HairlineItalic'),
+    url('#{$font-path}Lato-HairlineItalic.woff2') format('woff2'),
+    url('#{$font-path}Lato-HairlineItalic.woff') format('woff'),
+    url('#{$font-path}Lato-HairlineItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Light'),
+    url('#{$font-path}Lato-Light.woff2') format('woff2'),
+    url('#{$font-path}Lato-Light.woff') format('woff'),
+    url('#{$font-path}Lato-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato Black'), local('Lato-Black'),
+    url('#{$font-path}Lato-Black.woff2') format('woff2'),
+    url('#{$font-path}Lato-Black.woff') format('woff'),
+    url('#{$font-path}Lato-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-LightItalic'),
+    url('#{$font-path}Lato-LightItalic.woff2') format('woff2'),
+    url('#{$font-path}Lato-LightItalic.woff') format('woff'),
+    url('#{$font-path}Lato-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato Italic'), local('Lato-Italic'),
+    url('#{$font-path}Lato-Italic.woff2') format('woff2'),
+    url('#{$font-path}Lato-Italic.woff') format('woff'),
+    url('#{$font-path}Lato-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato Hairline';
+  src: local('Lato-Hairline'),
+    url('#{$font-path}Lato-Hairline.woff2') format('woff2'),
+    url('#{$font-path}Lato-Hairline.woff') format('woff'),
+    url('#{$font-path}Lato-Hairline.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans ExtraBold Italic'), local('FiraSans-ExtraBoldItalic'),
+    url('#{$font-path}FiraSans-ExtraBoldItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-ExtraBoldItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Medium Italic'), local('FiraSans-MediumItalic'),
+    url('#{$font-path}FiraSans-MediumItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-MediumItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans SemiBold'), local('FiraSans-SemiBold'),
+    url('#{$font-path}FiraSans-SemiBold.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-SemiBold.woff') format('woff'),
+    url('#{$font-path}FiraSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Light Italic'), local('FiraSans-LightItalic'),
+    url('#{$font-path}FiraSans-LightItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-LightItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Bold Italic'), local('FiraSans-BoldItalic'),
+    url('#{$font-path}FiraSans-BoldItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-BoldItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans SemiBold Italic'), local('FiraSans-SemiBoldItalic'),
+    url('#{$font-path}FiraSans-SemiBoldItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-SemiBoldItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans ExtraBold'), local('FiraSans-ExtraBold'),
+    url('#{$font-path}FiraSans-ExtraBold.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-ExtraBold.woff') format('woff'),
+    url('#{$font-path}FiraSans-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Medium'), local('FiraSans-Medium'),
+    url('#{$font-path}FiraSans-Medium.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-Medium.woff') format('woff'),
+    url('#{$font-path}FiraSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Thin'), local('FiraSans-Thin'),
+    url('#{$font-path}FiraSans-Thin.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-Thin.woff') format('woff'),
+    url('#{$font-path}FiraSans-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Black Italic'), local('FiraSans-BlackItalic'),
+    url('#{$font-path}FiraSans-BlackItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-BlackItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Bold'), local('FiraSans-Bold'),
+    url('#{$font-path}FiraSans-Bold.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-Bold.woff') format('woff'),
+    url('#{$font-path}FiraSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Light'), local('FiraSans-Light'),
+    url('#{$font-path}FiraSans-Light.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-Light.woff') format('woff'),
+    url('#{$font-path}FiraSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Thin Italic'), local('FiraSans-ThinItalic'),
+    url('#{$font-path}FiraSans-ThinItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-ThinItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans ExtraLight Italic'), local('FiraSans-ExtraLightItalic'),
+    url('#{$font-path}FiraSans-ExtraLightItalic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-ExtraLightItalic.woff') format('woff'),
+    url('#{$font-path}FiraSans-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Black'), local('FiraSans-Black'),
+    url('#{$font-path}FiraSans-Black.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-Black.woff') format('woff'),
+    url('#{$font-path}FiraSans-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans ExtraLight'), local('FiraSans-ExtraLight'),
+    url('#{$font-path}FiraSans-ExtraLight.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-ExtraLight.woff') format('woff'),
+    url('#{$font-path}FiraSans-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Italic'), local('FiraSans-Italic'),
+    url('#{$font-path}FiraSans-Italic.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-Italic.woff') format('woff'),
+    url('#{$font-path}FiraSans-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: local('Fira Sans Regular'), local('FiraSans-Regular'),
+    url('#{$font-path}FiraSans-Regular.woff2') format('woff2'),
+    url('#{$font-path}FiraSans-Regular.woff') format('woff'),
+    url('#{$font-path}FiraSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

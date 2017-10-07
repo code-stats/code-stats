@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Battle.Build.Css.Compile do
   use MBU.BuildTask
   import CodeStats.FrontendConfs
-  alias CodeStats.BuildTasks.CompileCSS
+  alias CodeStats.BuildTasks.CompileConciseCSS
 
   @shortdoc "Compile the battle mode Concise CSS sources"
 
@@ -12,6 +12,6 @@ defmodule Mix.Tasks.Battle.Build.Css.Compile do
   def out_file(), do: Path.join([out_path(), "#{battle_prefix()}.css"])
 
   task _ do
-    CompileCSS.task(out_path(), in_file(), out_file())
+    CompileConciseCSS.task(out_path(), in_file(), out_file())
   end
 end

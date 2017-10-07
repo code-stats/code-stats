@@ -36,98 +36,88 @@
 
   <body>
     <header id="nav-stripe" class="stripe">
-      <div class="stripe-inner" grid="center">
-        <div column="2">
-          <a class="logo" href="<%= page_path(@conn, :index) %>">
-            <img
-             id="header-logo"
-             src="<%= static_path(@conn, "/frontend/assets/images/Logo_circle_crushed.png") %>"
-             alt="<%= get_conf(:site_name) %> logo"
-             title="<%= get_conf(:site_name) %>"
-            />
-          </a>
-        </div>
+      <a id="header-logo" class="logo" href="<%= page_path(@conn, :index) %>">
+        <img
+         src="<%= static_path(@conn, "/frontend/assets/images/Logo_circle_crushed.png") %>"
+         alt="<%= get_conf(:site_name) %> logo"
+         title="<%= get_conf(:site_name) %>"
+        />
+      </a>
 
-        <nav column="8 +2" grid="justify-end center wrap" role="navigation">
-          <%= if is_authed?(@conn) do %>
-            <div column="s-12 m-3"><a href="<%= profile_path(@conn, :my_profile) %>">Profile</a></div>
-            <div column="s-12 m-3"><a href="<%= preferences_path(@conn, :edit) %>">Preferences</a></div>
-            <div column="s-12 m-3"><a href="<%= machine_path(@conn, :list) %>">Machines</a></div>
-            <div column="s-12 m-3"><a href="<%= auth_path(@conn, :logout) %>">Log out</a></div>
-          <% else %>
-            <div column="s-12 m-3"><a href="<%= auth_path(@conn, :render_login) %>">Log in</a></div>
-            <div column="s-12 m-3"><a href="<%= auth_path(@conn, :render_signup) %>">Sign up</a></div>
-          <% end %>
-        </nav>
-      </div>
+      <nav id="header-nav" role="navigation">
+        <%= if is_authed?(@conn) do %>
+          <a href="<%= profile_path(@conn, :my_profile) %>">Profile</a>
+          <a href="<%= preferences_path(@conn, :edit) %>">Preferences</a>
+          <a href="<%= machine_path(@conn, :list) %>">Machines</a>
+          <a href="<%= auth_path(@conn, :logout) %>">Log out</a>
+        <% else %>
+          <a href="<%= auth_path(@conn, :render_login) %>">Log in</a>
+          <a href="<%= auth_path(@conn, :render_signup) %>">Sign up</a>
+        <% end %>
+      </nav>
     </header>
 
     <section id="flash-stripe" class="stripe">
-      <div class="stripe-inner">
-        <%= if get_flash(@conn, :info) do %>
-          <section class="alert-box" role="alert">
-            <p><%= get_flash(@conn, :info) %></p>
-          </section>
-        <% end %>
-        <%= if get_flash(@conn, :success) do %>
-          <section class="alert-box -success" role="alert">
-            <p><%= get_flash(@conn, :success) %></p>
-          </section>
-        <% end %>
-        <%= if get_flash(@conn, :error) do %>
-          <section class="alert-box -warning" role="alert">
-            <p><%= get_flash(@conn, :error) %></p>
-          </section>
-        <% end %>
+      <%= if get_flash(@conn, :info) do %>
+        <section class="alert-box" role="alert">
+          <p><%= get_flash(@conn, :info) %></p>
+        </section>
+      <% end %>
+      <%= if get_flash(@conn, :success) do %>
+        <section class="alert alert-success" role="alert">
+          <p><%= get_flash(@conn, :success) %></p>
+        </section>
+      <% end %>
+      <%= if get_flash(@conn, :error) do %>
+        <section class="alert alert-warning" role="alert">
+          <p><%= get_flash(@conn, :error) %></p>
+        </section>
+      <% end %>
 
-        <%= if false and get_conf(:beta_mode) do %>
-          <section class="alert-box">
-            <p>
-              <strong>⚠️ Note!</strong>
-              This instance is in beta mode. You can register as normal and use this instance for testing
-              purposes, such as for developing a new editor plugin. The database may be reset at any time.
-            </p>
-          </section>
-        <% end %>
-      </div>
+      <%= if false and get_conf(:beta_mode) do %>
+        <section class="alert">
+          <p>
+            <strong>⚠️ Note!</strong>
+            This instance is in beta mode. You can register as normal and use this instance for testing
+            purposes, such as for developing a new editor plugin. The database may be reset at any time.
+          </p>
+        </section>
+      <% end %>
     </section>
 
     <main>
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <footer id="footer-stripe" class="stripe stripe-dark">
-      <div class="stripe-inner" grid="column">
-        <section column grid="justify-center">
-          <div column><%= CodeStats.RequestTime.calculate_time(@conn) %></div>
-          <div column><a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a></div>
-          <div column><a href="<%= page_path(@conn, :api_docs) %>">API docs</a></div>
-          <div column><a href="<%= page_path(@conn, :terms) %>">Legal</a></div>
-          <div column><a href="<%= page_path(@conn, :plugins) %>">Plugins</a></div>
+    <footer id="footer-stripe" class="stripe stripe-accent">
+      <section>
+        Rendered in <%= CodeStats.RequestTime.calculate_time(@conn) %>.
+        <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
+        <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
+        <a href="<%= page_path(@conn, :terms) %>">Legal</a>
+        <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
+      </section>
+
+      <%= if not Enum.empty?(get_conf(:social_links)) do %>
+        <section>
+          Contact us!
+          <%= for {name, url} <- get_conf(:social_links) do %>
+            <a href="<%= url %>"><%= name %></a>
+          <% end %>
         </section>
+      <% end %>
 
-        <%= if not Enum.empty?(get_conf(:social_links)) do %>
-          <section column grid="justify-center">
-            <%= for {name, url} <- get_conf(:social_links) do %>
-              <div column><a href="<%= url %>"><%= name %></a></div>
-            <% end %>
-          </section>
-        <% end %>
-
-        <section column>
-          Made with:
+      <section>
+        <p>
+          Made with
           <a href="http://elixir-lang.org/">Elixir</a>,
-          <a href="http://www.phoenixframework.org/">Phoenix</a>,
-          <a href="https://redom.js.org/">RE:DOM</a>, and
-          <a href="http://concisecss.com/">Concise CSS</a>.
-        </section>
-
-        <section column>
-          <small>
-            <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
-          </small>
-        </section>
-      </div>
+          <a href="http://www.phoenixframework.org/">Phoenix</a>, and
+          <a href="https://redom.js.org/">RE:DOM</a>.
+        </p>
+        <small>
+          <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
+        </small>
+      </section>
     </footer>
 
     <script type="text/javascript" src="<%= static_path(@conn, "/frontend/js/frontend.js") %>"></script>

@@ -1,4 +1,94 @@
+/*
+ * Base layout active on all pages.
+ */
+
+body {
+  display: grid;
+
+  grid: 'nav'
+        'flash'
+        'main'
+        'footer'
+        / 100%;
+}
+
+#nav-stripe {
+  grid-area: nav;
+
+  display: grid;
+  grid: 'logo header-nav' / auto 1fr;
+
+  >#header-logo {
+    grid-area: logo;
+
+    >img {
+      display: block;
+      max-height: 70px;
+      width: auto;
+      height: auto;
+    }
+  }
+
+  >#header-nav {
+    grid-area: header-nav;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 20px;
+
+    >a {
+      padding: 0 10px;
+    }
+  }
+}
+
+#flash-stripe {
+  grid-area: flash;
+}
+
 main {
+  grid-area: main;
+}
+
+#footer-stripe {
+  grid-area: footer;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  display: grid;
+  grid: 1fr 1fr 1fr / auto;
+  grid-row-gap: 20px;
+
+  @media #{$sm} {
+    grid: auto / 1fr 1fr 1fr;
+    grid-row-gap: 0;
+  }
+
+  >section {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+}
+
+.stripe {
+  background-color: $base-background;
+  padding: 0 $min-edge-padding;
+
+  &.stripe-accent {
+    @include use-accent;
+  }
+
+  // When layout is wider than stripe, keep content at max width and centered with padding. This enables the
+  // continuation of background color to edges of screen. We also need to account for the scroll bar as that is
+  // included in the width of the page.
+  @media (min-width: #{$content-max-width + $min-edge-padding * 2 + $scrollbar-width}) {
+    padding: 0 calc((100% - #{$content-max-width}) / 2);
+  }
+}
+
+/*main {
   margin: 0;
 }
 
@@ -61,4 +151,4 @@ main {
 
 .text-center {
   text-align: center;
-}
+}*/

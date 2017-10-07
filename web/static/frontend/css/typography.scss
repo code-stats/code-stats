@@ -1,0 +1,107 @@
+// Type scale
+$h1-size: 3.157rem;
+$h2-size: 2.369rem;
+$h3-size: 1.777rem;
+$h4-size: 1.333rem;
+
+// Make headings smaller on smaller screen sizes
+@mixin smallinize-heading($orig-size) {
+  font-size: ($orig-size * 0.5);
+
+  @media #{$sm} {
+    font-size: ($orig-size * 0.75);
+  }
+
+  @media #{$md} {
+    font-size: $orig-size;
+  }
+}
+
+// Make text a teeny bit smaller on smaller screen sizes
+@mixin smallinize-text($orig-size) {
+  font-size: ($orig-size * 0.9);
+
+  @media #{$sm} {
+    font-size: ($orig-size * 0.95);
+  }
+
+  @media #{$md} {
+    font-size: $orig-size;
+  }
+}
+
+body {
+  background-color: #fff;
+  font-family: $font-body;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #000;
+
+  @include smallinize-text(1em);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-headings;
+}
+
+p {
+  margin-bottom: 1.3em;
+
+  // No top margin if paragraph is first element in container.
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+h1 {
+  margin-top: 0;
+  @include smallinize-heading($h1-size);
+}
+
+h2 {
+  @include smallinize-heading($h2-size);
+}
+
+h3 {
+  @include smallinize-heading($h3-size);
+}
+
+h4 {
+  @include smallinize-heading($h4-size);
+}
+
+small,
+.font_small {
+  font-size: 0.75em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a {
+  color: $base-link;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: $base-link-visited;
+  }
+}

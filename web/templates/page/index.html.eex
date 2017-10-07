@@ -1,47 +1,43 @@
-<section class="stripe stripe-dark">
-  <div class="stripe-inner" id="global-user-map-graph">
+<section class="stripe stripe-accent" id="global-user-map-graph">
     <div id="world-map-graph"></div>
     <div id="history-bar-graph"></div>
 
-    <noscript>
-      <h2>JavaScript required</h2>
-      <p>
-        This website uses JavaScript for displaying graphs. You can use the site with
-        JavaScript turned off, but you will be missing out on some of the content.
-      </p>
-    </noscript>
-  </div>
+  <noscript>
+    <h2>JavaScript required</h2>
+    <p>
+      This website uses JavaScript for displaying graphs. You can use the site with
+      JavaScript turned off, but you will be missing out on some of the content.
+    </p>
+  </noscript>
 </section>
 
-<section class="stripe">
-  <div class="stripe-inner" grid="wrap">
-    <section column="s-12 m-4">
-      <h3>Write code</h3>
-      <p>
-        Code::Stats has plugins for various editors. If you wish to make one for your own favourite editor, you are free to check out the API documentation!
-      </p>
-    </section>
-    <section column="s-12 m-4">
-      <h3>
-        Level up
-      </h3>
-      <p>
-        You will be awarded with experience points for the amount of programming you do. Watch as your levels grow for each language you use. Identify your strong skill sets and use the data to see where you still have room for improvement.
-      </p>
-    </section>
-    <section column="s-12 m-4">
-      <h3>
-        Show off
-      </h3>
-      <p>
-        Show your personal statistics page to your friends and compare your progress with others. Maybe even have a competition! Or, if you wish, you can keep all your information private and enjoy it in secret.
-      </p>
+<section id="frontpage-ads" class="stripe">
+  <section class="frontpage-ad">
+    <h3>Write code</h3>
+    <p>
+      Code::Stats has plugins for various editors. If you wish to make one for your own favourite editor, you are free to check out the API documentation!
+    </p>
+  </section>
+  <section class="frontpage-ad">
+    <h3>
+      Level up
+    </h3>
+    <p>
+      You will be awarded with experience points for the amount of programming you do. Watch as your levels grow for each language you use. Identify your strong skill sets and use the data to see where you still have room for improvement.
+    </p>
+  </section>
+  <section class="frontpage-ad">
+    <h3>
+      Show off
+    </h3>
+    <p>
+      Show your personal statistics page to your friends and compare your progress with others. Maybe even have a competition! Or, if you wish, you can keep all your information private and enjoy it in secret.
+    </p>
 
-      <p>
-        <a class="button" href="">
-          See example profile
-        </a>
-      </p>
-    </section>
-  </div>
+    <p>
+      <a class="button" href="">
+        See example profile
+      </a>
+    </p>
+  </section>
 </section>

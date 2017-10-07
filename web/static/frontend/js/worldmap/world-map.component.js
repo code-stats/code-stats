@@ -29,6 +29,10 @@ class WorldMapGraphComponent {
 
     this.el = el(
       'div.world-map',
+      el('div.hero-title', [
+        el('h1', 'Welcome to Code::Stats'),
+        el('h2', 'The free stats tracking service for programmers.'),
+      ]),
       el('img.graph', {
         src: '/frontend/assets/images/worldmap-colored_crushed.png',
         alt: 'World map with light pulses showing where users are coding'

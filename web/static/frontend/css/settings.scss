@@ -2,160 +2,84 @@
 // Base
 // --------------------------------------------------
 
+// Reasonable estimate for the size of the scrollbar
+$scrollbar-width: 30px;
+
 // Font size for small devices
 $font-size: 16;
 
 // Font size for big devices
 $font-size-secondary: 18;
 
-// Tracking
-$letter-spacing: .05em;
-
 // Font families
-$font-primary: 'Helvetica', 'Arial', sans-serif;
-$font-secondary: 'Helvetica', 'Arial', sans-serif;
+$font-headings: 'Lato', 'Helvetica', 'Arial', sans-serif;
+$font-body: 'Fira Sans', 'Arial', sans-serif;
 $font-mono: 'Consolas', monospace;
 $font-print-primary: 'Georgia', 'Times New Roman', 'Times', serif;
 $font-print-secondary: 'Georgia', 'Times New Roman', 'Times', serif;
 
-// Enable margins to all the elements
-// except the first one in each nesting level
-$automargin: true;
-
-// ^ How much margin for those elements
-$block-margin: 1lh;
-
 // Transition duration
 $transition-duration: 150ms;
 
+// Custom sizes for media queries
+$small: 480px;
+$medium: 768px;
+$large: 960px;
+$extra-large: 1100px;
+
 // Custom media queries
-// Use as @media (--medium) { … }
-@custom-media --extra-small (width <= 480px);
-@custom-media --small (width >= 480px);
-@custom-media --medium (width >= 768px);
-@custom-media --large (width >= 960px);
-@custom-media --extra-large (width >= 1100px);
-@custom-media --only-small (480px < width <= 768px);
-@custom-media --only-medium (768px < width <= 980px);
-@custom-media --only-large (980px < width <= 1100px);
-
-// Spacing variables
-$spacing-xs: .5lh;
-$spacing-s:  1lh;
-$spacing-m:  2lh;
-$spacing-l:  3lh;
-$spacing-xl: 4lh;
-
-//
-// Type Scale
-// --------------------------------------------------
-
-// Suggested ratios
-// Source: http://type-scale.com/
-$_minor-second:     1.067;
-$_major-second:     1.125;
-$_minor-third:      1.200;
-$_major-third:      1.250;
-$_perfect-fourth:   1.333;
-$_augmented-fourth: 1.414;
-$_perfect-fifth:    1.500;
-$_golden-ratio:     1.618;
-
-// Ratio for primary scale
-$scale-ratio: $_minor-third;
-
-// Ratio for secondary scale
-$scale-ratio-secondary: $_perfect-fourth;
-
-//
-// Grid
-// --------------------------------------------------
-
-// Enable grid styles
-$enable-grid: true;
-
-// Enable x-*, sm-*, md-*, lg-*, xl-* columns and offsets
-$full-grid: true;
-
-// Max width for container
-$container-width: 1100px;
-
-// Gutter size
-$gutter: 2rem;
-
-// Number of columns in a row
-$num-columns: 12;
-
-// Prefix for attributes
-$prefix: '';
-
-// Create columns and offsets above this breakpoint
-$breakpoint: --small;
+$sm: '(min-width: #{$small})';
+$md: '(min-width: #{$medium})';
+$lg: '(min-width: #{$large})';
+$xl: '(min-width: #{$extra-large})';
 
 //
 // Color Palette
-// --------------------------------------------------
-// Use the getColor() function to use those values in
-// your stylesheets. Example: getColor(base, primary)
 
-$colors: (
-  base: (
-    'primary':   #798a8d,
-    'selection': #66635b,
-    'lines':     #d8d8dc
-  ),
+$background-color: #fff;
 
-  text: (
-    'primary':   #1b1f20,
-    'secondary': #282621,
-    'heading':   #0e1010,
-    'inverted':  #fcfcfe,
-    'inverted_link': #becacd,
-    'inverted_link_hover': #aebdc1
-  ),
+// Basic colors, the usual colors where others aren't appropriate
+$base-text: #000;
+$base-headings: $base-text;
+$base-background: $background-color;
+$base-link: #282621;
+$base-link-visited: $base-link;
 
-  background: (
-    'dark':  #3e4053,
-    'light': #d8d8dc,
-    'body':  #fcfcfe
-  ),
+// Accent color for differentiating special elements or layout "pop"
+$accent-text: #fcfcfe;
+$accent-headings: $accent-text;
+$accent-background: #3e4053;
+$accent-link: #becacd;
+$accent-link-visited: $accent-link;
 
-  state: (
-    'muted':   #eee,
-    'success': #10a887,
-    'warning': #F17F42,
-    'error':   #da3c3c
-  ),
+@mixin use-accent {
+  background-color: $accent-background;
+  color: $accent-text;
 
-  blue: (
-    'darker':  #1573b6,
-    'dark':    #1e80c6,
-    'base':    #2b90d9,
-    'light':   #3fa2e9,
-    'lighter': #4eb1f9
-  ),
+  a {
+    color: $accent-link;
 
-  green: (
-    'darker':  #089073,
-    'dark':    #0b9d7d,
-    'base':    #10a887,
-    'light':   #1eb896,
-    'lighter': #28ceaa
-  ),
+    &:visited {
+      color: $accent-link-visited;
+      text-decoration-style: dashed;
+    }
+  }
 
-  red: (
-    'darker':  #653131,
-    'dark':    #b73333,
-    'base':    #da3c3c,
-    'light':   #f25a5a,
-    'lighter': #fa8181
-  ),
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $accent-headings;
+  }
+}
 
-  gray: (
-    'darker':  #333333,
-    'dark':    #4d4d4d,
-    'base':    #666666,
-    'light':   #808080,
-    'lighter': #999999
-  )
-);
+//
+// Layout
+
+// Max width of content column
+$content-max-width: 1000px;
+
+// Min padding to edges of screen that should be maintained
+$min-edge-padding: 10px;

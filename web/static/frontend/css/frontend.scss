@@ -1,11 +1,10 @@
 @charset 'UTF-8';
 
+@import '../../common/css/normalize';
+
 @import './settings';
-
-@import '../../../../node_modules/concise.css/concise';
-@import '../../../../node_modules/concise-ui/concise-ui';
-
+@import './fonts';
+@import './typography';
 @import './layout';
-@import './ui';
+@import './front-layout';
 @import './graph';
-@import './profile';
