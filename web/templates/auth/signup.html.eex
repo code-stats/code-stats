@@ -3,7 +3,7 @@
   <%= form_for(@changeset, auth_path(@conn, :signup), fn f -> %>
     <label for="user_username" class="<%= if f.errors[:username], do: "has-error" %>">Username (required)</label>
     <div class="input">
-      <%= text_input(f, :username, class: "form-control", required: true) %>
+      <%= text_input(f, :username, required: true) %>
       <%= if message = f.errors[:username] do %>
         <p class="help-block has-error"><%= translate_error(message) %></p>
       <% end %>
@@ -16,7 +16,7 @@
 
     <label for="user_password" class="<%= if f.errors[:password], do: "has-error" %>">Password (required)</label>
     <div class="input">
-      <%= password_input(f, :password, class: "form-control", required: true) %>
+      <%= password_input(f, :password, required: true) %>
       <%= if message = f.errors[:password] do %>
         <p class="help-block has-error"><%= translate_error(message) %></p>
       <% end %>
@@ -24,7 +24,7 @@
 
     <label for="user_email" class="<%= if f.errors[:email], do: "has-error" %>">Email address (optional)</label>
     <div class="input">
-      <%= email_input(f, :email, class: "form-control") %>
+      <%= email_input(f, :email) %>
       <%= if message = f.errors[:email] do %>
         <p class="help-block has-error"><%= translate_error(message) %></p>
       <% end %>
@@ -42,7 +42,7 @@
     </p>
 
     <div class="submit">
-      <%= submit("Register!", class: "btn btn-primary") %>
+      <%= submit("Register!") %>
     </div>
   <% end) %>
 </div>

@@ -1,6 +1,6 @@
 <div class="stripe">
   <h1>Log in</h1>
-  <%= form_tag("", method: :post, class: "login-form") %>
+  <%= form_tag("", method: :post) %>
     <label for="username">Username</label>
     <input type="text" class="form-control" id="username" name="username" value="<%= assigns[:username_input] %>" required />
 
