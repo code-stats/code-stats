@@ -1,229 +1,236 @@
-<h2>Source</h2>
+<div class="stripe">
+  <h1>Source</h1>
 
-<p>
-  Code::Stats and its plugins are open source software, licensed under the 3-clause BSD licence. You can study the inner workings of the code and suggest improvements. You are also free to fork the code.
-</p>
+  <p>
+    Code::Stats and its plugins are open source software, licensed under the 3-clause BSD licence. You can study the inner workings of the code and suggest improvements. You are also free to fork the code.
+  </p>
 
-<h3>Code repositories</h3>
+  <h2>Code repositories</h2>
 
-<p>
+  <p>
+    <ul>
+      <li>
+        <strong>Code::Stats main site:</strong>
+        <a href="https://github.com/Nicd/code-stats">https://github.com/Nicd/code-stats</a>
+      </li>
+
+      <li>
+        <strong>Atom plugin:</strong>
+        <a href="https://github.com/Nicd/code-stats-atom">https://github.com/Nicd/code-stats-atom</a>
+      </li>
+
+      <li>
+        <strong>JetBrains plugin:</strong>
+        <a href="https://github.com/Nicd/code-stats-intellij">https://github.com/Nicd/code-stats-intellij</a>
+      </li>
+
+      <li>
+        <strong>Sublime Text 3 plugin:</strong>
+        <a href="https://github.com/Nicd/code-stats-sublime">https://github.com/Nicd/code-stats-sublime</a>
+      </li>
+    </ul>
+  </p>
+
+  <h2>Changelog</h2>
+
+  <h3>2.0.0 – ????-??-?? – Brand spanking new</h3>
+
   <ul>
-    <li>
-      <strong>Code::Stats main site:</strong>
-      <a href="https://github.com/Nicd/code-stats">https://github.com/Nicd/code-stats</a>
-    </li>
-
-    <li>
-      <strong>Atom plugin:</strong>
-      <a href="https://github.com/Nicd/code-stats-atom">https://github.com/Nicd/code-stats-atom</a>
-    </li>
-
-    <li>
-      <strong>JetBrains plugin:</strong>
-      <a href="https://github.com/Nicd/code-stats-intellij">https://github.com/Nicd/code-stats-intellij</a>
-    </li>
-
-    <li>
-      <strong>Sublime Text 3 plugin:</strong>
-      <a href="https://github.com/Nicd/code-stats-sublime">https://github.com/Nicd/code-stats-sublime</a>
-    </li>
+    <li>Totally new UI written with CSS Grid.</li>
+    <li>New graphs written with RE:DOM.</li>
   </ul>
-</p>
 
-<hr />
+  <h3>1.8.6 – 2017-10-02 – AppSignal filtering</h3>
 
-<h2>Changelog</h2>
+  <ul>
+    <li>Filtered out some data that doesn't need to go to AppSignal.</li>
+  </ul>
 
-<h3>1.8.6 – 2017-10-02 – AppSignal filtering</h3>
+  <h3>1.8.5 – 2017-10-01 – AppSignal &amp; token expiration</h3>
 
-<ul>
-  <li>Filtered out some data that doesn't need to go to AppSignal.</li>
-</ul>
+  <ul>
+    <li>Added AppSignal integration for metrics and error reports to aid in development.</li>
+    <li>Added token expiration to channels so that you need to refresh the page at least once every 3 months.</li>
+  </ul>
 
-<h3>1.8.5 – 2017-10-01 – AppSignal &amp; token expiration</h3>
+  <h3>1.8.4 – 2017-10-01 – Updated to Elixir 1.5, bumped deps</h3>
 
-<ul>
-  <li>Added AppSignal integration for metrics and error reports to aid in development.</li>
-  <li>Added token expiration to channels so that you need to refresh the page at least once every 3 months.</li>
-</ul>
+  <ul>
+    <li>So I kind of blew up the thing accidentally while restarting it. Now it is fixed.</li>
+  </ul>
 
-<h3>1.8.4 – 2017-10-01 – Updated to Elixir 1.5, bumped deps</h3>
+  <h3>1.8.3 – 2017-07-16 – Small fixes</h3>
 
-<ul>
-  <li>So I kind of blew up the thing accidentally while restarting it. Now it is fixed.</li>
-</ul>
+  <ul>
+    <li>Fixed the "private profile" checkbox not working properly in the preferences page.</li>
+    <li>Added support for CORS into the user profile read API.</li>
+  </ul>
 
-<h3>1.8.3 – 2017-07-16 – Small fixes</h3>
+  <h3>1.8.2 – 2017-04-09 – Groundwork for future refactoring</h3>
 
-<ul>
-  <li>Fixed the "private profile" checkbox not working properly in the preferences page.</li>
-  <li>Added support for CORS into the user profile read API.</li>
-</ul>
+  <ul>
+    <li>Added the storing of the user's local timestamp and timezone offset when creating pulses. This will be used for better graphs in the future.</li>
+    <li>Added note about the VSCode plugin to the plugins page.</li>
+  </ul>
 
-<h3>1.8.2 – 2017-04-09 – Groundwork for future refactoring</h3>
+  <h3>1.8.1 – 2017-01-18 – Fixes + Sublime Text 3 support</h3>
 
-<ul>
-  <li>Added the storing of the user's local timestamp and timezone offset when creating pulses. This will be used for better graphs in the future.</li>
-  <li>Added note about the VSCode plugin to the plugins page.</li>
-</ul>
+  <ul>
+    <li>Bumped Elixir version to 1.4 and fixed compilation warnings.</li>
+    <li>Fix decimals being printed wrong with Elixir 1.4.</li>
+    <li>Added information about new Sublime Text 3 plugin.</li>
+    <li>Added editor logos to plugin page.</li>
+  </ul>
 
-<h3>1.8.1 – 2017-01-18 – Fixes + Sublime Text 3 support</h3>
+  <h3>1.8.0 – 2017-01-02 – Language aliases</h3>
 
-<ul>
-  <li>Bumped Elixir version to 1.4 and fixed compilation warnings.</li>
-  <li>Fix decimals being printed wrong with Elixir 1.4.</li>
-  <li>Added information about new Sublime Text 3 plugin.</li>
-  <li>Added editor logos to plugin page.</li>
-</ul>
+  <ul>
+    <li>Added a language alias feature. Now some languages are just aliases for others. This is done to fix typos and problems in language detection in editors. For example, "JavaScript 1.5" (which was released in 2000 and is erroneously detected by JetBrains in some situations) will now be corrected to "JavaScript" and all existing XP has been combined between the languages. If you have feedback or suggestions on languages to merge, give us feedback on our Gitter or IRC channel.</li>
+    <li>Added information about Gitter channel into footer, removed useless contact page.</li>
+    <li>Added user profile API for fetching data of public users. Integrate Code::Stats with your website! Check the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a> for more information.</li>
+  </ul>
 
-<h3>1.8.0 – 2017-01-02 – Language aliases</h3>
+  <h3>1.7.2 – 2016-09-12 – Machine API key and caching duration stuff</h3>
 
-<ul>
-  <li>Added a language alias feature. Now some languages are just aliases for others. This is done to fix typos and problems in language detection in editors. For example, "JavaScript 1.5" (which was released in 2000 and is erroneously detected by JetBrains in some situations) will now be corrected to "JavaScript" and all existing XP has been combined between the languages. If you have feedback or suggestions on languages to merge, give us feedback on our Gitter or IRC channel.</li>
-  <li>Added information about Gitter channel into footer, removed useless contact page.</li>
-  <li>Added user profile API for fetching data of public users. Integrate Code::Stats with your website! Check the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a> for more information.</li>
-</ul>
+  <ul>
+    <li>Fixed machine API key changing when machine name was changed.</li>
+    <li>Added caching duration to user's cache to monitor how long generating caches takes. ⏱</li>
+    <li>Fixed duplicate update query when updating user's cache.</li>
+  </ul>
 
-<h3>1.7.2 – 2016-09-12 – Machine API key and caching duration stuff</h3>
+  <h3>1.7.1 – 2016-09-03 – Small fixes to live updates</h3>
 
-<ul>
-  <li>Fixed machine API key changing when machine name was changed.</li>
-  <li>Added caching duration to user's cache to monitor how long generating caches takes. ⏱</li>
-  <li>Fixed duplicate update query when updating user's cache.</li>
-</ul>
+  <ul>
+    <li>Fixed machine ordering on profile page being wrong when live updating.</li>
+    <li>Fixed live updates not working on IE and other silly browsers by adding Babel polyfill.</li>
+  </ul>
 
-<h3>1.7.1 – 2016-09-03 – Small fixes to live updates</h3>
+  <h3>1.7.0 – 2016-08-25 – Live updates ✨</h3>
 
-<ul>
-  <li>Fixed machine ordering on profile page being wrong when live updating.</li>
-  <li>Fixed live updates not working on IE and other silly browsers by adding Babel polyfill.</li>
-</ul>
+  <ul>
+    <li>Added live update functionality to profile page and index page. XP numbers and progress bars update live using Elm. 📊 Index page includes a ticker that shows users gaining XP live (private profiles are shown as "Private user").</li>
+    <li>Bumped dependencies. Update of Plug results in a different format for API tokens, but the old ones will still work.</li>
+  </ul>
 
-<h3>1.7.0 – 2016-08-25 – Live updates ✨</h3>
+  <h3>1.6.2 – 2016-08-08 – Small fixes</h3>
 
-<ul>
-  <li>Added live update functionality to profile page and index page. XP numbers and progress bars update live using Elm. 📊 Index page includes a ticker that shows users gaining XP live (private profiles are shown as "Private user").</li>
-  <li>Bumped dependencies. Update of Plug results in a different format for API tokens, but the old ones will still work.</li>
-</ul>
+  <ul>
+    <li>Remove redundant ARIA tags from progress bars to show more descriptive textual info for screen readers.</li>
+    <li>Fix error message printed in console when trying to access a page that does not allow authentication, while being logged in.</li>
+  </ul>
 
-<h3>1.6.2 – 2016-08-08 – Small fixes</h3>
+  <h3>1.6.1 – 2016-08-06 – Fixes to machines and page permissions</h3>
 
-<ul>
-  <li>Remove redundant ARIA tags from progress bars to show more descriptive textual info for screen readers.</li>
-  <li>Fix error message printed in console when trying to access a page that does not allow authentication, while being logged in.</li>
-</ul>
+  <ul>
+    <li>Forbid authenticated users from accessing the login, signup and password reset pages. They will be redirected to their profile instead.</li>
+    <li>Fix crash when machine was deleted, caused by the cache not being regenerated. Now the cache is regenerated automatically after delete and crash is avoided even if regeneration is still in progress.</li>
+    <li>Add a JavaScript confirmation prompt when deleting a machine.</li>
+  </ul>
 
-<h3>1.6.1 – 2016-08-06 – Fixes to machines and page permissions</h3>
+  <h3>1.6.0 – 2016-08-04 – Password resets and fixes</h3>
 
-<ul>
-  <li>Forbid authenticated users from accessing the login, signup and password reset pages. They will be redirected to their profile instead.</li>
-  <li>Fix crash when machine was deleted, caused by the cache not being regenerated. Now the cache is regenerated automatically after delete and crash is avoided even if regeneration is still in progress.</li>
-  <li>Add a JavaScript confirmation prompt when deleting a machine.</li>
-</ul>
+  <ul>
+    <li>Added password reset feature. Password can only be reset if the account has an email address set up.</li>
+    <li>Updated privacy policy and terms of service due to email sending feature.</li>
+    <li>Fixed 💥 when forms like the signup form were filled with invalid data.</li>
+    <li>Fixed crash when pulses were sent before caches were generated.</li>
+    <li>Fixed crash when pulses were sent with the API token in an invalid format.</li>
+    <li>Added Twitter link.</li>
+    <li>Added Elixir and Phoenix link to footer.</li>
+    <li>Fixed discrepancies in the API docs regarding pulse dates.</li>
+    <li>An issue with the "last coded at" date in 1.5.0 was hotfixed.</li>
+  </ul>
 
-<h3>1.6.0 – 2016-08-04 – Password resets and fixes</h3>
+  <h3>1.5.0 – 2016-07-17 – Second performance update</h3>
 
-<ul>
-  <li>Added password reset feature. Password can only be reset if the account has an email address set up.</li>
-  <li>Updated privacy policy and terms of service due to email sending feature.</li>
-  <li>Fixed 💥 when forms like the signup form were filled with invalid data.</li>
-  <li>Fixed crash when pulses were sent before caches were generated.</li>
-  <li>Fixed crash when pulses were sent with the API token in an invalid format.</li>
-  <li>Added Twitter link.</li>
-  <li>Added Elixir and Phoenix link to footer.</li>
-  <li>Fixed discrepancies in the API docs regarding pulse dates.</li>
-  <li>An issue with the "last coded at" date in 1.5.0 was hotfixed.</li>
-</ul>
+  <ul>
+    <li>Earlier, profile view XPs per language were cached to the database as CachedXP elements. This worked fine for that purpose but caching for other dimensions such as per machine and per date were needed. In this update, CachedXP is removed in favor of a JSON field on the user model, which can be used to add all kinds of different caches. Caching is implemented in this field for languages, machines and dates. This removes the need to hit the database for other uses than to update the cache and to load the last 12 hours' XP data. As a result the profile view's display should be much faster.</li>
+    <li>An issue with 1.4.0 and database limits in queries was hotfixed.</li>
+  </ul>
 
-<h3>1.5.0 – 2016-07-17 – Second performance update</h3>
+  <h3>1.4.0 – 2016-07-16 – First performance update</h3>
 
-<ul>
-  <li>Earlier, profile view XPs per language were cached to the database as CachedXP elements. This worked fine for that purpose but caching for other dimensions such as per machine and per date were needed. In this update, CachedXP is removed in favor of a JSON field on the user model, which can be used to add all kinds of different caches. Caching is implemented in this field for languages, machines and dates. This removes the need to hit the database for other uses than to update the cache and to load the last 12 hours' XP data. As a result the profile view's display should be much faster.</li>
-  <li>An issue with 1.4.0 and database limits in queries was hotfixed.</li>
-</ul>
+  <ul>
+    <li>Total XP and most popular languages counters on the front page are now in-memory, stored inside ETS. They are updated on every incoming pulse (for now) and totally refreshed every 15 minutes. This should make the front page much faster.</li>
+    <li>Added an index to make "XP in last 12 hours" queries faster both on front page and profile pages.</li>
+    <li>Accessibility was improved with regards to dates and progress bars.</li>
+    <li>Fixed average XP per day display, which showed XP in scientific format in some cases.</li>
+    <li>Added real page titles for better SEO and bookmarking.</li>
+    <li>Updated the codebase for Elixir 1.3, Phoenix 1.2 and Ecto 2.0.</li>
+    <li>Fixed some JSON errors not being sent correctly in the API.</li>
+  </ul>
 
-<h3>1.4.0 – 2016-07-16 – First performance update</h3>
+  <h3>1.3.7 – 2016-06-08 – Fix username uniqueness</h3>
 
-<ul>
-  <li>Total XP and most popular languages counters on the front page are now in-memory, stored inside ETS. They are updated on every incoming pulse (for now) and totally refreshed every 15 minutes. This should make the front page much faster.</li>
-  <li>Added an index to make "XP in last 12 hours" queries faster both on front page and profile pages.</li>
-  <li>Accessibility was improved with regards to dates and progress bars.</li>
-  <li>Fixed average XP per day display, which showed XP in scientific format in some cases.</li>
-  <li>Added real page titles for better SEO and bookmarking.</li>
-  <li>Updated the codebase for Elixir 1.3, Phoenix 1.2 and Ecto 2.0.</li>
-  <li>Fixed some JSON errors not being sent correctly in the API.</li>
-</ul>
+  <ul>
+    <li>Fix username uniqueness, due to a problem with SQL migrations a unique index was not created and multiple users could be registered with the same username. 😱</li>
+    <li>Change some IDs to bigint because if it's worth doing, it's worth overdoing.</li>
+    <li>Remove old unused total XP property from users.</li>
+    <li>Clarified git repo licences a bit.</li>
+  </ul>
 
-<h3>1.3.7 – 2016-06-08 – Fix username uniqueness</h3>
+  <h3>1.3.3–1.3.6 – 2016-06-07 – JetBrains and username path fixes</h3>
 
-<ul>
-  <li>Fix username uniqueness, due to a problem with SQL migrations a unique index was not created and multiple users could be registered with the same username. 😱</li>
-  <li>Change some IDs to bigint because if it's worth doing, it's worth overdoing.</li>
-  <li>Remove old unused total XP property from users.</li>
-  <li>Clarified git repo licences a bit.</li>
-</ul>
+  <ul>
+    <li>Added details of the published IntelliJ/JetBrains plugin.</li>
+    <li>Fixed spaces in usernames resulting in unreachable profile pages.</li>
+    <li>Disallowed the plus sign in usernames to avoid conflicts with spaces.</li>
+  </ul>
 
-<h3>1.3.3–1.3.6 – 2016-06-07 – JetBrains and username path fixes</h3>
+  <h3>1.3.2 – 2016-06-06 – JSON errors</h3>
 
-<ul>
-  <li>Added details of the published IntelliJ/JetBrains plugin.</li>
-  <li>Fixed spaces in usernames resulting in unreachable profile pages.</li>
-  <li>Disallowed the plus sign in usernames to avoid conflicts with spaces.</li>
-</ul>
+  <ul>
+    <li>Enabled JSON errors for easier debugging of 500 Internal server errors.</li>
+  </ul>
 
-<h3>1.3.2 – 2016-06-06 – JSON errors</h3>
+  <h3>1.3.1 – 2016-06-05 – Language name fix</h3>
 
-<ul>
-  <li>Enabled JSON errors for easier debugging of 500 Internal server errors.</li>
-</ul>
+  <ul>
+    <li>Fixed languages being created with different capitalisations. Now language names are case insensitive.</li>
+  </ul>
 
-<h3>1.3.1 – 2016-06-05 – Language name fix</h3>
+  <h3>1.3.0 – 2016-06-04 – Machine stats</h3>
 
-<ul>
-  <li>Fixed languages being created with different capitalisations. Now language names are case insensitive.</li>
-</ul>
+  <ul>
+    <li>Added machine statistics to profile page.</li>
+    <li>Added recalculation of XP once a day to fix XP errors in profile view.</li>
+    <li>Added favicons.</li>
+    <li>Added more user info to profile view.</li>
+  </ul>
 
-<h3>1.3.0 – 2016-06-04 – Machine stats</h3>
+  <h3>1.2.2 – 2016-06-02 – Vincit Oy</h3>
 
-<ul>
-  <li>Added machine statistics to profile page.</li>
-  <li>Added recalculation of XP once a day to fix XP errors in profile view.</li>
-  <li>Added favicons.</li>
-  <li>Added more user info to profile view.</li>
-</ul>
+  <ul>
+    <li>Added note about my company who have sponsored the development of the service.</li>
+    <li>Added more information to the plugins page.</li>
+  </ul>
 
-<h3>1.2.2 – 2016-06-02 – Vincit Oy</h3>
+  <h3>1.2.1 – 2016-05-31 – Small fixes</h3>
 
-<ul>
-  <li>Added note about my company who have sponsored the development of the service.</li>
-  <li>Added more information to the plugins page.</li>
-</ul>
+  <ul>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/1">#1</a>: coded_at time range not documented in API docs</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/2">#2</a>: Endpoint path typo in API docs</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/4">#4</a>: Refactor README</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/5">#5</a>: Add link to example stats to front page</li>
+    <li>Fix <a href="https://github.com/Nicd/code-stats/issues/6">#6</a>: Add clarification about recent XP</li>
+  </ul>
 
-<h3>1.2.1 – 2016-05-31 – Small fixes</h3>
+  <h3>1.2.0 – 2016-05-31 – Scaling back levels</h3>
 
-<ul>
-  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/1">#1</a>: coded_at time range not documented in API docs</li>
-  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/2">#2</a>: Endpoint path typo in API docs</li>
-  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/4">#4</a>: Refactor README</li>
-  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/5">#5</a>: Add link to example stats to front page</li>
-  <li>Fix <a href="https://github.com/Nicd/code-stats/issues/6">#6</a>: Add clarification about recent XP</li>
-</ul>
+  <ul>
+    <li>Scaled back the level algorithm to grant less levels. XP is not affected. The aim is to prevent an inflation of levels. The level algorithm may be modified further later on.</li>
+    <li>Combined the source and changes page.</li>
+  </ul>
 
-<h3>1.2.0 – 2016-05-31 – Scaling back levels</h3>
+  <h3>1.1.1 – 2016-05-30 – Clock drift</h3>
 
-<ul>
-  <li>Scaled back the level algorithm to grant less levels. XP is not affected. The aim is to prevent an inflation of levels. The level algorithm may be modified further later on.</li>
-  <li>Combined the source and changes page.</li>
-</ul>
+  <ul>
+    <li>Fixed a case where clock drift either on the client or the server caused pulses to not be accepted.</li>
+  </ul>
 
-<h3>1.1.1 – 2016-05-30 – Clock drift</h3>
+  <h3>1.1.0 – 2016-05-30 – First public release</h3>
 
-<ul>
-  <li>Fixed a case where clock drift either on the client or the server caused pulses to not be accepted.</li>
-</ul>
-
-<h3>1.1.0 – 2016-05-30 – First public release</h3>
-
-<p>
-  Implemented <em>everything</em>. 🎉
-</p>
+  <p>
+    Implemented <em>everything</em>. 🎉
+  </p>
+</div>
