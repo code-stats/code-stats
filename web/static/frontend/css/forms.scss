@@ -20,6 +20,9 @@
 
 // Basic form should be a 2-grid of label-element pairs
 form {
+  display: grid;
+  grid: auto / auto;
+
   >input,
   >textarea,
   >.input {
@@ -27,7 +30,6 @@ form {
   }
 
   @media #{$sm} {
-    display: grid;
     grid: auto / auto 1fr;
 
     grid-gap: 20px 20px;
