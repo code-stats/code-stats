@@ -1,135 +1,131 @@
-<h2>
-  <%= get_conf(:site_name) %> plugins
-</h2>
+<div class="stripe">
+  <h1>
+    <%= get_conf(:site_name) %> plugins
+  </h1>
 
-<h3>A note about the functionality of the plugins</h3>
+  <h2>A note about the functionality of the plugins</h2>
 
-<p>
-  The plugins work by listening to your editor's text changes and detecting the syntax used. If you are having problems with XP registering to the wrong language, you may need to install an appropriate language support package for your editor. <%= get_conf(:site_name) %> relies on the editor to detect the proper language.
-</p>
+  <p>
+    The plugins work by listening to your editor's text changes and detecting the syntax used. If you are having problems with XP registering to the wrong language, you may need to install an appropriate language support package for your editor. <%= get_conf(:site_name) %> relies on the editor to detect the proper language.
+  </p>
 
-<p>
-  Note that <em>at no point is any of your code sent to <%= get_conf(:site_name) %></em>. Only the amounts of XP (roughly the amount of keystrokes) are sent. For further information, check the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a> and the source code of the plugins.
-</p>
+  <p>
+    Note that <em>at no point is any of your code sent to <%= get_conf(:site_name) %></em>. Only the amounts of XP (roughly the amount of keystrokes) are sent. For further information, check the <a href="<%= page_path(@conn, :api_docs) %>">API documentation</a> and the source code of the plugins.
+  </p>
 
-<hr />
+  <hr />
 
-<div class="media">
-  <div class="media-left">
+  <div class="plugin">
+    <h2>Atom</h2>
+
+    <div class="plugin-description">
+      <p>
+        To install, use Atom's builtin package search to search for <code>code-stats-atom</code> and install the package. Then go to the package's settings page and insert the API key of the machine you want.
+      </p>
+
+      <p>
+        <a href="https://atom.io/packages/code-stats-atom">Link to the plugin on Atom's site.</a>
+      </p>
+    </div>
+
     <img
-     class="media-object"
-     src="<%= static_path(@conn, "/images/atom-logo.svg") %>"
+     class="plugin-image"
+     src="<%= static_path(@conn, "/frontend/assets/images/atom-logo.svg") %>"
      title="Atom editor"
      alt="Atom editor logo"
     />
   </div>
-  <div class="media-body">
-    <h3 class="media-heading">Atom</h3>
 
-    <p>
-      To install, use Atom's builtin package search to search for <code>code-stats-atom</code> and install the package. Then go to the package's settings page and insert the API key of the machine you want.
-    </p>
+  <div class="plugin">
+    <h2>JetBrains IDEs</h2>
 
-    <p>
-      <a href="https://atom.io/packages/code-stats-atom">Link to the plugin on Atom's site.</a>
-    </p>
-  </div>
-</div>
+    <div class="plugin-description">
+      <p>
+        To install, use the IDEs builtin package manager, click on "Browse repositories…" and search for <code>Code::Stats</code>. After installation, go to Settings -> Other Settings -> Code::Stats and insert your API key.
+      </p>
 
-<div class="media">
-  <div class="media-body">
-    <h3 class="media-heading">JetBrains IDEs</h3>
+      <p>
+        <a href="https://plugins.jetbrains.com/plugin/8393?pr=">Link to the plugin on JetBrain's site.</a>
+      </p>
 
-    <p>
-      To install, use the IDEs builtin package manager, click on "Browse repositories…" and search for <code>Code::Stats</code>. After installation, go to Settings -> Other Settings -> Code::Stats and insert your API key.
-    </p>
+      <p>
+        <strong>Note:</strong>
+        If the plugin fails to send XP, reporting <code>C::S ERR!</code>, hover over the status bar text to see the actual exception. If it complains of a PKIX error, you may need to install the <a href="https://www.identrust.com/certificates/trustid/root-download-x3.html">DST Root CA X3</a> to the IDE's JRE's trust store manually. The command to do that goes roughly like this on macOS:
+      </p>
 
-    <p>
-      <a href="https://plugins.jetbrains.com/plugin/8393?pr=">Link to the plugin on JetBrain's site.</a>
-    </p>
+      <pre><kbd>$ cd /Applications/&lt;IDE&gt;.app/Contents/jre/jdk/Contents/Home/jre
+$ bin/keytool -import -alias 'DST Root CA X3' -keystore lib/security/cacerts -trustcacerts -file /path/to/dst_root_ca_x3.pem</kbd></pre>
+    </div>
 
-    <p>
-      <strong>Note:</strong>
-      If the plugin fails to send XP, reporting <code>C::S ERR!</code>, hover over the status bar text to see the actual exception. If it complains of a PKIX error, you may need to install the <a href="https://www.identrust.com/certificates/trustid/root-download-x3.html">DST Root CA X3</a> to the IDE's JRE's trust store manually. The command to do that goes roughly like this on OS X:
-    </p>
-
-<pre>
-<code>$ cd /Applications/&lt;IDE&gt;.app/Contents/jre/jdk/Contents/Home/jre
-$ bin/keytool -import -alias 'DST Root CA X3' -keystore lib/security/cacerts -trustcacerts -file /path/to/dst_root_ca_x3.pem</code>
-</pre>
-  </div>
-  <div class="media-right">
     <img
-     class="media-object"
-     src="<%= static_path(@conn, "/images/jetbrains-logo.svg") %>"
+     class="plugin-image"
+     src="<%= static_path(@conn, "/frontend/assets/images/jetbrains-logo.svg") %>"
      title="JetBrains"
      alt="JetBrains logo"
     />
   </div>
-</div>
 
-<div class="media">
-  <div class="media-left">
+  <div class="plugin">
+    <h2>Sublime Text 3</h2>
+
+    <div class="plugin-description">
+      <p>
+        To install, first setup <a href="https://packagecontrol.io/">Package Control</a> and then use it to install package <code>CodeStats</code>. Then open the package settings and configure the API key.
+      </p>
+
+      <p>
+        <a href="https://packagecontrol.io/packages/CodeStats">Link to the plugin on Package Control's site.</a>
+      </p>
+    </div>
+
     <img
-     class="media-object"
-     src="<%= static_path(@conn, "/images/sublime-logo.png") %>"
+     class="plugin-image"
+     src="<%= static_path(@conn, "/frontend/assets/images/sublime-logo.png") %>"
      title="Sublime Text"
      alt="Sublime Text logo"
     />
   </div>
-  <div class="media-body">
-    <h3 class="media-heading">Sublime Text 3</h3>
 
-    <p>
-      To install, first setup <a href="https://packagecontrol.io/">Package Control</a> and then use it to install package <code>CodeStats</code>. Then open the package settings and configure the API key.
-    </p>
+  <div class="plugin">
+    <h2>Visual Studio Code</h2>
 
-    <p>
-      <a href="https://packagecontrol.io/packages/CodeStats">Link to the plugin on Package Control's site.</a>
-    </p>
-  </div>
-</div>
+    <div class="plugin-description">
+      <p>
+        To install, use the editor's extension manager and search for <code>Code::Stats</code>. After installation, set the <code>codestats.apikey</code> setting to your API key.
+      </p>
 
-<div class="media">
-  <div class="media-body">
-    <h3 class="media-heading">Visual Studio Code</h3>
+      <p>
+        <a href="https://marketplace.visualstudio.com/items?itemName=juha-ristolainen.code-stats-vscode">Link to the plugin on the Visual Studio Marketplace.</a>
+      </p>
 
-    <p>
-      To install, use the editor's extension manager and search for <code>Code::Stats</code>. After installation, set the <code>codestats.apikey</code> setting to your API key.
-    </p>
+      <p>
+        <em>Thanks to <a href="http://www.juharistolainen.com/">Juha Ristolainen</a> for the VSCode extension.</em>
+      </p>
+    </div>
 
-    <p>
-      <a href="https://marketplace.visualstudio.com/items?itemName=juha-ristolainen.code-stats-vscode">Link to the plugin on the Visual Studio Marketplace.</a>
-    </p>
-
-    <p>
-      <em>Thanks to <a href="http://www.juharistolainen.com/">Juha Ristolainen</a> for the VSCode extension.</em>
-    </p>
-  </div>
-  <div class="media-right">
     <img
-     class="media-object"
-     src="<%= static_path(@conn, "/images/vscode-logo.png") %>"
+     class="plugin-image"
+     src="<%= static_path(@conn, "/frontend/assets/images/vscode-logo.png") %>"
      title="Visual Studio Code"
      alt="Visual Studio Code logo"
     />
   </div>
-</div>
 
-<div class="media">
-  <div class="media-body">
-    <h3 class="media-heading">Other editors</h3>
+  <div class="media">
+    <div class="media-body">
+      <h2 class="media-heading">Other editors</h2>
+
+      <p>
+        If there is no plugin for your favourite editor, you can check out the <a href="<%= page_path(@conn, :api_docs) %>">API docs</a> and implement one yourself. If you do, please let us know so we can add a link to it here!
+      </p>
+    </div>
+
+    <hr />
 
     <p>
-      If there is no plugin for your favourite editor, you can check out the <a href="<%= page_path(@conn, :api_docs) %>">API docs</a> and implement one yourself. If you do, please let us know so we can add a link to it here!
+      <em>
+        All logos are the intellectual property and possible trademarks of their respective owners. The Atom editor logo is licensed under the MIT licence. The JetBrains logo is used with permission from JetBrains s.r.o. It is believed that the Sublime Text and Visual Studio Code logos are used according to the fair use rules of the Finnish law.
+      </em>
     </p>
   </div>
-
-  <hr />
-
-  <p>
-    <em>
-      All logos are the intellectual property and possible trademarks of their respective owners. The Atom editor logo is licensed under the MIT licence. The JetBrains logo is used with permission from JetBrains s.r.o. It is believed that the Sublime Text and Visual Studio Code logos are used according to the fair use rules of the Finnish law.
-    </em>
-  </p>
 </div>

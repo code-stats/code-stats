@@ -123,13 +123,20 @@ code {
 }
 
 pre {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+
   background-color: $code-background;
   padding: 10px;
   border-radius: 5px;
   overflow-x: auto;
 
-  >code {
+  >code,
+  >kbd {
     white-space: pre-wrap;
-    border: none;
+    word-wrap: break-word;
+    border: 0;
+    padding: 0;
   }
 }

@@ -1,0 +1,41 @@
+$image-size: 120px;
+$gap: 20px;
+
+.plugin {
+  margin: 40px 0;
+
+  display: grid;
+  grid: 'title'
+        'img'
+        'desc'
+        / 1fr;
+
+  @media #{$sm} {
+    grid: 'img title'
+          'img desc '
+          / $image-size auto;
+
+    grid-column-gap: $gap;
+
+    &:nth-child(2n+1) {
+      grid: 'title img'
+            'desc  img'
+            / auto $image-size;
+      grid-column-gap: $gap;
+    }
+  }
+
+  >h2 {
+    grid-area: title;
+    margin-top: 0;
+  }
+
+  .plugin-description {
+    grid-area: desc;
+  }
+
+  >.plugin-image {
+    grid-area: img;
+    max-width: 120px;
+  }
+}
