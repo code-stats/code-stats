@@ -58,19 +58,19 @@
     </header>
 
     <%= if get_flash(@conn, :info) do %>
-      <section class="stripe flash-stripe" role="alert">
-        ℹ️ <%= get_flash(@conn, :info) %>
-      </section>
+      <div class="stripe flash-stripe" role="alert">
+        <%= get_flash(@conn, :info) %>
+      </div>
     <% end %>
     <%= if get_flash(@conn, :success) do %>
-      <section class="stripe flash-stripe flash-success" role="alert">
-        ✅ <%= get_flash(@conn, :success) %>
-      </section>
+      <div class="stripe flash-stripe flash-success" role="alert">
+        <%= get_flash(@conn, :success) %>
+      </div>
     <% end %>
     <%= if get_flash(@conn, :error) do %>
-      <section class="stripe flash-stripe flash-error" role="alert">
-        ⚠️ <%= get_flash(@conn, :error) %>
-      </section>
+      <div class="stripe flash-stripe flash-error" role="alert">
+        <%= get_flash(@conn, :error) %>
+      </div>
     <% end %>
 
     <%= if false and get_conf(:beta_mode) do %>
@@ -87,7 +87,7 @@
 
     <footer id="footer-stripe" class="stripe stripe-accent">
       <section>
-        Rendered in <%= CodeStats.RequestTime.calculate_time(@conn) %>.
+        <h6 class="no-margin">Rendered in <%= CodeStats.RequestTime.calculate_time(@conn) %>.</h6>
         <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
         <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
         <a href="<%= page_path(@conn, :terms) %>">Legal</a>
@@ -96,7 +96,7 @@
 
       <%= if not Enum.empty?(get_conf(:social_links)) do %>
         <section>
-          Contact us!
+          <h6 class="no-margin">Contact us!</h6>
           <%= for {name, url} <- get_conf(:social_links) do %>
             <a href="<%= url %>"><%= name %></a>
           <% end %>

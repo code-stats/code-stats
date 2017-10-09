@@ -70,7 +70,7 @@ defmodule CodeStats.PreferencesController do
       end
     else
       conn
-      |> put_flash(:delete_error, "Please confirm deletion by typing \"DELETE\" into the inpute field.")
+      |> put_flash(:delete_error, "Please confirm deletion by typing \"DELETE\" into the input field.")
       |> redirect(to: preferences_path(conn, :edit))
     end
   end

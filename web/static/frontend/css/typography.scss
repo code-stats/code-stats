@@ -3,6 +3,8 @@ $h1-size: 3.000rem;
 $h2-size: 2.369rem;
 $h3-size: 1.777rem;
 $h4-size: 1.333rem;
+$h5-size: 1.222rem;
+$h6-size: 1.111rem;
 
 // Make headings smaller on smaller screen sizes
 @mixin smallinize-heading($orig-size) {
@@ -68,8 +70,11 @@ h4 {
 }
 
 h1 {
-  margin-top: 0;
   @include smallinize-heading($h1-size);
+
+  &:not(.top-margin) {
+    margin-top: 0;
+  }
 }
 
 h2 {
@@ -82,6 +87,14 @@ h3 {
 
 h4 {
   @include smallinize-heading($h4-size);
+}
+
+h5 {
+  @include smallinize-heading($h5-size);
+}
+
+h6 {
+  @include smallinize-heading($h6-size);
 }
 
 small,

@@ -1,80 +1,76 @@
-<div class="preferences-form">
+<div class="stripe">
+  <h1>Preferences</h1>
+
   <h2>User details</h2>
+
   <%= form_for(@changeset, preferences_path(@conn, :do_edit), fn f -> %>
-    <div class="form-group <%= if f.errors[:email], do: "has-error" %>">
-      <label for="user_email">Email address</label>
+    <label for="user_email" class="<%= if f.errors[:email], do: "has-error" %>">Email address</label>
+    <div class="input">
       <%= email_input(f, :email, class: "form-control") %>
       <%= if message = f.errors[:email] do %>
-        <p class="help-block"><%= message %></p>
+        <p class="help-block has-error"><%= message %></p>
       <% end %>
       <p class="help-block">
         Email is only used for important notifications about the service, not for promotions or spam.
       </p>
     </div>
 
-    <div class="checkbox">
-      <label>
-        <%= checkbox(f, :private_profile) %>
-        Private profile
-      </label>
+    <label for="user_private_profile">Private profile</label>
+    <div class="input">
+      <%= checkbox(f, :private_profile) %>
 
       <p class="help-block">
         Private profile can only be seen by yourself.
       </p>
     </div>
 
-    <%= submit("Update preferences", class: "btn btn-primary") %>
+    <div class="submit"><%= submit("Update preferences", class: "btn btn-primary") %></div>
   <% end) %>
+</div>
 
-  <hr />
+<div class="stripe flash-stripe flash-success" role="alert"><%= get_flash(@conn, :password_success) %></div>
+<div class="stripe flash-stripe flash-error" role="alert"><%= get_flash(@conn, :password_error) %></div>
 
+<div class="stripe">
   <h2>Change password</h2>
 
-  <p class="alert alert-success" role="alert"><%= get_flash(@conn, :password_success) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :password_error) %></p>
-
   <%= form_tag(preferences_path(@conn, :change_password)) %>
-    <div class="form-group <%= if assigns[:old_password_error], do: "has-error" %>">
-      <label for="old_password">Old password (required)</label>
-      <input type="password" id="old_password" name="old_password" class="form-control" required />
+    <label for="old_password" class="<%= if assigns[:old_password_error], do: "has-error" %>">Old password (required)</label>
+    <div class="input">
+      <input type="password" id="old_password" name="old_password" required />
       <%= if assigns[:old_password_error] do %>
-        <p class="help-block"><%= assigns[:old_password_error] %></p>
+        <p class="help-block has-error"><%= assigns[:old_password_error] %></p>
       <% end %>
     </div>
-    <div class="form-group <%= if assigns[:new_password_error], do: "has-error" %>">
-      <label for="new_password">New password (required)</label>
+
+    <label for="new_password" class="<%= if assigns[:new_password_error], do: "has-error" %>">New password (required)</label>
+    <div class="input">
       <input type="password" id="new_password" name="new_password" class="form-control" required />
       <%= if assigns[:new_password_error] do %>
-        <p class="help-block"><%= assigns[:new_password_error] %></p>
+        <p class="help-block has-error"><%= assigns[:new_password_error] %></p>
       <% end %>
     </div>
 
-    <input type="submit" class="btn btn-primary" value="Change password" />
+    <div class="submit"><button type="submit" class="btn btn-primary">Change password</button></div>
   </form>
+</div>
 
-  <hr />
+<div class="stripe flash-stripe flash-error" role="alert"><%= get_flash(@conn, :delete_error) %></div>
 
+<div class="stripe">
   <h2>Delete account</h2>
 
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :delete_error) %></p>
+  <p>
+    If you wish to delete your account, please input "DELETE" into the field below and press
+    the delete button. If you do this, all your data will be removed and cannot be recovered.
 
-  <div class="well">
-    <p>
-      If you wish to delete your account, please input "DELETE" into the field below and press
-      the delete button. If you do this, all your data will be removed and cannot be recovered.
 
-      <strong>
-        This cannot be undone!
-      </strong>
-    </p>
+  </p>
 
-    <%= form_tag(preferences_path(@conn, :delete)) %>
-      <div class="form-group">
-        <input type="text" class="form-control" name="delete_confirmation" maxlength="6" />
-      </div>
+  <%= form_tag(preferences_path(@conn, :delete)) %>
+    <label><strong>This cannot be undone!</strong></label>
+    <input type="text" class="form-control" name="delete_confirmation" maxlength="6" required />
 
-      <input type="submit" class="btn btn-danger" value="Delete account forever" />
-    </form>
-  </div>
-
+    <div class="submit"><button type="submit" class="btn btn-danger">Delete account forever</button></div>
+  </form>
 </div>

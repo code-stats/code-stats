@@ -1,47 +1,90 @@
-.stripe.flash-stripe {
-  grid-area: flash;
+@mixin flash($color, $text-color) {
+  background-color: $color;
+  color: $text-color;
+}
 
-  background-color: $info-color;
-  color: $info-text-color;
+@mixin flash-before($str) {
+  &::before {
+    content: $str;
+  }
+}
+
+@mixin info-before {
+  @include flash-before('ℹ️ ');
+}
+
+@mixin success-before {
+  @include flash-before('✅ ');
+}
+
+@mixin warning-before {
+  @include flash-before('⚠️ ');
+}
+
+@mixin error-before {
+  @include flash-before('❌ ');
+}
+
+@mixin danger-before {
+  @include flash-before('🛑 ');
+}
+
+.stripe.flash-stripe {
+  @include flash($info-color, $info-text-color);
+  @include info-before;
+
+  grid-area: flash;
 
   padding-top: 20px;
   padding-bottom: 20px;
 
+  &:empty {
+    display: none;
+  }
+
   &.flash-success {
-    background-color: $success-color;
-    color: $success-text-color;
+    @include flash($success-color, $success-text-color);
+    @include success-before;
   }
 
   &.flash-error {
-    background-color: $error-color;
-    color: $error-text-color;
+    @include flash($error-color, $error-text-color);
+    @include error-before;
   }
 }
 
 // Similar to flashes but not in the top stripe
+@mixin alert($color, $text-color) {
+  @include flash($color, $text-color);
+  border-color: $text-color;
+}
+
 .alert {
+  @include alert($info-color, $info-text-color);
+  @include info-before;
+
   padding: 10px;
   border-radius: 5px;
-
-  background-color: $info-color;
-  color: $info-text-color;
-  border: 1px dashed $info-text-color;
+  border-width: 1px;
+  border-style: dashed;
 
   &.alert-success {
-    background-color: $success-color;
-    color: $success-text-color;
-    border-color: $success-text-color;
+    @include alert($success-color, $success-text-color);
+    @include success-before;
   }
 
   &.alert-warning {
-    background-color: $warning-color;
-    color: $warning-text-color;
-    border-color: $warning-text-color;
+    @include alert($warning-color, $warning-text-color);
+    @include warning-before;
   }
 
   &.alert-error {
-    background-color: $error-color;
-    color: $error-text-color;
-    border-color: $error-text-color;
+    @include alert($error-color, $error-text-color);
+    @include error-before;
+  }
+
+  &.alert-danger {
+    @include alert($danger-color, $danger-text-color);
+    @include danger-before;
   }
 }
