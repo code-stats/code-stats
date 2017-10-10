@@ -1,0 +1,65 @@
+.machine-list {
+  margin-bottom: 40px;
+
+  >.machine {
+    display: grid;
+    grid-template: 'name'
+                   'key'
+                   'copy'
+                   'edit'
+                   'regen'
+                   'delete'
+                   / 1fr;
+    grid-gap: 20px;
+
+    @media #{$sm} {
+      grid-template: 'name name name  name  '
+                     'key  key  key   key   '
+                     'copy edit regen delete'
+                    / auto auto auto auto;
+    }
+
+    @media #{$lg} {
+      grid-template: 'name   name   name   name   name  '
+                     'key    copy   edit   regen  delete'
+                    / 1fr    auto   auto   auto   auto;
+    }
+
+    >h2 {
+      grid-area: name;
+    }
+
+    >.api-key-text {
+      grid-area: key;
+
+      display: grid;
+      grid-template: auto / auto 1fr;
+      grid-column-gap: 20px;
+
+      >input.api-key {
+        font-family: monospace;
+      }
+    }
+
+    >.copy-button {
+      grid-area: copy;
+    }
+
+    >.edit-form {
+      grid-area: edit;
+    }
+
+    >.regenerate-form {
+      grid-area: regen;
+    }
+
+    >.delete-form {
+      grid-area: delete;
+    }
+
+    // Don't use basic form template in these button forms
+    >form {
+      grid-template: auto / auto;
+    }
+  }
+}

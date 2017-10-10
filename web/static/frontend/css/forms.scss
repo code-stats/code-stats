@@ -86,4 +86,23 @@ button {
     padding: ($button-y-padding + $button-press-move) ($button-x-padding - $button-press-move) ($button-y-padding - $button-press-move) ($button-x-padding + $button-press-move);
     box-shadow: inset $button-shadow;
   }
+
+  @mixin button-color($base-color) {
+    $bg-color: darken($base-color, 10%);
+    background-color: $bg-color;
+    color: darken($base-color, 60%);
+    border-color: $bg-color;
+  }
+
+  &.button-info {
+    @include button-color($info-color);
+  }
+
+  &.button-warning {
+    @include button-color($warning-color);
+  }
+
+  &.button-danger {
+    @include button-color($danger-color);
+  }
 }

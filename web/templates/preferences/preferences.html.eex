@@ -6,7 +6,7 @@
   <%= form_for(@changeset, preferences_path(@conn, :do_edit), fn f -> %>
     <label for="user_email" class="<%= if f.errors[:email], do: "has-error" %>">Email address</label>
     <div class="input">
-      <%= email_input(f, :email, class: "form-control") %>
+      <%= email_input(f, :email) %>
       <%= if message = f.errors[:email] do %>
         <p class="help-block has-error"><%= message %></p>
       <% end %>
