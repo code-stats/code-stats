@@ -1,17 +1,23 @@
-<h2>Language aliases</h2>
+<div class="stripe">
+  <h1>Language aliases</h1>
 
-<%= for language <- @aliases do %>
-  <h3><%= language.name %></h3>
+  <div class="aliases">
+    <%= for language <- @aliases do %>
+      <div>
+        <h2><%= language.name %></h2>
 
-  <%= if Enum.count(language.aliases) > 0 do %>
-    <p>Aliases:</p>
+        <%= if Enum.count(language.aliases) > 0 do %>
+          <p>Aliases:</p>
 
-    <ul>
-      <%= for alias <- language.aliases do %>
-        <li><%= alias.name %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No aliases.</p>
-  <% end %>
-<% end %>
+          <ul>
+            <%= for alias <- language.aliases do %>
+              <li><%= alias.name %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No aliases.</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
