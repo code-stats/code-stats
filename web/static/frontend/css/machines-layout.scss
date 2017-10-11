@@ -6,22 +6,22 @@
     grid-template: 'name'
                    'key'
                    'copy'
-                   'edit'
                    'regen'
+                   'edit'
                    'delete'
                    / 1fr;
     grid-gap: 20px;
 
     @media #{$sm} {
-      grid-template: 'name name name  name  '
-                     'key  key  key   key   '
-                     'copy edit regen delete'
-                    / auto auto auto auto;
+      grid-template: 'name name  name  name  '
+                     'key  key   key   key   '
+                     'copy regen edit  delete'
+                    / auto auto  auto  auto;
     }
 
     @media #{$lg} {
       grid-template: 'name   name   name   name   name  '
-                     'key    copy   edit   regen  delete'
+                     'key    copy   regen  edit   delete'
                     / 1fr    auto   auto   auto   auto;
     }
 
@@ -35,6 +35,7 @@
       display: grid;
       grid-template: auto / auto 1fr;
       grid-column-gap: 20px;
+      align-items: center;
 
       >input.api-key {
         font-family: monospace;
