@@ -10,6 +10,7 @@ This repository contains the Phoenix application that implements the service bac
 
 To start your Phoenix app:
 
+  * Create required config files: `echo use Mix.Config > config/{appsignal,dev.secret}.exs`
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   * Install Node.js dependencies with `npm install`
