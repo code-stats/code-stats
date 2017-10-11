@@ -12,8 +12,6 @@ defmodule CodeStats.MachineController do
     User
   }
 
-  plug :set_title
-
   def list(conn, _params) do
     {conn, _} = common_assigns(conn)
     changeset = Machine.changeset(%Machine{})
@@ -47,6 +45,7 @@ defmodule CodeStats.MachineController do
       changeset                = Machine.changeset(machine) do
         conn
         |> assign(:machine, machine)
+        |> assign(:title, "Machine: #{machine.name}")
         |> render("single_machine.html", changeset: changeset)
       end
   end
@@ -60,7 +59,7 @@ defmodule CodeStats.MachineController do
         conn
         |> assign(:machine, machine)
         |> put_flash(:success, "Machine edited successfully.")
-        |> render("single_machine.html", changeset: changeset)
+        |> redirect(to: machine_path(conn, :view_single, machine.id))
       end
   end
 
@@ -92,7 +91,7 @@ defmodule CodeStats.MachineController do
         false ->
           conn
           |> put_flash(:error, "Machine could not be deleted.")
-          |> render("single_machine.html")
+          |> redirect(to: machine_path(conn, :view_single, machine.id))
       end
     end
   end
@@ -101,6 +100,7 @@ defmodule CodeStats.MachineController do
     user = SetSessionUser.get_user_data(conn)
     conn = conn
     |> assign(:user, user)
+    |> machines_title()
     |> assign(:machines, ControllerUtils.get_user_machines(user))
     {conn, user}
   end
@@ -161,7 +161,5 @@ defmodule CodeStats.MachineController do
     end
   end
 
-  defp set_title(conn, _opts) do
-    assign(conn, :title, "Machines")
-  end
+  defp machines_title(conn), do: assign(conn, :title, "Machines")
 end
