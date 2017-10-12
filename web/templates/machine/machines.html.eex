@@ -6,7 +6,10 @@
       <div class="col-xs-12">
         <h4><%= machine.name %></h4>
         <p>
-          API key: <code><%= CodeStats.AuthUtils.get_api_key(@conn, @user, machine) %></code>
+          API key:
+          <input id="api-key-<%= machine.id %>" class="api-key" readonly
+            value="<%= CodeStats.AuthUtils.get_api_key(@conn, @user, machine) %>" />
+          <button class="copy-to-clipboard" data-clipboard-target="#api-key-<%= machine.id %>">Copy</button>
         </p>
 
         <div class="pull-left machine-action">
