@@ -3,7 +3,7 @@ import {el} from 'redom';
 class UserInfoComponent {
   constructor(username, registered_at, last_day_coded) {
     this.el = el('div', [
-      el('h2', username),
+      el('h1', username),
       el('ul.profile-detail-list', [
         el('li', [
           'User since ',

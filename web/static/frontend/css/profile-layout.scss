@@ -1,0 +1,16 @@
+#profile-total-container {
+
+  >#profile-meta {
+    >#profile-username {
+      grid-area: username;
+    }
+
+    >#profile-detail-list {
+      grid-area: profile-details;
+    }
+  }
+
+  >#total-progress {
+    grid-area: total-progress;
+  }
+}

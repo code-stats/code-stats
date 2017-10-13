@@ -17,11 +17,11 @@ class TotalInfoComponent {
     this.last_day_coded = document.getElementById('last-programmed-at').getAttribute('datetime');
 
     this.userInfo = new UserInfoComponent(this.username, this.registered_at, this.last_day_coded);
-    this.levelCounter = new LevelCounterComponent('h3', null, 0, 0);
+    this.levelCounter = new LevelCounterComponent('h2', null, 0, 0);
     this.progressBar = new ProgressBarComponent(0, 0);
 
-    this.leftEl = el('div', [this.userInfo], {column: 's-12 m-4'});
-    this.rightEl = el('div', [this.levelCounter, this.progressBar], {column: 's-12 m-8'});
+    this.leftEl = el('div#profile-meta', [this.userInfo]);
+    this.rightEl = el('div#total-progress', [this.levelCounter, this.progressBar]);
 
     clear_children(init_el);
     mount(init_el, this.leftEl);

@@ -13,5 +13,8 @@
 @import './plugins-layout';
 @import './machines-layout';
 @import './aliases-layout';
+@import './profile-layout';
 
-@import './graph';
+@import './graphs/common';
+@import './graphs/world-map';
+@import './graphs/progress-bar';

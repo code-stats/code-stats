@@ -13,7 +13,10 @@ class ProgressBarComponent {
     this.newProgressEl = el('span.progress.progress-recent', {
       role: 'progressbar'
     });
-    this.el = el('div.progress-bar', [this.oldProgressEl, this.newProgressEl]);
+    this.progressText = el('span.total-progress', {
+      'aria-hidden': 'true'
+    });
+    this.el = el('div.progress-bar', [this.oldProgressEl, this.newProgressEl, this.progressText]);
 
     this._refresh();
   }
@@ -35,15 +38,17 @@ class ProgressBarComponent {
 
     if (new_progress === 0) {
       this.newProgressEl.setAttribute('aria-hidden', 'true');
-      this.el.classList.remove('-stacked');
+      this.el.classList.remove('stacked');
     }
     else {
       this.newProgressEl.setAttribute('aria-hidden', 'false');
-      this.el.classList.add('-stacked');
+      this.el.classList.add('stacked');
     }
 
     this.oldProgressEl.style.width = `${old_progress}%`;
     this.newProgressEl.style.width = `${new_progress}%`;
+
+    this.progressText.textContent = `${old_progress + new_progress} %`;
   }
 
   // Get values as readable text for screen readers

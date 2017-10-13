@@ -17,7 +17,7 @@
   stacked = if new_width > 0 and old_width > 0, do: true, else: false
 %>
 
-<div class="progress-bar <%= if stacked do %>-stacked<% end %>">
+<div class="progress-bar <%= if stacked do %>stacked<% end %>">
   <%= if old_width > 0 do %>
     <span
      class="progress progress-old"
@@ -35,4 +35,6 @@
      aria-valuetext="Recent level progress <%= new_width %> %."
     ></span>
   <% end %>
+
+  <span class="total-progress" aria-hidden="true"><%= old_width + new_width %>&nbsp;%</span>
 </div>

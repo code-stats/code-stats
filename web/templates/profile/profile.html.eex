@@ -1,13 +1,13 @@
-<div container>
+<div class="stripe">
   <header id="profile-total-container" grid="wrap">
-    <div column="s-12 m-4">
-      <h2
+    <div id="profile-meta">
+      <h1
         id="profile-username"
         data-name="<%= @user.username %>"
       >
         <%= @user.username %>
-      </h2>
-      <ul class="profile-detail-list">
+      </h1>
+      <ul id="profile-detail-list">
         <li>
           User since
           <time id="registered-at" datetime="<%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>">
@@ -26,20 +26,18 @@
       </ul>
     </div>
 
-    <div column="s-12 m-8">
+    <div id="total-progress">
       <%=
         render(
           CodeStats.ComponentsView,
           "totalprogress.html",
           total_xp: @total_xp,
           new_xp: @total_new_xp,
-          heading_type: "h3"
+          heading_type: "h2"
         )
       %>
     </div>
   </header>
-
-  <hr />
 
   <div id="main-stats-container">
     <div class="spinner"></div>
@@ -49,107 +47,4 @@
       <noscript>This website requires JavaScript to be turned on.</noscript>
     </div>
   </div>
-
-  <!--<%= if not has_language_xps?(@language_xps) do %>
-    <div class="jumbotron">
-      <p class="lead">
-        <%= if get_current_user_id(@conn) == @user.id do %>
-          <strong>Quick start:</strong><br />
-          ⑴ Create your first <a href="<%= machine_path(@conn, :list) %>">machine</a>.<br />
-          ⑵ Install the <a href="<%= page_path(@conn, :plugins) %>">Code::Stats plugin for your editor</a> and copy the machine's API token to its settings.</a><br />
-          ⑶ Start coding!
-        <% else %>
-          It seems this user hasn't coded anything yet. 😯
-        <% end %>
-      </p>
-    </div>
-  <% else %>
--->
-<!--
-    <div id="profile-main-container" grid="column">
-      <div column>
-        <%= for {language, xp} <- (@language_xps |> sort_xps() |> split_language_xps() |> elem(0)) do %>
-          <% new_xp = Map.get(@new_xps, language.id, 0) %>
-
-          <div class="profile-language-progress">
-            <%=
-              render(
-                CodeStats.ComponentsView,
-                "levelprogress.html",
-                target: language.name,
-                total_xp: xp,
-                new_xp: new_xp,
-                heading_type: "h4"
-              )
-            %>
-          </div>
-        <% end %>
-      </div>
-
-      <div column>
-        <hr />
-
-        <p class="text-center">
-          <small>
-            XP gained in the last 12 hours is highlighted. <noscript>Also, if you turned on JavaScript for this site, you would see these numbers update live.</noscript>
-          </small>
-        </p>
-      </div>
-
-      <div column>
-        <hr />
-      </div>
-
-      <div class="row">
-        <%= if has_more_language_xps?(@language_xps) do %>
-          <div class="col-xs-12 col-sm-6">
-            <h4>Other languages</h4>
-
-            <ol start="11">
-              <%= for {language, xp} <- (@language_xps |> sort_xps() |> split_language_xps() |> elem(1)) do %>
-                <% new_xp = Map.get(@new_xps, language.id, 0) %>
-
-                <%=
-                  render(
-                    CodeStats.ComponentsView,
-                    "listlevelprogress.html",
-                    target: language.name,
-                    total_xp: xp,
-                    new_xp: new_xp,
-                    show_bar: false,
-                    class: "profile-more-language-progress"
-                  )
-                %>
-              <% end %>
-            </ol>
-          </div>
-        <% end %>
-
-        <%= if has_machine_xps?(@machine_xps) do %>
-          <div class="col-xs-12 col-sm-6">
-            <h4>Machines</h4>
-
-            <ol>
-              <%= for {machine, xp} <- (@machine_xps |> sort_xps()) do %>
-                <% new_xp = Map.get(@new_machine_xps, machine.id, 0) %>
-
-                <%=
-                  render(
-                    CodeStats.ComponentsView,
-                    "listlevelprogress.html",
-                    target: machine.name,
-                    total_xp: xp,
-                    new_xp: new_xp,
-                    show_bar: true,
-                    class: "profile-machine-progress"
-                  )
-                %>
-              <% end %>
-            </ol>
-          </div>
-        <% end %>
-      </div>
-    </div>
--->
-  <% end %>
 </div>
