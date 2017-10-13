@@ -23,7 +23,7 @@ class ProgressBarComponent {
 
   update(total_xp, new_xp) {
     this.totalXp = total_xp;
-    this.newXp += new_xp;
+    this.newXp = new_xp;
 
     this._refresh();
   }

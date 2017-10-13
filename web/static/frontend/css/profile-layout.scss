@@ -1,16 +1,42 @@
 #profile-total-container {
+  display: grid;
+  grid-template: 'username'
+                 'total-progress'
+                 'profile-details'
+                 / auto;
+  grid-gutter: 20px;
 
-  >#profile-meta {
-    >#profile-username {
-      grid-area: username;
-    }
+  @media #{$md} {
+    grid-template: 'username         total-progress'
+                   'profile-details  total-progress'
+                   / auto;
+    align-items: center;
+  }
 
-    >#profile-detail-list {
-      grid-area: profile-details;
-    }
+  >#profile-username {
+    grid-area: username;
+
+    margin-bottom: 0;
+    margin-top: 5px;
+  }
+
+  >#profile-detail-list {
+    grid-area: profile-details;
+
+    list-style-type: none;
+    padding-left: 0;
   }
 
   >#total-progress {
     grid-area: total-progress;
+
+    >h2 {
+      margin-top: 0;
+    }
   }
+}
+
+#main-stats-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
 }

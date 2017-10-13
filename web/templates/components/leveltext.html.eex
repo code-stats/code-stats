@@ -11,7 +11,5 @@
 (<%= format_xp(@total_xp) %>&nbsp;XP)
 
 <%= if @new_xp > 0 do %>
-  <sup>
-    (+<%= format_xp(@new_xp) %>)
-  </sup>
+  (+<%= format_xp(@new_xp) %>)
 <% end %>
