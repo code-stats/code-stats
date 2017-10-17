@@ -4,6 +4,7 @@ defmodule CodeStats.Machine do
   schema "machines" do
     field :name, :string
     field :api_salt, :string
+    field :active, :boolean
 
     belongs_to :user, CodeStats.User
     has_many :pulses, CodeStats.Pulse
@@ -22,12 +23,18 @@ defmodule CodeStats.Machine do
     |> cast(params, [:name])
     |> name_validations()
     |> put_change(:api_salt, generate_api_salt())
+    |> put_change(:active, true)
   end
 
   def update_changeset(data, params \\ %{}) do
     data
     |> cast(params, [:name])
     |> name_validations()
+  end
+
+  def activation_changeset(data, params \\ %{}) do
+    data
+    |> cast(params, [:active])
   end
 
   @doc """

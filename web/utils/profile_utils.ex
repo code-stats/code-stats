@@ -66,7 +66,9 @@ defmodule CodeStats.ProfileUtils do
     new_xps_q = from m in Machine,
       join: p in Pulse, on: m.id == p.machine_id,
       join: x in XP, on: p.id == x.pulse_id,
-      where: m.user_id == ^user.id and p.sent_at >= ^then,
+      where: m.user_id == ^user.id and
+             p.sent_at >= ^then and
+             m.active == true,
       group_by: m.id,
       order_by: [desc: sum(x.amount)],
       select: {m, sum(x.amount)}
@@ -100,7 +102,8 @@ defmodule CodeStats.ProfileUtils do
     machine_xps = Map.to_list(machine_xps)
 
     machine_q = from m in Machine,
-      where: m.user_id == ^user.id,
+      where: m.user_id == ^user.id and
+             m.active == true,
       select: {m.id, m}
 
     machines = Repo.all(machine_q) |> Map.new()

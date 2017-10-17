@@ -252,7 +252,8 @@ defmodule CodeStats.AuthUtils do
   defp get_machine(machine_id, user) do
     query = from m in Machine,
       where: m.id == ^machine_id and
-             m.user_id == ^user.id
+             m.user_id == ^user.id and
+             m.active == true
 
     Repo.one(query)
   end

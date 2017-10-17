@@ -2,7 +2,7 @@
   <h1>Configured machines</h1>
 
   <div class="machine-list">
-    <%= for machine <- @machines do %>
+    <%= for %{active: true} = machine <- @machines do %>
       <div class="machine">
         <h2><%= machine.name %></h2>
         <div class="api-key-text">
@@ -18,6 +18,10 @@
 
         <%= form_tag(machine_path(@conn, :regen_machine_key, machine.id), class: "regenerate-form") %>
           <button type="submit" class="button-warning">Regenerate API key</button>
+        </form>
+
+        <%= form_tag(machine_path(@conn, :deactivate, machine.id), class: "deactivate-form") %>
+          <button type="submit" class="button-danger machine-deactivate-button">Deactivate</button>
         </form>
 
         <%= form_tag(machine_path(@conn, :delete, machine.id), method: :delete, class: "delete-form") %>
@@ -51,4 +55,16 @@
 
     <div class="submit"><%= submit("Add machine") %></div>
   <% end) %>
+
+  <%= if Enum.any?(@machines, &match?(%{active: false}, &1)) do %>
+    <div class="inactive-machine-list">
+      <h2>Inactive machines</h2>
+      <%= for %{active: false} = machine <- @machines do %>
+        <%= form_tag(machine_path(@conn, :activate, machine.id), class: "machine") %>
+          <div class="machine-name"><%= machine.name %></div>
+          <button type="submit">Activate</button>
+        </form>
+      <% end %>
+    </div>
+  <% end %>
 </div>
