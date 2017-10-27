@@ -20,7 +20,7 @@
     </h2>
     <ul class="profile-detail-list">
       <li>
-        Programming since
+        Joined at
         <time datetime="<%= Calendar.Strftime.strftime!(@user.inserted_at, "%F") %>">
           <%= Calendar.Strftime.strftime!(@user.inserted_at, "%b %e, %Y") %></time>.
       </li>
