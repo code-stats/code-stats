@@ -14,7 +14,7 @@ defmodule CodeStats.FrontendConfs do
   Get absolute path to node_modules.
   """
   def node_path() do
-    Path.join(proj_path(), "node_modules")
+    Path.join([proj_path(), "assets", "node_modules"])
   end
 
   @doc """
@@ -25,7 +25,7 @@ defmodule CodeStats.FrontendConfs do
   @doc """
   Get absolute path to source directory for frontend builds.
   """
-  def base_src_path(), do: Path.join([proj_path(), "web", "static"])
+  def base_src_path(), do: Path.join([proj_path(), "assets"])
 
   @doc """
   Get absolute path to temp directory for build artifacts.
