@@ -64,8 +64,8 @@ $colors: (
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-@import '../../../../node_modules/concise.css/concise';
-@import '../../../../node_modules/concise-ui/concise-ui';
+@import '../../node_modules/concise.css/concise';
+@import '../../node_modules/concise-ui/concise-ui';
 
 html {
   background-color: getColor(background, body);
