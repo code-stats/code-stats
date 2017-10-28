@@ -16,7 +16,7 @@ defmodule CodeStats do
       worker(CodeStats.CacheService, []),
 
       # Start the endpoint when the application starts
-      supervisor(CodeStats.Endpoint, []),
+      supervisor(CodeStatsWeb.Endpoint, []),
 
       # Here you could define other workers and supervisors as children
       # worker(CodeStats.Worker, [arg1, arg2, arg3]),
@@ -37,7 +37,7 @@ defmodule CodeStats do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    CodeStats.Endpoint.config_change(changed, removed)
+    CodeStatsWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

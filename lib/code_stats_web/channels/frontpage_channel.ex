@@ -42,7 +42,7 @@ defmodule CodeStatsWeb.FrontpageChannel do
       }
     end
 
-    CodeStats.Endpoint.broadcast(
+    CodeStatsWeb.Endpoint.broadcast(
       "frontpage",
       "new_pulse",
       %{

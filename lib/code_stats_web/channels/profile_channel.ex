@@ -52,7 +52,7 @@ defmodule CodeStatsWeb.ProfileChannel do
       }
     end
 
-    CodeStats.Endpoint.broadcast("users:#{user.username}", "new_pulse", %{xps: formatted_xps})
+    CodeStatsWeb.Endpoint.broadcast("users:#{user.username}", "new_pulse", %{xps: formatted_xps})
   end
 
   # Process cache to the correct format for the frontend and add recent XP data
