@@ -87,7 +87,7 @@
 
     <footer id="footer-stripe" class="stripe stripe-accent">
       <section>
-        <h6 class="no-margin">Rendered in <%= CodeStatsWeb.RequestTime.calculate_time(@conn) %>.</h6>
+        <h6 class="no-margin">Rendered in <%= CodeStatsWeb.RequestTimePlug.calculate_time(@conn) %>.</h6>
         <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
         <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
         <a href="<%= page_path(@conn, :terms) %>">Legal</a>

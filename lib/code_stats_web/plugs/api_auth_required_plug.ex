@@ -1,4 +1,4 @@
-defmodule CodeStatsWeb.APIAuthRequired do
+defmodule CodeStatsWeb.APIAuthRequiredPlug do
   @moduledoc """
   This plug requires the user to be authenticated with API authentication.
 

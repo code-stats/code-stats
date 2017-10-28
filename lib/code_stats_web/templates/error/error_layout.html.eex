@@ -59,7 +59,7 @@
           <center>
             <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
             —
-            <%= CodeStatsWeb.RequestTime.calculate_time(@conn) %>
+            <%= CodeStatsWeb.RequestTimePlug.calculate_time(@conn) %>
             —
             <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
             —

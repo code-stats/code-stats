@@ -1,4 +1,4 @@
-defmodule CodeStatsWeb.GeoIP do
+defmodule CodeStatsWeb.GeoIPPlug do
   @moduledoc """
   Plug for adding GeoIP information about user to conn.
 

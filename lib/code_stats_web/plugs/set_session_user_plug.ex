@@ -1,4 +1,4 @@
-defmodule CodeStatsWeb.SetSessionUser do
+defmodule CodeStatsWeb.SetSessionUserPlug do
   @moduledoc """
   This module sets the data of the current session authenticated user into the conn.
 

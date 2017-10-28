@@ -1,4 +1,4 @@
-defmodule CodeStatsWeb.RememberMe do
+defmodule CodeStatsWeb.RememberMePlug do
   @moduledoc """
   This plug provides "remember me" functionality.
 

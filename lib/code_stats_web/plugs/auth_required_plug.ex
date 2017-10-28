@@ -1,4 +1,4 @@
-defmodule CodeStatsWeb.AuthRequired do
+defmodule CodeStatsWeb.AuthRequiredPlug do
   @moduledoc """
   This plug requires the user to be authenticated with session authentication.
 

@@ -9,10 +9,9 @@ defmodule CodeStatsWeb.PulseController do
   alias Calendar.DateTime, as: CDateTime
 
   alias CodeStatsWeb.AuthUtils
-  alias CodeStatsWeb.GeoIP
   alias CodeStatsWeb.ProfileChannel
   alias CodeStatsWeb.FrontpageChannel
-  alias CodeStatsWeb.GeoIP
+  alias CodeStatsWeb.GeoIPPlug
   alias CodeStats.{
     Repo,
     Pulse,
@@ -21,7 +20,7 @@ defmodule CodeStatsWeb.PulseController do
     CacheService
   }
 
-  plug GeoIP
+  plug GeoIPPlug
 
   def add(conn, %{"coded_at" => timestamp, "xps" => xps}) when is_list(xps) do
     {user, machine} = AuthUtils.get_api_details(conn)
@@ -35,7 +34,7 @@ defmodule CodeStatsWeb.PulseController do
       :ok                           <- update_caches(inserted_xps)
     do
       # Broadcast XP data to possible viewers on profile page and frontpage
-      coords = GeoIP.get_coords(conn)
+      coords = GeoIPPlug.get_coords(conn)
       ProfileChannel.send_pulse(user, %{pulse | xps: inserted_xps})
       FrontpageChannel.send_pulse(user, coords, %{pulse | xps: inserted_xps})
 

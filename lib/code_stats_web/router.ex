@@ -7,16 +7,16 @@ defmodule CodeStatsWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug CodeStatsWeb.RememberMe
-    plug CodeStatsWeb.SetSessionUser
+    plug CodeStatsWeb.RememberMePlug
+    plug CodeStatsWeb.SetSessionUserPlug
   end
 
   pipeline :browser_auth do
-    plug CodeStatsWeb.AuthRequired
+    plug CodeStatsWeb.AuthRequiredPlug
   end
 
   pipeline :browser_unauth do
-    plug CodeStatsWeb.AuthNotAllowed
+    plug CodeStatsWeb.AuthNotAllowedPlug
   end
 
   pipeline :api do
@@ -24,7 +24,7 @@ defmodule CodeStatsWeb.Router do
   end
 
   pipeline :api_auth do
-    plug CodeStatsWeb.APIAuthRequired
+    plug CodeStatsWeb.APIAuthRequiredPlug
   end
 
   scope "/", CodeStatsWeb do

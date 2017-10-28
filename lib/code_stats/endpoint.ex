@@ -3,7 +3,7 @@ defmodule CodeStats.Endpoint do
 
   socket "/live_update_socket", CodeStats.LiveUpdateSocket
 
-  plug CodeStatsWeb.RequestTime
+  plug CodeStatsWeb.RequestTimePlug
 
   # Serve at "/" the static files from "priv/static" directory.
   #

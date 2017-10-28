@@ -6,7 +6,7 @@ defmodule CodeStatsWeb.AuthUtils do
   import Ecto.Query, only: [from: 2]
   alias Ecto.Changeset
 
-  alias CodeStatsWeb.SetSessionUser
+  alias CodeStatsWeb.SetSessionUserPlug
   alias CodeStats.{
     Repo,
     User,
@@ -45,7 +45,7 @@ defmodule CodeStatsWeb.AuthUtils do
   """
   @spec get_current_user(%Conn{}) :: %User{} | nil
   def get_current_user(conn) do
-    SetSessionUser.get_user_data(conn)
+    SetSessionUserPlug.get_user_data(conn)
   end
 
   @doc """

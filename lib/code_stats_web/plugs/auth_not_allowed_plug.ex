@@ -1,4 +1,4 @@
-defmodule CodeStatsWeb.AuthNotAllowed do
+defmodule CodeStatsWeb.AuthNotAllowedPlug do
   @moduledoc """
   This plug forbids the user from being authenticated with session authentication.
 

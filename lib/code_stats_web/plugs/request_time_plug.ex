@@ -1,4 +1,4 @@
-defmodule CodeStatsWeb.RequestTime do
+defmodule CodeStatsWeb.RequestTimePlug do
   @moduledoc """
   Plug that adds request time to the conn. It can be used to render the total time taken to
   serve the request.

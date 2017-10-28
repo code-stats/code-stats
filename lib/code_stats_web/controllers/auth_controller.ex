@@ -5,7 +5,7 @@ defmodule CodeStatsWeb.AuthController do
 
   alias CodeStatsWeb.AuthUtils
   alias CodeStatsWeb.EmailUtils
-  alias CodeStatsWeb.RememberMe
+  alias CodeStatsWeb.RememberMePlug
   alias CodeStats.{
     User,
     PasswordReset,
@@ -68,7 +68,7 @@ defmodule CodeStatsWeb.AuthController do
   def logout(conn, _params) do
     conn
     |> AuthUtils.unauth_user()
-    |> RememberMe.kill_cookie()
+    |> RememberMePlug.kill_cookie()
     |> redirect(to: page_path(conn, :index))
   end
 
@@ -151,7 +151,7 @@ defmodule CodeStatsWeb.AuthController do
   end
 
   defp maybe_remember_me(conn, user, %{"remember-me" => _}) do
-    RememberMe.write_cookie(conn, user)
+    RememberMePlug.write_cookie(conn, user)
   end
 
   defp maybe_remember_me(conn, _, _), do: conn
