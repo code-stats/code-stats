@@ -1,5 +1,7 @@
 defmodule CodeStats.XP do
-  use CodeStats.Web, :model
+  use Ecto.Schema
+
+  import Ecto.Changeset
 
   schema "xps" do
     field :amount, :integer

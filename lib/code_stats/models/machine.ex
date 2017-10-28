@@ -1,5 +1,7 @@
 defmodule CodeStats.Machine do
-  use CodeStats.Web, :model
+  use Ecto.Schema
+
+  import Ecto.Changeset
 
   schema "machines" do
     field :name, :string

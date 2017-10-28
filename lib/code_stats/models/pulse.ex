@@ -1,5 +1,7 @@
 defmodule CodeStats.Pulse do
-  use CodeStats.Web, :model
+  use Ecto.Schema
+
+  import Ecto.Changeset
 
   schema "pulses" do
     # When the Pulse was generated on the client. This is somewhat confusingly named

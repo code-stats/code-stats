@@ -1,5 +1,8 @@
 defmodule CodeStats.Language do
-  use CodeStats.Web, :model
+  use Ecto.Schema
+
+  import Ecto.Changeset
+  import Ecto.Query
 
   alias CodeStats.{
     Repo

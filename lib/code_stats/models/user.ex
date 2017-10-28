@@ -1,5 +1,8 @@
 defmodule CodeStats.User do
-  use CodeStats.Web, :model
+  use Ecto.Schema
+
+  import Ecto.Changeset
+  import Ecto.Query
 
   @null_datetime "1970-01-01T00:00:00Z"
 
