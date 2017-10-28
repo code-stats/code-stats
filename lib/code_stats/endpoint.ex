@@ -3,7 +3,7 @@ defmodule CodeStats.Endpoint do
 
   socket "/live_update_socket", CodeStats.LiveUpdateSocket
 
-  plug CodeStats.RequestTime
+  plug CodeStatsWeb.RequestTime
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -43,5 +43,5 @@ defmodule CodeStats.Endpoint do
     signing_salt: "UuJXllxk"
 
   use Appsignal.Phoenix
-  plug CodeStats.Router
+  plug CodeStatsWeb.Router
 end

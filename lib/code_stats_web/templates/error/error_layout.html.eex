@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Code::Stats is a free stats tracking service for programmers">
+    <meta name="author" content="Mikko Ahlroth">
+
+    <title><%= get_conf(:site_name) %></title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="row">
+          <div class="col-xs-2">
+            <a class="logo" href="<%= page_path(@conn, :index) %>"><img src="/images/Logo_crushed.png" alt="<%= get_conf(:site_name) %>" title="<%= get_conf(:site_name) %>" height="100%" /></a>
+          </div>
+
+          <div class="col-xs-10">
+            <nav role="navigation">
+              <ul class="nav nav-pills pull-right">
+                <li><a href="<%= page_path(@conn, :index) %>">Go back</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+      <footer>
+        <hr />
+
+        <p>
+          <center>
+            <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
+            —
+            <%= CodeStatsWeb.RequestTime.calculate_time(@conn) %>
+            —
+            <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
+            —
+            <a href="<%= page_path(@conn, :terms) %>">Legal</a>
+            —
+            <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
+          </center>
+        </p>
+
+        <p>
+          <center>
+            <small>
+              <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
+            </small>
+          </center>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <%= raw get_conf(:analytics_code) %>
+  </body>
+</html>
