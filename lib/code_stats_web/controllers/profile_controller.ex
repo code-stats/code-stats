@@ -5,10 +5,9 @@ defmodule CodeStatsWeb.ProfileController do
   alias CodeStatsWeb.AuthUtils
   alias CodeStatsWeb.PermissionUtils
   alias CodeStatsWeb.ProfileUtils
-  alias CodeStatsWeb.SetSessionUserPlug
 
   def my_profile(conn, _params) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
     redirect(conn, to: profile_path(conn, :profile, user.username))
   end
 

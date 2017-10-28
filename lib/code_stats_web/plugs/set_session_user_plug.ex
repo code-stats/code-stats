@@ -6,12 +6,8 @@ defmodule CodeStatsWeb.SetSessionUserPlug do
   this plug.
   """
 
-  @private_info_key :_codestats_session_user
-
   import Plug.Conn
   import Ecto.Query, only: [from: 2]
-
-  alias Plug.Conn
 
   alias CodeStatsWeb.AuthUtils
   alias CodeStats.Repo
@@ -27,19 +23,9 @@ defmodule CodeStatsWeb.SetSessionUserPlug do
       query = from u in User,
         where: u.id == ^id
 
-      put_private(conn, @private_info_key, Repo.one(query))
+      put_private(conn, AuthUtils.private_info_key(), Repo.one(query))
     else
-      put_private(conn, @private_info_key, nil)
+      put_private(conn, AuthUtils.private_info_key(), nil)
     end
-  end
-
-  @doc """
-  Get the data of the currently authenticated user.
-
-  Returns nil if the user is not authenticated.
-  """
-  @spec get_user_data(%Conn{}) :: %User{} | nil
-  def get_user_data(conn) do
-    conn.private[@private_info_key]
   end
 end

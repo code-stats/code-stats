@@ -19,6 +19,7 @@ defmodule CodeStatsWeb.AuthUtils do
 
   @auth_key     :codestats_user
   @api_auth_key :codestats_api_user
+  @private_info_key :_codestats_session_user
 
   @doc """
   Is the current user authenticated?
@@ -45,7 +46,15 @@ defmodule CodeStatsWeb.AuthUtils do
   """
   @spec get_current_user(%Conn{}) :: %User{} | nil
   def get_current_user(conn) do
-    SetSessionUserPlug.get_user_data(conn)
+    conn.private[@private_info_key]
+  end
+
+  @doc """
+  Get private key used for sessions
+  """
+  @spec private_info_key() :: atom
+  def private_info_key do
+    @private_info_key
   end
 
   @doc """

@@ -4,7 +4,7 @@ defmodule CodeStatsWeb.MachineController do
   import Ecto.Query, only: [from: 2]
   alias Ecto.Changeset
 
-  alias CodeStatsWeb.SetSessionUserPlug
+  alias CodeStatsWeb.AuthUtils
   alias CodeStatsWeb.ControllerUtils
   alias CodeStats.{
     Repo,
@@ -39,7 +39,7 @@ defmodule CodeStatsWeb.MachineController do
   end
 
   def view_single(conn, %{"id" => id}) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
       changeset                = Machine.changeset(machine) do
@@ -51,7 +51,7 @@ defmodule CodeStatsWeb.MachineController do
   end
 
   def edit(conn, %{"id" => id, "machine" => params}) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
       changeset                = Machine.update_changeset(machine, params),
@@ -64,7 +64,7 @@ defmodule CodeStatsWeb.MachineController do
   end
 
   def regen_machine_key(conn, %{"id" => id}) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
       changeset                = Machine.api_changeset(machine),
@@ -76,7 +76,7 @@ defmodule CodeStatsWeb.MachineController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id) do
       case delete_machine(machine) do
@@ -97,7 +97,7 @@ defmodule CodeStatsWeb.MachineController do
   end
 
   defp common_assigns(conn) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
     conn = conn
     |> assign(:user, user)
     |> machines_title()

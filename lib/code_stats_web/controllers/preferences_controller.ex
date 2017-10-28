@@ -3,19 +3,18 @@ defmodule CodeStatsWeb.PreferencesController do
 
   alias CodeStats.User
   alias CodeStatsWeb.AuthUtils
-  alias CodeStatsWeb.SetSessionUserPlug
 
   plug :set_title
 
   def edit(conn, _params) do
-    changeset = User.updating_changeset(SetSessionUserPlug.get_user_data(conn))
+    changeset = User.updating_changeset(AuthUtils.get_current_user(conn))
     conn
     |> common_edit_assigns()
     |> render("preferences.html", changeset: changeset)
   end
 
   def do_edit(conn, %{"user" => user}) do
-    changeset = User.updating_changeset(SetSessionUserPlug.get_user_data(conn), user)
+    changeset = User.updating_changeset(AuthUtils.get_current_user(conn), user)
     case AuthUtils.update_user(changeset) do
       %User{} ->
         conn
@@ -31,7 +30,7 @@ defmodule CodeStatsWeb.PreferencesController do
   end
 
   def change_password(conn, %{"old_password" => old_password, "new_password" => new_password}) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
 
     if AuthUtils.check_user_password(user, old_password) do
       password_changeset = User.password_changeset(user, %{password: new_password})
@@ -54,7 +53,7 @@ defmodule CodeStatsWeb.PreferencesController do
   end
 
   def delete(conn, %{"delete_confirmation" => delete}) do
-    user = SetSessionUserPlug.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
 
     if delete == "DELETE" do
       case AuthUtils.delete_user(user) do
@@ -76,7 +75,7 @@ defmodule CodeStatsWeb.PreferencesController do
   end
 
   defp common_edit_assigns(conn) do
-    user_data = SetSessionUserPlug.get_user_data(conn)
+    user_data = AuthUtils.get_current_user(conn)
     conn
     |> assign(:user, user_data)
   end
