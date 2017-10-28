@@ -26,7 +26,7 @@
   <div id="total-progress">
     <%=
       render(
-        CodeStats.ComponentsView,
+        CodeStatsWeb.ComponentsView,
         "totalprogress.html",
         total_xp: @total_xp,
         new_xp: @total_new_xp,
