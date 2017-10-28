@@ -6,8 +6,8 @@
     "babel-polyfill": "~6.26.0",
     "concise-ui": "~0.2.1",
     "concise.css": "~4.1.2",
-    "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html",
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
     "redom": "~3.6.1"
   },
   "devDependencies": {
