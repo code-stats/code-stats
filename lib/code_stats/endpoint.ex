@@ -1,7 +1,7 @@
 defmodule CodeStats.Endpoint do
   use Phoenix.Endpoint, otp_app: :code_stats
 
-  socket "/live_update_socket", CodeStats.LiveUpdateSocket
+  socket "/live_update_socket", CodeStatsWeb.LiveUpdateSocket
 
   plug CodeStatsWeb.RequestTimePlug
 

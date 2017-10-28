@@ -9,8 +9,8 @@ defmodule CodeStatsWeb.LiveUpdateSocket do
   @token_max_age 3 * 30 * 86400
 
   ## Channels
-  channel "users:*", CodeStats.ProfileChannel
-  channel "frontpage", CodeStats.FrontpageChannel
+  channel "users:*", CodeStatsWeb.ProfileChannel
+  channel "frontpage", CodeStatsWeb.FrontpageChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
