@@ -94,6 +94,28 @@ defmodule CodeStatsWeb.MachineController do
     end
   end
 
+  def deactivate(conn, %{"id" => id}) do
+    activate_or_deactivate(conn, id, false)
+  end
+
+  def activate(conn, %{"id" => id}) do
+    activate_or_deactivate(conn, id, true)
+  end
+
+  defp activate_or_deactivate(conn, id, active) do
+    user = SetSessionUser.get_user_data(conn)
+    verb = if active, do: "activated", else: "deactivated"
+
+    with %Machine{} = machine <- get_machine_or_404(conn, user, id),
+      changeset                = Machine.activation_changeset(machine, %{active: active}),
+      %Machine{} = machine    <- edit_machine_or_flash(conn, changeset)
+    do
+      conn
+      |> put_flash(:success, "Machine #{machine.name} #{verb}.")
+      |> redirect(to: machine_path(conn, :list))
+    end
+  end
+
   defp common_assigns(conn) do
     user = AuthUtils.get_current_user(conn)
     conn = conn

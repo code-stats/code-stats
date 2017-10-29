@@ -8,21 +8,16 @@
                    'copy'
                    'regen'
                    'edit'
+                   'deact'
                    'delete'
                    / 1fr;
     grid-gap: 20px;
 
     @media #{$sm} {
-      grid-template: 'name name  name  name  '
-                     'key  key   key   key   '
-                     'copy regen edit  delete'
-                    / auto auto  auto  auto;
-    }
-
-    @media #{$lg} {
-      grid-template: 'name   name   name   name   name  '
-                     'key    copy   regen  edit   delete'
-                    / 1fr    auto   auto   auto   auto;
+      grid-template: 'name   name   name   name  '
+                     'key    key    key    copy   '
+                     'regen  edit   deact  delete'
+                    / 1fr    1fr    1fr    1fr;
     }
 
     >h2 {
@@ -54,6 +49,10 @@
       grid-area: regen;
     }
 
+    >.deactivate-form {
+      grid-area: deact;
+    }
+
     >.delete-form {
       grid-area: delete;
     }
@@ -62,5 +61,14 @@
     >form {
       grid-template: auto / auto;
     }
+  }
+}
+
+.inactive-machine-list {
+  >.machine {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-bottom: 1rem;
+    align-items: center;
   }
 }
