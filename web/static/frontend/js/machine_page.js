@@ -4,12 +4,18 @@
 
 function machine_page() {
   document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.getElementsByClassName('machine-delete-button');
+    const delete_buttons = document.getElementsByClassName('machine-delete-button');
 
-    for (const button of buttons) {
+    for (const button of delete_buttons) {
       button.onclick = () => {
         return confirm('Are you sure you wish to delete this machine? You will lose all XP associated with it.');
       };
+    }
+
+    const deactivate_buttons = document.getElementsByClassName('machine-deactivate-button');
+
+    for (const button of deactivate_buttons) {
+      button.onclick = () => confirm('Are you sure you wish to deactivate this machine? It will be hidden, but can be re-activated.');
     }
 
     const copy_buttons = document.getElementsByClassName('copy-button');

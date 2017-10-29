@@ -74,6 +74,8 @@ defmodule CodeStats.Router do
       get "/machines/:id", MachineController, :view_single
       put "/machines/:id", MachineController, :edit
       delete "/machines/:id", MachineController, :delete
+      post "/machines/:id/activate", MachineController, :activate
+      post "/machines/:id/deactivate", MachineController, :deactivate
       post "/machines/:id/key", MachineController, :regen_machine_key
     end
   end
