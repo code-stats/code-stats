@@ -13,7 +13,7 @@ defmodule CodeStats do
       # Start cache service
       # We want this to be before the endpoint so that the caches are ready for new
       # requests
-      worker(CodeStats.CacheService, []),
+      worker(CodeStats.Language.CacheService, []),
 
       # Start the endpoint when the application starts
       supervisor(CodeStatsWeb.Endpoint, []),
@@ -22,10 +22,10 @@ defmodule CodeStats do
       # worker(CodeStats.Worker, [arg1, arg2, arg3]),
 
       # Start XPCacheRefresher
-      worker(CodeStats.XPCacheRefresher, []),
+      worker(CodeStats.Language.XPCacheRefresher, []),
 
       # Start The Terminator
-      worker(CodeStats.Terminator, [])
+      worker(CodeStats.User.Terminator, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

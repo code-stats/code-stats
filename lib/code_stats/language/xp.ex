@@ -1,11 +1,11 @@
-defmodule CodeStats.XP do
+defmodule CodeStats.Language.XP do
   use Ecto.Schema
 
   import Ecto.Changeset
 
   schema "xps" do
     field :amount, :integer
-    belongs_to :pulse, CodeStats.Pulse
+    belongs_to :pulse, CodeStats.User.Pulse
     belongs_to :language, CodeStats.Language
 
     # Original language can be used to fix alias errors later, it should always use

@@ -1,4 +1,4 @@
-defmodule CodeStats.Machine do
+defmodule CodeStats.User.Machine do
   use Ecto.Schema
 
   import Ecto.Changeset
@@ -8,7 +8,7 @@ defmodule CodeStats.Machine do
     field :api_salt, :string
 
     belongs_to :user, CodeStats.User
-    has_many :pulses, CodeStats.Pulse
+    has_many :pulses, CodeStats.User.Pulse
 
     timestamps()
   end

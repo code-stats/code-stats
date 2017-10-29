@@ -2,7 +2,7 @@ defmodule CodeStatsWeb.ProfileChannel do
   use Phoenix.Channel
 
   alias CodeStats.User
-  alias CodeStats.Pulse
+  alias CodeStats.User.Pulse
   alias CodeStatsWeb.AuthUtils
   alias CodeStatsWeb.ProfileUtils
 

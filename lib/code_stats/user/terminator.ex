@@ -1,4 +1,4 @@
-defmodule CodeStats.Terminator do
+defmodule CodeStats.User.Terminator do
   @moduledoc """
   The Terminator is a timed assassin designed to delete unneeded, invalid data
   from the system.
@@ -8,10 +8,8 @@ defmodule CodeStats.Terminator do
 
   alias Calendar.DateTime, as: CDateTime
 
-  alias CodeStats.{
-    Repo,
-    PasswordReset
-  }
+  alias CodeStats.Repo
+  alias CodeStats.User.PasswordReset
 
   # List of targets to assassinate. Should contain 2-tuples where the first element
   # is the function to call and the second is how often to call it, in milliseconds.

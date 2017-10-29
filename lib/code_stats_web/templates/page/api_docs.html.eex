@@ -89,7 +89,7 @@ int get_level(float xp) {
 }</code></pre>
 
   <p>
-    For more examples of level calculations, see <a href="https://github.com/Nicd/code-stats/blob/master/lib/code_stats/xp_calculator.ex">CodeStats.XPCalculator</a>.
+    For more examples of level calculations, see <a href="https://github.com/Nicd/code-stats/blob/master/lib/code_stats/xp_calculator.ex">CodeStats.Language.XPCalculator</a>.
   </p>
 
   <h3>Language</h3>

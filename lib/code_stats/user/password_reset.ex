@@ -1,4 +1,4 @@
-defmodule CodeStats.PasswordReset do
+defmodule CodeStats.User.PasswordReset do
   use Ecto.Schema
 
   import Ecto.Changeset

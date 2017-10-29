@@ -6,12 +6,9 @@ defmodule CodeStatsWeb.AuthUtils do
   import Ecto.Query, only: [from: 2]
   alias Ecto.Changeset
 
-  alias CodeStatsWeb.SetSessionUserPlug
-  alias CodeStats.{
-    Repo,
-    User,
-    Machine
-  }
+  alias CodeStats.Repo
+  alias CodeStats.User
+  alias CodeStats.User.Machine
 
   alias Comeonin.Bcrypt
   alias Plug.Conn

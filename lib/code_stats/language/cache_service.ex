@@ -1,4 +1,4 @@
-defmodule CodeStats.CacheService do
+defmodule CodeStats.Language.CacheService do
   @moduledoc """
   The cache service implements a simple key-value cache that stores its values in ETS
   (Erlang Term Storage) and optionally refreshes them periodically.
@@ -10,7 +10,9 @@ defmodule CodeStats.CacheService do
 
   import Ecto.Query, only: [from: 2]
 
-  alias CodeStats.{Language, XP, Repo}
+  alias CodeStats.Repo
+  alias CodeStats.Language
+  alias CodeStats.Language.XP
 
   # Table names
   @language_xp_cache_table :cache_service_language_xp_cache

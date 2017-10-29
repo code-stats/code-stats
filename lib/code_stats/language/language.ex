@@ -4,14 +4,12 @@ defmodule CodeStats.Language do
   import Ecto.Changeset
   import Ecto.Query
 
-  alias CodeStats.{
-    Repo
-  }
+  alias CodeStats.Repo
 
   schema "languages" do
     field :name, :string
 
-    has_many :xps, CodeStats.XP
+    has_many :xps, CodeStats.Language.XP
 
     # Either a language has many aliases or it is an alias of some other language,
     # it cannot be both.

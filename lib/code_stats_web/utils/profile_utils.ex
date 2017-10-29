@@ -5,14 +5,12 @@ defmodule CodeStatsWeb.ProfileUtils do
 
   import Ecto.Query, only: [from: 2]
 
-  alias CodeStats.{
-    Repo,
-    Language,
-    Machine,
-    XP,
-    Pulse,
-    User
-  }
+  alias CodeStats.Repo
+  alias CodeStats.User
+  alias CodeStats.User.Machine
+  alias CodeStats.User.Pulse
+  alias CodeStats.Language
+  alias CodeStats.Language.XP
 
   @doc """
   Amount of hours to go back when looking at "recent XP".

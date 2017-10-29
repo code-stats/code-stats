@@ -6,11 +6,9 @@ defmodule CodeStatsWeb.FrontpageChannel do
   XP numbers on the front page.
   """
 
-  alias CodeStats.{
-    CacheService,
-    User,
-    Pulse
-  }
+  alias CodeStats.User
+  alias CodeStats.Language.CacheService
+  alias CodeStats.User.Pulse
 
   def join("frontpage", _params, socket) do
     # Load total language XPs from cache and use them to populate total XP and

@@ -33,7 +33,7 @@ defmodule CodeStatsWeb.Endpoint do
 
   plug Plug.MethodOverride
 
-  plug CodeStats.CORS
+  plug CodeStatsWeb.CORS
 
   plug Plug.Head
 

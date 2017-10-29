@@ -1,9 +1,7 @@
 defmodule CodeStatsWeb.PageController do
   use CodeStatsWeb, :controller
 
-  alias CodeStats.{
-    CacheService
-  }
+  alias CodeStats.Language.CacheService
 
   @popular_languages_limit 10
 

@@ -7,7 +7,7 @@ defmodule CodeStatsWeb.ControllerUtils do
 
   alias CodeStats.Repo
   alias CodeStats.User
-  alias CodeStats.Machine
+  alias CodeStats.User.Machine
 
   @doc """
   Get list of user's machines.

@@ -1,4 +1,4 @@
-defmodule CodeStats.CORS do
+defmodule CodeStatsWeb.CORS do
   alias CodeStats.Utils
 
   use Corsica.Router,

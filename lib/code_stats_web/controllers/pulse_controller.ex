@@ -12,13 +12,11 @@ defmodule CodeStatsWeb.PulseController do
   alias CodeStatsWeb.ProfileChannel
   alias CodeStatsWeb.FrontpageChannel
   alias CodeStatsWeb.GeoIPPlug
-  alias CodeStats.{
-    Repo,
-    Pulse,
-    Language,
-    XP,
-    CacheService
-  }
+  alias CodeStats.Repo
+  alias CodeStats.Language
+  alias CodeStats.Language.XP
+  alias CodeStats.Language.CacheService
+  alias CodeStats.User.Pulse
 
   plug GeoIPPlug
 

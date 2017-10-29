@@ -6,11 +6,9 @@ defmodule CodeStatsWeb.AuthController do
   alias CodeStatsWeb.AuthUtils
   alias CodeStatsWeb.EmailUtils
   alias CodeStatsWeb.RememberMePlug
-  alias CodeStats.{
-    User,
-    PasswordReset,
-    Repo
-  }
+  alias CodeStats.Repo
+  alias CodeStats.User
+  alias CodeStats.User.PasswordReset
 
   def render_login(conn, _params) do
     conn

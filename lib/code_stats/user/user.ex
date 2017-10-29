@@ -8,11 +8,9 @@ defmodule CodeStats.User do
 
   alias Comeonin.Bcrypt
 
-  alias CodeStats.{
-    Repo,
-    Pulse,
-    XP
-  }
+  alias CodeStats.Repo
+  alias CodeStats.User.Pulse
+  alias CodeStats.Language.XP
 
   schema "users" do
     field :username, :string

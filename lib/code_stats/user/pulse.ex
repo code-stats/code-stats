@@ -1,4 +1,4 @@
-defmodule CodeStats.Pulse do
+defmodule CodeStats.User.Pulse do
   use Ecto.Schema
 
   import Ecto.Changeset
@@ -15,9 +15,9 @@ defmodule CodeStats.Pulse do
     # Original offset from UTC for the sent_at_local timestamp. In minutes.
     field :tz_offset, :integer
     belongs_to :user, CodeStats.User
-    belongs_to :machine, CodeStats.Machine
+    belongs_to :machine, CodeStats.User.Machine
 
-    has_many :xps, CodeStats.XP
+    has_many :xps, CodeStats.Language.XP
 
     timestamps()
   end

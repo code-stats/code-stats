@@ -1,4 +1,4 @@
-defmodule CodeStats.AdminCommands do
+defmodule CodeStats.Language.AdminCommands do
   @moduledoc """
   Administration commands that should be called by connecting an IEx shell
   into the instance.
@@ -6,12 +6,11 @@ defmodule CodeStats.AdminCommands do
 
   alias Ecto.Changeset
 
-  alias CodeStats.{
-    Repo,
-    Language,
-    XP,
-    User
-  }
+  alias CodeStats.Repo
+  alias CodeStats.Language
+  alias CodeStats.Language.XP
+  alias CodeStats.Language.CacheService
+  alias CodeStats.User
 
   import Ecto.Query, only: [from: 2]
 
@@ -78,7 +77,7 @@ defmodule CodeStats.AdminCommands do
     |> Repo.update_all([])
 
     # Update frontpage language caches
-    CodeStats.CacheService.refresh_total_language_xp()
+    CacheService.refresh_total_language_xp()
   end
 
   @doc """
@@ -112,6 +111,6 @@ defmodule CodeStats.AdminCommands do
     )
 
     # Update frontpage language caches
-    CodeStats.CacheService.refresh_total_language_xp()
+    CacheService.refresh_total_language_xp()
   end
 end

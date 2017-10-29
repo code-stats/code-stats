@@ -6,11 +6,9 @@ defmodule CodeStatsWeb.MachineController do
 
   alias CodeStatsWeb.AuthUtils
   alias CodeStatsWeb.ControllerUtils
-  alias CodeStats.{
-    Repo,
-    Machine,
-    User
-  }
+  alias CodeStats.Repo
+  alias CodeStats.User
+  alias CodeStats.User.Machine
 
   def list(conn, _params) do
     {conn, _} = common_assigns(conn)
