@@ -8,9 +8,9 @@ defmodule CodeStats.Language.AdminCommands do
 
   alias CodeStats.Repo
   alias CodeStats.Language
-  alias CodeStats.Language.XP
   alias CodeStats.Language.CacheService
   alias CodeStats.User
+  alias CodeStats.XP
 
   import Ecto.Query, only: [from: 2]
 

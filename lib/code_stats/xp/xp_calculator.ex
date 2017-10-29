@@ -1,4 +1,4 @@
-defmodule CodeStats.Language.XPCalculator do
+defmodule CodeStats.XP.XPCalculator do
   @moduledoc """
   Calculations for levels based on XP.
   """

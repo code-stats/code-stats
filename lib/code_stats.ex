@@ -22,7 +22,7 @@ defmodule CodeStats do
       # worker(CodeStats.Worker, [arg1, arg2, arg3]),
 
       # Start XPCacheRefresher
-      worker(CodeStats.Language.XPCacheRefresher, []),
+      worker(CodeStats.XP.XPCacheRefresher, []),
 
       # Start The Terminator
       worker(CodeStats.User.Terminator, [])

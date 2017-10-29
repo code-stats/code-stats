@@ -12,7 +12,7 @@ defmodule CodeStats.Language.CacheService do
 
   alias CodeStats.Repo
   alias CodeStats.Language
-  alias CodeStats.Language.XP
+  alias CodeStats.XP
 
   # Table names
   @language_xp_cache_table :cache_service_language_xp_cache

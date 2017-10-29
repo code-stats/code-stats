@@ -14,9 +14,9 @@ defmodule CodeStatsWeb.PulseController do
   alias CodeStatsWeb.GeoIPPlug
   alias CodeStats.Repo
   alias CodeStats.Language
-  alias CodeStats.Language.XP
   alias CodeStats.Language.CacheService
   alias CodeStats.User.Pulse
+  alias CodeStats.XP
 
   plug GeoIPPlug
 

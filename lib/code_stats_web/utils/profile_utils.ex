@@ -10,7 +10,7 @@ defmodule CodeStatsWeb.ProfileUtils do
   alias CodeStats.User.Machine
   alias CodeStats.User.Pulse
   alias CodeStats.Language
-  alias CodeStats.Language.XP
+  alias CodeStats.XP
 
   @doc """
   Amount of hours to go back when looking at "recent XP".

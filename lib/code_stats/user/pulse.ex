@@ -17,7 +17,7 @@ defmodule CodeStats.User.Pulse do
     belongs_to :user, CodeStats.User
     belongs_to :machine, CodeStats.User.Machine
 
-    has_many :xps, CodeStats.Language.XP
+    has_many :xps, CodeStats.XP
 
     timestamps()
   end

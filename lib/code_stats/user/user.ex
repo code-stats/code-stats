@@ -10,7 +10,7 @@ defmodule CodeStats.User do
 
   alias CodeStats.Repo
   alias CodeStats.User.Pulse
-  alias CodeStats.Language.XP
+  alias CodeStats.XP
 
   schema "users" do
     field :username, :string

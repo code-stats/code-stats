@@ -1,4 +1,4 @@
-defmodule CodeStats.Language.XP do
+defmodule CodeStats.XP do
   use Ecto.Schema
 
   import Ecto.Changeset
