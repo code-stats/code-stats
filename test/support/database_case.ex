@@ -1,4 +1,4 @@
-defmodule CodeStats.ModelCase do
+defmodule CodeStats.DatabaseCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -13,6 +13,9 @@ defmodule CodeStats.ModelCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Ecto.Adapters.SQL.Sandbox
+  alias CodeStats.Repo
+  alias CodeStatsWeb.ErrorHelpers
 
   using do
     quote do
@@ -21,15 +24,15 @@ defmodule CodeStats.ModelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
-      import CodeStats.ModelCase
+      import CodeStats.DatabaseCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CodeStats.Repo)
+    :ok = Sandbox.checkout(Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(CodeStats.Repo, {:shared, self()})
+      Sandbox.mode(Repo, {:shared, self()})
     end
   end
 
@@ -57,7 +60,7 @@ defmodule CodeStats.ModelCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&MyApp.ErrorHelpers.translate_error/1)
+    |> Ecto.Changeset.traverse_errors(&ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
 end

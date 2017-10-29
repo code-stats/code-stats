@@ -1,5 +1,5 @@
 defmodule CodeStats.XPTest do
-  use CodeStats.ModelCase
+  use CodeStats.DatabaseCase
 
   alias CodeStats.XP
 

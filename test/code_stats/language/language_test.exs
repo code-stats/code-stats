@@ -1,5 +1,5 @@
 defmodule CodeStats.LanguageTest do
-  use CodeStats.ModelCase
+  use CodeStats.DatabaseCase
 
   alias CodeStats.Language
 

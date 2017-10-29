@@ -1,4 +1,4 @@
-defmodule CodeStats.ChannelCase do
+defmodule CodeStatsWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -14,6 +14,8 @@ defmodule CodeStats.ChannelCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Ecto.Adapters.SQL.Sandbox
+  alias CodeStats.Repo
 
   using do
     quote do
@@ -27,13 +29,15 @@ defmodule CodeStats.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint CodeStats.Endpoint
+      @endpoint CodeStatsWeb.Endpoint
     end
   end
 
   setup tags do
+    :ok = Sandbox.checkout(Repo)
+
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(CodeStats.Repo, [])
+      Sandbox.mode(Repo, {:shared, self()})
     end
 
     :ok
