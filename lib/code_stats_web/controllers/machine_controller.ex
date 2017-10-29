@@ -103,7 +103,7 @@ defmodule CodeStatsWeb.MachineController do
   end
 
   defp activate_or_deactivate(conn, id, active) do
-    user = SetSessionUser.get_user_data(conn)
+    user = AuthUtils.get_current_user(conn)
     verb = if active, do: "activated", else: "deactivated"
 
     with %Machine{} = machine <- get_machine_or_404(conn, user, id),
