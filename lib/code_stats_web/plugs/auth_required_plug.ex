@@ -19,7 +19,7 @@ defmodule CodeStatsWeb.AuthRequiredPlug do
     else
       conn
       |> put_status(403)
-      |> Phoenix.Controller.put_view(CodeStats.ErrorView)
+      |> Phoenix.Controller.put_view(CodeStatsWeb.ErrorView)
       |> Phoenix.Controller.render("403.html")
       |> halt
     end
