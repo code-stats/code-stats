@@ -1,0 +1,124 @@
+@charset 'UTF-8';
+
+$colors: (
+  base: (
+    'primary':   #7cb518,
+    'selection': #f3de2c,
+    'lines':     #5c8001
+  ),
+
+  text: (
+    'primary':   #454955,
+    'secondary': #fff,
+    'heading':   #f3eff5,
+    'inverted':  #1c1c1c,
+    'inverted_link': #becacd,
+    'inverted_link_hover': #aebdc1
+  ),
+
+  background: (
+    'dark':  #343434,
+    'light': #585858,
+    'body':  #080f0f
+  ),
+
+  state: (
+    'muted':   #666,
+    'success': #10a887,
+    'warning': #F17F42,
+    'error':   #da3c3c
+  ),
+
+  blue: (
+    'darker':  #1573b6,
+    'dark':    #1e80c6,
+    'base':    #2b90d9,
+    'light':   #3fa2e9,
+    'lighter': #4eb1f9
+  ),
+
+  green: (
+    'darker':  #089073,
+    'dark':    #0b9d7d,
+    'base':    #10a887,
+    'light':   #1eb896,
+    'lighter': #28ceaa
+  ),
+
+  red: (
+    'darker':  #653131,
+    'dark':    #b73333,
+    'base':    #da3c3c,
+    'light':   #f25a5a,
+    'lighter': #fa8181
+  ),
+
+  gray: (
+    'darker':  #333333,
+    'dark':    #4d4d4d,
+    'base':    #666666,
+    'light':   #808080,
+    'lighter': #999999
+  )
+);
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@import '../../node_modules/concise.css/concise';
+@import '../../node_modules/concise-ui/concise-ui';
+
+html {
+  background-color: getColor(background, body);
+}
+
+#main-column {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+header {
+  textarea#log {
+    border: 0;
+    resize: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto', sans-serif;
+}
+
+.user-info {
+  h2.user-name {
+    display: inline;
+    margin-right: 10px;
+    padding-right: 10px;
+    //border-right: 1px solid getColor(base, lines);
+  }
+
+  h3.xp-counter {
+    display: inline;
+  }
+}
+
+.language-progress {
+  margin: 10px 0;
+
+  h4.language-name {
+    display: inline;
+    margin-right: 10px;
+    padding-right: 10px;
+    //border-right: 1px solid getColor(base, lines);
+  }
+
+  h5.xp-counter {
+    display: inline;
+  }
+}
+
+.user-view {
+  //border: 1px solid getColor(base, lines);
+  margin-bottom: 40px;
+}

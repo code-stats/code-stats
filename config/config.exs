@@ -6,7 +6,7 @@
 use Mix.Config
 
 # Configures the endpoint
-config :code_stats, CodeStats.Endpoint,
+config :code_stats, CodeStatsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "gWdaZrx0+CB8iuwoC1LMNUD2Lp37PCqvv73Dgid6k+jESaQFWguzrf2hDAoIYE4U",
   render_errors: [accepts: ~w(html json)],
@@ -111,7 +111,7 @@ config :geolite2data,
 
 # Appsignal configuration
 
-config :code_stats, CodeStats.Endpoint,
+config :code_stats, CodeStatsWeb.Endpoint,
   instrumenters: [Appsignal.Phoenix.Instrumenter]
 
 config :phoenix, :template_engines,

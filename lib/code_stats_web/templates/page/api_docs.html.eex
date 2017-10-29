@@ -1,0 +1,223 @@
+<div class="stripe">
+  <h1>
+    API documentation <sup>(v. 1.0.1)</sup>
+  </h1>
+
+  <h2>
+    Table of Contents
+  </h2>
+
+  <p>
+    <ol>
+      <li>
+        <a href="#basics">Basics</a>
+      </li>
+      <li>
+        <a href="#terms">Terms</a>
+      </li>
+      <li>
+        <a href="#auth">Authentication</a>
+      </li>
+      <li>
+        <a href="#profile">Endpoint: Profile</a>
+      </li>
+      <li>
+        <a href="#pulse">Endpoint: Pulse</a>
+      </li>
+    </ol>
+  </p>
+
+  <h2>
+    Basics <a id="basics" href="#basics">#</a>
+  </h2>
+
+  <h3>API version</h3>
+
+  <p>
+    The API follows <a href="http://semver.org/">Semantic Versioning</a>. That means bugfixes bump the patch version, backwards compatible features bump the minor version and backwards incompatible changes bump the major version.
+  </p>
+
+  <h3>Protocol</h3>
+
+  <p>
+    All requests are made using HTTP and use JSON to serialize the data. Requests with payloads should send the payload as JSON in the request body. The responses are JSON, error responses will contain the key <code>error</code> which has the error message as value. The error message is a human readable message, not intended for automated parsing.
+  </p>
+
+  <h3>Path</h3>
+
+  <p>
+    All API paths are prefixed with <code>/api</code>.
+  </p>
+
+  <h3>HTTPS</h3>
+
+  <p>
+    All requests must be secured using HTTPS. Plain HTTP requests will not be accepted.
+  </p>
+
+  <h3>Timestamps</h3>
+
+  <p>
+    Datetime timestamps should be sent as RFC 3339 datetime values and include the timezone offset. Example: <code>2016-04-24T01:43:56+12:00</code>.
+  </p>
+
+  <h2>
+    Terms <a id="terms" href="#terms">#</a>
+  </h2>
+
+  <h3>XP</h3>
+
+  <p>
+    Programming gives users <em>experience points</em>, i.e. XP. A certain amount of XP corresponds to a certain level. In Code::Stats, each keystroke that creates or deletes a character gives 1 XP, so a client should keep an XP counter and add to it on each such keystroke. Operating on many characters at once, such as when deleting highlighted text, is counted as 1 XP, if made possible by the editor's API. An XP value is a positive integer.
+  </p>
+
+  <h3>Level</h3>
+
+  <p>
+    A <em>level</em> is a human readable indicator of progress. It is calculated from XP and its only purpose is to make an amount of XP more meaningful for a user. The read API does not provide levels, so it is the client's job to calculate the levels of a user.
+  </p>
+
+  <p>
+    Levels are calculated with the following pseudocode formula:
+  </p>
+
+  <pre><code>LEVEL_FACTOR = 0.025
+
+// Get level for given XP
+int get_level(float xp) {
+  return to_int(floor(LEVEL_FACTOR * sqrt(xp)))
+}</code></pre>
+
+  <p>
+    For more examples of level calculations, see <a href="https://github.com/Nicd/code-stats/blob/master/lib/code_stats/language/xp_calculator.ex">CodeStats.Language.XPCalculator</a>.
+  </p>
+
+  <h3>Language</h3>
+
+  <p>
+    XP is always tied to a <em>language</em>. This can be a programming language, but also some other syntax edited by the users, such as Markdown or JSON. Detecting the active language is the client's responsibility. This can be done, for example, based on the active syntax highlighting language or the file's extension. Languages are referred to by their names as strings.
+  </p>
+
+  <h3>Pulse</h3>
+
+  <p>
+    A <em>pulse</em> is a collection of XPs for different languages. Pulses should be added periodically by the client and should contain the languages used and the XPs accumulated since the last pulse. They should also contain the time the pulse was created. This way they can be sent later, if the user's Internet connection is down for the moment. Pulses that are more than a week old will not be accepted by the API.
+  </p>
+
+  <h2>
+    Authentication <a id="auth" href="#auth">#</a>
+  </h2>
+
+  <p>
+    Code::Stats uses simple token authentication. A single token authenticates both a user and the machine they are using. It is signed to prevent tampering and unauthorized creation of tokens matching other users' information. To generate a token, you need to create a new machine from the <a href="<%= machine_path(@conn, :list) %>">Machine control panel</a>. A token looks like this:
+  </p>
+
+  <pre><code>SFMyNTY.OEotWWdnPT0jI01qaz0.X0wVEZquh8Ogau1iTtBihYqqL71FD8N6p5ChQiIpaxQ</code></pre>
+
+  <p>
+    In all API requests that require authentication, the token must be added using the HTTP header <code>X-API-Token</code>. Here is an example request sent with the token (as printed by curl):
+  </p>
+
+  <pre><code>&gt; POST /api/my/pulses HTTP/1.1
+&gt; Host: codestats.net:443
+&gt; User-Agent: curl/7.43.0
+&gt; Accept: */*
+&gt; X-API-Token: SFMyNTY.OEotWWdnPT0jI01qaz0.X0wVEZquh8Ogau1iTtBihYqqL71FD8N6p5ChQiIpaxQ
+&gt; Content-Type: application/json
+&gt; Content-Length: 113</code></pre>
+
+  <h2>
+    Endpoint: Profile <a id="profile" href="#profile">#</a>
+  </h2>
+
+  <h3>
+    Read public user's information
+  </h3>
+
+  <p>
+    <code>GET <%= profile_path(@conn, :profile_api, "username") %></code>
+  </p>
+
+  <p>
+    Retrieves the information of the specified user. If the user does not exist or their profile is private, <code>HTTP 404</code> will be returned. An example request that also shows the returned data format:
+  </p>
+
+  <pre><code>GET /api/users/Nicd HTTP/1.1
+
+{
+  "user": "Nicd",
+  "total_xp": 3073421,
+  "new_xp": 3289,
+  "machines": {
+    "Työkone": {
+      "xps": 246116,
+      "new_xps": 3289
+    },
+    "Best Machine": {
+      "xps": 2827305,
+      "new_xps": 0
+    }
+  },
+  "languages": {
+    "💩": {
+      "xps": 1767278,
+      "new_xps": 0
+    },
+    "XML": {
+      "xps": 15,
+      "new_xps": 0
+    },
+    "Plaintext": {
+      "xps": 3429,
+      "new_xps": 3289
+    }
+  },
+  "dates": {
+    "2016-12-31": 3289,
+    "2016-08-24": 26700
+  }
+}</code></pre>
+
+  <p>
+    <strong>Returns</strong> user profile data as JSON. In the data, <code>new_xps</code> is XP gained in the last 12 hours.
+  </p>
+
+  <h2>
+    Endpoint: Pulse <a id="pulse" href="#pulse">#</a>
+  </h2>
+
+  <h3>
+    Add pulse <sup>(authn required)</sup>
+  </h3>
+
+  <p>
+    <code>POST <%= pulse_path(@conn, :add) %></code>
+  </p>
+
+  <p>
+    Adds a new <em>Pulse</em> to the system. The client should send a pulse periodically when the user is programming. The payload should be a list of languages and their accumulated XP since the last successful pulse. The pulse must also contain a <code>coded_at</code> timestamp that signifies when the pulse was generated. This allows sending the pulse later, if the Internet connection is momentarily cut.
+  </p>
+
+  <p>
+    <strong>Note:</strong> The <code>coded_at</code> timestamp <strong>MUST</strong> be in the user's local time with their local UTC offset. Do not convert the time to UTC before sending it to the API.
+  </p>
+
+  <p>
+    Note: The <code>coded_at</code> timestamp must be no older than a week. Any older timestamps will result in an error. Timestamps in the future will be ignored, their <code>coded_at</code> will be set to the current moment.
+  </p>
+
+  <p>
+    Example payload:
+  </p>
+
+  <pre><code>{
+  "coded_at": "2016-04-24T01:43:56+12:00",
+  "xps": [
+    {"language": "C++",    "xp": 15},
+    {"language": "Elixir", "xp": 30},
+    {"language": "EEx",    "xp": 3}
+  ]
+}</code></pre>
+
+  <p><strong>Returns</strong> <code>HTTP 201</code> and <code>{"ok": "Great success!"}</code> on success.</p>
+</div>

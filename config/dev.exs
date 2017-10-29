@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :code_stats, CodeStats.Endpoint,
+config :code_stats, CodeStatsWeb.Endpoint,
   http: [port: 5000],
   debug_errors: true,
   code_reloader: true,
@@ -15,7 +15,7 @@ config :code_stats, CodeStats.Endpoint,
              cd: Path.expand("../", __DIR__)]]
 
 # Watch static and templates for browser reloading.
-config :code_stats, CodeStats.Endpoint,
+config :code_stats, CodeStatsWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|s?css|png|jpeg|jpg|gif|svg)$},

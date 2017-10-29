@@ -6,7 +6,7 @@ defmodule CodeStats.BuildTasks.BundleJS do
   def args(in_file, out_file) do
     [
       "--config",
-      "rollup.config.js",
+      "assets/rollup.config.js",
       "--input",
       in_file,
       "--output.file",

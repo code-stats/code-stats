@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Code::Stats is a free stats tracking service for programmers">
+    <meta name="author" content="Mikko Ahlroth">
+
+    <title><%= get_title(@conn) %></title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/frontend/css/frontend.css") %>">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/frontend/assets/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/frontend/assets/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/frontend/assets/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/frontend/assets/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/frontend/assets/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/frontend/assets/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/frontend/assets/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/frontend/assets/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/frontend/assets/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/frontend/assets/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/frontend/assets/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/frontend/assets/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/frontend/assets/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/frontend/assets/manifest.json">
+    <link rel="mask-icon" href="/frontend/assets/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/frontend/assets/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <%= if is_authed?(@conn) do %>
+      <%= tag(:meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", get_current_user(@conn).username)) %>
+    <% end %>
+  </head>
+
+  <body>
+    <header id="nav-stripe" class="stripe">
+      <a id="header-logo" class="logo" href="<%= page_path(@conn, :index) %>">
+        <img
+         src="<%= static_path(@conn, "/frontend/assets/images/Logo_circle_crushed.png") %>"
+         alt="<%= get_conf(:site_name) %> logo"
+         title="<%= get_conf(:site_name) %>"
+        />
+      </a>
+
+      <nav id="header-nav" role="navigation">
+        <%= if is_authed?(@conn) do %>
+          <a href="<%= profile_path(@conn, :my_profile) %>">Profile</a>
+          <a href="<%= preferences_path(@conn, :edit) %>">Preferences</a>
+          <a href="<%= machine_path(@conn, :list) %>">Machines</a>
+          <a href="<%= auth_path(@conn, :logout) %>">Log out</a>
+        <% else %>
+          <a href="<%= auth_path(@conn, :render_login) %>">Log in</a>
+          <a href="<%= auth_path(@conn, :render_signup) %>">Sign up</a>
+        <% end %>
+      </nav>
+    </header>
+
+    <%= if get_flash(@conn, :info) do %>
+      <div class="stripe flash-stripe" role="alert">
+        <%= get_flash(@conn, :info) %>
+      </div>
+    <% end %>
+    <%= if get_flash(@conn, :success) do %>
+      <div class="stripe flash-stripe flash-success" role="alert">
+        <%= get_flash(@conn, :success) %>
+      </div>
+    <% end %>
+    <%= if get_flash(@conn, :error) do %>
+      <div class="stripe flash-stripe flash-error" role="alert">
+        <%= get_flash(@conn, :error) %>
+      </div>
+    <% end %>
+
+    <%= if false and get_conf(:beta_mode) do %>
+      <section class="stripe flash-stripe" role="alert">
+        <strong>⚠️ Note!</strong>
+        This instance is in beta mode. You can register as normal and use this instance for testing
+        purposes, such as for developing a new editor plugin. The database may be reset at any time.
+      </section>
+    <% end %>
+
+    <main>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+
+    <footer id="footer-stripe" class="stripe stripe-accent">
+      <section>
+        <h6 class="no-margin">Rendered in <%= CodeStatsWeb.RequestTimePlug.calculate_time(@conn) %>.</h6>
+        <a href="<%= page_path(@conn, :changes)%>"><%= unquote(Mix.Project.config[:version]) %></a>
+        <a href="<%= page_path(@conn, :api_docs) %>">API docs</a>
+        <a href="<%= page_path(@conn, :terms) %>">Legal</a>
+        <a href="<%= page_path(@conn, :plugins) %>">Plugins</a>
+      </section>
+
+      <%= if not Enum.empty?(get_conf(:social_links)) do %>
+        <section>
+          <h6 class="no-margin">Contact us!</h6>
+          <%= for {name, url} <- get_conf(:social_links) do %>
+            <a href="<%= url %>"><%= name %></a>
+          <% end %>
+        </section>
+      <% end %>
+
+      <section>
+        <p>
+          Made with
+          <a href="http://elixir-lang.org/">Elixir</a>,
+          <a href="http://www.phoenixframework.org/">Phoenix</a>, and
+          <a href="https://redom.js.org/">RE:DOM</a>.
+        </p>
+        <small>
+          <%= get_conf(:site_name) %> development sponsored by <a href="https://www.vincit.fi/en/">Vincit Oy</a>, the passionate software company.
+        </small>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="<%= static_path(@conn, "/frontend/js/frontend.js") %>"></script>
+    <%= raw get_conf(:analytics_code) %>
+  </body>
+</html>

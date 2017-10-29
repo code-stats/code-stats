@@ -1,0 +1,70 @@
+<div class="stripe">
+  <h1>Configured machines</h1>
+
+  <div class="machine-list">
+    <%= for %{active: true} = machine <- @machines do %>
+      <div class="machine">
+        <h2><%= machine.name %></h2>
+        <div class="api-key-text">
+          <span>API key:</span>
+          <input type="text" class="api-key" readonly value="<%= CodeStatsWeb.AuthUtils.get_api_key(@conn, @user, machine) %>" />
+        </div>
+
+        <button type="button" class="copy-button button-info">Copy</button>
+
+        <%= form_tag(machine_path(@conn, :view_single, machine.id), method: :get, class: "edit-form") %>
+          <button type="submit">Edit</button>
+        </form>
+
+        <%= form_tag(machine_path(@conn, :regen_machine_key, machine.id), class: "regenerate-form") %>
+          <button type="submit" class="button-warning">Regenerate API key</button>
+        </form>
+
+        <%= form_tag(machine_path(@conn, :deactivate, machine.id), class: "deactivate-form") %>
+          <button type="submit" class="button-danger machine-deactivate-button">Deactivate</button>
+        </form>
+
+        <%= form_tag(machine_path(@conn, :delete, machine.id), method: :delete, class: "delete-form") %>
+          <button type="submit" class="button-danger machine-delete-button">Delete</button>
+        </form>
+      </div>
+    <% end %>
+  </div>
+
+  <%= if Enum.empty?(@machines) do %>
+    <div class="alert alert-info">
+      You don't have any machines configured. :( You should add one below!
+    </div>
+  <% end %>
+
+  <div class="alert alert-warning">
+    Note that if you regenerate a machine's API key, the old API key will stop working immediately. You should do this if you lose your API key or the machine that was connected to it.
+  </div>
+
+  <h2>Add new machine</h2>
+
+  <%= form_for(@changeset, machine_path(@conn, :list), fn f -> %>
+  <label for="machine_name" class="<%= if f.errors[:name], do: "has-error" %>">Name (required)</label>
+
+    <div class="input">
+      <%= text_input(f, :name, required: true) %>
+      <%= if message = f.errors[:name] do %>
+        <p class="help-block"><%= translate_error(message) %></p>
+      <% end %>
+    </div>
+
+    <div class="submit"><%= submit("Add machine") %></div>
+  <% end) %>
+
+  <%= if Enum.any?(@machines, &match?(%{active: false}, &1)) do %>
+    <div class="inactive-machine-list">
+      <h2>Inactive machines</h2>
+      <%= for %{active: false} = machine <- @machines do %>
+        <%= form_tag(machine_path(@conn, :activate, machine.id), class: "machine") %>
+          <div class="machine-name"><%= machine.name %></div>
+          <button type="submit">Activate</button>
+        </form>
+      <% end %>
+    </div>
+  <% end %>
+</div>

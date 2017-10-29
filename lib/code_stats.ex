@@ -13,19 +13,19 @@ defmodule CodeStats do
       # Start cache service
       # We want this to be before the endpoint so that the caches are ready for new
       # requests
-      worker(CodeStats.CacheService, []),
+      worker(CodeStats.Language.CacheService, []),
 
       # Start the endpoint when the application starts
-      supervisor(CodeStats.Endpoint, []),
+      supervisor(CodeStatsWeb.Endpoint, []),
 
       # Here you could define other workers and supervisors as children
       # worker(CodeStats.Worker, [arg1, arg2, arg3]),
 
       # Start XPCacheRefresher
-      worker(CodeStats.XPCacheRefresher, []),
+      worker(CodeStats.XP.XPCacheRefresher, []),
 
       # Start The Terminator
-      worker(CodeStats.Terminator, [])
+      worker(CodeStats.User.Terminator, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -37,7 +37,7 @@ defmodule CodeStats do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    CodeStats.Endpoint.config_change(changed, removed)
+    CodeStatsWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

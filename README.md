@@ -33,7 +33,7 @@ mix deps.get                # Get Hex dependencies, answer yes to installing Hex
 mix compile                 # Compile application
 mix ecto.create             # Create database using default credentials
 mix ecto.migrate            # Migrate database to latest state
-npm install                 # Install frontend dependencies and tools
+cd assets && npm install    # Install frontend dependencies and tools
 nano config/dev.secret.exs  # Set up dev config with at least the line "use Mix.Config"
                             # at the top
 ```
